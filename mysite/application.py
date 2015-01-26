@@ -47,9 +47,9 @@ app.add_url_rule("/api/student_info/<int:studentid>",
                  view_func=get_user_info, methods=["GET"])
 app.add_url_rule("/api/set_user_info", view_func=set_user_info,
                  methods=["POST"])
-
-app.add_url_rule("/googlefad2f2add41d5dac.html",
-                 view_func=google)
+#
+# app.add_url_rule("/googlefad2f2add41d5dac.html",
+#                  view_func=google)
 
 
 @app.before_request
