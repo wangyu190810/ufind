@@ -4,10 +4,6 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
 from datetime import timedelta
 
-from mysite.view.blog import index, edit, search, arch, blog, blog_tag, \
-    blog_classify, blog_change
-from mysite.view.login import login, logout
-from mysite.view.toole import google
 from mysite.view.university import get_university, get_search_university, \
     get_university_info
 from mysite.view.major import search_major
