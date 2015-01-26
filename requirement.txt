@@ -1,0 +1,4 @@
+flask
+sqlalchmy
+pgcoyg2
+flask-redis
