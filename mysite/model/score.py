@@ -27,7 +27,7 @@ class Score(Base):
     GMAT_ir = Column(Integer, default=0, doc=u"")
     SAT_cr = Column(Integer, default=0, doc=u"")
     SAT_m = Column(Integer, default=0, doc=u"")
-    STA_w = Column(Integer, default=0, doc=u"")
+    SAT_w = Column(Integer, default=0, doc=u"")
 
     @classmethod
     def set_user_info(cls,
@@ -51,9 +51,9 @@ class Score(Base):
                       GMAT_q=None,
                       GMAT_aw=None,
                       GMAT_ir=None,
-                      STA_cr=None,
-                      STA_m=None,
-                      STA_w=None):
+                      SAT_cr=None,
+                      SAT_m=None,
+                      SAT_w=None):
         if university_type == 1:
             score = Score(user_id=user_id,rank=rank, TOEFL_r=TOEFL_r, TOEFL_l=TOEFL_l,
                           TOEFL_s=TOEFL_s, TOEFL_w=TOEFL_w, IELTS_r=IELTS_r,
@@ -72,14 +72,19 @@ class Score(Base):
             connection.commit()
             return "success"
         elif university_type == 0:
-            score = Score(rank=rank, TOEFL_r=TOEFL_r, TOEFL_l=TOEFL_l,
-                          TOEFL_s=TOEFL_s, TOEFL_w=TOEFL_w, IELTS_r=IELTS_r,
+            score = Score(user_id=user_id,
+                          rank=rank,
+                          TOEFL_r=TOEFL_r,
+                          TOEFL_l=TOEFL_l,
+                          TOEFL_s=TOEFL_s,
+                          TOEFL_w=TOEFL_w,
+                          IELTS_r=IELTS_r,
                           IELTS_l=IELTS_l,
                           IELTS_s=IELTS_s,
                           IELTS_w=IELTS_w,
-                          STA_cr=STA_cr,
-                          STA_w=STA_w,
-                          STA_m=STA_m
+                          SAT_cr=SAT_cr,
+                          SAT_w=SAT_w,
+                          SAT_m=SAT_m
             )
             connection.add(score)
             connection.commit()
