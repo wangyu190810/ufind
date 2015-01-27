@@ -15,6 +15,7 @@ from flask import request, jsonify, g
 
 
 def set_user_info():
+    print request.data
     if request.method == "POST":
         data = request.data
         data = json.loads(data)
@@ -25,71 +26,64 @@ def set_user_info():
             GPA = data["GPA"]
             rank = data["rank"]
             TOEFL = data["TOEFL"]
-            print TOEFL
-            print prevuniversity
             IELTS = data["IELTS"]
             GRE  =data["GRE"]
             GMAT = data["GMAT"]
             description = data["description"]
 
             Score.set_user_info(g.db,university_type=1,
-                                user_id=123
+                                user_id=123,
+                                rank=rank,
+                                TOEFL_r=int(TOEFL["r"]),
+                                TOEFL_l=int(TOEFL["l"]),
+                                TOEFL_s=int(TOEFL["s"]),
+                                TOEFL_w=int(TOEFL["w"]),
+                                IELTS_r=int(IELTS["r"]),
+                                IELTS_l=int(IELTS["l"]),
+                                IELTS_s=int(IELTS["s"]),
+                                IELTS_w=int(IELTS["w"]),
+                                GRE_v=int(GRE["v"]),
+                                GRE_q=int(GRE["q"]),
+                                GRE_aw=int(GRE["aw"]),
+                                GMAT_v=int(GMAT["v"]),
+                                GMAT_q=int(GMAT["q"]),
+                                GMAT_aw=int(GMAT["aw"]),
+                                GMAT_ir=int(GMAT["ir"])
+                                )
+        else:
+            prevuniversity = data[u"prevuniversity"]
+            prevmajor = data["prevmajor"]
+            GPA = data["GPA"]
+            rank = data["rank"]
+            TOEFL = data["TOEFL"]
+            IELTS = data["IELTS"]
+            SAT  = data["SAT"]
+            SATSUB = data["SATSUB"]
+            user_id = 123
+            description = data["description"]
+            Score.set_user_info(g.db,
+                                university_type=0,
+                                rank=rank,
+                                user_id=user_id,
+                                TOEFL_r=int(TOEFL["r"]),
+                                TOEFL_l=int(TOEFL["l"]),
+                                TOEFL_s=int(TOEFL["s"]),
+                                TOEFL_w=int(TOEFL["w"]),
+                                IELTS_r=int(IELTS["r"]),
+                                IELTS_l=int(IELTS["l"]),
+                                IELTS_s=int(IELTS["s"]),
+                                IELTS_w=int(IELTS["w"]),
+                                SAT_cr=int(SAT["cr"]),
+                                SAT_w=int(SAT["w"]),
+                                SAT_m=int(SAT["m"])
                                 )
 
-        # prevuniversity,prevmajor,GPA,university_type,
-        # user_id,
-        # rank,
-        # TOEFL_r,
-        # TOEFL_l,
-        #
-        # TOEFL_s,
-        # TOEFL_w,
-        # IELTS_r,
-        # IELTS_l,
-        # IELTS_s,
-        # IELTS_w,
-        # GRE_v,
-        # GRE_q,
-        # GRE_aw,
-        # GMAT_v,
-        # GMAT_q,
-        # GMAT_aw,
-        # GMAT_ir,
-        # STA_cr,
-        # STA_m,
-        # STA_w
-        user_id = request.args.get("user_id")
-    #     print user_id
-    #     user_info = map(request.args.get, (
-    #         "prevuniversity","prevmajor","GPA",
-    # "university_type",
-    # "user_id",
-    # "rank",
-    # "TOEFL_r",
-    # "TOEFL_l",
-    #
-    # "TOEFL_s",
-    # "TOEFL_w",
-    # "IELTS_r",
-    # "IELTS_l",
-    # "IELTS_s",
-    # "IELTS_w",
-    # "GRE_v",
-    # "GRE_q",
-    # "GRE_aw",
-    # "GMAT_v",
-    # "GMAT_q",
-    # "GMAT_aw",
-    # "GMAT_ir",
-    # "STA_cr",
-    # "STA_m"))
-    #     print user_info
-        data= request.get_json()
+        data = request.get_json()
         print data
         #
         # if university_type == 1:
         #     print "asdfasdf"
         #     return 0
 
-        return "0"
+        return jsonify(status="success")
 

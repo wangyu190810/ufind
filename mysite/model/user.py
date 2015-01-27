@@ -22,11 +22,13 @@ class User(Base):
     prevuniversity = Column(Unicode(225), doc=u"国内学校")
     prevmajor = Column(Unicode(255), doc=u"专业，如果时高中字段为空")
     gender = Column(Integer, doc=u"性别：1表示男，0表示女")
+    grade = Column(Integer,doc=u"字段，筛选相关")
     type = Column(Integer, doc=u"高中还是大学：1表示大学，0表示高中,3表示研究生")
 
     @classmethod
     def get_user_info(cls,connection, user_id):
         return connection.query(User).filter(User.id == user_id)
+
 
 
 
