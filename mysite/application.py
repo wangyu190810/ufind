@@ -36,13 +36,13 @@ app.DBSession = scoped_session(sessionmaker(bind=app.sa_engine))
 # app.add_url_rule("/login",view_func=login,methods=["GET","POST"])
 # app.add_url_rule("/logout",view_func=logout,methods=["GET","POST"])
 
-app.add_url_rule("/api/get_university/<int:university_id>",
+app.add_url_rule("/api/get_university",
                  view_func=get_university, methods=["GET"])
 app.add_url_rule("/api/search_university",
                  view_func=get_search_university, methods=["GET"])
 app.add_url_rule("/api/search_major",
                  view_func=search_major, methods=["GET"])
-app.add_url_rule("/api/university_info/<int:university_id>",
+app.add_url_rule("/api/university_info",
                  view_func=get_university_info, methods=["GET"])
 app.add_url_rule("/api/student_info/<int:studentid>",
                  view_func=get_user_info, methods=["GET"])
@@ -52,7 +52,7 @@ app.add_url_rule("/api/set_compare", view_func=set_compare,
                  methods=["POST"])
 app.add_url_rule("/api/set_offer", view_func=set_offer,
                  methods=["POST"])
-app.add_url_rule("/api/get_offer/<int:compareid>", view_func=get_compare,
+app.add_url_rule("/api/get_compare", view_func=get_compare,
                  methods=["GET"])
 # app.add_url_rule("/googlefad2f2add41d5dac.html",
 # view_func=google)

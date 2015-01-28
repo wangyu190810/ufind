@@ -36,8 +36,9 @@ def set_compare():
                                         major_id=major_id)
         return jsonify(status="success")
 
-def get_compare(compareid):
+def get_compare():
     if request.method == "GET":
+        compareid = request.args.get("compareid")
         compare = {}
         compare_info = {}
         comparelist = []
