@@ -9,7 +9,8 @@ from mysite.view.university import get_university, get_search_university, \
 from mysite.view.major import search_major
 from mysite.view.user import get_user_info
 from mysite.view.score import set_user_info
-
+from mysite.view.compare import set_compare, get_compare
+from mysite.view.offer import set_offer
 from config import Config
 
 
@@ -47,9 +48,14 @@ app.add_url_rule("/api/student_info/<int:studentid>",
                  view_func=get_user_info, methods=["GET"])
 app.add_url_rule("/api/set_user_info", view_func=set_user_info,
                  methods=["POST"])
-#
+app.add_url_rule("/api/set_compare", view_func=set_compare,
+                 methods=["POST"])
+app.add_url_rule("/api/set_offer", view_func=set_offer,
+                 methods=["POST"])
+app.add_url_rule("/api/get_offer/<int:compareid>", view_func=get_compare,
+                 methods=["GET"])
 # app.add_url_rule("/googlefad2f2add41d5dac.html",
-#                  view_func=google)
+# view_func=google)
 
 
 @app.before_request
