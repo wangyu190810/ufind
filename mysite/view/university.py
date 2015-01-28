@@ -14,8 +14,9 @@ from mysite.model.major import Major
 from flask import request,jsonify,g
 
 
-def get_university(university_id):
+def get_university():
     if request.method == "GET":
+        university_id = request.args.get("universityid")
         university = {}
         faculty = {}
         if university_id == 0:
@@ -42,8 +43,9 @@ def get_university(university_id):
                            stattus="success")
 
 
-def get_university_info(university_id):
+def get_university_info():
     if request.method == "GET":
+        university_id = request.args.get("universityid")
         university_info = {}
         facultylist = []
         faculty = {}
