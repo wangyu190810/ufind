@@ -31,8 +31,14 @@ class Major(Base):
 
 
     @classmethod
-    def get_major_info(cls, connection, university_id, faculty_id):
-        return connection.query(Major).\
-            filter(Major.university_id == university_id).\
-            filter(Major.faculty_id == faculty_id)
+    def get_major_info(cls, connection, university_id, faculty_id=None,major_id=None):
+        if major_id is None:
+
+            return connection.query(Major).\
+                filter(Major.university_id == university_id).\
+                filter(Major.faculty_id == faculty_id)
+        else:
+            return connection.query(Major).\
+                filter(Major.id == major_id).\
+                filter(Major.university_id == university_id)
 
