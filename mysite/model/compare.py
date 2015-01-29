@@ -17,14 +17,21 @@ class CompareInfo(Base):
 
 
     @classmethod
-    def set_compareinfo(cls,connection, university_id, major_id, compare_id):
+    def set_compare_info(cls,connection, university_id, major_id, compare_id):
         compare_info = CompareInfo(university_id=university_id,major_id=major_id,compare_id=compare_id)
         connection.add(compare_info)
         connection.commit()
 
     @classmethod
-    def get_compaerinfo(cls,connection,compare_id):
-        return connection.query(CompareInfo).filter(CompareInfo.compare_id == compare_id)
+    def get_compare_info(cls,connection,compare_id):
+        return connection.query(CompareInfo).\
+            filter(CompareInfo.compare_id == compare_id)
+
+    @classmethod
+    def get_compare_random(cls,connection,university_id,major_id):
+        return connection.query(CompareInfo.compare_id).\
+            filter(CompareInfo.university_id == university_id).\
+            filter(CompareInfo.major_id == major_id).order_by(func.random()).limit(2)
 
 
 class Compare(Base):

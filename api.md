@@ -25,3 +25,15 @@
     
     接口地址
         www.ufind.top/api/university_info?universityid=1
+        
+        
+接口3.4
+    
+    方式 
+        GET
+        
+    接口地址
+        www.ufind.top/api/get_major_compare?universityid=1&majorid=1
+        
+接口3.5
+
