@@ -11,3 +11,6 @@ def validate_user_login(func):
     return _validate_user_login
 
 
+#def set_password(password):
+
+

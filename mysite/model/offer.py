@@ -2,7 +2,7 @@
 __author__ = ''
 from sqlalchemy.schema import Table, Column
 from sqlalchemy.types import Integer, Unicode, Float
-from sqlalchemy.sql import select
+from sqlalchemy.sql import select,func
 
 from time import time
 
@@ -24,4 +24,10 @@ class Offer(Base):
         connection.add(offer)
         connection.commit()
 
+
+    @classmethod
+    def get_offer_student(cls,connection,unviersity_id,major_id):
+        return connection.query(func.random(Offer.user_id)).\
+            filter(Offer.university_id == unviersity_id).\
+            filter(Offer.major_id == major_id).limit(6)
 

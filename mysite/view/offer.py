@@ -11,7 +11,7 @@ from mysite.model.university import University
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.offer import Offer
-from flask import request,jsonify,g
+from flask import request,jsonify,g,session
 
 
 def set_offer():
@@ -20,7 +20,7 @@ def set_offer():
         data = request.data
         data = json.loads(data)
         offer = data["offers"]
-        user_id = 12312
+        user_id = session["user_id"]
         for row in offer:
             university_id = int(row["universityid"])
             major_id = int(row["majorid"])
@@ -33,4 +33,13 @@ def set_offer():
 
         return jsonify(status="success",
                        img="asdfsda")
+
+def get_offer_student():
+    if request.method == "GET":
+        university_id,major_id = map(request.args.get,("universityid","majorid"))
+        student_list = []
+        for row in Offer.get_offer_student(g.db,university_id,major_id):
+            student_list.append(row.id)
+        return jsonify(studentlist=student_list,
+                       status="success")
 

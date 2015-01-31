@@ -59,10 +59,11 @@ def get_university_info():
             link["wiki"] = row.wiki
             link["official"] = row.official
             university_info["name"] = row.name
-            university_info["chiname"] = row.name
+            university_info["chiname"] = row.chiname
             university_info["offrnum"] = 234
             university_info["pic1"] = "pic1"
             university_info["pic2"] = "pic2"
+            university_info["link"] = link
         for row in Faculty.get_faculty_info(g.db, university_id):
             faculty["facultyid"] = row.id
             print row.id
@@ -80,9 +81,12 @@ def get_university_info():
             majorlist = []
             facultylist.append(faculty)
             faculty = {}
-        return jsonify(university_info=university_info,
-                       status="success",
-                       facultylist=facultylist)
+        university_info["facultylist"] = facultylist
+        university_info["status"] = "success"
+        return json.dumps(university_info)
+        # return jsonify(university_info=university_info,
+        #                status="success",
+        #                facultylist=facultylist)
 
 
 

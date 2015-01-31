@@ -64,6 +64,22 @@ class CompareSupport(Base):
     user_id = Column(Integer,doc=u"投票用户的id")
     compare_id = Column(Integer,doc=u"投向哪个投票列表")
     compare_info_id = Column(Integer,doc=u"投票的具体投向哪个")
-    create_time = Column(Integer,doc=u"创建时间")
+    create_time = Column(Integer,default=lambda: time(),doc=u"创建时间")
+
+    @classmethod
+    def set_compare_support(cls,connection,user_id,compare_info_id):
+        compare_info = connection.query(CompareInfo.compare_id,
+                                        CompareInfo.supportnum).\
+            filter(CompareInfo.id == compare_info_id).as_scalar()
+        compare_support = CompareSupport(user_id=user_id,
+                                         compare_id=compare_info["id"],
+                                         compare_info_id=compare_info_id)
+        connection.add(compare_support)
+        count = connection.query(func.count(CompareSupport.compare_info_id)).\
+            filter(CompareSupport.compare_info_id == compare_info_id).as_scalar()
+        compare_info_num = CompareInfo(supportnum=count+1)
+        connection.add(compare_info_num)
+        connection.commit()
+
 
 

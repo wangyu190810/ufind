@@ -10,7 +10,8 @@ from mysite.view.major import search_major,get_major_compare
 from mysite.view.user import get_user_info
 from mysite.view.score import set_user_info
 from mysite.view.compare import set_compare, get_compare
-from mysite.view.offer import set_offer
+from mysite.view.offer import set_offer,get_offer_student
+from mysite.view.login import login,logout
 from config import Config
 
 
@@ -33,8 +34,8 @@ app.DBSession = scoped_session(sessionmaker(bind=app.sa_engine))
 # app.add_url_rule("/classify/<name>",view_func=blog_classify,methods=["GET","POST"])
 #
 #
-# app.add_url_rule("/login",view_func=login,methods=["GET","POST"])
-# app.add_url_rule("/logout",view_func=logout,methods=["GET","POST"])
+app.add_url_rule("/login",view_func=login,methods=["GET","POST"])
+app.add_url_rule("/logout",view_func=logout,methods=["GET","POST"])
 
 app.add_url_rule("/api/get_university",
                  view_func=get_university, methods=["GET"])
@@ -55,6 +56,8 @@ app.add_url_rule("/api/set_offer", view_func=set_offer,
 app.add_url_rule("/api/get_compare", view_func=get_compare,
                  methods=["GET"])
 app.add_url_rule("/api/get_major_compare",view_func=get_major_compare,
+                 methods=["GET"])
+app.add_url_rule("/api/get_offer_student_id",view_func=get_offer_student,
                  methods=["GET"])
 
 # app.add_url_rule("/googlefad2f2add41d5dac.html",

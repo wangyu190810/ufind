@@ -30,6 +30,13 @@ class User(Base):
         return connection.query(User).filter(User.id == user_id)
 
 
+    @classmethod
+    def login_user(cls,connection,phone,password):
+        print (phone,password)
+        return connection.query(User.id).\
+            filter(User.phone == phone).\
+            filter(User.password == password)
+
 
 
 

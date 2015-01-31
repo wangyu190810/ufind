@@ -11,7 +11,7 @@ from mysite.model.university import University
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.score import Score
-from flask import request, jsonify, g
+from flask import request, jsonify, g ,session
 
 
 def set_user_info():
@@ -30,9 +30,9 @@ def set_user_info():
             GRE  =data["GRE"]
             GMAT = data["GMAT"]
             description = data["description"]
-
+            user_id = session["user_id"]
             Score.set_user_info(g.db,university_type=1,
-                                user_id=123,
+                                user_id=user_id,
                                 rank=rank,
                                 TOEFL_r=int(TOEFL["r"]),
                                 TOEFL_l=int(TOEFL["l"]),
@@ -59,7 +59,7 @@ def set_user_info():
             IELTS = data["IELTS"]
             SAT  = data["SAT"]
             SATSUB = data["SATSUB"]
-            user_id = 123
+            user_id = session["session"]
             description = data["description"]
             Score.set_user_info(g.db,
                                 university_type=0,
@@ -79,11 +79,6 @@ def set_user_info():
                                 )
 
         data = request.get_json()
-        print data
-        #
-        # if university_type == 1:
-        #     print "asdfasdf"
-        #     return 0
 
         return jsonify(status="success")
 

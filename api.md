@@ -26,6 +26,14 @@
     接口地址
         www.ufind.top/api/university_info?universityid=1
         
+接口3.2
+    
+    方式
+        GET
+    
+    接口地址
+        www.ufind.top/api/get_offer_student_id?universityid=1&majorid=1
+    
         
 接口3.4
     

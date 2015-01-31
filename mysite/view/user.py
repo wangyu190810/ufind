@@ -1,7 +1,7 @@
 # -*-coding:utf-8-*-
 __author__ = 'wangyu'
 
-from flask import g, jsonify, request
+from flask import g, jsonify, request,redirect,session
 import json
 
 from mysite.model.user import User
