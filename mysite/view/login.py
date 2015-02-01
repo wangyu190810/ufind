@@ -1,9 +1,9 @@
 __author__ = 'wangyu'
 from flask import render_template,redirect,g,session,request,jsonify
-
+from mysite.view.base import allow_cross_domain
 from mysite.model.user import User
 
-
+@allow_cross_domain
 def login():
     if request.method == "GET":
         return render_template("login.html")
@@ -19,6 +19,7 @@ def login():
         return redirect("/index")
 
 
+@allow_cross_domain
 def logout():
     session.pop("username")
     return redirect("/index")

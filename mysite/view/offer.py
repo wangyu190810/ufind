@@ -7,13 +7,15 @@
 #Description: 
 
 import json
+from flask import request,jsonify,g,session
 from mysite.model.university import University
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.offer import Offer
-from flask import request,jsonify,g,session
+from mysite.view.base import allow_cross_domain
 
 
+@allow_cross_domain
 def set_offer():
     if request.method == "POST":
 
@@ -34,6 +36,7 @@ def set_offer():
         return jsonify(status="success",
                        img="asdfsda")
 
+@allow_cross_domain
 def get_offer_student():
     if request.method == "GET":
         university_id,major_id = map(request.args.get,("universityid","majorid"))

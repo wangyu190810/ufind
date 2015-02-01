@@ -7,12 +7,15 @@
 #Description: 
 
 import json
+from flask import request,jsonify,g
 from mysite.model.university import University
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
-from flask import request,jsonify,g
 from mysite.model.compare import CompareInfo
+from mysite.view.base import allow_cross_domain
 
+
+@allow_cross_domain
 def search_major():
     """专业搜索"""
     if request.method == "GET":
@@ -34,6 +37,8 @@ def search_major():
                 major_list.append(major)
             return jsonify(namelist=major_list,status="success")
 
+
+@allow_cross_domain
 def get_major_compare():
     """返回投票信息"""
     if request.method == "GET":

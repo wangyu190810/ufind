@@ -5,9 +5,10 @@ from flask import g, jsonify, request,redirect,session
 import json
 
 from mysite.model.user import User
+from mysite.view.base import allow_cross_domain
 
 
-
+@allow_cross_domain
 def get_user_info():
     if request.method == "GET":
         studentid = request.args.get("studentid")

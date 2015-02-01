@@ -7,14 +7,16 @@
 #Description: 
 
 import json
+from flask import request,jsonify,g,session
 from mysite.model.user import User
 from mysite.model.university import University
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.compare import Compare, CompareInfo,CompareSupport
-from flask import request,jsonify,g,session
+from mysite.view.base import allow_cross_domain
 
 
+@allow_cross_domain
 def set_compare():
     if request.method == "POST":
 
@@ -36,6 +38,8 @@ def set_compare():
                                         major_id=major_id)
         return jsonify(status="success")
 
+
+@allow_cross_domain
 def get_compare():
     if request.method == "GET":
         compareid = request.args.get("compareid")

@@ -9,11 +9,14 @@
 import json
 from mysite.model.university import University
 #from mysite.model.major import
-from mysite.model.faculty import Faculty
-from mysite.model.major import Major
 from flask import request,jsonify,g
 
+from mysite.model.faculty import Faculty
+from mysite.model.major import Major
+from mysite.view.base import allow_cross_domain
 
+
+@allow_cross_domain
 def get_university():
     if request.method == "GET":
         university_id = request.args.get("universityid")
@@ -43,6 +46,7 @@ def get_university():
                            stattus="success")
 
 
+@allow_cross_domain
 def get_university_info():
     if request.method == "GET":
         university_id = request.args.get("universityid")
@@ -54,13 +58,13 @@ def get_university_info():
         link = {}
         for row in University.get_university_info(g.db,university_id):
             university_info["universityid"] = row.id
-            university_info["universitylogo"] = row.id
+            university_info["universitylogo"] = row.schoollogo
             link["baidu"] = row.baidu
             link["wiki"] = row.wiki
             link["official"] = row.official
             university_info["name"] = row.name
             university_info["chiname"] = row.chiname
-            university_info["offrnum"] = 234
+            university_info["offernum"] = 234
             university_info["pic1"] = "pic1"
             university_info["pic2"] = "pic2"
             university_info["link"] = link
@@ -90,7 +94,7 @@ def get_university_info():
 
 
 
-
+@allow_cross_domain
 def get_search_university():
     if request.method == "GET":
         searchname, stateid = map(request.args.get,("searchname","stateid"))
