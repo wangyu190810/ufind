@@ -26,12 +26,13 @@ def set_compare():
         print data
         print comparelist
         description = data["description"]
+        print session
         user_id = session["user_id"]
         Compare.set_compare(connection=g.db,user_id=user_id,description=description)
         compare_id = Compare.get_compare_id(g.db)
         for row in comparelist:
             university_id = int(row["universityid"])
-            major_id = int(row["major"])
+            major_id = int(row["majorid"])
             CompareInfo.set_compare_info(g.db,
                                         compare_id=compare_id,
                                         university_id=university_id,

@@ -33,6 +33,9 @@ class CompareInfo(Base):
             filter(CompareInfo.university_id == university_id).\
             filter(CompareInfo.major_id == major_id).order_by(func.random()).limit(2)
 
+    @classmethod
+    def get_compare_about_major(cls,connection,major_id):
+        return connection.query(CompareInfo).filter(CompareInfo.major_id==major_id)
 
 class Compare(Base):
     """投票信息"""
@@ -54,8 +57,13 @@ class Compare(Base):
 
 
     @classmethod
-    def get_compaer(cls,connection,compaer_id):
+    def get_compare(cls,connection,compaer_id):
         return connection.query(Compare).filter(Compare.id == compaer_id)
+
+    @classmethod
+    def get_compare_user_id(cls,connection,user_id):
+        """用户的id获取用户发起国的投票"""
+        return connection.query(Compare).filter(Compare.user_id==user_id)
 
 
 class CompareSupport(Base):

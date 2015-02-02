@@ -6,8 +6,10 @@ import json
 
 from mysite.model.user import User
 from mysite.view.base import allow_cross_domain
-
-
+from mysite.model.offer import Offer
+from mysite.model.university import University
+from mysite.model.major import Major
+from mysite.model.compare import CompareInfo,Compare
 @allow_cross_domain
 def get_user_info():
     if request.method == "GET":
@@ -27,3 +29,51 @@ def get_user_info():
         student_info["universityname"] = universityname
         return json.dumps(student_info)
 
+@allow_cross_domain
+def get_user_detail_info():
+    if request.method == "GET":
+        studentid = request.args.get("studentid")
+        student_info = {}
+        student_info["fannum"] = 123
+        offers = []
+        offer_info = {}
+        for row in Offer.get_offer_student_info(g.db,
+                                       studentid):
+            for row_un in University.get_university_info(g.db,row.university_id):
+                offer_info["universityname"] = row_un.name
+                offer_info["logo"] = row_un.schoollogo
+            for row_ma in Major.get_major_info_by_id(g.db,row.major_id):
+                offer_info["majorname"] = row_ma.name
+            offer_info["twodimcode"] = ""
+            offers.append(offer_info)
+        student_info["offers"] = offers
+        compares = []
+        compares_info = {}
+        for row_co in Compare.get_compare_user_id(g.db,studentid):
+            compares_info["compareid"] = row_co.id
+            compareslist = []
+            compares_un = {}
+            for row_ci in CompareInfo.get_compare_info(g.db,row_co.id):
+                for row_un in University.get_university_info(g.db,row_ci.university_id):
+                    compares_un["universityname"] = row_un.name
+                    compares_un["universityid"] = row_un.id
+                    compares_un["logo"] = row_un.schoollogo
+                for row_ma in CompareInfo.get_compare_info(g.db,row_ci.major_id):
+                    compares_un["majorname"] = row_ma.name
+                    compares_un["supportnum"] = row_ci.supportnum
+                #for row_of in  Offer.get_offer_num(g.db,row_ci.university_id):
+                compares_un["offernum"] = Offer.get_offer_num(g.db,row_ci.university_id)
+                #    compares_un["offernum"] = row_of.count
+                #    print row_of.count
+                print compares_un["offernum"]
+                compareslist.append(compares_un)
+                compares_un = {}
+            compares_info["comparelist"] = compareslist
+            compares.append(compares_info)
+        student_info["compares"] = compares
+        for row_us in User.get_user_info(g.db,studentid):
+            student_info["description"] = row_us.description
+
+        student_info["status"] = "success"
+
+        return json.dumps(student_info)

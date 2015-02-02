@@ -52,4 +52,25 @@ def get_major_compare():
                         status=u"success")
 
 
+@allow_cross_domain
+def get_major_from_university_faculty():
+    """投票根据学校和学院返回专业和投票信息"""
+    if request.method == "GET":
+        university_id,faculty_id = map(request.args.get,
+                            ("universityid","facultyid"))
+        major_list = []
+        major_info = {}
+        if faculty_id is None:
+            for row in Major.get_major_info(g.db,university_id):
+                students = []
+                major_info["majorid"] = row.id
+                major_info["name"] = row.name
+                major_info["offernum"] = "12312"
+                offervote = {}
+                for major_row in CompareInfo.get_compare_about_major(g.db,row.id):
+                    for compare_row in CompareInfo.get_compare_info(g.db,major_row.id):
+                        for university_row in University.get_university_info(g.db,compare_row.university_id):
+                            offervote["compuniversityid"] = compare_row.university_id
+                            offervote["compname"] = university_row.name
+                            offervote["compmajor"] = university_row.major
 

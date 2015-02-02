@@ -24,6 +24,7 @@ class User(Base):
     gender = Column(Integer, doc=u"性别：1表示男，0表示女")
     grade = Column(Integer,doc=u"字段，筛选相关")
     type = Column(Integer, doc=u"高中还是大学：1表示大学，0表示高中,3表示研究生")
+    description = Column(Unicode(255),doc=u"描述")
 
     @classmethod
     def get_user_info(cls,connection, user_id):
