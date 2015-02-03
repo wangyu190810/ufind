@@ -10,6 +10,8 @@ from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
 from mysite.model.compare import CompareInfo,Compare
+
+
 @allow_cross_domain
 def get_user_info():
     if request.method == "GET":
@@ -33,6 +35,7 @@ def get_user_info():
 def get_user_detail_info():
     if request.method == "GET":
         studentid = request.args.get("studentid")
+        print studentid
         student_info = {}
         student_info["fannum"] = 123
         offers = []
@@ -77,3 +80,33 @@ def get_user_detail_info():
         student_info["status"] = "success"
 
         return json.dumps(student_info)
+
+def get_user_in_university():
+    if request.method == "POST":
+        data = json.loads(request.data)
+        university_id = data["universityid"]
+        faculty_id = data["facultyid"]
+        major_id = data["majorid"]
+        grade = data["grade"]
+        GPA = data["GPA"]
+        TOEFL = data["TOEFL"]
+        GRE = data["GRE"]
+        IELTS = data["IELTS"]
+        GMAT = data["GMAT"]
+        SAT = data["SAT"]
+        page =data["page"]
+        compares = {}
+        compare_list = []
+        page_list = []
+        student_list = []
+        student = {}
+        for row in User.get_user_info(g.db,university_id):
+            student_list.append(str(row.id))
+        student["studentlist"] = student_list
+        page = len(student_list)/15
+        student["more"] = ""
+        if page >= 1:
+            student["more"] = "true"
+        student["status"] = "success"
+
+        return json.dumps(student)

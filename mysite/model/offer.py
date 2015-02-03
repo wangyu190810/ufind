@@ -30,7 +30,7 @@ class Offer(Base):
         """根据学校和专业随机的返回两个学生的id"""
         return connection.query(func.random(Offer.user_id)).\
             filter(Offer.university_id == unviersity_id).\
-            filter(Offer.major_id == major_id).limit(6)
+            filter(Offer.major_id == major_id).limit(2)
 
     @classmethod
     def get_offer_student_info(cls,connection,student_id):
@@ -43,3 +43,10 @@ class Offer(Base):
         """查看当前学校的off数量"""
         return connection.query(func.count(Offer)).\
             filter(Offer.university_id == university_id).scalar()
+
+
+    @classmethod
+    def get_user_id_from_university(cls,connection,university_id):
+        """根据学校找学生iD"""
+        return connection.query(Offer).\
+            filter(Offer.university_id == university_id)

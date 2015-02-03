@@ -31,11 +31,23 @@ class CompareInfo(Base):
     def get_compare_random(cls,connection,university_id,major_id):
         return connection.query(CompareInfo.compare_id).\
             filter(CompareInfo.university_id == university_id).\
-            filter(CompareInfo.major_id == major_id).order_by(func.random()).limit(2)
+            filter(CompareInfo.major_id == major_id).\
+            order_by(func.random()).limit(2)
 
     @classmethod
     def get_compare_about_major(cls,connection,major_id):
-        return connection.query(CompareInfo).filter(CompareInfo.major_id==major_id)
+        return connection.query(CompareInfo).\
+            filter(CompareInfo.major_id==major_id)
+
+    @classmethod
+    def get_compare_university_major(cls,connection,university_id,
+                                     major_id=None):
+        if major_id is None:
+            return connection.query(CompareInfo).\
+                filter(CompareInfo.university_id == university_id)
+        return connection.query(CompareInfo).\
+            filter(CompareInfo.university_id == university_id).\
+            filter(CompareInfo.major_id == major_id)
 
 class Compare(Base):
     """投票信息"""
@@ -67,7 +79,7 @@ class Compare(Base):
 
 
 class CompareSupport(Base):
-    __tablename__ = "Comparesupport"
+    __tablename__ = "comparesupport"
     id = Column(Integer,primary_key=True,autoincrement=True)
     user_id = Column(Integer,doc=u"投票用户的id")
     compare_id = Column(Integer,doc=u"投向哪个投票列表")
@@ -76,17 +88,20 @@ class CompareSupport(Base):
 
     @classmethod
     def set_compare_support(cls,connection,user_id,compare_info_id):
-        compare_info = connection.query(CompareInfo.compare_id,
-                                        CompareInfo.supportnum).\
-            filter(CompareInfo.id == compare_info_id).as_scalar()
+        compare_info = connection.query(CompareInfo).\
+            filter(CompareInfo.id == compare_info_id).scalar()
+        print compare_info.id
         compare_support = CompareSupport(user_id=user_id,
-                                         compare_id=compare_info["id"],
-                                         compare_info_id=compare_info_id)
+                                         compare_id=compare_info.compare_id,
+                                         compare_info_id=compare_info.id)
         connection.add(compare_support)
+
         count = connection.query(func.count(CompareSupport.compare_info_id)).\
-            filter(CompareSupport.compare_info_id == compare_info_id).as_scalar()
-        compare_info_num = CompareInfo(supportnum=count+1)
-        connection.add(compare_info_num)
+            filter(CompareSupport.compare_info_id == compare_info_id).scalar()
+
+        compare_info_num = connection.query(CompareInfo).\
+            filter(CompareInfo.id == compare_info_id).\
+            update({"supportnum":count+1})
         connection.commit()
 
 

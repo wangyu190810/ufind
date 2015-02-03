@@ -67,6 +67,9 @@ def get_major_from_university_faculty():
                 major_info["name"] = row.name
                 major_info["offernum"] = "12312"
                 offervote = {}
+                for un in University.get_university_info(g.db,university_id):
+                    pass
+
                 for major_row in CompareInfo.get_compare_about_major(g.db,row.id):
                     for compare_row in CompareInfo.get_compare_info(g.db,major_row.id):
                         for university_row in University.get_university_info(g.db,compare_row.university_id):

@@ -2,7 +2,7 @@ __author__ = 'wangyu'
 from flask import session,wrappers,redirect
 from functools import wraps
 from flask import make_response
-
+import time
 
 def validate_user_login(func):
     @wraps(func)
@@ -27,5 +27,13 @@ def allow_cross_domain(fun):
 def get_university_img(universityname,num):
     return "http://www.22too.com/US(150115)/intimer/"+str(universityname)+"/"+str(num)+".jpg"
 
+
 def get_university_logo(universityname):
-     return "http://www.22too.com/US LOGO/"+str(universityname)+".png"
+    return "http://www.22too.com/US LOGO/"+str(universityname)+".png"
+
+
+def get_timestamp(create_time):
+    timeArray = time.localtime(create_time)
+    return time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
+
+

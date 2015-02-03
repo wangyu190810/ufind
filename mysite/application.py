@@ -7,9 +7,9 @@ from datetime import timedelta
 from mysite.view.university import get_university, get_search_university, \
     get_university_info
 from mysite.view.major import search_major,get_major_compare
-from mysite.view.user import get_user_info,get_user_detail_info
+from mysite.view.user import get_user_info,get_user_detail_info,get_user_in_university
 from mysite.view.score import set_user_info
-from mysite.view.compare import set_compare, get_compare
+from mysite.view.compare import set_compare, get_compare,get_compare_list,set_compare_support
 from mysite.view.offer import set_offer,get_offer_student
 from mysite.view.login import login,logout
 from config import Config
@@ -49,16 +49,23 @@ app.add_url_rule("/api/student_info",
                  view_func=get_user_info, methods=["GET"])
 app.add_url_rule("/api/get_user_detail_info",
                  view_func=get_user_detail_info, methods=["GET"])
+app.add_url_rule("/api/get_user_in_university",methods=["POST"],
+                 view_func=get_user_in_university)
 app.add_url_rule("/api/set_user_info", view_func=set_user_info,
+
                  methods=["POST"])
 app.add_url_rule("/api/set_compare", view_func=set_compare,
                  methods=["POST"])
+app.add_url_rule("/api/set_compare_support",methods=["POST"],
+                 view_func=set_compare_support)
 app.add_url_rule("/api/set_offer", view_func=set_offer,
                  methods=["POST"])
 app.add_url_rule("/api/get_compare", view_func=get_compare,
                  methods=["GET"])
 app.add_url_rule("/api/get_major_compare",view_func=get_major_compare,
                  methods=["GET"])
+app.add_url_rule("/api/get_compare_list",view_func=get_compare_list,
+                 methods=["POST"])
 app.add_url_rule("/api/get_offer_student_id",view_func=get_offer_student,
                  methods=["GET"])
 

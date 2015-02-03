@@ -13,8 +13,7 @@ from mysite.model.university import University
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.compare import Compare, CompareInfo,CompareSupport
-from mysite.view.base import allow_cross_domain
-
+from mysite.view.base import allow_cross_domain,get_timestamp
 
 @allow_cross_domain
 def set_compare():
@@ -47,14 +46,14 @@ def get_compare():
         compare = {}
         compare_info = {}
         comparelist = []
-        for row in  Compare.get_compaer(g.db,compareid):
+        for row in Compare.get_compare(g.db,compareid):
             compare["compareid"] = row.id
             compare["description"] = row.description
-            compare["date"] = row.create_time
+            compare["date"] = get_timestamp(row.create_time)
             compare["studentid"] = row.user_id
             #compare["major_id"] = row.major_id
             print compareid
-        for row in CompareInfo.get_compaerinfo(g.db,compareid):
+        for row in CompareInfo.get_compare_info(g.db,compareid):
             compare_info["universityid"] = row.university_id
             compare_info["major_id"] = row.major_id
             compare_info["supportnum"] = row.supportnum
@@ -83,5 +82,27 @@ def set_compare_support():
         CompareSupport.set_compare_support(g.db,user_id,compare_info_id)
         return jsonify(status="success")
 
+
+def get_compare_list():
+    if request.method == "POST":
+        data = json.loads(request.data)
+        university_id = data["universityid"]
+        faculty_id = data["facultyid"]
+        major_id = data["majorid"]
+        grade = data["grade"]
+        GPA = data["GPA"]
+        TOEFL = data["TOEFL"]
+        GRE = data["GRE"]
+        IELTS = data["IELTS"]
+        GMAT = data["GMAT"]
+        SAT = data["SAT"]
+        page =data["page"]
+        compares = {}
+        compare_list = []
+        for row in CompareInfo.get_compare_university_major(g.db,university_id,major_id):
+            compare_list.append(str(row.compare_id))
+
+        return jsonify(compares=compare_list,
+                       status="success")
 
 
