@@ -102,6 +102,14 @@
         
     return {"status":"success"}
     
+接口4.3
+  
+    方式
+        POST
+        
+    接口地址
+        www.ufind.top/api/set_
+  
 接口4.4
 
     方式
