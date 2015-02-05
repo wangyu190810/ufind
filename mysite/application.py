@@ -8,7 +8,7 @@ from mysite.view.university import get_university, get_search_university, \
     get_university_info
 from mysite.view.major import search_major,get_major_compare
 from mysite.view.user import get_user_info,get_user_detail_info,get_user_in_university
-from mysite.view.score import set_user_info
+from mysite.view.score import set_user_score
 from mysite.view.compare import set_compare, get_compare,get_compare_list,set_compare_support
 from mysite.view.offer import set_offer,get_offer_student
 from mysite.view.login import login,logout
@@ -34,8 +34,10 @@ app.DBSession = scoped_session(sessionmaker(bind=app.sa_engine))
 # app.add_url_rule("/classify/<name>",view_func=blog_classify,methods=["GET","POST"])
 #
 #
-app.add_url_rule("/login",view_func=login,methods=["GET","POST"])
-app.add_url_rule("/logout",view_func=logout,methods=["GET","POST"])
+app.add_url_rule("/login",view_func=login,
+                 methods=["GET","POST"])
+app.add_url_rule("/logout",view_func=logout,
+                 methods=["GET","POST"])
 
 app.add_url_rule("/api/get_university",
                  view_func=get_university, methods=["GET"])
@@ -51,8 +53,7 @@ app.add_url_rule("/api/get_user_detail_info",
                  view_func=get_user_detail_info, methods=["GET"])
 app.add_url_rule("/api/get_user_in_university",methods=["POST"],
                  view_func=get_user_in_university)
-app.add_url_rule("/api/set_user_info", view_func=set_user_info,
-
+app.add_url_rule("/api/set_user_score", view_func=set_user_score,
                  methods=["POST"])
 app.add_url_rule("/api/set_compare", view_func=set_compare,
                  methods=["POST"])

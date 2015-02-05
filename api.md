@@ -108,7 +108,7 @@
         POST
         
     接口地址
-        www.ufind.top/api/set_
+        www.ufind.top/api/set_user_score
   
 接口4.4
 

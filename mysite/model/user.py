@@ -33,13 +33,19 @@ class User(Base):
 
     @classmethod
     def login_user(cls,connection,phone,password):
-        print (phone,password)
         return connection.query(User.id).\
             filter(User.phone == phone).\
             filter(User.password == password)
 
 
-
+    @classmethod
+    def set_user_info_detail(cls,connection,user_id,prevuniversity,prevmajor,
+                             type,description):
+       connection.query(User).filter(User.id == user_id).\
+           update({User.prevuniversity:prevuniversity,
+           User.prevmajor:prevmajor,
+           User.type:type,
+           User.description:description})
 
 
 

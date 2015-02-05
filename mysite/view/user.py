@@ -100,13 +100,18 @@ def get_user_in_university():
         page_list = []
         student_list = []
         student = {}
-        for row in User.get_user_info(g.db,university_id):
-            student_list.append(str(row.id))
-        student["studentlist"] = student_list
-        page = len(student_list)/15
-        student["more"] = ""
-        if page >= 1:
-            student["more"] = "true"
-        student["status"] = "success"
+        if faculty_id == "":
+            if major_id == "":
+                major_id = None
+            for row in Offer.get_user_id_from_university(g.db,int(university_id),int(major_id)):
+                student_list.append(str(row.user_id))
+                student["studentlist"] = student_list
+                page = len(student_list)/15
+            student["more"] = ""
+            if int(page) > 1:
+                student["more"] = "true"
+            student["status"] = "success"
 
-        return json.dumps(student)
+            return json.dumps(student)
+
+        return jsonify(status="123")
