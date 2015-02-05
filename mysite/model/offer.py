@@ -46,7 +46,10 @@ class Offer(Base):
 
 
     @classmethod
-    def get_user_id_from_university(cls,connection,university_id):
+    def get_user_id_from_university(cls,connection,university_id,major_id=None):
         """根据学校找学生iD"""
-        return connection.query(Offer).\
-            filter(Offer.university_id == university_id)
+        if major_id is None:
+            return connection.query(Offer).\
+                filter(Offer.university_id == university_id)
+        return connection.query(Offer).filter(Offer.university_id == university_id).\
+            filter(Offer.major_id == major_id)

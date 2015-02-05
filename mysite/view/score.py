@@ -11,12 +11,13 @@ from flask import request, jsonify, g ,session
 from mysite.model.university import University
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
+from mysite.model.user import User
 from mysite.model.score import Score
 from mysite.view.base import allow_cross_domain
 
 
 @allow_cross_domain
-def set_user_info():
+def set_user_score():
     print request.data
     if request.method == "POST":
         data = request.data
@@ -33,6 +34,12 @@ def set_user_info():
             GMAT = data["GMAT"]
             description = data["description"]
             user_id = session["user_id"]
+            User.set_user_info_detail(g.db,
+                                      user_id=user_id,
+                                      prevuniversity=prevuniversity,
+                                      prevmajor=prevmajor,
+                                      type=int(data["type"]),
+                                      description=description)
             Score.set_user_info(g.db,university_type=1,
                                 user_id=user_id,
                                 rank=rank,
@@ -46,10 +53,10 @@ def set_user_info():
                                 IELTS_w=int(IELTS["w"]),
                                 GRE_v=int(GRE["v"]),
                                 GRE_q=int(GRE["q"]),
-                                GRE_aw=int(GRE["aw"]),
+                                GRE_aw=float(GRE["aw"]),
                                 GMAT_v=int(GMAT["v"]),
                                 GMAT_q=int(GMAT["q"]),
-                                GMAT_aw=int(GMAT["aw"]),
+                                GMAT_aw=float(GMAT["aw"]),
                                 GMAT_ir=int(GMAT["ir"])
                                 )
         else:
@@ -61,8 +68,14 @@ def set_user_info():
             IELTS = data["IELTS"]
             SAT  = data["SAT"]
             SATSUB = data["SATSUB"]
-            user_id = session["session"]
+            user_id = session["user_id"]
             description = data["description"]
+            User.set_user_info_detail(g.db,
+                                      user_id=user_id,
+                                      prevuniversity=prevuniversity,
+                                      prevmajor=prevmajor,
+                                      type=int(data["type"]),
+                                      description=description)
             Score.set_user_info(g.db,
                                 university_type=0,
                                 rank=rank,
@@ -79,8 +92,5 @@ def set_user_info():
                                 SAT_w=int(SAT["w"]),
                                 SAT_m=int(SAT["m"])
                                 )
-
-        data = request.get_json()
-
         return jsonify(status="success")
 
