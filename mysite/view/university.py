@@ -42,7 +42,7 @@ def get_university():
 
             return jsonify(universityinfo=university_info,
                            faculty=faculty_info,
-                           stattus="success")
+                           status="success")
 
 
 @allow_cross_domain
@@ -117,5 +117,9 @@ def get_search_university():
             return jsonify(namelist=universitylist,
                            stattus="success")
 
-
-
+def get_university_list():
+    if request.method == "GET":
+        name = []
+        for row in University.university_name_list(g.db):
+            name.append(row.name)
+        return jsonify(university=name)

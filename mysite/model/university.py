@@ -48,8 +48,10 @@ class University(Base):
                 filter(University.name.like("%"+searchname+"%")).\
                 filter(University.city == stateid)
 
+    @classmethod
+    def university_name_list(cls,connection):
+        return connection.query(University.name)
 
-#
 # def set_perm(connection, title, url):
 # auth = permission.insert().values(title=title, url=url)
 #     connection.execute(auth)
