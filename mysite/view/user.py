@@ -81,6 +81,7 @@ def get_user_detail_info():
 
         return json.dumps(student_info)
 
+@allow_cross_domain
 def get_user_in_university():
     if request.method == "POST":
         data = json.loads(request.data)

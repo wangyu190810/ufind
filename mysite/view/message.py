@@ -7,6 +7,7 @@ from mysite.model.user import User
 from mysite.view.base import validate_user_login
 
 
+@validate_user_login
 def get_message():
     if request.method == "GET":
         user_id = request.args.get("user_id")
@@ -28,6 +29,7 @@ def get_message():
         return json.dumps(message)
 
 
+@validate_user_login
 def set_message():
     if request.method == "POST":
         user_id = session["user_id"]

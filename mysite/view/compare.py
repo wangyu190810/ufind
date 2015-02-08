@@ -74,6 +74,7 @@ def get_compare():
         return json.dumps(compare)
 
 
+@allow_cross_domain
 def set_compare_support():
     if request.method == "POST":
         data = json.loads(request.data)
@@ -83,6 +84,7 @@ def set_compare_support():
         return jsonify(status="success")
 
 
+@allow_cross_domain
 def get_compare_list():
     if request.method == "POST":
         data = json.loads(request.data)

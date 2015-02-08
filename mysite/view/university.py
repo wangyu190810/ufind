@@ -116,7 +116,7 @@ def get_search_university():
                 universitylist.append(university)
             return jsonify(namelist=universitylist,
                            stattus="success")
-
+@allow_cross_domain
 def get_university_list():
     if request.method == "GET":
         name = []
