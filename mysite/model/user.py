@@ -47,6 +47,9 @@ class User(Base):
            User.type:type,
            User.description:description})
 
+    @classmethod
+    def get_user_name(cls,connection,user_id):
+        return connection.query(User).filter(User.id==user_id).scalar()
 
 
 

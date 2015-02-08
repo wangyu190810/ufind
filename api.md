@@ -9,6 +9,19 @@
 
         www.ufind.top/api/get_university?universityid=1
 
+接口2.1
+    
+    方式
+        GET
+    接口地址
+        www.ufind.top/api/search_university?searchname=MIT&stateid=1
+
+接口2.2
+
+    方式
+        GET
+    接口地址
+        www.ufind.top/api/search_major?searchname=EE&universityid=1
 
 接口3.1
     
@@ -118,4 +131,41 @@
         www.ufind.top/api/set_offer
         
     
-
+留言接口
+    
+    接口5.1 
+    方法
+        POST  json 
+        
+    接口地址
+        www.ufind.top/api/set_message
+        input
+        {
+            "message_user_id":"1",
+            "message":""
+        
+        }
+        output
+        {
+            "status":"success"
+        }
+        
+        
+    接口5.2
+    方法
+        GET
+    接口地址
+       www.ufind.top/api/get_message?user_id=1
+       
+       output
+       {
+       "message_list" :[
+            {
+                "message_user_id":"12",
+                "mesaage_user_name":"xxxx",
+                "message'
+            }
+        ]
+        
+        }
+        

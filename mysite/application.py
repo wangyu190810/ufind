@@ -12,6 +12,7 @@ from mysite.view.score import set_user_score
 from mysite.view.compare import set_compare, get_compare,get_compare_list,set_compare_support
 from mysite.view.offer import set_offer,get_offer_student
 from mysite.view.login import login,logout
+from mysite.view.message import set_message,get_message
 from config import Config
 
 
@@ -71,6 +72,11 @@ app.add_url_rule("/api/get_offer_student_id",view_func=get_offer_student,
                  methods=["GET"])
 app.add_url_rule("/api/university_list",view_func=get_university_list,
                  methods=["GET"])
+app.add_url_rule("/api/set_message",view_func=set_message,
+                 methods=["POST"])
+app.add_url_rule("/api/get_message",view_func=get_message,
+                 methods=["GET"])
+
 # app.add_url_rule("/googlefad2f2add41d5dac.html",
 # view_func=google)
 
