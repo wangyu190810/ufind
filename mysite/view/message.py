@@ -2,7 +2,6 @@
 __author__ = 'wangyu'
 from flask import render_template,request,g,redirect,jsonify,session
 import json
-from mysite.model.blog import Blog
 from mysite.model.message import Message
 from mysite.model.user import User
 from mysite.view.base import validate_user_login

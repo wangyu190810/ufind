@@ -24,6 +24,7 @@ class University(Base):
     latitude = Column(Float, doc=u"经度")
     longitude = Column(Float, doc=u"纬度")
     country = Column(Unicode(255))
+    state_id = Column(Integer,doc=u"地区id")
     city = Column(Unicode(255))
 
 

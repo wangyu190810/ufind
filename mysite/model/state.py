@@ -14,5 +14,9 @@ class State(Base):
     __tablename__ = "state"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(Unicode(255))
+    country = Column(Unicode(255))
     offernum = Column(Integer)
 
+    @classmethod
+    def get_state_info(cls,connection):
+        return connection.query(State)

@@ -7,9 +7,7 @@
 #Description: 
 
 from sqlalchemy import Column,Integer,String,TEXT,Date,DateTime
-from flask import g
-import markdown2
-from datetime import date
+
 from time import time
 from mysite.model.base import Base
 
