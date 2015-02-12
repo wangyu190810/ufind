@@ -1,4 +1,12 @@
 
+接口1.2
+    
+    方式
+        GET
+    接口地址
+        www.ufind.top/api/get_state_university?stateid=53
+
+
 接口1.3
 
     方式 

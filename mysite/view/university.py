@@ -123,3 +123,23 @@ def get_university_list():
         for row in University.university_name_list(g.db):
             name.append(row.name)
         return jsonify(university=name)
+
+
+@allow_cross_domain
+def get_state_university():
+    if request.method == "GET":
+        university = {}
+        state_id = request.args.get("stateid")
+        university["statepic"] = ""
+        universitylist = []
+        university_info = {}
+        for row in University.get_state_university(g.db,state_id):
+            university_info["name"] = row.name
+            university_info["chiname"] = row.chiname
+            university_info["universityid"] = row.id
+            university_info["universitypic"] = ""
+            universitylist.append(university_info)
+            university_info = {}
+        university["universitylist"] = universitylist
+        university["status"] = "success"
+        return json.dumps(university)

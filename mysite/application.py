@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from datetime import timedelta
 
 from mysite.view.university import get_university, get_search_university, \
-    get_university_info,get_university_list
+    get_university_info,get_university_list,get_state_university
 from mysite.view.major import search_major,get_major_compare
 from mysite.view.user import get_user_info,get_user_detail_info,get_user_in_university
 from mysite.view.score import set_user_score
@@ -77,6 +77,8 @@ app.add_url_rule("/api/set_message",view_func=set_message,
 app.add_url_rule("/api/get_message",view_func=get_message,
                  methods=["GET"])
 
+app.add_url_rule("/api/get_state_university",view_func=get_state_university,
+                 methods=["GET"])
 # app.add_url_rule("/googlefad2f2add41d5dac.html",
 # view_func=google)
 

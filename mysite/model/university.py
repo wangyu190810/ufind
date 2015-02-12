@@ -54,30 +54,7 @@ class University(Base):
     def university_name_list(cls,connection):
         return connection.query(University.name)
 
-# def set_perm(connection, title, url):
-# auth = permission.insert().values(title=title, url=url)
-#     connection.execute(auth)
-#     return True
-#
-#
-# def set_not_active_perm(connection,perm_id):
-#     not_active = permission.update().\
-#         where(permission.c.id == perm_id).\
-#         values(is_active=0)
-#     connection.execute(not_active)
-#     return True
-#
-#
-# def get_all_permission(connection):
-#     perm = select([permission.c.id, permission.c.title]).\
-#         where(permission.c.is_active == 1)
-#     for row in connection.execute(perm):
-#         yield row
-#
-#
-# def get_permission_on_user(connection,perm_id):
-#     user_perm = select([permission.c.url], permission.c.id.in_(perm_id))
-#     for row in connection.execute(user_perm):
-#         yield row
-#
-#
+    @classmethod
+    def get_state_university(cls,connection,state_id):
+        return connection.query(University).\
+            filter(University.state_id == state_id)
