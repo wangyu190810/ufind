@@ -14,8 +14,8 @@ class Major(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(Unicode(255))
     chiname = Column(Unicode(255))
-    university_id = Column(Unicode(225))
-    faculty_id = Column(Unicode(225))
+    university_id = Column(Integer)
+    faculty_id = Column(Integer)
     introduction = Column(Unicode(225))
 
 

@@ -1,4 +1,11 @@
 
+接口1.1
+    方式
+        GET
+    接口地址
+        www.ufind.top/api/index
+
+
 接口1.2
     
     方式

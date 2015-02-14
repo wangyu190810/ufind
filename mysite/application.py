@@ -13,6 +13,7 @@ from mysite.view.compare import set_compare, get_compare,get_compare_list,set_co
 from mysite.view.offer import set_offer,get_offer_student
 from mysite.view.login import login,logout
 from mysite.view.message import set_message,get_message
+from mysite.view.state import get_index
 from config import Config
 
 
@@ -78,6 +79,8 @@ app.add_url_rule("/api/get_message",view_func=get_message,
                  methods=["GET"])
 
 app.add_url_rule("/api/get_state_university",view_func=get_state_university,
+                 methods=["GET"])
+app.add_url_rule("/api/index",view_func=get_index,
                  methods=["GET"])
 # app.add_url_rule("/googlefad2f2add41d5dac.html",
 # view_func=google)

@@ -36,4 +36,3 @@ def get_timestamp(create_time):
     timeArray = time.localtime(create_time)
     return time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
 
-

@@ -116,3 +116,5 @@ def get_user_in_university():
             return json.dumps(student)
 
         return jsonify(status="123")
+
+

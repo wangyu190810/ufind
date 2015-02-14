@@ -14,7 +14,7 @@ class Faculty(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(Unicode(255))
     chiname = Column(Unicode(255))
-    university_id = Column(Unicode(225))
+    university_id = Column(Integer)
 
     @classmethod
     def get_faculty_info(cls, connection, university_id=None):
