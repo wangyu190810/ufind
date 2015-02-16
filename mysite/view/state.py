@@ -1,20 +1,17 @@
 #! /usr/bin/python
-#-*- coding:utf-8 -*-
-#Filename: university.py
-#Author: wangyu190810
-#E-mail: wo190810401@gmail.com
-#Date: 2015-01-22
-#Description:
+# -*- coding:utf-8 -*-
+# Filename: university.py
+# Author: wangyu190810
+# E-mail: wo190810401@gmail.com
+# Date: 2015-01-22
+# Description:
 
 import json
-from flask import request,jsonify,g,session
-from mysite.model.university import University
-from mysite.model.faculty import Faculty
-from mysite.model.major import Major
-from mysite.model.offer import Offer
+from flask import request,g
 from mysite.view.base import allow_cross_domain
 from mysite.model.state import State
 
+@allow_cross_domain
 def get_state_info():
     if request.method == "GET":
         statelist = {}
@@ -27,6 +24,8 @@ def get_state_info():
             country.append(state)
             state = {}
 
+
+@allow_cross_domain
 def get_index():
     if request.method == "GET":
         statelist = {}
