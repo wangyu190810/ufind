@@ -137,7 +137,7 @@ def get_state_university():
             university_info["name"] = row.name
             university_info["chiname"] = row.chiname
             university_info["universityid"] = row.id
-            university_info["universitypic"] = ""
+            university_info["universitypic"] = "school1.jpg"
             university_info["latitude"] = row.latitude
             university_info["longitude"] = row.longitude
             universitylist.append(university_info)
