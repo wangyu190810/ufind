@@ -84,7 +84,7 @@ app.add_url_rule("/api/get_state_university",view_func=get_state_university,
 app.add_url_rule("/api/index",view_func=get_index,
                  methods=["GET"])
 app.add_url_rule("/",view_func=send_sms,
-                 methods=["GET"])
+                 methods=["POST"])
 # app.add_url_rule("/googlefad2f2add41d5dac.html",
 
 # view_func=google)
