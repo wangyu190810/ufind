@@ -14,6 +14,7 @@ from mysite.view.offer import set_offer,get_offer_student
 from mysite.view.login import login,logout
 from mysite.view.message import set_message,get_message
 from mysite.view.state import get_index
+from mysite.view.sms import send_sms
 from config import Config
 
 
@@ -82,7 +83,10 @@ app.add_url_rule("/api/get_state_university",view_func=get_state_university,
                  methods=["GET"])
 app.add_url_rule("/api/index",view_func=get_index,
                  methods=["GET"])
+app.add_url_rule("/api/sms",view_func=send_sms,
+                 methods=["GET"])
 # app.add_url_rule("/googlefad2f2add41d5dac.html",
+
 # view_func=google)
 
 

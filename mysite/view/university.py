@@ -140,6 +140,7 @@ def get_state_university():
             university_info["universitypic"] = "school1.jpg"
             university_info["latitude"] = row.latitude
             university_info["longitude"] = row.longitude
+            university_info["offernum"] = "12"
             universitylist.append(university_info)
             university_info = {}
         university["universitylist"] = universitylist

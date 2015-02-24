@@ -1,3 +1,4 @@
+# -*-coding:utf-8-*-
 __author__ = 'wangyu'
 #
 import base64
@@ -331,7 +332,7 @@ def main():
 
     start = "0"
     limit = "100"
-    isUseJson = False
+    isUseJson = True
     date = "day"
     chargeType="0"
     maxAllowTime="60"
@@ -369,7 +370,7 @@ def main():
     a = test.templateSMS(accountSid,accountToken,appId,toNumber,templateId,param,isUseJson)
     return a
 
-def get_sms():
+def send_sms():
     if request.method == "GET":
         data = main()
 
