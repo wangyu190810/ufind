@@ -371,7 +371,7 @@ def main():
     return a
 
 def send_sms():
-    if request.method == "GET":
+    if request.method == "POST":
         data = main()
 
         return json.dumps(data)
