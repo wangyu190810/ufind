@@ -28,6 +28,7 @@ def search_major():
                 major["chiname"] = row.chiname
                 major["id"] = row.id
                 major_list.append(major)
+                major = {}
             return jsonify(namelist=major_list,status="success")
         else:
             for row in Major.search_maior(g.db, searchname, university_id):
@@ -35,6 +36,7 @@ def search_major():
                 major["chiname"] = row.chiname
                 major["id"] = row.id
                 major_list.append(major)
+                major = {}
             return jsonify(namelist=major_list,status="success")
 
 
