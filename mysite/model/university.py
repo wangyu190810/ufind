@@ -52,7 +52,8 @@ class University(Base):
 
     @classmethod
     def university_name_list(cls,connection):
-        return connection.query(University.name)
+        return connection.query(University.name).\
+            filter(University.latitude==None)
 
     @classmethod
     def get_state_university(cls,connection,state_id):
