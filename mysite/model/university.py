@@ -5,7 +5,7 @@ from sqlalchemy.types import Integer, Unicode, Float
 from sqlalchemy.sql import select
 from sqlalchemy.orm import aliased
 from datetime import datetime
-
+from sqlalchemy import or_
 from base import Base
 
 
@@ -44,11 +44,11 @@ class University(Base):
     def search_university(cls, connection, searchname=None, stateid=None):
         if stateid == None:
             return connection.query(University).\
-                filter(University.name.like("%"+searchname+"%"))
+                filter(or_(University.name.like("%"+searchname+"%"),University.short_name==searchname))
         else:
             return connection.query(University).\
-                filter(University.name.like("%"+searchname+"%")).\
-                filter(University.city == stateid)
+                filter(or_(University.name.like("%"+searchname+"%"),University.short_name==searchname)).\
+                filter(University.state_id == stateid)
 
     @classmethod
     def university_name_list(cls,connection):
