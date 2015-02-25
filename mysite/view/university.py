@@ -37,8 +37,9 @@ def get_university():
             for row in Faculty.get_faculty_info(g.db, university_id):
                 faculty["name"] = row.name
                 faculty["chiname"] = row.chiname
+                faculty["facultyid"] = row.id
                 faculty_info.append(faculty)
-
+                faculty = {}
 
             return jsonify(universityinfo=university_info,
                            faculty=faculty_info,
