@@ -16,6 +16,7 @@ class Major(Base):
     chiname = Column(Unicode(255))
     university_id = Column(Integer)
     faculty_id = Column(Integer)
+    major_type = Column(Integer,doc=u"专业类型，1为本科生，2为研究生，3为博士生，0为不分级别")
     introduction = Column(Unicode(225))
 
 
