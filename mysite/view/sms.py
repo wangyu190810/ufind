@@ -46,7 +46,7 @@ def send_sms():
         if len(phone) == 11:
             code = randint(1000, 9999)
             company = "游必有方"
-            tpl_value = "#code#="+str(code)+"&#company="+company
+            tpl_value = "#code#="+str(code)+"&#company#="+company
             result = tpl_send_sms(Config.apikey, 1, tpl_value, phone)
             return jsonify(status=result)
         return jsonify(status=phone)
