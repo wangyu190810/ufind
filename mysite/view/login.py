@@ -19,13 +19,13 @@ def login():
         return jsonify(status="success",
                        student=student
                        )
+    return jsonify(status="false")
 
-    return jsonify(status="falue")
 @allow_cross_domain
-def register():
+def register_user():
     if request.method == "POST":
+        #email,password,phonenum,chenkc
         pass
-
 
 @allow_cross_domain
 def logout():
