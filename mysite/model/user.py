@@ -32,10 +32,10 @@ class User(Base):
 
 
     @classmethod
-    def login_user(cls,connection,phone,password):
+    def login_user(cls,connection,email,password):
         return connection.query(User.id).\
-            filter(User.phone == phone).\
-            filter(User.password == password)
+            filter(User.email == email).\
+            filter(User.password == password).scalar()
 
 
     @classmethod

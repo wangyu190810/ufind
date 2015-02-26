@@ -5,18 +5,26 @@ from mysite.model.user import User
 
 @allow_cross_domain
 def login():
-    if request.method == "GET":
-        return render_template("login.html")
+#    if request.method == "GET":
+#        return render_template("login.html")
 
-    phone, password = map(request.form.get,("phone","password"))
-    print (phone,password)
-    user_id = User.login_user(g.db,phone,password)
-    for row in user_id:
-        print row
-        if row[0] is not None:
-            session["user_id"] = row[0]
-            return jsonify(status="success")
-        return redirect("/index")
+    email, password = map(request.form.get,("email","password"))
+    user = User.login_user(g.db,email,password)
+    if user.id is not None:
+        session["user_id"] = user.id
+        student = {}
+        student["studentid"] = user.id
+        student["studentname"] = user.username
+        student["studentpic"] = user.pic
+        return jsonify(status="success",
+                       student=student
+                       )
+
+    return jsonify(status="falue")
+@allow_cross_domain
+def register():
+    if request.method == "POST":
+        pass
 
 
 @allow_cross_domain

@@ -145,6 +145,8 @@ def get_state_university():
             university_info["latitude"] = row.latitude
             university_info["longitude"] = row.longitude
             university_info["offernum"] = "12"
+            university_info["meanGPA"] = "32"
+            university_info["meanTOEFL"] = "123"
             universitylist.append(university_info)
             university_info = {}
         university["universitylist"] = universitylist
