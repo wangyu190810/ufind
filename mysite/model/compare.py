@@ -90,7 +90,6 @@ class CompareSupport(Base):
     def set_compare_support(cls,connection,user_id,compare_info_id):
         compare_info = connection.query(CompareInfo).\
             filter(CompareInfo.id == compare_info_id).scalar()
-        print compare_info.id
         compare_support = CompareSupport(user_id=user_id,
                                          compare_id=compare_info.compare_id,
                                          compare_info_id=compare_info.id)
@@ -99,7 +98,7 @@ class CompareSupport(Base):
         count = connection.query(func.count(CompareSupport.compare_info_id)).\
             filter(CompareSupport.compare_info_id == compare_info_id).scalar()
 
-        compare_info_num = connection.query(CompareInfo).\
+        connection.query(CompareInfo).\
             filter(CompareInfo.id == compare_info_id).\
             update({"supportnum":count+1})
         connection.commit()
