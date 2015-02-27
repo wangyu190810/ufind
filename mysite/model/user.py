@@ -66,9 +66,16 @@ class User(Base):
 
     @classmethod
     def set_sms_checknum(cls,connection,phone,checknum):
-        user = User(phone=phone,checknum=checknum)
-        connection.add(user)
-        connection.commit()
+        phonenum = connection.query(User.phone).\
+            filter(User.phone == phone).scalar()
+        if len(str(phonenum)) < 10:
+            user = User(phone=phone, checknum=checknum)
+            connection.add(user)
+            connection.commit()
+        else:
+            connection.query(User).filter(User.phone == phone).upate(
+                {User.checknum:checknum}
+            )
 
     @classmethod
     def get_user_name(cls,connection,user_id):
