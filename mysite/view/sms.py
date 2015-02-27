@@ -10,6 +10,7 @@ from flask import request, jsonify,g
 from config import Config
 
 from mysite.model.user import User
+from mysite.view.base import allow_cross_domain
 # 服务地址
 host = "yunpian.com"
 # 端口号
@@ -39,7 +40,7 @@ def tpl_send_sms(apikey, tpl_id, tpl_value, mobile):
     conn.close()
     return response_str
 
-
+@allow_cross_domain
 def send_sms():
     if request.method == "POST":
         data = json.loads(request.data)
