@@ -43,6 +43,8 @@ def tpl_send_sms(apikey, tpl_id, tpl_value, mobile):
 @allow_cross_domain
 def send_sms():
     if request.method == "POST":
+        print request.data
+        print request.form.get
         data = json.loads(request.data)
         print data
         phone = data["phone"]
