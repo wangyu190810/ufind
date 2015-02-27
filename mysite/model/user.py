@@ -76,6 +76,7 @@ class User(Base):
             connection.query(User).filter(User.phone == phone).update(
                 {User.checknum:checknum}
             )
+            connection.commit()
 
     @classmethod
     def get_user_name(cls,connection,user_id):
