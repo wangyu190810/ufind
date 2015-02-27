@@ -3,6 +3,8 @@ from flask import render_template,redirect,g,session,request,jsonify
 from mysite.view.base import allow_cross_domain
 from mysite.model.user import User
 
+import json
+
 @allow_cross_domain
 def login():
 #    if request.method == "GET":
@@ -22,10 +24,25 @@ def login():
     return jsonify(status="false")
 
 @allow_cross_domain
-def register_user():
+def register_first():
     if request.method == "POST":
-        #email,password,phonenum,chenkc
-        pass
+        print request.data
+        data = json.loads(request.data)
+        print data
+        email  = data["email"]
+        passwrod = data["password"]
+        phonenum = data["phonenum"]
+        checknum = data["checknum"]
+        check = User.get_checknum(g.db,phonenum)
+        if check is None:
+            print "12"
+            return jsonify(status="false")
+        elif check == int(checknum):
+            User.register_first(g.db,email,passwrod,phonenum)
+            return jsonify(status="success")
+        else:
+            return jsonify(status="false")
+
 
 @allow_cross_domain
 def logout():

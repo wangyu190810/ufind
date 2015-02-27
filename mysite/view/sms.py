@@ -6,8 +6,10 @@ import httplib
 import urllib
 from random import randint
 import json
-from flask import request, jsonify
+from flask import request, jsonify,g
 from config import Config
+
+from mysite.model.user import User
 # 服务地址
 host = "yunpian.com"
 # 端口号
@@ -48,5 +50,8 @@ def send_sms():
             company = "游必有方"
             tpl_value = "#code#="+str(code)+"&#company#="+company
             result = tpl_send_sms(Config.apikey, 1, tpl_value, phone)
-            return jsonify(status=result)
-        return jsonify(status=phone)
+            code_num = json.loads(result)["code"]
+            if code_num == 0:
+                User.set_sms_checknum(g.db, phone, code)
+                return jsonify(status="success")
+        return jsonify(status="false")

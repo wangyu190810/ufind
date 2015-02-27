@@ -12,6 +12,7 @@ class User(Base):
     password = Column(String(80), doc=u"密码")
     email = Column(String(80), doc=u"邮箱")
     phone = Column(Integer, doc=u"电话")
+    checknum = Column(Integer, doc=u"验证码")
     pic = Column(Unicode(255), doc=u"头像")
     GPA = Column(Float(10), doc=u"")
     TOEFL = Column(Float(10), doc=u"")
@@ -37,9 +38,15 @@ class User(Base):
             filter(User.email == email).\
             filter(User.password == password).scalar()
 
+    @classmethod
+    def register_first(cls,connection,email,password,phone):
+        connection.query(User).\
+            filter(User.phone==phone).\
+            update({User.email:email,User.password:password})
 
     @classmethod
-    def set_user_info_detail(cls,connection,user_id,prevuniversity,prevmajor,
+    def set_user_info_detail(cls,connection, user_id,
+                             prevuniversity, prevmajor,
                              type,description):
        connection.query(User).filter(User.id == user_id).\
            update({User.prevuniversity:prevuniversity,
@@ -48,8 +55,17 @@ class User(Base):
            User.description:description})
 
     @classmethod
+    def set_sms_checknum(cls,connection,phone,checknum):
+        user = User(phone=phone,checknum=checknum)
+        connection.add(user)
+        connection.commit()
+
+    @classmethod
     def get_user_name(cls,connection,user_id):
-        return connection.query(User).filter(User.id==user_id).scalar()
+        return connection.query(User).filter(User.id == user_id).scalar()
 
 
-
+    @classmethod
+    def get_checknum(cls,connection,phone):
+        return connection.query(User.checknum).\
+            filter(User.phone == phone).scalar()

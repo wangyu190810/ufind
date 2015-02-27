@@ -11,7 +11,7 @@ from mysite.view.user import get_user_info,get_user_detail_info,get_user_in_univ
 from mysite.view.score import set_user_score
 from mysite.view.compare import set_compare, get_compare,get_compare_list,set_compare_support
 from mysite.view.offer import set_offer,get_offer_student
-from mysite.view.login import login,logout
+from mysite.view.login import login,logout,register_first
 from mysite.view.message import set_message,get_message
 from mysite.view.state import get_index
 from mysite.view.sms import send_sms
@@ -83,6 +83,8 @@ app.add_url_rule("/api/get_state_university",view_func=get_state_university,
                  methods=["GET"])
 app.add_url_rule("/api/index",view_func=get_index,
                  methods=["GET"])
+app.add_url_rule("/api/register_first",view_func=register_first,
+                 methods=["POST"])
 app.add_url_rule("/api/send_sms",view_func=send_sms,
                  methods=["POST"])
 app.add_url_rule("/",view_func=send_sms,
