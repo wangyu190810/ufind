@@ -43,6 +43,18 @@ def register_first():
         else:
             return jsonify(status="false")
 
+@allow_cross_domain
+def register_second():
+    if request.method == "POST":
+        data = json.loads(request.data)
+        phone = data["phonenum"]
+        username = data["username"]
+        university_id = data["universityid"]
+        major_id = data["majorid"]
+        gpa = data["gpa"]
+        User.register_second(g.db,phone,username,university_id,major_id,gpa)
+        return jsonify(status="success")
+    return jsonify(status="false")
 
 @allow_cross_domain
 def logout():

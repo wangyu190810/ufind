@@ -45,11 +45,21 @@ class User(Base):
             update({User.email:email,User.password:password})
 
     @classmethod
+    def register_second(cls, connection, phone, username,
+                       university_id,major_id,gpa):
+        connection.query(User).filter(User.phone == phone).update(
+            {User.username:username,
+             User.prevuniversity:university_id,
+             User.prevmajor:major_id,
+             User.GPA:gpa}
+        )
+
+    @classmethod
     def set_user_info_detail(cls,connection, user_id,
                              prevuniversity, prevmajor,
                              type,description):
-       connection.query(User).filter(User.id == user_id).\
-           update({User.prevuniversity:prevuniversity,
+       connection.query(User).filter(User.id == user_id).update(
+           {User.prevuniversity:prevuniversity,
            User.prevmajor:prevmajor,
            User.type:type,
            User.description:description})
