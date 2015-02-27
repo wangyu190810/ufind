@@ -51,7 +51,9 @@ def send_sms():
             tpl_value = "#code#="+str(code)+"&#company#="+company
             result = tpl_send_sms(Config.apikey, 1, tpl_value, phone)
             code_num = json.loads(result)["code"]
+            print code_num
             if code_num == 0:
-                User.set_sms_checknum(g.db, phone, code)
+
+                print User.set_sms_checknum(g.db, phone, code)
                 return jsonify(status="success")
         return jsonify(status="false")
