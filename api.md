@@ -184,4 +184,65 @@
         ]
         
         }
+   
+
+             
+接口 5.2
+    
+    短信验证码api
+    方法
+        POST
+    接口地址
+        www.ufind.top/api/send_sms
+    input
+    {
+        "phone":""
+    
+    }
+    output
+    {
+        "status":"success"
+    }
+    
+    注意保持第一次phonenum和第二次phonenum的数据一样，
+
+    第一次
+    方法
+        POST
+    接口地址
+        www.ufind.top/api/register_first
         
+    input 
+   
+       {
+        "email":"",
+        "password":"",
+        "phonenum":"",
+        "checknum":""
+        }
+    output
+    {
+        "status":"success"
+    }
+    
+    第二次
+    方法
+        POST
+    接口地址
+        www.ufind.top/api/register_second
+    
+    input
+        {
+  
+        "phonenum":"",
+        "username":"",
+        "universityid":"",
+        "majorid":"",
+        "gpa":""
+        }
+    output
+    {
+        "status":"success"
+    }
+    
+    
