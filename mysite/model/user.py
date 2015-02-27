@@ -73,7 +73,7 @@ class User(Base):
             connection.add(user)
             connection.commit()
         else:
-            connection.query(User).filter(User.phone == phone).upate(
+            connection.query(User).filter(User.phone == phone).update(
                 {User.checknum:checknum}
             )
 
