@@ -44,10 +44,12 @@ def tpl_send_sms(apikey, tpl_id, tpl_value, mobile):
 def send_sms():
     if request.method == "POST":
         print request.data
-        print request.form.get
-        data = json.loads(request.data)
-        print data
-        phone = data["phone"]
+        print request.form
+        phone = request.form["phonenum"]
+        print phone
+        #data = json.loads(request.data)
+        #print data
+        #phone = data["phone"]
         if len(phone) == 11:
             code = randint(1000, 9999)
             company = "游必有方"

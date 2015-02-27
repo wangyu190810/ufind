@@ -7,12 +7,12 @@ import json
 
 @allow_cross_domain
 def login():
-#    if request.method == "GET":
-#        return render_template("login.html")
-
-    email, password = map(request.form.get,("email","password"))
+    data = request.form
+    email = data["email"]
+    password = data["password"]
     user = User.login_user(g.db,email,password)
-    if user.id is not None:
+    if user is not None:
+        print user
         session["user_id"] = user.id
         student = {}
         student["studentid"] = user.id
@@ -27,7 +27,7 @@ def login():
 def register_first():
     if request.method == "POST":
         print request.data
-        data = json.loads(request.data)
+        data = request.form
         print data
         email  = data["email"]
         passwrod = data["password"]
