@@ -48,8 +48,10 @@ def send_sms():
         #print request.json
         data =  request.form
         #data = json.loads(data)
-        print  dir(data)
+        print data
+        print dir(data)
         print data.get("phonenum")
+        print data.getlist
         print dir(request)
         phone = request.form[0]["phonenum"]
         print phone
