@@ -44,9 +44,12 @@ def tpl_send_sms(apikey, tpl_id, tpl_value, mobile):
 def send_sms():
     if request.method == "POST":
         print request.data
-        print request.get_json()
-        print request.json
-        print request.form
+       # print request.get_json()
+        #print request.json
+        data =  request.form
+        #data = json.loads(data)
+        print  dir(data)
+        print data.get("phonenum")
         print dir(request)
         phone = request.form[0]["phonenum"]
         print phone
