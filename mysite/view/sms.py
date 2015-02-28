@@ -45,7 +45,7 @@ def send_sms():
     if request.method == "POST":
         print request.data
         print request.get_json()
-        print request.json()
+        print request.json["phonenum"]
         print request.form
         phone = request.form["phonenum"]
         print phone
