@@ -48,10 +48,15 @@ def register_second():
     if request.method == "POST":
         data = request.form
         phone = data["phonenum"]
+        print phone
         username = data["username"]
+        print username
         university_id = data["universityid"]
+        print university_id
         major_id = data["majorid"]
+        print major_id
         gpa = data["gpa"]
+        print gpa
         User.register_second(g.db,phone,username,university_id,major_id,gpa)
         return jsonify(status="success")
     return jsonify(status="false")
