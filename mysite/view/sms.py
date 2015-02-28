@@ -52,6 +52,7 @@ def send_sms():
         print dir(data)
         print data.get("phonenum")
         print data.getlist
+        print data.to_dict()
         print dir(request)
         phone = request.form[0]["phonenum"]
         print phone
