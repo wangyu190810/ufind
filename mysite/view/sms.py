@@ -53,7 +53,7 @@ def send_sms():
         print data.get("phonenum")
         print data.getlist
         cc = data.to_dict()
-        print cc.iterkeys()
+        print cc.keys()
         print data.fromkeys
         print data.setlist()
         print data.itervalues()
