@@ -46,7 +46,7 @@ def register_first():
 @allow_cross_domain
 def register_second():
     if request.method == "POST":
-        data = json.loads(request.data)
+        data = request.form
         phone = data["phonenum"]
         username = data["username"]
         university_id = data["universityid"]
