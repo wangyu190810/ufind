@@ -53,13 +53,13 @@ def send_sms():
         print data.get("phonenum")
         print data.getlist
         cc = data.to_dict()
-        print cc.keys()
-        print data.fromkeys
-        print data.setlist()
-        print data.itervalues()
-        print dir(request)
-        phone = request.form[0]["phonenum"]
-        print phone
+        phone =  json.loads(cc.keys()[0])["phonenum"]
+       # print data.fromkeys
+        #print data.setlist()
+        #print data.itervalues()
+        #print dir(request)
+        #phone = request.form[0]["phonenum"]
+        #print phone
         #data = json.loads(request.data)
         #print data
         #phone = data["phone"]
