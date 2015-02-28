@@ -59,9 +59,10 @@ def send_sms():
         print phone
         phone = json.loads(phone)
         print phone
+        abc = phone
         print dir(phone)
         print str(phone)
-        phone = phone["phonenum"]
+        phone = abc["phonenum"]
        # print data.fromkeys
         #print data.setlist()
         #print data.itervalues()
