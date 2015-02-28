@@ -37,9 +37,9 @@ app.DBSession = scoped_session(sessionmaker(bind=app.sa_engine))
 # app.add_url_rule("/classify/<name>",view_func=blog_classify,methods=["GET","POST"])
 #
 #
-app.add_url_rule("/login",view_func=login,
+app.add_url_rule("/api/login",view_func=login,
                  methods=["GET","POST"])
-app.add_url_rule("/logout",view_func=logout,
+app.add_url_rule("/api/logout",view_func=logout,
                  methods=["GET","POST"])
 
 app.add_url_rule("/api/get_university",
