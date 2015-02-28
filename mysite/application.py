@@ -5,14 +5,16 @@ from sqlalchemy import create_engine
 from datetime import timedelta
 
 from mysite.view.university import get_university, get_search_university, \
-    get_university_info,get_university_list,get_state_university
-from mysite.view.major import search_major,get_major_compare
-from mysite.view.user import get_user_info,get_user_detail_info,get_user_in_university
+    get_university_info, get_university_list, get_state_university
+from mysite.view.major import search_major, get_major_compare
+from mysite.view.user import get_user_info, get_user_detail_info, \
+    get_user_in_university
 from mysite.view.score import set_user_score
-from mysite.view.compare import set_compare, get_compare,get_compare_list,set_compare_support
-from mysite.view.offer import set_offer,get_offer_student
-from mysite.view.login import login,logout,register_first,register_second
-from mysite.view.message import set_message,get_message
+from mysite.view.compare import set_compare, get_compare, get_compare_list, \
+    set_compare_support
+from mysite.view.offer import set_offer, get_offer_student
+from mysite.view.login import login, logout, register_first, register_second
+from mysite.view.message import set_message, get_message
 from mysite.view.state import get_index
 from mysite.view.sms import send_sms
 from config import Config
@@ -37,10 +39,10 @@ app.DBSession = scoped_session(sessionmaker(bind=app.sa_engine))
 # app.add_url_rule("/classify/<name>",view_func=blog_classify,methods=["GET","POST"])
 #
 #
-app.add_url_rule("/api/login",view_func=login,
-                 methods=["GET","POST"])
-app.add_url_rule("/api/logout",view_func=logout,
-                 methods=["GET","POST"])
+app.add_url_rule("/login", view_func=login,
+                 methods=["GET", "POST"])
+app.add_url_rule("/logout", view_func=logout,
+                 methods=["GET", "POST"])
 
 app.add_url_rule("/api/get_university",
                  view_func=get_university, methods=["GET"])
@@ -54,42 +56,42 @@ app.add_url_rule("/api/student_info",
                  view_func=get_user_info, methods=["GET"])
 app.add_url_rule("/api/get_user_detail_info",
                  view_func=get_user_detail_info, methods=["GET"])
-app.add_url_rule("/api/get_user_in_university",methods=["POST"],
+app.add_url_rule("/api/get_user_in_university", methods=["POST"],
                  view_func=get_user_in_university)
 app.add_url_rule("/api/set_user_score", view_func=set_user_score,
                  methods=["POST"])
 app.add_url_rule("/api/set_compare", view_func=set_compare,
                  methods=["POST"])
-app.add_url_rule("/api/set_compare_support",methods=["POST"],
+app.add_url_rule("/api/set_compare_support", methods=["POST"],
                  view_func=set_compare_support)
 app.add_url_rule("/api/set_offer", view_func=set_offer,
                  methods=["POST"])
 app.add_url_rule("/api/get_compare", view_func=get_compare,
                  methods=["GET"])
-app.add_url_rule("/api/get_major_compare",view_func=get_major_compare,
+app.add_url_rule("/api/get_major_compare", view_func=get_major_compare,
                  methods=["GET"])
-app.add_url_rule("/api/get_compare_list",view_func=get_compare_list,
+app.add_url_rule("/api/get_compare_list", view_func=get_compare_list,
                  methods=["POST"])
-app.add_url_rule("/api/get_offer_student_id",view_func=get_offer_student,
+app.add_url_rule("/api/get_offer_student_id", view_func=get_offer_student,
                  methods=["GET"])
-app.add_url_rule("/api/university_list",view_func=get_university_list,
+app.add_url_rule("/api/university_list", view_func=get_university_list,
                  methods=["GET"])
-app.add_url_rule("/api/set_message",view_func=set_message,
+app.add_url_rule("/api/set_message", view_func=set_message,
                  methods=["POST"])
-app.add_url_rule("/api/get_message",view_func=get_message,
+app.add_url_rule("/api/get_message", view_func=get_message,
                  methods=["GET"])
 
-app.add_url_rule("/api/get_state_university",view_func=get_state_university,
+app.add_url_rule("/api/get_state_university", view_func=get_state_university,
                  methods=["GET"])
-app.add_url_rule("/api/index",view_func=get_index,
+app.add_url_rule("/api/index", view_func=get_index,
                  methods=["GET"])
-app.add_url_rule("/api/register_first",view_func=register_first,
+app.add_url_rule("/api/register_first", view_func=register_first,
                  methods=["POST"])
-app.add_url_rule("/api/register_second",view_func=register_second,
+app.add_url_rule("/api/register_second", view_func=register_second,
                  methods=["POST"])
-app.add_url_rule("/api/send_sms",view_func=send_sms,
+app.add_url_rule("/api/send_sms", view_func=send_sms,
                  methods=["POST"])
-app.add_url_rule("/",view_func=send_sms,
+app.add_url_rule("/", view_func=send_sms,
                  methods=["POST"])
 # app.add_url_rule("/googlefad2f2add41d5dac.html",
 

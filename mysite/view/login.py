@@ -1,27 +1,27 @@
+# -*-coding:utf8-*-
 __author__ = 'wangyu'
-from flask import render_template,redirect,g,session,request,jsonify
+from flask import redirect, g, session, request, jsonify
 from mysite.view.base import allow_cross_domain
 from mysite.model.user import User
 
-import json
 
 @allow_cross_domain
 def login():
     data = request.form
     email = data["email"]
     password = data["password"]
-    user = User.login_user(g.db,email,password)
+    user = User.login_user(g.db, email, password)
     if user is not None:
-        print user
+        student = dict()
         session["user_id"] = user.id
-        student = {}
         student["studentid"] = user.id
         student["studentname"] = user.username
         student["studentpic"] = user.pic
+        print student
         return jsonify(status="success",
-                       student=student
-                       )
+                       student=student)
     return jsonify(status="false")
+
 
 @allow_cross_domain
 def register_first():
@@ -29,37 +29,34 @@ def register_first():
         print request.data
         data = request.form
         print data
-        email  = data["email"]
-        passwrod = data["password"]
+        email = data["email"]
+        password = data["password"]
         phonenum = data["phonenum"]
         checknum = data["checknum"]
-        check = User.get_checknum(g.db,phonenum)
+        check = User.get_checknum(g.db, phonenum)
         if check is None:
-            print "12"
             return jsonify(status="false")
         elif check == int(checknum):
-            User.register_first(g.db,email,passwrod,phonenum)
+            User.register_first(g.db, email, password, phonenum)
             return jsonify(status="success")
         else:
             return jsonify(status="false")
+
 
 @allow_cross_domain
 def register_second():
     if request.method == "POST":
         data = request.form
         phone = data["phonenum"]
-        print phone
         username = data["username"]
-        print username
         university_id = data["universityid"]
-        print university_id
         major_id = data["majorid"]
-        print major_id
         gpa = data["gpa"]
-        print gpa
-        User.register_second(g.db,phone,username,university_id,major_id,gpa)
+        User.register_second(g.db, phone, username, university_id, major_id,
+                             gpa)
         return jsonify(status="success")
     return jsonify(status="false")
+
 
 @allow_cross_domain
 def logout():

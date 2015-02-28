@@ -1,4 +1,5 @@
 flask
 sqlalchemy
 gunicorn
-python-Mysql
+MySQL-python
+

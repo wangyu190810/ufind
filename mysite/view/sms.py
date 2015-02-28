@@ -43,46 +43,16 @@ def tpl_send_sms(apikey, tpl_id, tpl_value, mobile):
 @allow_cross_domain
 def send_sms():
     if request.method == "POST":
-        print request.data
-       # print request.get_json()
-        #print request.json
-        data =  request.form
-        #data = json.loads(data)
-        print data
-        print dir(data)
-        print data.get("phonenum")
-        print data.getlist
+        data = request.form
         cc = data.to_dict()
-        print cc.keys()[0]
-        print dir(cc.keys()[0])
-        phonenum =  eval(cc.keys()[0])
-        phone = json.dumps(cc.keys()[0])
-        print phone
-        phone = json.loads(phone)
-        print phone
-        abc = phone
-        print dir(phone)
-        print type(phone)
-        print type(abc)
-        #phone = abc["phonenum"]
+        phonenum = eval(cc.keys()[0])
         phone = phonenum["phonenum"]
-       # print data.fromkeys
-        #print data.setlist()
-        #print data.itervalues()
-        #print dir(request)
-        #phone = request.form[0]["phonenum"]
-        #print phone
-        #data = json.loads(request.data)
-        #print data
-        #phone = data["phone"]
-        print phone
         if len(phone) == 11:
             code = randint(1000, 9999)
             company = "游必有方"
             tpl_value = "#code#="+str(code)+"&#company#="+company
             result = tpl_send_sms(Config.apikey, 1, tpl_value, phone)
             code_num = json.loads(result)["code"]
-            print code_num,"code_num"
             if code_num == 0:
 
                 print User.set_sms_checknum(g.db, phone, code)
