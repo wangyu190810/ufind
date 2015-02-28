@@ -61,7 +61,8 @@ def send_sms():
         print phone
         abc = phone
         print dir(phone)
-        print str(phone)
+        print type(phone)
+        print type(abc)
         phone = abc["phonenum"]
        # print data.fromkeys
         #print data.setlist()
