@@ -34,7 +34,7 @@ class User(Base):
 
     @classmethod
     def login_user(cls, connection, email, password):
-        return connection.query(User.id). \
+        return connection.query(User). \
             filter(User.email == email). \
             filter(User.password == password).scalar()
 
