@@ -8,9 +8,13 @@ from mysite.model.user import User
 @allow_cross_domain
 def login():
     data = request.form
+    print request.form
     email = data["email"]
     password = data["password"]
+    print email,password
+
     user = User.login_user(g.db, email, password)
+    print user
     if user is not None:
         student = dict()
         session["user_id"] = user.id
