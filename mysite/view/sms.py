@@ -56,7 +56,11 @@ def send_sms():
         print cc.keys()[0]
         print dir(cc.keys()[0])
         phone = json.dumps(cc.keys()[0])
+        print phone
         phone = json.loads(phone)
+        print phone
+        print dir(phone)
+        print str(phone)
         phone = phone["phonenum"]
        # print data.fromkeys
         #print data.setlist()
