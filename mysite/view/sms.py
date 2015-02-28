@@ -53,8 +53,8 @@ def send_sms():
         print data.get("phonenum")
         print data.getlist
         cc = data.to_dict()
-        print cc.keys()
-        print dir(cc.keys())
+        print cc.keys()[0]
+        print dir(cc.keys()[0])
         phone =  json.loads(cc.keys()[0])["phonenum"]
        # print data.fromkeys
         #print data.setlist()
