@@ -75,13 +75,14 @@ def send_sms():
         #data = json.loads(request.data)
         #print data
         #phone = data["phone"]
+        print phone
         if len(phone) == 11:
             code = randint(1000, 9999)
             company = "游必有方"
             tpl_value = "#code#="+str(code)+"&#company#="+company
             result = tpl_send_sms(Config.apikey, 1, tpl_value, phone)
             code_num = json.loads(result)["code"]
-            print code_num
+            print code_num,"code_num"
             if code_num == 0:
 
                 print User.set_sms_checknum(g.db, phone, code)
