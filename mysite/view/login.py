@@ -68,7 +68,7 @@ def change_password():
         print phone,password,checknum
         check_num = User.get_checknum(g.db, phone)
         print check_num
-        if check_num == checknum:
+        if check_num == int(checknum):
             User.change_password(g.db, phone, password)
             return jsonify(status="success")
         return jsonify(status="false")
