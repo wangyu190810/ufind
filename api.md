@@ -257,6 +257,6 @@
     方法
         POST
     接口地址
-        www.ufind.top/api/register_second
+        www.ufind.top/api/change_password
      
      
