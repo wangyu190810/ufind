@@ -1,6 +1,6 @@
 # -*-coding:utf-8-*-
 __author__ = 'wangyu'
-from sqlalchemy import Column, String, TEXT, Integer, Unicode, Float
+from sqlalchemy import Column, String, Integer, Unicode, Float
 from base import Base
 
 
@@ -57,9 +57,10 @@ class User(Base):
         connection.commit()
 
     @classmethod
-    def set_user_info_detail(cls, connection, user_id,
-                             prevuniversity, prevmajor,
-                             type, description):
+    def set_user_info_detail(cls, connection,
+                             user_id, prevuniversity,
+                             prevmajor, type,
+                             description):
         connection.query(User).filter(User.id == user_id).update(
             {User.prevuniversity: prevuniversity,
              User.prevmajor: prevmajor,
@@ -90,3 +91,10 @@ class User(Base):
     def get_checknum(cls, connection, phone):
         return connection.query(User.checknum). \
             filter(User.phone == phone).scalar()
+
+    @classmethod
+    def change_password(cls,connection,phone,checknum,password):
+        connection.query(User).filter(User.phone == phone).update({
+            User.password: password})
+        connection.commit()
+
