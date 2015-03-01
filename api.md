@@ -251,4 +251,12 @@
         "status":"success"
     }
     
-    
+接口 5.3
+
+    修改密码api
+    方法
+        POST
+    接口地址
+        www.ufind.top/api/register_second
+     
+     

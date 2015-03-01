@@ -13,7 +13,8 @@ from mysite.view.score import set_user_score
 from mysite.view.compare import set_compare, get_compare, get_compare_list, \
     set_compare_support
 from mysite.view.offer import set_offer, get_offer_student
-from mysite.view.login import login, logout, register_first, register_second
+from mysite.view.login import login, logout, register_first, register_second,\
+    change_password
 from mysite.view.message import set_message, get_message
 from mysite.view.state import get_index
 from mysite.view.sms import send_sms
@@ -88,6 +89,8 @@ app.add_url_rule("/api/index", view_func=get_index,
 app.add_url_rule("/api/register_first", view_func=register_first,
                  methods=["POST"])
 app.add_url_rule("/api/register_second", view_func=register_second,
+                 methods=["POST"])
+app.add_url_rule("/api/change_password", view_func=change_password,
                  methods=["POST"])
 app.add_url_rule("/api/send_sms", view_func=send_sms,
                  methods=["POST"])
