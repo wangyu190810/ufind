@@ -8,13 +8,9 @@ from mysite.model.user import User
 @allow_cross_domain
 def login():
     data = request.form
-    print request.form
     email = data["email"]
     password = data["password"]
-    print email,password
-
     user = User.login_user(g.db, email, password)
-    print user
     if user is not None:
         student = dict()
         session["user_id"] = user.id
@@ -60,6 +56,20 @@ def register_second():
                              gpa)
         return jsonify(status="success")
     return jsonify(status="false")
+
+
+@allow_cross_domain
+def change_password():
+    if request.method == "POST":
+        data = request.form
+        phone = data["phonenum"]
+        password = data["password"]
+        checknum = data["checknum"]
+        check_num = User.get_checknum(g.db, phone)
+        if check_num == checknum:
+            User.change_password(g.db, phone, password)
+            return jsonify(status="success")
+        return jsonify(status="false")
 
 
 @allow_cross_domain
