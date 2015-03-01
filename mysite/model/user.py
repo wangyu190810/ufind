@@ -93,7 +93,7 @@ class User(Base):
             filter(User.phone == phone).scalar()
 
     @classmethod
-    def change_password(cls,connection,phone,checknum,password):
+    def change_password(cls,connection,phone,password):
         connection.query(User).filter(User.phone == phone).update({
             User.password: password})
         connection.commit()
