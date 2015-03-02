@@ -8,9 +8,17 @@ from mysite.model.user import User
 @allow_cross_domain
 def login():
     data = request.form
-    email = data["email"]
+    login_auth = data["email"]
+    if "@" in login_auth:
+        login_emial = login_auth
+        login_phone = None
+    else:
+        login_email = None
+        login_phone = login_auth
+
     password = data["password"]
-    user = User.login_user(g.db, email, password)
+    user = User.login_user(g.db, email=login_email,
+                           phone=login_phone, password=password)
     if user is not None:
         student = dict()
         session["user_id"] = user.id

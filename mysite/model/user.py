@@ -33,10 +33,15 @@ class User(Base):
 
 
     @classmethod
-    def login_user(cls, connection, email, password):
-        return connection.query(User). \
-            filter(User.email == email). \
-            filter(User.password == password).scalar()
+    def login_user(cls, connection, email=None, phone=None, password=None,):
+        if phone is None:
+            return connection.query(User). \
+                filter(User.email == email). \
+                filter(User.password == password).scalar()
+        elif email is None:
+            return connection.query(User).\
+                filter(User.phone == phone).\
+                filter(User.password==password)
 
     @classmethod
     def register_first(cls, connection, email, password, phone):
