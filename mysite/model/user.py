@@ -41,7 +41,7 @@ class User(Base):
         elif email is None:
             return connection.query(User).\
                 filter(User.phone == phone).\
-                filter(User.password==password)
+                filter(User.password==password).scalar()
 
     @classmethod
     def register_first(cls, connection, email, password, phone):
