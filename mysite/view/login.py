@@ -10,7 +10,7 @@ def login():
     data = request.form
     login_auth = data["email"]
     if "@" in login_auth:
-        login_emial = login_auth
+        login_email = login_auth
         login_phone = None
     else:
         login_email = None

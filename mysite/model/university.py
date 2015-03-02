@@ -44,18 +44,20 @@ class University(Base):
     def search_university(cls, connection, searchname=None, stateid=None):
         if stateid == None:
             return connection.query(University).\
-                filter(or_(University.name.like("%"+searchname+"%"),University.short_name==searchname))
+                filter(or_(University.name.like("%"+searchname+"%"),
+                           University.short_name == searchname)).limit(10)
         else:
             return connection.query(University).\
-                filter(or_(University.name.like("%"+searchname+"%"),University.short_name==searchname)).\
-                filter(University.state_id == stateid)
+                filter(or_(University.name.like("%"+searchname+"%"),
+                           University.short_name == searchname)).\
+                filter(University.state_id == stateid).limit(10)
 
     @classmethod
-    def university_name_list(cls,connection):
+    def university_name_list(cls, connection):
         return connection.query(University.name).\
-            filter(University.latitude==None)
+            filter(University.latitude == None)
 
     @classmethod
-    def get_state_university(cls,connection,state_id):
+    def get_state_university(cls, connection, state_id):
         return connection.query(University).\
             filter(University.state_id == state_id)
