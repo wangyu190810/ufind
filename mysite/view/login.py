@@ -26,7 +26,7 @@ def login():
     if user is not None:
         session["user_id"] = user.id
         resp = make_response(redirect("/"))
-        resp.set_cookie(key="user_id",value="user.id",domain="www.ufind.top",expires=time.time()+60*60)
+        resp.set_cookie(key="user_id",value=str(user.id),domain="www.ufind.top",expires=time.time()+60*60)
         return jsonify(status="success")
     return jsonify(status="false")
 
