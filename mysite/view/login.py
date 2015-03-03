@@ -86,7 +86,10 @@ def register_second():
         gpa = data["gpa"]
         User.register_second(g.db, phone, username, university_id, major_id,
                              gpa)
-        return jsonify(status="success")
+        user = User.get_user_info_by_phone(g.db,phone)
+        user_id = user.id
+        return jsonify(status="success",
+                       cookie=set_sign_safe(user_id))
     return jsonify(status="false")
 
 
