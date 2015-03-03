@@ -26,7 +26,7 @@ def login():
         student = dict()
         session["user_id"] = user.id
         resp = make_response()
-        resp.set_cookie(cookie="user_id",value=user.id,domain="*",expires=time.time()+60*60)
+        resp.set_cookie(key="user_id",value=user.id,domain="*",expires=time.time()+60*60)
         student["studentid"] = user.id
         student["studentname"] = user.username
         student["studentpic"] = user.pic
