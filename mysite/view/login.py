@@ -25,7 +25,7 @@ def login():
     if user is not None:
         student = dict()
         session["user_id"] = user.id
-        resp = make_response()
+        resp = make_response(redirect("#"))
         resp.set_cookie(key="user_id",value=user.id,domain="*",expires=time.time()+60*60)
         student["studentid"] = user.id
         student["studentname"] = user.username
