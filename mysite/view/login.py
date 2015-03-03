@@ -25,12 +25,12 @@ def login():
                            phone=login_phone, password=password)
     if user is not None:
         session["user_id"] = user.id
-        #resp = make_response()
+        resp = make_response()
         stuedent = dict()
         stuedent["studentid"] = user.id
         stuedent["studentname"] = user.username
         stuedent["studentpic"] = user.pic
-        #resp.set_cookie(key="user_id",value=str(user.id),domain="www.ufind.top",expires=time.time()+60*60)
+        resp.set_cookie(key="user_id",value=str(user.id),domain="www.ufind.top",expires=time.time()+60*60)
         return jsonify(
             student = stuedent,
             status="success")
