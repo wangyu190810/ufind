@@ -32,7 +32,7 @@ def login():
         stuedent["studentpic"] = user.pic
         #resp.set_cookie(key="user_id",value=str(user.id),domain="www.ufind.top",expires=time.time()+60*60)
         return jsonify(
-            stuedent = stuedent,
+            student = stuedent,
             status="success")
     return jsonify(status="false")
 
