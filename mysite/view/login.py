@@ -89,6 +89,7 @@ def register_second():
         user = User.get_user_info_by_phone(g.db,phone)
         user_id = user.id
         session["user_id"] = user_id
+        print user_id
         return jsonify(status="success",
                        cookie=set_sign_safe(user_id))
     return jsonify(status="false")
