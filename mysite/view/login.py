@@ -85,7 +85,7 @@ def change_password():
 @allow_cross_domain
 def logout():
     session.pop("username")
-    return redirect("/index")
+    return jsonify(status="success")
 
 
 
