@@ -32,7 +32,7 @@ def login():
         student["studentpic"] = user.pic
         print student
         return jsonify(status="success",
-                       student=student),resp
+                       student=student)
     return jsonify(status="false")
 
 
