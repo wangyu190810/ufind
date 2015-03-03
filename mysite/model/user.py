@@ -102,3 +102,7 @@ class User(Base):
             User.password: password})
         connection.commit()
 
+    @classmethod
+    def get_user_info_by_phone(cls,connection,phone):
+        return connection.query(User).filter(User.phone==phone).scalar()
+
