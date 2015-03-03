@@ -269,5 +269,14 @@
     input
         www.ufind.top/api/logout
         
+接口 5.5 
     
-    
+    使用cookie登录
+    方法
+        GET
+    接口地址
+        www.ufind.top/api/login_cookie
+        
+    input
+        www.ufind.top/api/login_cookie?cookie=123123
+        

@@ -4,9 +4,10 @@ from functools import wraps
 from flask import make_response,jsonify
 
 import time
+from itsdangerous import Signer
 
 from mysite.model.user import User
-
+from config import Config
 
 def validate_user_login(func):
     @wraps(func)
@@ -60,3 +61,10 @@ def get_timestamp(create_time):
     timeArray = time.localtime(create_time)
     return time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
 
+def set_sign_safe(sign_file):
+    s = Signer(Config.login_sign)
+    return s.sign(sign_file)
+
+def get_sign_safe(true_file):
+    s= Signer(Config.login_sign)
+    return s.unsign(true_file)

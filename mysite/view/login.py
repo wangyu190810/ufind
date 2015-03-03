@@ -3,7 +3,7 @@ __author__ = 'wangyu'
 from flask import redirect, g, session, request, jsonify,make_response
 
 
-from mysite.view.base import allow_cross_domain
+from mysite.view.base import allow_cross_domain,get_sign_safe,set_sign_safe
 from mysite.model.user import User
 
 import time
@@ -32,8 +32,27 @@ def login():
         return jsonify(
             student=stuedent,
             status="success",
-            cookie=user.id)
+            cookie=set_sign_safe(user.id))
     return jsonify(status="false")
+
+@allow_cross_domain
+def login_from_cookie():
+    if request.method == "GET":
+        data = request.args.get("cookie")
+        user_id = get_sign_safe(data)
+        user = User.get_user_info(g.db,user_id)
+    if user is not None:
+        session["user_id"] = user.id
+        stuedent = dict()
+        stuedent["studentid"] = user.id
+        stuedent["studentname"] = user.username
+        stuedent["studentpic"] = user.pic
+        return jsonify(
+            student=stuedent,
+            status="success",
+            cookie=set_sign_safe(user.id))
+    return jsonify(status="false")
+
 
 
 @allow_cross_domain
