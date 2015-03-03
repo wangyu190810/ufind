@@ -8,7 +8,7 @@ from mysite.model.user import User
 
 import time
 
-#@allow_cross_domain
+@allow_cross_domain
 def login():
     data = request.form
     print request.headers
@@ -26,8 +26,14 @@ def login():
     if user is not None:
         session["user_id"] = user.id
         resp = make_response(redirect("/"))
+        stuedent = dict()
+        stuedent["studentid"] = user.id
+        stuedent["studentname"] = user.username
+        stuedent["studentpic"] = user.pic
         resp.set_cookie(key="user_id",value=str(user.id),domain="www.ufind.top",expires=time.time()+60*60)
-        return jsonify(status="success")
+        return jsonify(
+            stuedent = stuedent,
+            status="success")
     return jsonify(status="false")
 
 
