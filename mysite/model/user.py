@@ -29,8 +29,7 @@ class User(Base):
 
     @classmethod
     def get_user_info(cls, connection, user_id):
-        return connection.query(User).filter(User.id == user_id)
-
+        return connection.query(User).filter(User.id == user_id).scalar()
 
     @classmethod
     def login_user(cls, connection, email=None, phone=None, password=None,):

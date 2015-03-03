@@ -1,14 +1,13 @@
 #! /usr/bin/python
-#-*- coding:utf-8 -*-
-#Filename: university.py
-#Author: wangyu190810
-#E-mail: wo190810401@gmail.com
-#Date: 2015-01-22
-#Description: 
+# -*- coding:utf-8 -*-
+# Filename: university.py
+# Author: wangyu190810
+# E-mail: wo190810401@gmail.com
+# Date: 2015-01-22
+# Description:
 
 import json
 from mysite.model.university import University
-#from mysite.model.major import
 from flask import request,jsonify,g
 
 from mysite.model.faculty import Faculty
@@ -23,8 +22,7 @@ def get_university():
         faculty = {}
         if university_id == 0:
             for university in University.get_university_info(connection=g.db):
-                c =  university.__dict__
-            data= json.dumps(c)
+                c = university.__dict__
             return jsonify(data=json.dumps(c), status=u"success")
         else:
             university_info = []

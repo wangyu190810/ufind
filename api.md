@@ -259,4 +259,15 @@
     接口地址
         www.ufind.top/api/change_password
      
-     
+接口 5.4 
+    
+    退出登录api
+    方法
+        GET
+    接口地址
+        www.ufind.top/api/logout
+    input
+        www.ufind.top/api/logout
+        
+    
+    
