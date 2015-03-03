@@ -108,7 +108,7 @@ def change_password():
 
 @allow_cross_domain
 def logout():
-    session.pop("username")
+    session.pop("user_id")
   #  user_id = request.cookies.get("user_id")
 
     return jsonify(status="success")
