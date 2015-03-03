@@ -91,7 +91,7 @@ def register_second():
         session["user_id"] = user_id
         print user_id
         return jsonify(status="success",
-                       cookie=set_sign_safe(user_id))
+                       cookie=set_sign_safe(str(user_id)))
     return jsonify(status="false")
 
 
