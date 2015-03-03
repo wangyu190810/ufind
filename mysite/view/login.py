@@ -24,17 +24,10 @@ def login():
     user = User.login_user(g.db, email=login_email,
                            phone=login_phone, password=password)
     if user is not None:
-        student = dict()
         session["user_id"] = user.id
         resp = make_response(redirect("/"))
         resp.set_cookie(key="user_id",value="user.id",domain="www.ufind.top",expires=time.time()+60*60)
-        student["studentid"] = user.id
-        student["studentname"] = user.username
-        student["studentpic"] = user.pic
-        print student
-       # return jsonify(status="success",
-       #                student=student)
-        return resp
+        return jsonify(status="success")
     return jsonify(status="false")
 
 
@@ -92,6 +85,8 @@ def change_password():
 @allow_cross_domain
 def logout():
     session.pop("username")
+  #  user_id = request.cookies.get("user_id")
+
     return jsonify(status="success")
 
 
