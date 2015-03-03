@@ -32,7 +32,7 @@ def login():
         return jsonify(
             student=stuedent,
             status="success",
-            cookie=set_sign_safe(user.id))
+            cookie=set_sign_safe(str(user.id)))
     return jsonify(status="false")
 
 @allow_cross_domain
@@ -50,7 +50,7 @@ def login_from_cookie():
         return jsonify(
             student=stuedent,
             status="success",
-            cookie=set_sign_safe(user.id))
+            cookie=set_sign_safe(str(user.id)))
     return jsonify(status="false")
 
 
