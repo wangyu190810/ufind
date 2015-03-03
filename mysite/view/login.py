@@ -25,7 +25,7 @@ def login():
                            phone=login_phone, password=password)
     if user is not None:
         session["user_id"] = user.id
-        resp = make_response(redirect("/"))
+        resp = make_response()
         stuedent = dict()
         stuedent["studentid"] = user.id
         stuedent["studentname"] = user.username
