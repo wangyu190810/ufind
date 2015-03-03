@@ -45,6 +45,7 @@ def send_sms():
     if request.method == "POST":
         data = request.form
         cc = data.to_dict()
+        print cc
         phonenum = eval(cc.keys()[0])
         phone = phonenum["phonenum"]
         if len(phone) == 11:
