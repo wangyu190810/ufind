@@ -1,9 +1,12 @@
 # -*-coding:utf8-*-
 __author__ = 'wangyu'
-from flask import redirect, g, session, request, jsonify
+from flask import redirect, g, session, request, jsonify,make_response
+
+
 from mysite.view.base import allow_cross_domain
 from mysite.model.user import User
 
+import time
 
 @allow_cross_domain
 def login():
@@ -22,12 +25,14 @@ def login():
     if user is not None:
         student = dict()
         session["user_id"] = user.id
+        resp = make_response()
+        resp.set_cookie(cookie="user_id",value=user.id,domain="*",expires=time.time()+60*60)
         student["studentid"] = user.id
         student["studentname"] = user.username
         student["studentpic"] = user.pic
         print student
         return jsonify(status="success",
-                       student=student)
+                       student=student),resp
     return jsonify(status="false")
 
 
