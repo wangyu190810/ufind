@@ -113,6 +113,7 @@ def change_password():
 
 @allow_cross_domain
 def logout():
+    print session.keys()
     session.pop("user_id")
   #  user_id = request.cookies.get("user_id")
 
