@@ -14,7 +14,7 @@ from mysite.view.compare import set_compare, get_compare, get_compare_list, \
     set_compare_support
 from mysite.view.offer import set_offer, get_offer_student
 from mysite.view.login import login, logout, register_first, register_second,\
-    change_password
+    change_password,login_from_cookie
 from mysite.view.message import set_message, get_message
 from mysite.view.state import get_index
 from mysite.view.sms import send_sms
@@ -42,6 +42,8 @@ app.DBSession = scoped_session(sessionmaker(bind=app.sa_engine))
 #
 app.add_url_rule("/api/login", view_func=login,
                  methods=["GET", "POST"])
+app.add_url_rule("/api/login_cookie",view_func=login_from_cookie,
+                 methods=["GET"])
 app.add_url_rule("/api/logout", view_func=logout,
                  methods=["GET", "POST"])
 

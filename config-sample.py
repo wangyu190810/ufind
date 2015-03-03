@@ -6,3 +6,4 @@ class Config(object):
     SUCCESS_KEY = "@åßßßßßå∂åß∂œ∑œ∑œ∑œ∑œœ∑åßåß∂åß∂ΩΩΩ≈çΩ≈ç"
     REDIS_URL = "redis:://:"
     apikey = ""
+    login_sign = u"随意的签名"
