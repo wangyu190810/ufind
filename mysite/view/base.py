@@ -41,8 +41,8 @@ def allow_cross_domain(fun):
         allow_headers = "Referer,Accept,Origin,User-Agent"
         rst.headers['Access-Control-Allow-Headers'] = allow_headers
         rst.headers["Access-Control-Allow-Credentials"] = True
-        cookie = {"user_id":"123"}
-        rst.headers["Set-Cookie"] = cookie
+ #      cookie = {"user_id":"123"}
+ #       rst.headers["Set-Cookie"] = cookie
         #rst.set_cookie(key="user_id",value="12",domain="*",expires=time.time()+60*60)
 
         return rst
