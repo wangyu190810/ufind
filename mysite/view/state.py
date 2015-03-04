@@ -24,7 +24,7 @@ def get_state_info():
             country.append(state)
             state = {}
 
-@login_user_info
+#@login_user_info
 @allow_cross_domain
 def get_index():
     if request.method == "GET":
