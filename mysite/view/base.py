@@ -22,7 +22,7 @@ def login_user_info(func):
     @wraps(func)
     def _login_user_info(*args,**kwargs):
         if "user_id" in session:
-            user = User.get_user_info()
+            user = User.get_user_info(session["user_id"])
             student = dict()
             student["studentid"] =user.id
             student["studentname"] = user.username
