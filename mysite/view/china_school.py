@@ -11,8 +11,10 @@ from mysite.model.major import Major
 from mysite.model.compare import Compare, CompareInfo, CompareSupport
 from mysite.view.base import allow_cross_domain, get_timestamp
 from mysite.model.university_china import UniversityChina,SeniorHighSchool,MajorChina
+from mysite.view.base import allow_cross_domain
 
 
+@allow_cross_domain
 def search_university_china():
     if request.method == "GET":
         name,school_type = map(request.args.get,
@@ -40,7 +42,7 @@ def search_university_china():
                 school = dict
             return json.dumps(search_info)
 
-
+@allow_cross_domain
 def search_major_name():
     if request.method == "GET":
         name,school_type = map(request.args.get,
