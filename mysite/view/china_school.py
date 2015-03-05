@@ -17,15 +17,15 @@ from mysite.view.base import allow_cross_domain
 @allow_cross_domain
 def search_university_china():
     if request.method == "GET":
-        name,school_type = map(request.args.get,
+        search,school_type = map(request.args.get,
                                           ("name",
                                            "type"))
-        print name,school_type
+        print search,school_type
         if int(school_type) == 0:
             university = dict()
             search_info = list()
-            print name,school_type
-            for row in UniversityChina.search_university_china(g.db, name):
+            print search,school_type
+            for row in UniversityChina.search_university_china(g.db, search):
                 print row.name
                 university["name"] = row.name
                 university["id"] = str(row.id)
@@ -36,15 +36,15 @@ def search_university_china():
         if int(school_type) == 1:
             school = dict()
             search_info = list()
-            city = name
-
-            for row in SeniorHighSchool.search_senior_high(g.db,name,city):
+            for row in SeniorHighSchool.search_senior_high(g.db,search,search):
                 print row.name
                 school["name"] = row.name
                 school["id"] = str(row.id)
                 search_info.append(school)
-                school = dict
+                school = dict()
             return json.dumps(search_info)
+        error = []
+    return json.dumps(error)
 
 @allow_cross_domain
 def search_major_name():
