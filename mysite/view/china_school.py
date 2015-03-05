@@ -24,6 +24,7 @@ def search_university_china():
             university = dict()
             search_info = list()
             for row in UniversityChina.search_university_china(g.db, name):
+                print row.name
                 university["name"] = row.name
                 university["id"] = str(row.id)
                 search_info.append(university)
@@ -36,6 +37,7 @@ def search_university_china():
             city = name
 
             for row in SeniorHighSchool.search_senior_high(g.db,name,city):
+                print row.name
                 school["name"] = row.name
                 school["id"] = str(row.id)
                 search_info.append(school)
@@ -54,6 +56,7 @@ def search_major_name():
             major_name = name
             faculty_name = name
             for row in MajorChina.search_major_china(g.db, faculty_name,major_name):
+                print row.name
                 major["name"] = row.name
                 major["id"] = str(row.id)
                 search_info.append(major)
