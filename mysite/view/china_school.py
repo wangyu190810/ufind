@@ -59,8 +59,8 @@ def search_major_name():
             major_name = name
             faculty_name = name
             for row in MajorChina.search_major_china(g.db, faculty_name,major_name):
-                print row.name
-                major["name"] = row.name
+                print row.major_name
+                major["name"] = row.major_name
                 major["id"] = str(row.id)
                 search_info.append(major)
                 major = dict()
