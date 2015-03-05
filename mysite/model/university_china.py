@@ -46,7 +46,7 @@ class SeniorHighSchool(Base):
 
     @classmethod
     def search_senior_high(cls,connection,name=None,city=None):
-        """按照大学高中名字和高中地区搜学校"""
+        """按照高中名字和高中地区搜学校"""
         return connection.query(SeniorHighSchool).\
             filter(or_(
                 SeniorHighSchool.name.like("%"+name+"%"),

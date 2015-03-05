@@ -38,8 +38,9 @@ def login():
 @allow_cross_domain
 def login_from_cookie():
     if request.method == "GET":
-        data = request.args.get("cookie")
-        user_id = get_sign_safe(data)
+        #data = request.args.get("cookie")
+        user_id = session.get("user_id")
+        #user_id = get_sign_safe(data)
         user = User.get_user_info(g.db,user_id)
     if user is not None:
         session["user_id"] = user.id
@@ -49,8 +50,7 @@ def login_from_cookie():
         stuedent["studentpic"] = user.pic
         return jsonify(
             student=stuedent,
-            status="success",
-            cookie=set_sign_safe(str(user.id)))
+            status="success")
     return jsonify(status="false")
 
 

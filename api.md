@@ -278,7 +278,7 @@
         www.ufindoffer.com/api/login_cookie
         
     input
-        www.ufindoffer.com/api/login_cookie?cookie=123123
+        www.ufindoffer.com/api/login_cookie
         
         
 接口 5.6 
@@ -313,7 +313,7 @@
         www.ufindffer.com/api/search_major_china
        
     input
-        www.ufindoffer.com/api/search_major_china?name=abc&type=1
+        www.ufindoffer.com/api/search_major_china?name=abc&type=0
         
     output
         [
