@@ -26,7 +26,7 @@ class UniversityChina(Base):
     def search_university_china(cls,connection,name):
         """搜索国内大学的名字"""
         return connection.query(UniversityChina).\
-            filter(UniversityChina.name == name).limit(10)
+            filter(or_(UniversityChina.name.like("%"+name+"%"))).limit(10)
 
 class SeniorHighSchool(Base):
     """国内高中"""
