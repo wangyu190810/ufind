@@ -313,7 +313,7 @@
         www.ufindffer.com/api/search_major_china
        
     input
-        www.ufindoffer.com/api/search_university_china?name=abc&type=1
+        www.ufindoffer.com/api/search_major_china?name=abc&type=1
         
     output
         [

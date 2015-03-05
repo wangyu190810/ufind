@@ -20,9 +20,11 @@ def search_university_china():
         name,school_type = map(request.args.get,
                                           ("name",
                                            "type"))
+        print name,school_type
         if int(school_type) == 0:
             university = dict()
             search_info = list()
+            print name,school_type
             for row in UniversityChina.search_university_china(g.db, name):
                 print row.name
                 university["name"] = row.name
@@ -50,6 +52,7 @@ def search_major_name():
         name,school_type = map(request.args.get,
                                           ("name",
                                            "type"))
+        print name,school_type
         if int(school_type) == 0:
             major = dict()
             search_info = list()
