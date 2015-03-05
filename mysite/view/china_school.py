@@ -20,7 +20,7 @@ def search_university_china():
         name,school_type = map(request.args.get,
                                           ("name",
                                            "type"))
-        if school_type == 0:
+        if int(school_type) == 0:
             university = dict()
             search_info = list()
             for row in UniversityChina.search_university_china(g.db, name):
@@ -30,7 +30,7 @@ def search_university_china():
                 university = dict()
 
             return json.dumps(search_info)
-        if school_type == 1:
+        if int(school_type) == 1:
             school = dict()
             search_info = list()
             city = name
@@ -48,7 +48,7 @@ def search_major_name():
         name,school_type = map(request.args.get,
                                           ("name",
                                            "type"))
-        if school_type == 1:
+        if int(school_type) == 0:
             major = dict()
             search_info = list()
             major_name = name
@@ -59,7 +59,7 @@ def search_major_name():
                 search_info.append(major)
                 major = dict()
             return json.dumps(search_info)
-        if school_type == 0:
+        if int(school_type) == 1:
             major = dict()
             search_info = list()
             major["name"] = ""
