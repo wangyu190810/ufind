@@ -18,6 +18,7 @@ from mysite.view.login import login, logout, register_first, register_second,\
 from mysite.view.message import set_message, get_message
 from mysite.view.state import get_index
 from mysite.view.sms import send_sms
+from mysite.view.china_school import search_major_name,search_university_china
 from config import Config
 
 
@@ -99,6 +100,11 @@ app.add_url_rule("/api/send_sms", view_func=send_sms,
 # app.add_url_rule("/googlefad2f2add41d5dac.html",
 
 # view_func=google)
+
+app.add_url_rule("/api/search_university_china",methods=["GET"],
+                 view_func=search_university_china)
+app.add_url_rule("/api/search_major_china",methods=["GET"],
+                 view_func=search_major_name)
 
 
 @app.before_request
