@@ -280,3 +280,49 @@
     input
         www.ufind.top/api/login_cookie?cookie=123123
         
+        
+接口 5.6 
+
+    搜索国内大学帮助填写
+    大学使用type为0，高中是1
+    方法
+        GET
+    接口地址
+        www.ufinoffer.com/api/search_university_china
+       
+    input
+        www.ufinoffer.com/api/search_university_china?name=abc&type=1
+    
+    output
+        [
+        {"name":"abc",
+        "id":"123"
+        },
+         {"name":"abcd",
+        "id":"123"
+        },
+        "status":"success"
+        ]
+接口 5.7
+
+    搜索国内的大学专业
+    大学使用type为0，高中是1，高中返回结果为空
+    方法
+        GET
+    接口地址
+        www.ufinoffer.com/api/search_major_china
+       
+    input
+        www.ufinoffer.com/api/search_university_china?name=abc&type=1
+        
+    output
+        [
+        {"name":"abc",
+        "id":"123"
+        },
+         {"name":"abcd",
+        "id":"123"
+        },
+        "status":"success"
+        ]
+    

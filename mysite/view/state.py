@@ -11,6 +11,7 @@ from flask import request,g
 from mysite.view.base import allow_cross_domain,login_user_info
 from mysite.model.state import State
 
+
 @allow_cross_domain
 def get_state_info():
     if request.method == "GET":
@@ -24,7 +25,7 @@ def get_state_info():
             country.append(state)
             state = {}
 
-#@login_user_info
+
 @allow_cross_domain
 def get_index():
     if request.method == "GET":

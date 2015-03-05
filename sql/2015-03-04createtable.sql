@@ -9,7 +9,6 @@ drop TABLE IF EXISTS senior_high;
 CREATE TABLE senior_high(
   id INT(11) NOT NULL AUTO_INCREMENT,
   name VARCHAR(255),
-  location VARCHAR(255),
   provinice VARCHAR(255),
   city VARCHAR(255),
   dictrict VARCHAR(255),
