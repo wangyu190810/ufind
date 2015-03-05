@@ -9,9 +9,9 @@ drop TABLE IF EXISTS senior_high;
 CREATE TABLE senior_high(
   id INT(11) NOT NULL AUTO_INCREMENT,
   name VARCHAR(255),
-  provinice VARCHAR(255),
+  province VARCHAR(255),
   city VARCHAR(255),
-  dictrict VARCHAR(255),
+  district VARCHAR(255),
   PRIMARY KEY(id)
 );
 drop TABLE IF EXISTS major_china;

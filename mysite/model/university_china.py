@@ -34,7 +34,7 @@ class SeniorHighSchool(Base):
     id = Column(Integer,primary_key=True,autoincrement=True)
     name = Column(Unicode(255))
     location = Column(Unicode(255))
-    Province = Column(Unicode(255))
+    province = Column(Unicode(255))
     city = Column(Unicode(255))
     district = Column(Unicode(255))
 
