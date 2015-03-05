@@ -4,7 +4,7 @@
     方式
         GET
     接口地址
-        www.ufind.top/api/index
+        www.ufindoffer.com/api/index
 
 
 接口1.2
@@ -12,7 +12,7 @@
     方式
         GET
     接口地址
-        www.ufind.top/api/get_state_university?stateid=53
+        www.ufindoffer.com/api/get_state_university?stateid=53
 
 
 接口1.3
@@ -23,21 +23,21 @@
 
     接口地址 
 
-        www.ufind.top/api/get_university?universityid=1
+        www.ufindoffer.com/api/get_university?universityid=1
 
 接口2.1
     
     方式
         GET
     接口地址
-        www.ufind.top/api/search_university?searchname=MIT&stateid=1
+        www.ufindoffer.com/api/search_university?searchname=MIT&stateid=1
 
 接口2.2
 
     方式
         GET
     接口地址
-        www.ufind.top/api/search_major?searchname=EE&universityid=1
+        www.ufindoffer.com/api/search_major?searchname=EE&universityid=1
 
 接口3.1
     
@@ -45,7 +45,7 @@
         GET
     
     接口地址
-        www.ufind.top/api/university_info?universityid=1
+        www.ufindoffer.com/api/university_info?universityid=1
         
 接口3.2
     
@@ -53,14 +53,14 @@
         GET
     
     接口地址
-        www.ufind.top/api/get_offer_student_id?universityid=1&majorid=1
+        www.ufindoffer.com/api/get_offer_student_id?universityid=1&majorid=1
     
 接口3.3
     
     方式
         POST
     接口地址
-        www.ufind.top/api/get_user_in_university
+        www.ufindoffer.com/api/get_user_in_university
         
         
         
@@ -70,7 +70,7 @@
         GET
         
     接口地址
-        www.ufind.top/api/get_major_compare?universityid=1&majorid=1
+        www.ufindoffer.com/api/get_major_compare?universityid=1&majorid=1
         
 接口3.5
     
@@ -78,14 +78,14 @@
         POST
         
     接口地址
-        www.ufind.top/api/get_compare_list
+        www.ufindoffer.com/api/get_compare_list
         
 接口3.6
     
     方式
         GET
     接口地址
-        www.ufind.top/api/get_compare?compareid=10
+        www.ufindoffer.com/api/get_compare?compareid=10
     
 
 接口3.7
@@ -94,7 +94,7 @@
         GET
        
     接口地址
-        www.ufind.top/api/student_info?studentid=3
+        www.ufindoffer.com/api/student_info?studentid=3
         
 接口3.8
     
@@ -108,13 +108,13 @@
     方式
         POST
     接口地址
-        www.ufind.top/api/get_user_detail_info?studentid=3
+        www.ufindoffer.com/api/get_user_detail_info?studentid=3
 接口4.1
 
     方式
         POST
     接口地址
-        www.ufind.top/api/set_compare_support
+        www.ufindoffer.com/api/set_compare_support
         
     备注（这个接口服务端改变）
     {
@@ -127,7 +127,7 @@
         POST
     
     接口地址
-        www.ufind.top/api/set_compare
+        www.ufindoffer.com/api/set_compare
         
     return {"status":"success"}
     
@@ -137,14 +137,14 @@
         POST
         
     接口地址
-        www.ufind.top/api/set_user_score
+        www.ufindoffer.com/api/set_user_score
   
 接口4.4
 
     方式
         POST
     接口地址
-        www.ufind.top/api/set_offer
+        www.ufindoffer.com/api/set_offer
         
     
 留言接口
@@ -154,7 +154,7 @@
         POST  json 
         
     接口地址
-        www.ufind.top/api/set_message
+        www.ufindoffer.com/api/set_message
         input
         {
             "message_user_id":"1",
@@ -171,7 +171,7 @@
     方法
         GET
     接口地址
-       www.ufind.top/api/get_message?user_id=1
+       www.ufindoffer.com/api/get_message?user_id=1
        
        output
        {
@@ -190,7 +190,7 @@
     方法
         POST
     接口地址
-        www.ufind.top/api/login
+        www.ufindoffer.com/api/login
 
              
 接口 5.2
@@ -199,7 +199,7 @@
     方法
         POST
     接口地址
-        www.ufind.top/api/send_sms
+        www.ufindoffer.com/api/send_sms
     input
     {
         "phone":""
@@ -216,7 +216,7 @@
     方法
         POST
     接口地址
-        www.ufind.top/api/register_first
+        www.ufindoffer.com/api/register_first
         
     input 
    
@@ -235,7 +235,7 @@
     方法
         POST
     接口地址
-        www.ufind.top/api/register_second
+        www.ufindoffer.com/api/register_second
     
     input
         {
@@ -257,7 +257,7 @@
     方法
         POST
     接口地址
-        www.ufind.top/api/change_password
+        www.ufindoffer.com/api/change_password
      
 接口 5.4 
     
@@ -265,9 +265,9 @@
     方法
         GET
     接口地址
-        www.ufind.top/api/logout
+        www.ufindoffer.com/api/logout
     input
-        www.ufind.top/api/logout
+        www.ufindoffer.com/api/logout
         
 接口 5.5 
     
@@ -275,10 +275,10 @@
     方法
         GET
     接口地址
-        www.ufind.top/api/login_cookie
+        www.ufindoffer.com/api/login_cookie
         
     input
-        www.ufind.top/api/login_cookie?cookie=123123
+        www.ufindoffer.com/api/login_cookie?cookie=123123
         
         
 接口 5.6 
@@ -288,10 +288,10 @@
     方法
         GET
     接口地址
-        www.ufinoffer.com/api/search_university_china
+        www.ufindoffer.com/api/search_university_china
        
     input
-        www.ufinoffer.com/api/search_university_china?name=abc&type=1
+        www.ufindoffer.com/api/search_university_china?name=abc&type=1
     
     output
         [
@@ -310,10 +310,10 @@
     方法
         GET
     接口地址
-        www.ufinoffer.com/api/search_major_china
+        www.ufindffer.com/api/search_major_china
        
     input
-        www.ufinoffer.com/api/search_university_china?name=abc&type=1
+        www.ufindoffer.com/api/search_university_china?name=abc&type=1
         
     output
         [
