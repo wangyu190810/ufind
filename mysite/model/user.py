@@ -1,9 +1,10 @@
 # -*-coding:utf-8-*-
 __author__ = 'wangyu'
-from sqlalchemy import Column, String, Integer, Unicode, Float
-from base import Base
+from sqlalchemy import Column, String, Integer, Unicode, Float,func
 
 import time
+
+from base import Base
 
 
 class User(Base):
@@ -148,4 +149,8 @@ class UserFollow(Base):
             filter(UserFollow.user_id == user_id).\
             filter(UserFollow.follow_user_id == follow_user_id).scalar()
 
-
+    @classmethod
+    def get_follow_count_user(cls,connection,follow_user_id):
+        """获取粉丝数量"""
+        return connection.query(func.count(UserFollow)).\
+            filter(User.follow_user_id == follow_user_id).scalar()
