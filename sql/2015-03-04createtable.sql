@@ -19,7 +19,7 @@ CREATE TABLE major_china(
   id int(11) NOT NULL AUTO_INCREMENT,
   faculty_id int(11),
   faculty_name VARCHAR(255),
-  major_id int(11),
+  major_id VARCHAR(11),
   major_name VARCHAR(255),
   PRIMARY KEY(id)
 )
