@@ -37,9 +37,8 @@ def get_user_info():
 @allow_cross_domain
 def get_user_detail_info():
     if request.method == "GET":
-        student_id = request.args.get("studentid")
+        student_id = int(request.args.get("studentid"))
         student_info = dict()
-        student_info["fannum"] = 123
         offers = []
         offer_info = {}
         login_user_id = session.get("user_id")
@@ -86,6 +85,7 @@ def get_user_detail_info():
         user = User.get_user_info(g.db, student_id)
         print user
         print type(user)
+        student_info["fannum"] = UserFollow.get_follow_count_user(g.db,student_id)
         if user is None:
             student_info["description"] = ""
             student_info["bginf"] = ""
