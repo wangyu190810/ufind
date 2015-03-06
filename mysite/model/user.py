@@ -153,4 +153,4 @@ class UserFollow(Base):
     def get_follow_count_user(cls,connection,follow_user_id):
         """获取粉丝数量"""
         return connection.query(func.count(UserFollow)).\
-            filter(User.follow_user_id == follow_user_id).scalar()
+            filter(UserFollow.follow_user_id == follow_user_id).scalar()
