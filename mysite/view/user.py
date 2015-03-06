@@ -79,8 +79,8 @@ def get_user_detail_info():
             compares_info["comparelist"] = compareslist
             compares.append(compares_info)
         student_info["compares"] = compares
-        for row_us in User.get_user_info(g.db, student_id):
-            student_info["description"] = row_us.description
+        user = User.get_user_info(g.db, student_id)
+        student_info["description"] = user.description
 
         student_info["status"] = "success"
 
