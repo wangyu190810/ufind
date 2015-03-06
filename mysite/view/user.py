@@ -1,15 +1,16 @@
 # -*-coding:utf-8-*-
 __author__ = 'wangyu'
 
-from flask import g, jsonify, request
+from flask import g, jsonify, request, session
 import json
 
-from mysite.model.user import User
+from mysite.model.user import User,UserFollow
 from mysite.view.base import allow_cross_domain
 from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
 from mysite.model.compare import CompareInfo, Compare
+from mysite.model.message import Message
 
 
 @allow_cross_domain
@@ -41,6 +42,9 @@ def get_user_detail_info():
         student_info["fannum"] = 123
         offers = []
         offer_info = {}
+        login_user_id = session.get("user_id")
+        if login_user_id is None:
+            login_user_id = -1
         for row in Offer.get_offer_student_info(g.db,
                                                 student_id):
             for row_un in University.get_university_info(g.db,
@@ -84,8 +88,38 @@ def get_user_detail_info():
         print type(user)
         if user is None:
             student_info["description"] = ""
+            student_info["bginf"] = ""
         else:
             student_info["description"] = user.description
+            student_info["bginf"] = user.bginf
+        if int(login_user_id) == int(student_id):
+            student_info["self"] = "true"
+            student_info["phone"] = user.phone
+            student_info["email"] = user.email
+        else:
+            student_info["self"] = "false"
+            student_info["phone"] = ""
+            student_info["email"] = ""
+
+        message = list()
+        for row_meg in Message.get_message_user(g.db,student_id):
+            message_dict = dict()
+            message_dict["messageid"] = row_meg.id
+            user_id = row_meg.user_id
+            user = User.get_user_info(g.db,user_id)
+            message_dict["pic"] = user.pic
+            message_dict["name"] = user.username
+            message_dict["studentid"] = user_id
+            message_dict["content"] = row_meg.content
+            message_dict["time"] = row_meg.create_time
+            message.append(message_dict)
+        student_info["messages"] = message
+
+        follow_status = UserFollow.get_follow_to_user(g.db,student_id,login_user_id)
+        if follow_status is not None:
+            student_info["followed"] = "true"
+        else:
+            student_info["followed"] = "false"
 
         student_info["status"] = "success"
 

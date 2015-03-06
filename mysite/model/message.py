@@ -22,6 +22,7 @@ class Message(Base):
 
     @classmethod
     def set_message(cls,connection,user_id,message_user_id,message):
+        """对某个人留言"""
         me = Message(user_id=user_id,
                      message_user_id=message_user_id,
                      message=message)
@@ -29,12 +30,14 @@ class Message(Base):
         connection.commit()
 
     @classmethod
-    def get_message(cls,connection,user_id):
+    def get_message_user(cls,connection,message_user_id):
+        """获取被人给自己的留言信息"""
         return connection.query(Message).\
-            filter(Message.user_id == user_id)
+            filter(Message.message_user_id == message_user_id)
 
     @classmethod
     def set_message_to_gov(cls,connection,user_id,message):
+        """对官方留言"""
         message = Message(user_id=user_id,message=message,message_type=1)
         connection.add(message)
         connection.commit()

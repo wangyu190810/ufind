@@ -30,6 +30,7 @@ class User(Base):
     grade = Column(Integer, doc=u"字段，筛选相关")
     type = Column(Integer, doc=u"高中还是大学：0表示大学，1表示高中,3表示研究生")
     description = Column(Unicode(255), doc=u"描述")
+    bginf = Column(Unicode(255), doc=u"背景信息")
 
     @classmethod
     def get_user_info(cls, connection, user_id):
@@ -129,10 +130,9 @@ class UserFollow(Base):
     @classmethod
     def del_follow_id(cls, connection, user_id, follow_user_id):
         """取消关注"""
-        del_follow = connection.query(UserFollow).\
+        connection.query(UserFollow).\
             filter(UserFollow.user_id == user_id).\
             filter(UserFollow.follow_user_id == follow_user_id).delete()
-        #connection.delete(del_follow)
         connection.commit()
 
     @classmethod
@@ -140,4 +140,12 @@ class UserFollow(Base):
         """关注列表"""
         return connection.query(UserFollow).\
             filter(UserFollow.user_id == user_id)
+
+    @classmethod
+    def get_follow_to_user(cls,connection,user_id,follow_user_id):
+        """或者两个用户之间的关注关系"""
+        return connection.query(UserFollow).\
+            filter(UserFollow.user_id == user_id).\
+            filter(UserFollow.follow_user_id == follow_user_id).scalar()
+
 

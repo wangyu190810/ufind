@@ -1,0 +1,1 @@
+ALTER TABLE user ADD bginf VARCHAR(255) DEFAULT "";
