@@ -80,6 +80,8 @@ def get_user_detail_info():
             compares.append(compares_info)
         student_info["compares"] = compares
         user = User.get_user_info(g.db, student_id)
+        print user
+        print type(user)
         student_info["description"] = user.description
 
         student_info["status"] = "success"
