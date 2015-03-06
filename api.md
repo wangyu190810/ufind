@@ -374,9 +374,14 @@
     {
         "content":"大家好"
     }
-    
+    成功
     output:
     {
         "status":"success"
+    }
+    没有登录返回
+    output:
+    {
+        "status":"nologin"
     }
    
