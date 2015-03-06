@@ -325,4 +325,40 @@
         },
         "status":"success"
         ]
+
+6.1 接口
+
+    关注某人
+    方法:
+        POST
+    接口地址：
+        www.ufindoffer.com/api/set_follow_user
+        
+    input 
+    {
+        "follow_user_id":"12"
+    }
+    output
+    {
+        
+        "status":"success"
+    }
     
+6.2 接口
+
+    取消关注：
+    方法:
+        POST
+        
+    地址:
+        www.ufindoffer.com/api/del_follow_user
+        
+    input:
+    {
+        "follow_user_id":"123"
+    }
+    
+    {
+        "status":"success"
+    }
+   

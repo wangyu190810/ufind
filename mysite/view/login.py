@@ -5,6 +5,8 @@ from flask import redirect, g, session, request, jsonify,make_response
 
 from mysite.view.base import allow_cross_domain,get_sign_safe,set_sign_safe
 from mysite.model.user import User
+from mysite.model.university_china import UniversityChina, SeniorHighSchool,\
+    MajorChina
 
 import time
 
@@ -82,6 +84,10 @@ def register_second():
         phone = data["phonenum"]
         username = data["username"]
         university_id = data["universityid"]
+        university = UniversityChina.get_university_china_info(g.db,university_id)
+        university_name = university.name
+        if university_name is None:
+            SeniorHighSchool.get_senior_high(g.db,university_id)
         major_id = data["majorid"]
         gpa = data["gpa"]
         User.register_second(g.db, phone, username, university_id, major_id,

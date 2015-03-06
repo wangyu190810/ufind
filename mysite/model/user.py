@@ -3,9 +3,13 @@ __author__ = 'wangyu'
 from sqlalchemy import Column, String, Integer, Unicode, Float
 from base import Base
 
+import time
+
 
 class User(Base):
+
     """用户信息表"""
+
     __tablename__ = "user"
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(80), doc=u"用户名")
@@ -40,7 +44,7 @@ class User(Base):
         elif email is None:
             return connection.query(User).\
                 filter(User.phone == phone).\
-                filter(User.password==password).scalar()
+                filter(User.password == password).scalar()
 
     @classmethod
     def register_first(cls, connection, email, password, phone):
@@ -90,19 +94,49 @@ class User(Base):
     def get_user_name(cls, connection, user_id):
         return connection.query(User).filter(User.id == user_id).scalar()
 
-
     @classmethod
     def get_checknum(cls, connection, phone):
         return connection.query(User.checknum). \
             filter(User.phone == phone).scalar()
 
     @classmethod
-    def change_password(cls,connection,phone,password):
+    def change_password(cls, connection, phone, password):
         connection.query(User).filter(User.phone == phone).update({
             User.password: password})
         connection.commit()
 
     @classmethod
-    def get_user_info_by_phone(cls,connection,phone):
-        return connection.query(User).filter(User.phone==phone).scalar()
+    def get_user_info_by_phone(cls, connection, phone):
+        return connection.query(User).filter(User.phone == phone).scalar()
+
+
+class UserFollow(Base):
+
+    __tablename__ = "user_follow"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, doc=u"用户id")
+    follow_user_id = Column(Integer, doc=u"关注者的id")
+    create_time = Column(Integer, default=lambda: time.time(), doc=u"关注时间")
+
+    @classmethod
+    def set_follow(cls, connection, user_id, follow_user_id):
+        """关注用户"""
+        user_follow = UserFollow(user_id=user_id, follow_user_id=follow_user_id)
+        connection.add(user_follow)
+        connection.commit()
+
+    @classmethod
+    def del_follow_id(cls, connection, user_id, follow_user_id):
+        """取消关注"""
+        del_follow = connection.query(UserFollow).\
+            filter(UserFollow.user_id == user_id).\
+            filter(UserFollow.follow_user_id == follow_user_id).delete()
+        #connection.delete(del_follow)
+        connection.commit()
+
+    @classmethod
+    def get_follow_id(cls, connection, user_id):
+        """关注列表"""
+        return connection.query(UserFollow).\
+            filter(UserFollow.user_id == user_id)
 

@@ -28,6 +28,7 @@ class UniversityChina(Base):
         return connection.query(UniversityChina).\
             filter(or_(UniversityChina.name.like("%"+name+"%"))).limit(10)
 
+
 class SeniorHighSchool(Base):
     """国内高中"""
     __tablename__ = "senior_high"
@@ -53,6 +54,7 @@ class SeniorHighSchool(Base):
                 SeniorHighSchool.city.like("%"+city+"%"))).\
             limit(10)
 
+
 class MajorChina(Base):
     """国内大学专业"""
     __tablename__ = "major_china"
@@ -63,12 +65,13 @@ class MajorChina(Base):
     major_name = Column(Unicode(255))
 
     @classmethod
-    def get_major_china(cls,connection,id):
+    def get_major_china(cls, connection, major_id):
         """获取国内大学专业信息"""
-        return connection.query(MajorChina).filter(MajorChina.id == id).scalar()
+        return connection.query(MajorChina).\
+            filter(MajorChina.id == major_id).scalar()
 
     @classmethod
-    def search_major_china(cls,connection,faculty_name,major_name):
+    def search_major_china(cls, connection, faculty_name, major_name):
         return connection.query(MajorChina).\
             filter(or_(
                 MajorChina.faculty_name.like("%"+faculty_name+"%"),
