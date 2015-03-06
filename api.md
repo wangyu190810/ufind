@@ -361,4 +361,22 @@
     {
         "status":"success"
     }
+
+6.4 接口
+
+    反馈信息：
+    方法：
+        POST
+    地址:
+        www.ufindoffer.com/api/send_advice
+        
+    input:
+    {
+        "content":"大家好"
+    }
+    
+    output:
+    {
+        "status":"success"
+    }
    

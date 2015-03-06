@@ -27,7 +27,7 @@ def get_message():
         message["message"] = messagelist
         print(message)
         return json.dumps(message)
-
+    return jsonify(status="false")
 
 @validate_user_login
 def set_message():
@@ -41,3 +41,14 @@ def set_message():
         print(message_user_id,message)
         Message.set_message(g.db,user_id,message_user_id,message)
         return jsonify(status="success")
+    return jsonify(status="false")
+
+@validate_user_login
+def set_message_to_gov():
+    if request.method == "POST":
+        user_id = session.get("user_id")
+        data = request.form
+        message = data["content"]
+        Message.set_message_to_gov(g.db,user_id,message)
+        return jsonify(status="success")
+    return jsonify(status="false")

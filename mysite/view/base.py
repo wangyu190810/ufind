@@ -13,9 +13,9 @@ from config import Config
 def validate_user_login(func):
     @wraps(func)
     def _validate_user_login(*args, **kwargs):
-        if "username" in session:
+        if "user_id" in session:
             return func(*args, **kwargs)
-        return redirect("/login")
+        return jsonify(status="no_login")
     return _validate_user_login
 
 
