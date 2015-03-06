@@ -82,7 +82,10 @@ def get_user_detail_info():
         user = User.get_user_info(g.db, student_id)
         print user
         print type(user)
-        student_info["description"] = user.description
+        if user is None:
+            student_info["description"] = ""
+        else:
+            student_info["description"] = user.description
 
         student_info["status"] = "success"
 
