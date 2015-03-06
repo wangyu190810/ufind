@@ -84,11 +84,13 @@ def register_second():
         phone = data["phonenum"]
         username = data["username"]
         university_id = data["universityid"]
+        print university_id,data
         university = UniversityChina.get_university_china_info(g.db,university_id)
         university_name = university.name
         if university_name is None:
             SeniorHighSchool.get_senior_high(g.db,university_id)
         major_id = data["majorid"]
+        print major_id
         gpa = data["gpa"]
         User.register_second(g.db, phone, username, university_id, major_id,
                              gpa)
