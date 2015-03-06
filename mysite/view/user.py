@@ -15,6 +15,7 @@ from mysite.model.compare import CompareInfo, Compare
 @allow_cross_domain
 def get_user_info():
     if request.method == "GET":
+        print request.args
         student_id = request.args.get("studentid")
         student_info = {}
         for row in User.get_user_info(g.db, student_id):
