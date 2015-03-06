@@ -106,7 +106,7 @@
 接口3.9
 
     方式
-        POST
+        GET
     接口地址
         www.ufindoffer.com/api/get_user_detail_info?studentid=3
 接口4.1
