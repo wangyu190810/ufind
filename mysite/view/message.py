@@ -14,7 +14,7 @@ def get_message():
         messagelist = []
         message = {}
         user_message = {}
-        for row in Message.get_message(g.db,user_id):
+        for row in Message.get_message_user(g.db,user_id):
             user_message["message_user_id"] = row.message_user_id
             #user_message["message_user_name"] = row.message_user_name
             print User.get_user_name(g.db,user_id).id
@@ -41,7 +41,7 @@ def set_message():
 
         message = data["message"]
         print message_user_id,message
-        Message.set_message_user(g.db,user_id,message_user_id,message)
+        Message.set_message(g.db,user_id,message_user_id,message)
         return jsonify(status="success")
     return jsonify(status="false")
 
