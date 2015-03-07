@@ -94,12 +94,6 @@ def register_second():
             university_name = university.name
             major_id = int(data["majorid"])
             major_name = MajorChina.get_major_china(g.db,major_id).major_name
-            #if major_info is not None:
-            #    major_name = major_info.
-        #university_name = university.name
-      #  if university_name is None:
-        #    SeniorHighSchool.get_senior_high(g.db,university_id)
-#        print major_id
         gpa = data["gpa"]
         User.register_second(g.db, phone, username, university_name, major_name,
                              gpa,user_type)
