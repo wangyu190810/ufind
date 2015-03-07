@@ -41,7 +41,7 @@ def set_message():
 
         message = data["message"]
         print message_user_id,message
-        Message.set_message(g.db,user_id,message_user_id,message)
+        Message.set_message_user(g.db,user_id,message_user_id,message)
         return jsonify(status="success")
     return jsonify(status="false")
 
