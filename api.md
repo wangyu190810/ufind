@@ -183,7 +183,24 @@
             }
         ]
         
+        
         }
+    接口 5.3 e
+    删除留言
+    方法：
+        POST
+    接口地址：
+        www.ufindoffer.com/api/del_message_to_user
+    input
+    {
+        "message_id":"12"
+    }
+    output
+    {
+        "status":"success"
+    }
+    
+        
 接口 5.1
    
     登录接口
