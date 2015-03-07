@@ -10,18 +10,18 @@ from mysite.view.base import validate_user_login,allow_cross_domain,get_timestam
 @validate_user_login
 def get_message():
     if request.method == "GET":
-        user_id = request.args.get("user_id")
+        message_user_id = request.args.get("user_id")
         messagelist = list()
         message = dict()
-        for row in Message.get_message_user(g.db,user_id):
+        for row in Message.get_message_user(g.db,message_user_id):
             user_message = dict()
-            user_message["studentid"] = row.message_user_id
+            user_message["studentid"] = row.user_id
             user_message["messageid"] = row.id
             user_message["time"] = get_timestamp(row.create_time)
             #user_message["message_user_name"] = row.message_user_name
-            print User.get_user_name(g.db,user_id).id
+            print User.get_user_name(g.db,message_user_id).id
 
-            user = User.get_user_name(g.db,user_id)
+            user = User.get_user_name(g.db,message_user_id)
             user_message["name"] = user.username
             user_message["pic"] = user.pic
             user_message["content"] = row.message
