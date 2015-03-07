@@ -60,3 +60,14 @@ def set_message_to_gov():
         Message.set_message_to_gov(g.db,user_id,message)
         return jsonify(status="success")
     return jsonify(status="false")
+
+@allow_cross_domain
+@validate_user_login
+def del_message_to_user():
+    if request.method == "POST":
+        data = request.form
+        print data
+        message_id = data["message_id"]
+        Message.del_message_to_user(g.db,message_id)
+        return jsonify(status="success")
+    return jsonify(status="false")

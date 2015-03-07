@@ -15,7 +15,8 @@ from mysite.view.compare import set_compare, get_compare, get_compare_list, \
 from mysite.view.offer import set_offer, get_offer_student
 from mysite.view.login import login, logout, register_first, register_second,\
     change_password,login_from_cookie
-from mysite.view.message import set_message, get_message,set_message_to_gov
+from mysite.view.message import set_message, get_message,set_message_to_gov,\
+    del_message_to_user
 from mysite.view.state import get_index
 from mysite.view.sms import send_sms
 from mysite.view.china_school import search_major_name, search_university_china
@@ -89,6 +90,9 @@ app.add_url_rule("/api/get_message", view_func=get_message,
                  methods=["GET"])
 app.add_url_rule("/api/send_advice",view_func=set_message_to_gov,
                  methods=["POST"])
+app.add_url_rule("/api/del_message_to_user",view_func=del_message_to_user,
+                 methods=["POST"])
+
 
 app.add_url_rule("/api/get_state_university", view_func=get_state_university,
                  methods=["GET"])

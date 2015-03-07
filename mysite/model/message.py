@@ -41,3 +41,8 @@ class Message(Base):
         message = Message(user_id=user_id,message=message,message_type=1)
         connection.add(message)
         connection.commit()
+
+    @classmethod
+    def del_message_to_user(cls,connection,message_id):
+        connection.query(Message).filter(Message.id==message_id).delete()
+        connection.commit()
