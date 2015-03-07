@@ -4,9 +4,9 @@ from flask import render_template,request,g,redirect,jsonify,session
 import json
 from mysite.model.message import Message
 from mysite.model.user import User
-from mysite.view.base import validate_user_login
+from mysite.view.base import validate_user_login,allow_cross_domain
 
-
+@allow_cross_domain
 @validate_user_login
 def get_message():
     if request.method == "GET":
@@ -29,6 +29,8 @@ def get_message():
         return json.dumps(message)
     return jsonify(status="false")
 
+
+@allow_cross_domain
 @validate_user_login
 def set_message():
     if request.method == "POST":
@@ -38,11 +40,13 @@ def set_message():
         message_user_id = data["message_user_id"]
 
         message = data["message"]
-        print(message_user_id,message)
+        print message_user_id,message
         Message.set_message(g.db,user_id,message_user_id,message)
         return jsonify(status="success")
     return jsonify(status="false")
 
+
+@allow_cross_domain
 @validate_user_login
 def set_message_to_gov():
     if request.method == "POST":
