@@ -16,11 +16,16 @@ def get_message():
         for row in Message.get_message_user(g.db,user_id):
             user_message = dict()
             user_message["studentid"] = row.message_user_id
+            user_message["messageid"] = row.id
+            user_message["time"] = row.time
             #user_message["message_user_name"] = row.message_user_name
             print User.get_user_name(g.db,user_id).id
 
-            user_message["name"] = User.get_user_name(g.db,user_id).username
+            user = User.get_user_name(g.db,user_id)
+            user_message["name"] = user.username
+            user_message["pic"] = user.pic
             user_message["content"] = row.message
+
             messagelist.append(user_message)
 
         message["messages"] = messagelist
