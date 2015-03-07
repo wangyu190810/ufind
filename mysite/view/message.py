@@ -4,7 +4,7 @@ from flask import render_template,request,g,redirect,jsonify,session
 import json
 from mysite.model.message import Message
 from mysite.model.user import User
-from mysite.view.base import validate_user_login,allow_cross_domain
+from mysite.view.base import validate_user_login,allow_cross_domain,get_timestamp
 
 @allow_cross_domain
 @validate_user_login
@@ -17,7 +17,7 @@ def get_message():
             user_message = dict()
             user_message["studentid"] = row.message_user_id
             user_message["messageid"] = row.id
-            user_message["time"] = row.create_time
+            user_message["time"] = get_timestamp(row.create_time)
             #user_message["message_user_name"] = row.message_user_name
             print User.get_user_name(g.db,user_id).id
 
