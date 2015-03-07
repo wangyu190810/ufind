@@ -15,15 +15,15 @@ def get_message():
         message = dict()
         for row in Message.get_message_user(g.db,user_id):
             user_message = dict()
-            user_message["message_user_id"] = row.message_user_id
+            user_message["studentid"] = row.message_user_id
             #user_message["message_user_name"] = row.message_user_name
             print User.get_user_name(g.db,user_id).id
 
-            user_message["message_user_name"] = User.get_user_name(g.db,user_id).username
-            user_message["message"] = row.message
+            user_message["name"] = User.get_user_name(g.db,user_id).username
+            user_message["content"] = row.message
             messagelist.append(user_message)
 
-        message["message"] = messagelist
+        message["messages"] = messagelist
         print(message)
         return json.dumps(message)
     return jsonify(status="false")

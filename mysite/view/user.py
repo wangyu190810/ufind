@@ -5,7 +5,7 @@ from flask import g, jsonify, request, session
 import json
 
 from mysite.model.user import User,UserFollow
-from mysite.view.base import allow_cross_domain
+from mysite.view.base import allow_cross_domain,get_timestamp
 from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
@@ -111,7 +111,7 @@ def get_user_detail_info():
             message_dict["name"] = user.username
             message_dict["studentid"] = user_id
             message_dict["content"] = row_meg.message
-            message_dict["time"] = row_meg.create_time
+            message_dict["time"] = get_timestamp(row_meg.create_time)
             message.append(message_dict)
         student_info["messages"] = message
 
