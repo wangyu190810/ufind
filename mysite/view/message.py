@@ -21,7 +21,7 @@ def get_message():
             #user_message["message_user_name"] = row.message_user_name
             print User.get_user_name(g.db,message_user_id).id
 
-            user = User.get_user_name(g.db,message_user_id)
+            user = User.get_user_name(g.db,row.user_id)
             user_message["name"] = user.username
             user_message["pic"] = user.pic
             user_message["content"] = row.message
