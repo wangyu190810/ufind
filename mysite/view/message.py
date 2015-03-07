@@ -34,11 +34,11 @@ def get_message():
 def set_message():
     if request.method == "POST":
         user_id = session.get("user_id")
-        data = json.loads(request.data)
-        print data
-        message_user_id = data["message_user_id"]
+        message = request.form.get("message")
+        #print data
+        message_user_id = request.form.get("message_user_id")
 
-        message = data["message"]
+
         print message_user_id,message
         Message.set_message(g.db,user_id,message_user_id,message)
         return jsonify(status="success")
