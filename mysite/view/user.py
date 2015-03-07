@@ -110,7 +110,7 @@ def get_user_detail_info():
             message_dict["pic"] = user.pic
             message_dict["name"] = user.username
             message_dict["studentid"] = user_id
-            message_dict["content"] = row_meg.content
+            message_dict["content"] = row_meg.message
             message_dict["time"] = row_meg.create_time
             message.append(message_dict)
         student_info["messages"] = message
