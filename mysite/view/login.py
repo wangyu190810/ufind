@@ -93,7 +93,7 @@ def register_second():
             university = UniversityChina.get_university_china_info(g.db,university_id)
             university_name = university.name
             major_id = int(data["majorid"])
-            major_name = MajorChina.get_major_china(g.db,major_id)
+            major_name = MajorChina.get_major_china(g.db,major_id).name
         #university_name = university.name
       #  if university_name is None:
         #    SeniorHighSchool.get_senior_high(g.db,university_id)
