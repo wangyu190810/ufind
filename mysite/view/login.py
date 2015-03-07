@@ -13,7 +13,6 @@ import time
 @allow_cross_domain
 def login():
     data = request.form
-    print request.headers
     login_auth = data["email"]
     if "@" in login_auth:
         login_email = login_auth
