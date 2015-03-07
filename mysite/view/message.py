@@ -67,10 +67,14 @@ def del_message_to_user():
     if request.method == "POST":
         data = request.form
         print data
+        user_id = session.get("user_id")
         message_id = data["message_id"]
         print message_id
         if message_id == data:
             print "adsf"
-        Message.del_message_to_user(g.db,message_id)
-        return jsonify(status="success")
+        message = Message.get_message_info(g.db,message_id)
+        if message.message_user_id == int(user_id):
+            Message.del_message_to_user(g.db,message_id)
+            return jsonify(status="success")
+        return jsonify(status="false")
     return jsonify(status="false")
