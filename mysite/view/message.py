@@ -11,10 +11,10 @@ from mysite.view.base import validate_user_login,allow_cross_domain
 def get_message():
     if request.method == "GET":
         user_id = request.args.get("user_id")
-        messagelist = []
-        message = {}
-        user_message = {}
+        messagelist = list()
+        message = dict()
         for row in Message.get_message_user(g.db,user_id):
+            user_message = dict()
             user_message["message_user_id"] = row.message_user_id
             #user_message["message_user_name"] = row.message_user_name
             print User.get_user_name(g.db,user_id).id
@@ -22,7 +22,6 @@ def get_message():
             user_message["message_user_name"] = User.get_user_name(g.db,user_id).username
             user_message["message"] = row.message
             messagelist.append(user_message)
-            user_message = {}
 
         message["message"] = messagelist
         print(message)
@@ -34,7 +33,7 @@ def get_message():
 @validate_user_login
 def set_message():
     if request.method == "POST":
-        user_id = session["user_id"]
+        user_id = session.get("user_id")
         data = json.loads(request.data)
         print data
         message_user_id = data["message_user_id"]
