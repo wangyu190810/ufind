@@ -21,6 +21,10 @@ class Message(Base):
     create_time = Column(Integer,default=lambda: time(), doc=u"留言时间")
 
     @classmethod
+    def get_message_info(cls,connection,message_id):
+        return connection.query(Message).filter(Message.id == message_id).scalar()
+
+    @classmethod
     def set_message(cls,connection,user_id,message_user_id,message):
         """对某个人留言"""
         me = Message(user_id=user_id,
@@ -44,5 +48,7 @@ class Message(Base):
 
     @classmethod
     def del_message_to_user(cls,connection,message_id):
+        """删除留言"""
         connection.query(Message).filter(Message.id==message_id).delete()
         connection.commit()
+
