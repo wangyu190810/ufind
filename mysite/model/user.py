@@ -138,9 +138,17 @@ class UserFollow(Base):
 
     @classmethod
     def get_follow_id(cls, connection, user_id):
-        """关注列表"""
+        """我的关注列表"""
         return connection.query(UserFollow).\
             filter(UserFollow.user_id == user_id)
+
+    @classmethod
+    def get_follow_user_id(cls,connection,follow_user_id):
+        """别人关注我的列表"""
+        return connection.query(UserFollow).filter(
+            UserFollow.follow_user_id == follow_user_id
+        )
+
 
     @classmethod
     def get_follow_to_user(cls,connection,user_id,follow_user_id):

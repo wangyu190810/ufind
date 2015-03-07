@@ -120,7 +120,16 @@ def get_user_detail_info():
             student_info["followed"] = "true"
         else:
             student_info["followed"] = "false"
-
+        follows_list = list()
+        for row_follow in UserFollow.get_follow_user_id(g.db,student_id):
+            follows = dict()
+            user_id = row_follow.id
+            user = User.get_user_info(g.db,user_id)
+            follows["name"] = user.username
+            follows["pic"] = user.pic
+            follows["studentid"] = user_id
+            follows_list.append(follows)
+        student_info["follows"] = follows_list
         student_info["status"] = "success"
 
         return json.dumps(student_info)
