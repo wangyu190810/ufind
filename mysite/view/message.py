@@ -17,7 +17,7 @@ def get_message():
             user_message = dict()
             user_message["studentid"] = row.message_user_id
             user_message["messageid"] = row.id
-            user_message["time"] = row.time
+            user_message["time"] = row.create_time
             #user_message["message_user_name"] = row.message_user_name
             print User.get_user_name(g.db,user_id).id
 
