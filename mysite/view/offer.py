@@ -22,18 +22,18 @@ def set_offer():
         data = request.data
         print request.form
         print data
-        data = json.loads(data)
-        offer = data["offers"]
-        user_id = session["user_id"]
-        for row in offer:
-            university_id = int(row["universityid"])
-            major_id = int(row["majorid"])
-            result = int(row["result"])
-            Offer.set_offer(g.db,
-                            user_id=user_id,
-                            university_id=university_id,
-                            major_id=major_id,
-                            result=result)
+#        data = json.loads(data)
+#        offer = data["offers"]
+#        user_id = session["user_id"]
+#        for row in offer:
+#            university_id = int(row["universityid"])
+#            major_id = int(row["majorid"])
+#            result = int(row["result"])
+#            Offer.set_offer(g.db,
+#                            user_id=user_id,
+#                            university_id=university_id,
+#                            major_id=major_id,
+#                            result=result)
 
         return jsonify(status="success",
                        img="asdfsda")
