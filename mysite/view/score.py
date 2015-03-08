@@ -13,9 +13,10 @@ from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.user import User
 from mysite.model.score import Score
-from mysite.view.base import allow_cross_domain
+from mysite.view.base import allow_cross_domain,validate_user_login
 
 
+@validate_user_login
 @allow_cross_domain
 def set_user_score():
     print request.data
@@ -33,6 +34,7 @@ def set_user_score():
                 GREmoreV = request.form.get("GERmore[V]")
                 GREmoreQ = request.form.get("GERmore[Q]")
                 GREmoreAW = request.form.get("GERmore[AW]")
+                print GREmoreAW,"GREmoreAW"
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     IELTS_r=LELTSmoreR,
                                     IELTS_l=LELTSmoreL,
@@ -48,6 +50,7 @@ def set_user_score():
                 GMATmoreQ = request.form.get("GMATmoreQ")
                 GMATmoreAW = request.form.get("GMATmoreAW")
                 GMATmoreIR = request.form.get("GMATmoreIR")
+                print GMATmoreAW,"GMATmoreAW"
                 Score.set_user_info(connection=g.db,
                                     user_id=user_id,
                                     IELTS_r=LELTSmoreR,
@@ -72,6 +75,7 @@ def set_user_score():
                 GREmoreV = request.form.get("GERmore[V]")
                 GREmoreQ = request.form.get("GERmore[Q]")
                 GREmoreAW = request.form.get("GERmore[AW]")
+                print GREmoreAW,"GREmoreAV"
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     TOEFL_r =TOEFLmoreR,
                                     TOEFL_l =TOEFLmoreL,
@@ -87,6 +91,7 @@ def set_user_score():
                 GMATmoreQ = request.form.get("GMATmoreQ")
                 GMATmoreAW = request.form.get("GMATmoreAW")
                 GMATmoreIR = request.form.get("GMATmoreIR")
+                print GMATmoreIR,"GMATmoreIR"
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     TOEFL_r =TOEFLmoreR,
                                     TOEFL_l =TOEFLmoreL,
