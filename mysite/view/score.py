@@ -22,6 +22,7 @@ def set_user_score():
     if request.method == "POST":
         data = request.data
         print request.form
+        user_id = session.get("user_id")
         if request.form.get("IELTSmore[R]") is not None:
             LELTSmoreR = request.form.get("IELTSmore[R]")
             LELTSmoreL = request.form.get("IELTSmore[L]")
@@ -32,11 +33,33 @@ def set_user_score():
                 GREmoreV = request.form.get("GERmore[V]")
                 GREmoreQ = request.form.get("GERmore[Q]")
                 GREmoreAW = request.form.get("GERmore[AW]")
+                Score.set_user_info(g.db,user_id,
+                                    LELTS_r=LELTSmoreR,
+                                    LELTS_l=LELTSmoreL,
+                                    LELTS_s=LELTSmoreS,
+                                    LELTS_w=LELTSmoreW,
+                                    GER_v=GREmoreV,
+                                    GER_q=GREmoreQ,
+                                    GER_aw=GREmoreAW,
+
+                                    )
             else:
                 GMATmoreV = request.form.get("GMATmoreV")
                 GMATmoreQ = request.form.get("GMATmoreQ")
                 GMATmoreAW = request.form.get("GMATmoreAW")
                 GMATmoreIR = request.form.get("GMATmoreIR")
+                Score.set_user_info(g.db,user_id,
+                                    LELTS_r=LELTSmoreR,
+                                    LELTS_l=LELTSmoreL,
+                                    LELTS_s=LELTSmoreS,
+                                    LELTS_w=LELTSmoreW,
+                                    GMATmoreV=GMATmoreV,
+                                    GMATmoreQ=GMATmoreQ,
+                                    GMATmoreAW=GMATmoreAW,
+                                    GMATmoreIR=GMATmoreIR,
+
+                                    )
+
 
         elif request.form.get("TOEFLmore[R]") is not None:
             TOEFLmoreR = request.form.get("TOEFLmore[R]")
@@ -48,11 +71,31 @@ def set_user_score():
                 GREmoreV = request.form.get("GERmore[V]")
                 GREmoreQ = request.form.get("GERmore[Q]")
                 GREmoreAW = request.form.get("GERmore[AW]")
+                Score.set_user_info(g.db,user_id,
+                                    TOEFL_r =TOEFLmoreR,
+                                    TOEFL_l =TOEFLmoreL,
+                                    TOEFL_s =TOEFLmoreS,
+                                    TOEFL_w =TOEFLmoreW,
+                                    GER_v=GREmoreV,
+                                    GER_q=GREmoreQ,
+                                    GER_aw=GREmoreAW
+
+                                    )
             else:
                 GMATmoreV = request.form.get("GMATmoreV")
                 GMATmoreQ = request.form.get("GMATmoreQ")
                 GMATmoreAW = request.form.get("GMATmoreAW")
                 GMATmoreIR = request.form.get("GMATmoreIR")
+                Score.set_user_info(g.db,user_id,
+                                    TOEFL_r =TOEFLmoreR,
+                                    TOEFL_l =TOEFLmoreL,
+                                    TOEFL_s =TOEFLmoreS,
+                                    TOEFL_w =TOEFLmoreW,
+                                    GMAT_v=GMATmoreV,
+                                    GMAT_q=GMATmoreQ,
+                                    GMAT_aw=GMATmoreAW,
+                                    GER_ir=GMATmoreIR,
+                                    )
 
 
         #else:TOEFLmore
