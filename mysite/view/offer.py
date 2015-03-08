@@ -24,18 +24,24 @@ def set_offer():
         num = 0
         while True:
             offer_major_id = data.get("offers["+str(num)+"][majorid]")
+            offer_grade = data.get("offers["+str(num)+"][grade]")
+            offer_university_id = data.get("offers["+str(num)+"][universityid]")
+            offer_type = data.get("'offers["+str(num)+"][offertype]'")
+            scholarship_type = data.get("offers["+str(num)+"][scholarship][type]")
+            scholarship_money = data.get("offers["+str(num)+"][scholarship][money]")
             if offer_major_id is None:
                 break
             num += 1
-#        for row in offer:
-#            university_id = int(row["universityid"])
-#            major_id = int(row["majorid"])
-#            result = int(row["result"])
-#            Offer.set_offer(g.db,
-#                            user_id=user_id,
-#                            university_id=university_id,
-#                            major_id=major_id,
-#                            result=result)
+
+            Offer.set_offer(g.db,
+                            user_id=user_id,
+                            university_id=offer_university_id,
+                            major_id=offer_major_id,
+                            result=1,
+                            offer_type=offer_type,
+                            grade=offer_grade,
+                            scholarship=scholarship_money,
+                            scholarship_type=scholarship_type)
 
         return jsonify(status="success",
                        img="asdfsda")
