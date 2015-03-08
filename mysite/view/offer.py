@@ -24,7 +24,7 @@ def set_offer():
             offer_major_id = data.get("offers["+str(num)+"][majorid]")
             offer_grade = data.get("offers["+str(num)+"][grade]")
             offer_university_id = data.get("offers["+str(num)+"][universityid]")
-            offer_type = data.get("'offers["+str(num)+"][offertype]")
+            offer_type = data.get("offers["+str(num)+"][offertype]")
             print data.get("offers[0][offertype]")
             scholarship_type = data.get("offers["+str(num)+"][scholarship][type]")
             scholarship_money = data.get("offers["+str(num)+"][scholarship][money]")
