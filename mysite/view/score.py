@@ -24,7 +24,7 @@ def set_user_score():
         print request.form
         user_id = session.get("user_id")
         if request.form.get("IELTSmore[R]") is not None:
-            LELTSmoreR = request.form.get("IELTSmore[R]")
+            LELTSmoreR = request.form.get("IELTSmore[R]",0,int)
             LELTSmoreL = request.form.get("IELTSmore[L]")
             LELTSmoreS = request.form.get("IELTSmore[S]")
             LELTSmoreW = request.form.get("IELTSmore[W]")
@@ -48,15 +48,16 @@ def set_user_score():
                 GMATmoreQ = request.form.get("GMATmoreQ")
                 GMATmoreAW = request.form.get("GMATmoreAW")
                 GMATmoreIR = request.form.get("GMATmoreIR")
-                Score.set_user_info(connection=g.db,user_id=user_id,
+                Score.set_user_info(connection=g.db,
+                                    user_id=user_id,
                                     LELTS_r=LELTSmoreR,
                                     LELTS_l=LELTSmoreL,
                                     LELTS_s=LELTSmoreS,
                                     LELTS_w=LELTSmoreW,
-                                    GMATmoreV=GMATmoreV,
-                                    GMATmoreQ=GMATmoreQ,
-                                    GMATmoreAW=GMATmoreAW,
-                                    GMATmoreIR=GMATmoreIR
+                                    GMAT_v=GMATmoreV,
+                                    GMAT_q=GMATmoreQ,
+                                    GMAT_aw=GMATmoreAW,
+                                    GMAT_ir=GMATmoreIR
 
                                     )
 
