@@ -37,7 +37,7 @@ def get_user_info():
 @allow_cross_domain
 def get_user_detail_info():
     if request.method == "GET":
-        student_id = int(request.args.get("studentid"))
+        student_id = request.args.get("studentid")
         student_info = dict()
         offers = []
         offer_info = {}
