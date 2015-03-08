@@ -41,7 +41,8 @@ def set_offer():
                             offer_type=offer_type,
                             grade=offer_grade,
                             scholarship=scholarship_money,
-                            scholarship_type=scholarship_type)
+                            scholarship_type=scholarship_type
+            )
 
         return jsonify(status="success",
                        img="asdfsda")
