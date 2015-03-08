@@ -19,7 +19,7 @@ from mysite.view.base import allow_cross_domain
 def set_offer():
     if request.method == "POST":
         data = request.form
-
+        print data
         user_id = session["user_id"]
         num = 0
         while True:
