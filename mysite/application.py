@@ -21,6 +21,7 @@ from mysite.view.state import get_index
 from mysite.view.sms import send_sms
 from mysite.view.china_school import search_major_name, search_university_china
 from mysite.view.user_follow import del_follow_user, set_follow_user
+from mysite.view.sub import get_sub
 from config import Config
 
 
@@ -64,14 +65,21 @@ app.add_url_rule("/api/get_user_detail_info",
                  view_func=get_user_detail_info, methods=["GET"])
 app.add_url_rule("/api/get_user_in_university", methods=["POST"],
                  view_func=get_user_in_university)
-app.add_url_rule("/api/set_user_score", view_func=set_user_score,
-                 methods=["POST"])
+#app.add_url_rule("/api/set_user_score", view_func=set_user_score,
+#                 methods=["POST"])
 app.add_url_rule("/api/set_compare", view_func=set_compare,
                  methods=["POST"])
 app.add_url_rule("/api/set_compare_support", methods=["POST"],
                  view_func=set_compare_support)
+
+
 app.add_url_rule("/api/set_offer", view_func=set_offer,
                  methods=["POST"])
+app.add_url_rule("/api/get_sub",view_func=get_sub,
+                 methods=["GET"])
+app.add_url_rule("/api/set_user_score",view_func=set_user_score,
+                 methods=["POST"])
+
 app.add_url_rule("/api/get_compare", view_func=get_compare,
                  methods=["GET"])
 app.add_url_rule("/api/get_major_compare", view_func=get_major_compare,
