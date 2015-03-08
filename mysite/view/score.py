@@ -34,13 +34,13 @@ def set_user_score():
                 GREmoreQ = request.form.get("GERmore[Q]")
                 GREmoreAW = request.form.get("GERmore[AW]")
                 Score.set_user_info(connection=g.db,user_id=user_id,
-                                    LELTS_r=LELTSmoreR,
-                                    LELTS_l=LELTSmoreL,
-                                    LELTS_s=LELTSmoreS,
-                                    LELTS_w=LELTSmoreW,
-                                    GER_v=GREmoreV,
-                                    GER_q=GREmoreQ,
-                                    GER_aw=GREmoreAW
+                                    IELTS_r=LELTSmoreR,
+                                    IELTS_l=LELTSmoreL,
+                                    IELTS_s=LELTSmoreS,
+                                    IELTS_w=LELTSmoreW,
+                                    GRE_v=GREmoreV,
+                                    GRE_q=GREmoreQ,
+                                    GRE_aw=GREmoreAW
 
                                     )
             else:
@@ -50,10 +50,10 @@ def set_user_score():
                 GMATmoreIR = request.form.get("GMATmoreIR")
                 Score.set_user_info(connection=g.db,
                                     user_id=user_id,
-                                    LELTS_r=LELTSmoreR,
-                                    LELTS_l=LELTSmoreL,
-                                    LELTS_s=LELTSmoreS,
-                                    LELTS_w=LELTSmoreW,
+                                    IELTS_r=LELTSmoreR,
+                                    IELTS_l=LELTSmoreL,
+                                    IELTS_s=LELTSmoreS,
+                                    IELTS_w=LELTSmoreW,
                                     GMAT_v=GMATmoreV,
                                     GMAT_q=GMATmoreQ,
                                     GMAT_aw=GMATmoreAW,
@@ -77,9 +77,9 @@ def set_user_score():
                                     TOEFL_l =TOEFLmoreL,
                                     TOEFL_s =TOEFLmoreS,
                                     TOEFL_w =TOEFLmoreW,
-                                    GER_v=GREmoreV,
-                                    GER_q=GREmoreQ,
-                                    GER_aw=GREmoreAW
+                                    GRE_v=GREmoreV,
+                                    GRE_q=GREmoreQ,
+                                    GRE_aw=GREmoreAW
 
                                     )
             else:
