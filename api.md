@@ -417,11 +417,10 @@
     方法：
         GET
     接口地址：
-        www.
-    input:
-    {
-        "type":"0"
-    }
+        www.ufindoffer.com/api/get_sub?sub_type=1
+        
+    访问方式：
+        www.ufindoffer.com/api/get_sub?sub_type=1
     output:
     {
         "status":"success",

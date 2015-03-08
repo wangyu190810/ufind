@@ -7,9 +7,8 @@ from mysite.model.stasub import SubContent,Stasub
 
 def get_sub():
     if request.method == "GET":
-        sub_type = request.form.get("type")
+        sub_type = request.args.get("sub_type")
         sub_list = list()
-
         for row in SubContent.get_sub_content(g.db,int(sub_type)):
             sub_dict = dict()
             sub_dict["id"] = row.id
