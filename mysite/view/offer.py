@@ -9,8 +9,6 @@
 import json
 from flask import request,jsonify,g,session
 from mysite.model.university import University
-from mysite.model.faculty import Faculty
-from mysite.model.major import Major
 from mysite.model.offer import Offer
 from mysite.view.base import allow_cross_domain,get_university_img
 from mysite.model.user import User

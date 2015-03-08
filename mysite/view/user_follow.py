@@ -4,12 +4,7 @@ __author__ = 'wangyu'
 from flask import g, jsonify, request,session
 import json
 
-from mysite.model.user import User
 from mysite.view.base import allow_cross_domain
-from mysite.model.offer import Offer
-from mysite.model.university import University
-from mysite.model.major import Major
-from mysite.model.compare import CompareInfo, Compare
 from mysite.model.user import UserFollow
 
 
