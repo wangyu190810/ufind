@@ -61,3 +61,8 @@ class University(Base):
     def get_state_university(cls, connection, state_id):
         return connection.query(University).\
             filter(University.state_id == state_id)
+
+    @classmethod
+    def get_university_from_id(cls,connection,univerity_id):
+        return connection.query(University).\
+            filter(University.id == univerity_id).scalar()

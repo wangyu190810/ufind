@@ -12,7 +12,7 @@ from mysite.model.university import University
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.offer import Offer
-from mysite.view.base import allow_cross_domain
+from mysite.view.base import allow_cross_domain,get_university_img
 
 
 @allow_cross_domain
@@ -42,7 +42,12 @@ def set_offer():
                             scholarship=scholarship_money,
                             scholarship_type=scholarship_type
             )
-
+        offer_list = list()
+        for row in Offer.get_offer_student_info(g.db,user_id):
+            offer_dict = dict()
+            offer_dict["universityid"] = row.university_id
+            offer_dict["universityname"] = University.get_university_from_id(g.db,row.university_id).name
+            offer_dict["twodim"] = get_university_img(offer_dict["universityname"],1)
         return jsonify(status="success",
                        img="asdfsda")
 
