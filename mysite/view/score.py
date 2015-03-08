@@ -22,9 +22,10 @@ def set_user_score():
     if request.method == "POST":
         data = request.data
         print request.form
-        print data
-        data = json.loads(data)
-        print data
+        print request.form.get("GREmore[Q]")
+        #data = json.loads(data)
+        #print data
+
         if data["type"] == "1":
             prevuniversity = data[u"prevuniversity"]
             prevmajor = data["prevmajor"]
