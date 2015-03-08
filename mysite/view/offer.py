@@ -20,6 +20,8 @@ def set_offer():
     if request.method == "POST":
 
         data = request.data
+        print request.form
+
         data = json.loads(data)
         offer = data["offers"]
         user_id = session["user_id"]
