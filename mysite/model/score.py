@@ -32,7 +32,6 @@ class Score(Base):
     @classmethod
     def set_user_info(cls,
                       connection,
-                      university_type,
                       user_id,
                       rank=None,
                       TOEFL_r=None,
@@ -54,7 +53,6 @@ class Score(Base):
                       SAT_cr=None,
                       SAT_m=None,
                       SAT_w=None):
-        if university_type == 1:
             score = Score(user_id=user_id,rank=rank, TOEFL_r=TOEFL_r, TOEFL_l=TOEFL_l,
                           TOEFL_s=TOEFL_s, TOEFL_w=TOEFL_w, IELTS_r=IELTS_r,
                           IELTS_l=IELTS_l,
@@ -71,22 +69,21 @@ class Score(Base):
             connection.add(score)
             connection.commit()
             return "success"
-        elif university_type == 0:
-            score = Score(user_id=user_id,
-                          rank=rank,
-                          TOEFL_r=TOEFL_r,
-                          TOEFL_l=TOEFL_l,
-                          TOEFL_s=TOEFL_s,
-                          TOEFL_w=TOEFL_w,
-                          IELTS_r=IELTS_r,
-                          IELTS_l=IELTS_l,
-                          IELTS_s=IELTS_s,
-                          IELTS_w=IELTS_w,
-                          SAT_cr=SAT_cr,
-                          SAT_w=SAT_w,
-                          SAT_m=SAT_m
-            )
-            connection.add(score)
-            connection.commit()
-            return "success"
+      #      score = Score(user_id=user_id,
+      #                    rank=rank,
+      #                    TOEFL_r=TOEFL_r,
+      #                    TOEFL_l=TOEFL_l,
+      #                    TOEFL_s=TOEFL_s,
+      #                    TOEFL_w=TOEFL_w,
+      #                    IELTS_r=IELTS_r,
+      #                    IELTS_l=IELTS_l,
+      #                    IELTS_s=IELTS_s,
+      #                    IELTS_w=IELTS_w,
+      #                    SAT_cr=SAT_cr,
+      #                    SAT_w=SAT_w,
+      #                    SAT_m=SAT_m
+      #      )
+      #      connection.add(score)
+      #      connection.commit()
+      #      return "success"
 
