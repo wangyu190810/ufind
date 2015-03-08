@@ -23,7 +23,9 @@ def set_user_score():
     if request.method == "POST":
         user_id = session.get("user_id")
         print request.form
-
+        if request.form.get("bginf") is not None:
+            bginf = request.form.get("bginf")
+            User.update_user_bginf(g.db,user_id,bginf)
         if request.form.get("IELTSmore[R]") is not None:
             LELTSmoreR = request.form.get("IELTSmore[R]",0,int)
             LELTSmoreL = request.form.get("IELTSmore[L]")

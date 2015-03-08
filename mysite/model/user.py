@@ -112,6 +112,13 @@ class User(Base):
     def get_user_info_by_phone(cls, connection, phone):
         return connection.query(User).filter(User.phone == phone).scalar()
 
+    @classmethod
+    def update_user_bginf(cls,connection,user_id,bginf):
+        """更新个人背景信息"""
+        return connection.query(User).filter(User.id == user_id).\
+            update({User.bginf: bginf})
+
+
 
 class UserFollow(Base):
 
