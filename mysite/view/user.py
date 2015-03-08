@@ -54,6 +54,7 @@ def get_user_detail_info():
             for row_ma in Major.get_major_info_by_id(g.db, row.major_id):
                 offer_info["majorname"] = row_ma.name
             offer_info["twodimcode"] = ""
+            offer_info["grade"] = row.grade
             offers.append(offer_info)
         student_info["offers"] = offers
         compares = []
