@@ -56,7 +56,11 @@ def get_user_detail_info():
             offer_info["twodimcode"] = ""
             offer_info["grade"] = row.grade
             offer_info["offertype"] = row.offer_type
-            offer_info["scholarship"] = str(row.scholarship)+row.scholarship_type
+            if row.scholarship is not None:
+                offer_info["scholarship"] = str(row.scholarship)+\
+                                            row.scholarship_type
+            else:
+                offer_info["scholarship"] = "0"
             offers.append(offer_info)
         student_info["offers"] = offers
         compares = []
