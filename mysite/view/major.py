@@ -13,7 +13,8 @@ from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.compare import CompareInfo
 from mysite.view.base import allow_cross_domain
-
+from mysite.model.offer import Offer
+from mysite.model.user import User
 
 @allow_cross_domain
 def search_major():
@@ -64,12 +65,20 @@ def get_major_from_university_faculty():
         major_info = {}
         if faculty_id is None:
             for row in Major.get_major_info(g.db,university_id):
-                students = []
+                students = list()
                 major_info["majorid"] = row.id
                 major_info["name"] = row.name
                 major_info["offernum"] = "12312"
-                offervote = {}
-                for un in University.get_university_info(g.db,university_id):
+                offervote = dict()
+                for row_major in Offer.get_user_id_from_major(g.db,row.id):
+                    student_info = dict()
+                    user = User.get_user_info(g.db,row_major.user_id)
+                    student_info["studentid"] = user.id
+                    student_info["name"] = user.username
+                    student_info["GPA"] = user.gpa
+                    student_info["prevuniversity"] = user.prevuniversity
+                    students.append(student_info)
+                for row_un in University.get_university_info(g.db,university_id):
                     pass
 
                 for major_row in CompareInfo.get_compare_about_major(g.db,row.id):
