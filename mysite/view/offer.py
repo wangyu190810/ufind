@@ -13,7 +13,7 @@ from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.offer import Offer
 from mysite.view.base import allow_cross_domain,get_university_img
-
+from mysite.model.user import User
 
 @allow_cross_domain
 def set_offer():
@@ -51,7 +51,7 @@ def set_offer():
             offer_list.append(offer_dict)
         return jsonify(status="success",
                        offerlist=offer_list,
-                       bigin="asdfasdf")
+                       bigin=User.get_user_info(g.db,user_id).bginf)
 
 @allow_cross_domain
 def get_offer_student():
