@@ -37,10 +37,12 @@ def get_user_info():
 @allow_cross_domain
 def get_user_detail_info():
     if request.method == "GET":
-        student_id = int(request.args.get("studentid", 0, int))
+        student_id = int(request.args.get("studentid"))
         student_info = dict()
         offers = []
         offer_info = {}
+        print student_id
+        print type(student_id)
         login_user_id = session.get("user_id")
         if login_user_id is None:
             login_user_id = -1
