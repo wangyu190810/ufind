@@ -22,7 +22,41 @@ def set_user_score():
     if request.method == "POST":
         data = request.data
         print request.form
-        print request.form.get("GREmore[Q]")
+        if request.form.get("IELTSmore[R]") is not None:
+            LELTSmoreR = request.form.get("IELTSmore[R]")
+            LELTSmoreL = request.form.get("IELTSmore[L]")
+            LELTSmoreS = request.form.get("IELTSmore[S]")
+            LELTSmoreW = request.form.get("IELTSmore[W]")
+
+            if request.form.get("GERmore[R]") is not None:
+                GREmoreV = request.form.get("GERmore[V]")
+                GREmoreQ = request.form.get("GERmore[Q]")
+                GREmoreAW = request.form.get("GERmore[AW]")
+            else:
+                GMATmoreV = request.form.get("GMATmoreV")
+                GMATmoreQ = request.form.get("GMATmoreQ")
+                GMATmoreAW = request.form.get("GMATmoreAW")
+                GMATmoreIR = request.form.get("GMATmoreIR")
+
+        elif request.form.get("TOEFLmore[R]") is not None:
+            TOEFLmoreR = request.form.get("TOEFLmore[R]")
+            TOEFLmoreL = request.form.get("TOEFLmore[L]")
+            TOEFLmoreS = request.form.get("TOEFLmore[S]")
+            TOEFLmoreW = request.form.get("TOEFLmore[W]")
+
+            if request.form.get("GERmore[R]") is not None:
+                GREmoreV = request.form.get("GERmore[V]")
+                GREmoreQ = request.form.get("GERmore[Q]")
+                GREmoreAW = request.form.get("GERmore[AW]")
+            else:
+                GMATmoreV = request.form.get("GMATmoreV")
+                GMATmoreQ = request.form.get("GMATmoreQ")
+                GMATmoreAW = request.form.get("GMATmoreAW")
+                GMATmoreIR = request.form.get("GMATmoreIR")
+
+
+        #else:TOEFLmore
+
         #data = json.loads(data)
         #print data
 

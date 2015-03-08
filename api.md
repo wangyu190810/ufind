@@ -408,7 +408,7 @@
     方法：
         POST
     接口地址：
-        www.
+        www.ufindoffer.com/api/set_user_score
  
    
 10.1 接口
