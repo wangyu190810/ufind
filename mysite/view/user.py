@@ -39,14 +39,12 @@ def get_user_detail_info():
     if request.method == "GET":
         student_id = request.args.get("studentid")
         student_info = dict()
-        offers = []
-        offer_info = {}
-        print student_id
-        print type(student_id)
+        offers = list()
         login_user_id = session.get("user_id")
         if login_user_id is None:
             login_user_id = -1
         for row in Offer.get_offer_student_info(g.db,student_id):
+            offer_info = dict()
             for row_un in University.get_university_info(g.db,
                                                          row.university_id):
                 offer_info["universityname"] = row_un.name
@@ -140,6 +138,7 @@ def get_user_detail_info():
         student_info["follows"] = follows_list
         student_info["status"] = "success"
 
+        print json.dumps(student_info)
         return json.dumps(student_info)
 
 
