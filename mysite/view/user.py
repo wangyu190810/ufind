@@ -46,7 +46,7 @@ def get_user_detail_info():
         login_user_id = session.get("user_id")
         if login_user_id is None:
             login_user_id = -1
-        for row in Offer.get_offer_student_info(g.db, student_id):
+        for row in Offer.get_offer_student_info(g.db,student_id):
             for row_un in University.get_university_info(g.db,
                                                          row.university_id):
                 offer_info["universityname"] = row_un.name
