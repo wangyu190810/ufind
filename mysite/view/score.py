@@ -21,6 +21,8 @@ def set_user_score():
     print request.data
     if request.method == "POST":
         data = request.data
+        print request.form
+        print data
         data = json.loads(data)
         print data
         if data["type"] == "1":

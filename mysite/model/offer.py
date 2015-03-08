@@ -53,3 +53,9 @@ class Offer(Base):
                 filter(Offer.university_id == university_id)
         return connection.query(Offer).filter(Offer.university_id == university_id).\
             filter(Offer.major_id == major_id)
+
+    @classmethod
+    def get_user_id_from_major(cls,connection,major_id):
+        """根据专业id查找学生信息"""
+        return connection.query(Offer).filter(Offer.major_id == major_id).limit(2)
+

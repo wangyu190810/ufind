@@ -402,3 +402,34 @@
         "status":"nologin"
     }
    
+9.2 接口
+    
+    报offer
+    方法：
+        POST
+    接口地址：
+        www.
+ 
+   
+10.1 接口
+  
+    sublist 获得gre或sat的sub科目
+    方法：
+        GET
+    接口地址：
+        www.
+    input:
+    {
+        "type":"0"
+    }
+    output:
+    {
+        "status":"success",
+        sublist:[
+            {
+                "name":"Literature",
+                "id":1
+            }
+        ]
+    }
+    
