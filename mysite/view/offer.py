@@ -18,13 +18,15 @@ from mysite.view.base import allow_cross_domain
 @allow_cross_domain
 def set_offer():
     if request.method == "POST":
+        data = request.form
 
-        data = request.data
-        print request.form
-        print data
-#        data = json.loads(data)
-#        offer = data["offers"]
-#        user_id = session["user_id"]
+        user_id = session["user_id"]
+        num = 0
+        while True:
+            offer_major_id = data.get("offers[0][majorid]")
+            if offer_major_id is None:
+                break
+
 #        for row in offer:
 #            university_id = int(row["universityid"])
 #            major_id = int(row["majorid"])
