@@ -21,9 +21,8 @@ from mysite.view.base import allow_cross_domain,validate_user_login
 def set_user_score():
     print request.data
     if request.method == "POST":
-        data = request.data
-        print request.form
         user_id = session.get("user_id")
+
         if request.form.get("IELTSmore[R]") is not None:
             LELTSmoreR = request.form.get("IELTSmore[R]",0,int)
             LELTSmoreL = request.form.get("IELTSmore[L]")
