@@ -55,6 +55,7 @@ def get_user_detail_info():
                 offer_info["majorname"] = row_ma.name
             offer_info["twodimcode"] = ""
             offer_info["grade"] = row.grade
+            offer_info["offertype"] = row.offer_type
             offers.append(offer_info)
         student_info["offers"] = offers
         compares = []
