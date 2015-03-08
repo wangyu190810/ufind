@@ -21,7 +21,7 @@ def set_offer():
 
         data = request.data
         print request.form
-
+        print data
         data = json.loads(data)
         offer = data["offers"]
         user_id = session["user_id"]
