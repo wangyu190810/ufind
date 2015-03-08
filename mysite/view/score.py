@@ -94,7 +94,7 @@ def set_user_score():
                                     GMAT_v=GMATmoreV,
                                     GMAT_q=GMATmoreQ,
                                     GMAT_aw=GMATmoreAW,
-                                    GER_ir=GMATmoreIR,
+                                    GMAT_ir=GMATmoreIR,
                                     )
 
 
