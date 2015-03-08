@@ -22,6 +22,7 @@ def set_user_score():
     print request.data
     if request.method == "POST":
         user_id = session.get("user_id")
+        print request.form
 
         if request.form.get("IELTSmore[R]") is not None:
             LELTSmoreR = request.form.get("IELTSmore[R]",0,int)
