@@ -23,10 +23,10 @@ def set_offer():
         user_id = session["user_id"]
         num = 0
         while True:
-            offer_major_id = data.get("offers[0][majorid]")
+            offer_major_id = data.get("offers["+str(num)+"][majorid]")
             if offer_major_id is None:
                 break
-
+            num += 1
 #        for row in offer:
 #            university_id = int(row["universityid"])
 #            major_id = int(row["majorid"])
