@@ -40,7 +40,7 @@ def set_user_score():
                                     LELTS_w=LELTSmoreW,
                                     GER_v=GREmoreV,
                                     GER_q=GREmoreQ,
-                                    GER_aw=GREmoreAW,
+                                    GER_aw=GREmoreAW
 
                                     )
             else:
@@ -56,7 +56,7 @@ def set_user_score():
                                     GMATmoreV=GMATmoreV,
                                     GMATmoreQ=GMATmoreQ,
                                     GMATmoreAW=GMATmoreAW,
-                                    GMATmoreIR=GMATmoreIR,
+                                    GMATmoreIR=GMATmoreIR
 
                                     )
 
@@ -94,7 +94,7 @@ def set_user_score():
                                     GMAT_v=GMATmoreV,
                                     GMAT_q=GMATmoreQ,
                                     GMAT_aw=GMATmoreAW,
-                                    GMAT_ir=GMATmoreIR,
+                                    GMAT_ir=GMATmoreIR
                                     )
 
 
