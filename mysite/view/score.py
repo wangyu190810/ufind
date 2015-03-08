@@ -33,7 +33,7 @@ def set_user_score():
                 GREmoreV = request.form.get("GERmore[V]")
                 GREmoreQ = request.form.get("GERmore[Q]")
                 GREmoreAW = request.form.get("GERmore[AW]")
-                Score.set_user_info(g.db,user_id,
+                Score.set_user_info(connection=g.db,user_id=user_id,
                                     LELTS_r=LELTSmoreR,
                                     LELTS_l=LELTSmoreL,
                                     LELTS_s=LELTSmoreS,
@@ -48,7 +48,7 @@ def set_user_score():
                 GMATmoreQ = request.form.get("GMATmoreQ")
                 GMATmoreAW = request.form.get("GMATmoreAW")
                 GMATmoreIR = request.form.get("GMATmoreIR")
-                Score.set_user_info(g.db,user_id,
+                Score.set_user_info(connection=g.db,user_id=user_id,
                                     LELTS_r=LELTSmoreR,
                                     LELTS_l=LELTSmoreL,
                                     LELTS_s=LELTSmoreS,
@@ -71,7 +71,7 @@ def set_user_score():
                 GREmoreV = request.form.get("GERmore[V]")
                 GREmoreQ = request.form.get("GERmore[Q]")
                 GREmoreAW = request.form.get("GERmore[AW]")
-                Score.set_user_info(g.db,user_id,
+                Score.set_user_info(connection=g.db,user_id=user_id,
                                     TOEFL_r =TOEFLmoreR,
                                     TOEFL_l =TOEFLmoreL,
                                     TOEFL_s =TOEFLmoreS,
@@ -86,7 +86,7 @@ def set_user_score():
                 GMATmoreQ = request.form.get("GMATmoreQ")
                 GMATmoreAW = request.form.get("GMATmoreAW")
                 GMATmoreIR = request.form.get("GMATmoreIR")
-                Score.set_user_info(g.db,user_id,
+                Score.set_user_info(connection=g.db,user_id=user_id,
                                     TOEFL_r =TOEFLmoreR,
                                     TOEFL_l =TOEFLmoreL,
                                     TOEFL_s =TOEFLmoreS,
