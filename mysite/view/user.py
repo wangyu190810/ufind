@@ -20,6 +20,8 @@ def get_user_info():
         student_id = request.args.get("studentid")
         student_info = {}
         row = User.get_user_info(g.db, student_id)
+        if row is None:
+            return jsonify(status="false")
         student_info["prevuniversity"] = row.prevuniversity
         student_info["name"] = row.username
         student_info["prevmajor"] = row.prevmajor
@@ -46,7 +48,7 @@ def get_user_detail_info():
         offers = list()
         login_user_id = session.get("user_id")
         print student_id,login_user_id
-        print type(student_id),(login_user_id)
+        print type(student_id),type(login_user_id)
 
         if login_user_id is None:
             login_user_id = -1
