@@ -38,6 +38,8 @@ def login():
 
 @allow_cross_domain
 def login_from_cookie():
+    print request.data
+    print request.args
     if request.method == "GET":
         #data = request.args.get("cookie")
         user_id = session.get("user_id")
@@ -47,12 +49,12 @@ def login_from_cookie():
         print user,type(user)
     if user is not None:
         session["user_id"] = user.id
-        stuedent = dict()
-        stuedent["studentid"] = user.id
-        stuedent["studentname"] = user.username
-        stuedent["studentpic"] = user.pic
+        student = dict()
+        student["studentid"] = user.id
+        student["studentname"] = user.username
+        student["studentpic"] = user.pic
         return jsonify(
-            student=stuedent,
+            student=student,
             status="success")
     return jsonify(status="false")
 
