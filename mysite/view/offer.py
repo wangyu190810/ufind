@@ -49,7 +49,7 @@ def set_offer():
             offer_list.append(offer_dict)
         return jsonify(status="success",
                        offerlist=offer_list,
-                       bigin=User.get_user_info(g.db,user_id).bginf)
+                       bginf=User.get_user_info(g.db,user_id).bginf)
 
 @allow_cross_domain
 def get_offer_student():
