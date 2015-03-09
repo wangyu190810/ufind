@@ -58,7 +58,7 @@ def get_user_detail_info():
                 offer_info["scholarship"] = str(row.scholarship)+\
                                             row.scholarship_type
             else:
-                offer_info["scholarship"] = "0"
+                offer_info["scholarship"] = None
             offers.append(offer_info)
         student_info["offers"] = offers
         compares = []
@@ -138,7 +138,6 @@ def get_user_detail_info():
         student_info["follows"] = follows_list
         student_info["status"] = "success"
 
-        print json.dumps(student_info)
         return json.dumps(student_info)
 
 
