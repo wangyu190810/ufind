@@ -139,7 +139,7 @@ def get_user_detail_info():
             user = User.get_user_info(g.db,follow_user_id)
             follows["name"] = user.username
             follows["pic"] = user.pic
-            follows["studentid"] = user_id
+            follows["studentid"] = follow_user_id
             follows_list.append(follows)
         student_info["follows"] = follows_list
         student_info["status"] = "success"
