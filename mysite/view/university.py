@@ -14,6 +14,8 @@ from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.view.base import allow_cross_domain,get_university_img,get_university_logo
 from mysite.model.offer import Offer
+
+
 @allow_cross_domain
 def get_university():
     if request.method == "GET":
@@ -62,7 +64,7 @@ def get_university_info():
             link["official"] = row.official
             university_info["name"] = row.name
             university_info["chiname"] = row.chiname
-            university_info["offernum"] = 234
+            university_info["offernum"] = Offer.get_offer_num(g.db,row.id)
             university_info["pic1"] = get_university_img(row.name,1)
             university_info["pic2"] = get_university_img(row.name,2)
             university_info["link"] = link
