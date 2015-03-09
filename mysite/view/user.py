@@ -180,3 +180,13 @@ def get_user_in_university():
         return jsonify(status="123")
 
 
+def update_user_bginf():
+    """修改个人背景信息"""
+    if request.method == "POST":
+        bginf = request.form.get("bginf")
+        user_id = session.get("user_id")
+        User.update_user_bginf(g.db, user_id=user_id, bginf=bginf)
+        return jsonify(status="success")
+    return jsonify(status="false")
+
+

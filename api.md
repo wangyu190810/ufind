@@ -401,6 +401,23 @@
     {
         "status":"nologin"
     }
+    
+8.1 接口
+    
+    修改个人背景信息
+    方法：
+        POST
+    接口地址：
+        www.ufindoffer.com/api/update_user_bginf
+        
+    input:
+    {
+        "bginf":"哈哈好的"
+    }
+    {
+    
+        "status":"success"
+    }
    
 9.2 接口
     
