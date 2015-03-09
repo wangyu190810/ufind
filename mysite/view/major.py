@@ -68,7 +68,9 @@ def get_major_from_university_faculty():
                 students = list()
                 major_info["majorid"] = row.id
                 major_info["name"] = row.name
-                major_info["offernum"] = "12312"
+                major_info["offernum"] = Offer.get_offer_student(g.db,
+                                                                 university_id,
+                                                                 row.id)
                 offervote = dict()
                 for row_major in Offer.get_user_id_from_major(g.db,row.id):
                     student_info = dict()
