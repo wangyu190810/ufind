@@ -130,11 +130,9 @@ def get_user_detail_info():
             message_dict["time"] = get_timestamp(row_meg.create_time)
             message.append(message_dict)
         student_info["messages"] = message
-
+        # 这个位置的关注状态逻辑有点奇葩，以后要多注意
         follow_status = UserFollow.get_follow_to_user(g.db,login_user_id,student_id)
-        print follow_status
         if follow_status is not None:
-            print follow_status
             student_info["followed"] = "true"
         else:
             student_info["followed"] = "false"
