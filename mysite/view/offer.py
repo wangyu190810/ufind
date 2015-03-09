@@ -57,8 +57,6 @@ def get_offer_student():
         university_id,major_id = map(request.args.get,("universityid","majorid"))
         student_list = []
         for row in Offer.get_offer_student(g.db,university_id,major_id):
-            print row
-            print dir(row)
             student_list.append(row.user_id)
         return jsonify(studentlist=student_list,
                        status="success")

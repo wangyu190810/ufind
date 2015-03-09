@@ -41,7 +41,7 @@ class Offer(Base):
     @classmethod
     def get_offer_student(cls, connection, unviersity_id, major_id):
         """根据学校和专业随机的返回两个学生的id"""
-        return connection.query(func.random(Offer.user_id)). \
+        return connection.query(Offer). \
             filter(Offer.university_id == unviersity_id). \
             filter(Offer.major_id == major_id).limit(2)
 
