@@ -75,3 +75,7 @@ class Offer(Base):
         return connection.query(Offer).\
             filter(Offer.major_id == major_id).limit(2)
 
+    @classmethod
+    def get_site_offer_num(cls,connection):
+        """全站offer数量"""
+        return connection.query(func.count(Offer)).scalar()
