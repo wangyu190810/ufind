@@ -53,6 +53,7 @@ class Score(Base):
                       SAT_cr=None,
                       SAT_m=None,
                       SAT_w=None):
+            cls.del_user_score(connection=connection,user_id=user_id)
             score = Score(user_id=user_id,rank=rank, TOEFL_r=TOEFL_r, TOEFL_l=TOEFL_l,
                           TOEFL_s=TOEFL_s, TOEFL_w=TOEFL_w, IELTS_r=IELTS_r,
                           IELTS_l=IELTS_l,
@@ -68,22 +69,9 @@ class Score(Base):
             )
             connection.add(score)
             connection.commit()
-            return "success"
-      #      score = Score(user_id=user_id,
-      #                    rank=rank,
-      #                    TOEFL_r=TOEFL_r,
-      #                    TOEFL_l=TOEFL_l,
-      #                    TOEFL_s=TOEFL_s,
-      #                    TOEFL_w=TOEFL_w,
-      #                    IELTS_r=IELTS_r,
-      #                    IELTS_l=IELTS_l,
-      #                    IELTS_s=IELTS_s,
-      #                    IELTS_w=IELTS_w,
-      #                    SAT_cr=SAT_cr,
-      #                    SAT_w=SAT_w,
-      #                    SAT_m=SAT_m
-      #      )
-      #      connection.add(score)
-      #      connection.commit()
-      #      return "success"
 
+    @classmethod
+    def del_user_score(cls,connection,user_id):
+        """用户的分数只能有一个，所以采用只要从新填写分数，自动删除之前的分数"""
+        connection.query(Score).filter(Score.user_id == user_id).delete()
+        connection.commit()
