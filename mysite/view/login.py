@@ -41,8 +41,10 @@ def login_from_cookie():
     if request.method == "GET":
         #data = request.args.get("cookie")
         user_id = session.get("user_id")
+        print user_id
         #user_id = get_sign_safe(data)
         user = User.get_user_info(g.db,user_id)
+        print user,type(user)
     if user is not None:
         session["user_id"] = user.id
         stuedent = dict()
