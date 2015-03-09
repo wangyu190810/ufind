@@ -84,12 +84,7 @@ def get_university_info():
             faculty = {}
         university_info["facultylist"] = facultylist
         university_info["status"] = "success"
-        print university_info
         return json.dumps(university_info)
-        # return jsonify(university_info=university_info,
-        #                status="success",
-        #                facultylist=facultylist)
-
 
 
 @allow_cross_domain
