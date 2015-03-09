@@ -10,6 +10,7 @@ import json
 from flask import request,g
 from mysite.view.base import allow_cross_domain,login_user_info
 from mysite.model.state import State
+from mysite.model.offer import Offer
 
 
 @allow_cross_domain
@@ -67,6 +68,6 @@ def get_index():
         statelist["UK"] = local["UK"]
         statelist["AUS"] = local["AUS"]
         data["statelist"] = statelist
-        data["offernum"] = "123"
+        data["offernum"] = Offer.get_site_offer_num(g.db)
         data["status"] = "success"
         return json.dumps(data)
