@@ -29,7 +29,9 @@ def get_user_info():
         student_info["GMAT"] = row.GMAT
         student_info["SAT"] = row.SAT
         student_info["pic"] = row.pic
-        universityname = []
+        universityname = list()
+        for row in Offer.get_offer_student_info(g.db,student_id):
+            universityname.append(University.get_university_from_id(row.university_id).name)
         student_info["universityname"] = universityname
         student_info["status"] = "success"
         return json.dumps(student_info)
