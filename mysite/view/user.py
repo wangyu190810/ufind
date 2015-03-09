@@ -31,7 +31,7 @@ def get_user_info():
         student_info["pic"] = row.pic
         universityname = list()
         for row in Offer.get_offer_student_info(g.db,student_id):
-            universityname.append(University.get_university_from_id(row.university_id).name)
+            universityname.append(University.get_university_from_id(g.db,row.university_id).name)
         student_info["universityname"] = universityname
         student_info["status"] = "success"
         return json.dumps(student_info)
