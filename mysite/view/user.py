@@ -125,7 +125,7 @@ def get_user_detail_info():
             message.append(message_dict)
         student_info["messages"] = message
 
-        follow_status = UserFollow.get_follow_to_user(g.db,student_id,login_user_id)
+        follow_status = UserFollow.get_follow_to_user(g.db,int(student_id),login_user_id)
         print follow_status
         if follow_status is not None:
             print follow_status
