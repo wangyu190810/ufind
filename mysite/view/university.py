@@ -68,7 +68,7 @@ def get_university_info():
             university_info["link"] = link
         for row in Faculty.get_faculty_info(g.db, university_id):
             faculty["facultyid"] = row.id
-            faculty["chiname"] = row.chiname
+            faculty["chiname"] = row.chinam
             faculty["name"] = row.name
             for row in Major.get_major_info(g.db,
                                             university_info["universityid"],
@@ -84,6 +84,7 @@ def get_university_info():
             faculty = {}
         university_info["facultylist"] = facultylist
         university_info["status"] = "success"
+        print university_info
         return json.dumps(university_info)
         # return jsonify(university_info=university_info,
         #                status="success",
