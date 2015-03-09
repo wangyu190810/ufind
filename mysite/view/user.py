@@ -31,7 +31,9 @@ def get_user_info():
         student_info["pic"] = row.pic
         universityname = []
         student_info["universityname"] = universityname
+        student_info["status"] = "success"
         return json.dumps(student_info)
+    return jsonify(status="false")
 
 
 @allow_cross_domain
