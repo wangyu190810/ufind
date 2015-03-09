@@ -38,15 +38,9 @@ def login():
 
 @allow_cross_domain
 def login_from_cookie():
-    print request.data
-    print request.args
     if request.method == "GET":
-        #data = request.args.get("cookie")
         user_id = session.get("user_id")
-        print user_id
-        #user_id = get_sign_safe(data)
         user = User.get_user_info(g.db,user_id)
-        print user,type(user)
     if user is not None:
         session["user_id"] = user.id
         student = dict()
@@ -63,9 +57,7 @@ def login_from_cookie():
 @allow_cross_domain
 def register_first():
     if request.method == "POST":
-        print request.data
         data = request.form
-        print data
         email = data["email"]
         password = data["password"]
         phonenum = data["phonenum"]
@@ -116,9 +108,7 @@ def change_password():
         phone = data["phonenum"]
         password = data["password"]
         checknum = data["checknum"]
-        print phone,password,checknum
         check_num = User.get_checknum(g.db, phone)
-        print check_num
         if check_num == int(checknum):
             User.change_password(g.db, phone, password)
             return jsonify(status="success")

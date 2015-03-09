@@ -45,6 +45,9 @@ def get_user_detail_info():
         student_info = dict()
         offers = list()
         login_user_id = session.get("user_id")
+        print student_id,login_user_id
+        print type(student_id),(login_user_id)
+
         if login_user_id is None:
             login_user_id = -1
         for row in Offer.get_offer_student_info(g.db,student_id):
