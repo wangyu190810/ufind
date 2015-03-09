@@ -68,7 +68,7 @@ def get_university_info():
             university_info["link"] = link
         for row in Faculty.get_faculty_info(g.db, university_id):
             faculty["facultyid"] = row.id
-            faculty["chiname"] = row.chinam
+            faculty["chiname"] = row.chiname
             faculty["name"] = row.name
             for row in Major.get_major_info(g.db,
                                             university_info["universityid"],
