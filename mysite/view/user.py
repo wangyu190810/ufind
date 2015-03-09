@@ -127,10 +127,10 @@ def get_user_detail_info():
         else:
             student_info["followed"] = "false"
         follows_list = list()
-        for row_follow in UserFollow.get_follow_user_id(g.db,student_id):
+        for row_follow in UserFollow.get_follow_id(g.db,student_id):
             follows = dict()
-            user_id = row_follow.id
-            user = User.get_user_info(g.db,user_id)
+            follow_user_id = row_follow.follow_user_id
+            user = User.get_user_info(g.db,follow_user_id)
             follows["name"] = user.username
             follows["pic"] = user.pic
             follows["studentid"] = user_id
