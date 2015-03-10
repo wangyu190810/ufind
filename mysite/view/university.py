@@ -58,15 +58,15 @@ def get_university_info():
         link = {}
         for row in University.get_university_info(g.db,university_id):
             university_info["universityid"] = row.id
-            university_info["universitylogo"] = get_university_logo(row.name)
+            university_info["universitylogo"] = get_university_logo(row.name,)
             link["baidu"] = row.baidu
             link["wiki"] = row.wiki
             link["official"] = row.official
             university_info["name"] = row.name
             university_info["chiname"] = row.chiname
             university_info["offernum"] = Offer.get_offer_num(g.db,row.id)
-            university_info["pic1"] = get_university_img(row.name,1)
-            university_info["pic2"] = get_university_img(row.name,2)
+            university_info["pic1"] = get_university_img(row.name,1,u"长方形图片")
+            university_info["pic2"] = get_university_img(row.name,2,u"长方形图片")
             university_info["link"] = link
         for row in Faculty.get_faculty_info(g.db, university_id):
             faculty["facultyid"] = row.id
