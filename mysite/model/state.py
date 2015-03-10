@@ -27,3 +27,7 @@ class State(Base):
     def get_index(cls,connection,country):
         return connection.query(State).\
             filter(State.country == country)
+
+    @classmethod
+    def get_state_name(cls,connection,state_id):
+        return connection.query(State).filter(State.id == state_id).scalar()

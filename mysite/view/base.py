@@ -56,6 +56,10 @@ def get_university_logo(universityname):
     return "http://www.ufindoffer.com/images/unimg/all_logo/"+str(universityname)+".png"
 
 
+def get_university_state(statename):
+    return "http://www.ufindoffer.com/images/unimg/state/"+str(statename)+".jpg"
+
+
 def get_timestamp(create_time):
     timeArray = time.localtime(create_time)
     return time.strftime("%Y-%m-%d %H:%M:%S", timeArray)

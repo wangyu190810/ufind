@@ -12,9 +12,10 @@ from flask import request,jsonify,g
 
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
-from mysite.view.base import allow_cross_domain,get_university_img,get_university_logo
+from mysite.view.base import allow_cross_domain,get_university_img,\
+    get_university_logo,get_university_state
 from mysite.model.offer import Offer
-
+from mysite.model.state import State
 
 @allow_cross_domain
 def get_university():
@@ -130,7 +131,8 @@ def get_state_university():
     if request.method == "GET":
         university = {}
         state_id = request.args.get("stateid")
-        university["statepic"] = ""
+        university["statepic"] = get_university_state(
+            State.get_state_name(g.db, state_id).name)
         universitylist = []
         university_info = {}
         for row in University.get_state_university(g.db,state_id):
