@@ -1,14 +1,12 @@
 # -*-coding:utf8-*-
 __author__ = 'wangyu'
-from flask import redirect, g, session, request, jsonify,make_response
+from flask import g, session, request, jsonify
 
-
-from mysite.view.base import allow_cross_domain,get_sign_safe,set_sign_safe
+from mysite.view.base import allow_cross_domain, set_sign_safe
 from mysite.model.user import User
-from mysite.model.university_china import UniversityChina, SeniorHighSchool,\
+from mysite.model.university_china import UniversityChina, SeniorHighSchool, \
     MajorChina
 
-import time
 
 @allow_cross_domain
 def login():
@@ -26,32 +24,32 @@ def login():
                            phone=login_phone, password=password)
     if user is not None:
         session["user_id"] = user.id
-        stuedent = dict()
-        stuedent["studentid"] = user.id
-        stuedent["studentname"] = user.username
-        stuedent["studentpic"] = user.pic
-        return jsonify(
-            student=stuedent,
-            status="success",
-            cookie=set_sign_safe(str(user.id)))
-    return jsonify(status="false")
-
-@allow_cross_domain
-def login_from_cookie():
-    if request.method == "GET":
-        user_id = session.get("user_id")
-        user = User.get_user_info(g.db,user_id)
-    if user is not None:
-        session["user_id"] = user.id
         student = dict()
         student["studentid"] = user.id
         student["studentname"] = user.username
         student["studentpic"] = user.pic
         return jsonify(
             student=student,
-            status="success")
+            status="success",
+            cookie=set_sign_safe(str(user.id)))
     return jsonify(status="false")
 
+
+@allow_cross_domain
+def login_from_cookie():
+    if request.method == "GET":
+        user_id = session.get("user_id")
+        user = User.get_user_info(g.db, user_id)
+        if user is not None:
+            session["user_id"] = user.id
+            student = dict()
+            student["studentid"] = user.id
+            student["studentname"] = user.username
+            student["studentpic"] = user.pic
+            return jsonify(
+                student=student,
+                status="success")
+    return jsonify(status="false")
 
 
 @allow_cross_domain
@@ -81,18 +79,19 @@ def register_second():
         university_id = data["universityid"]
         user_type = data["type"]
         if int(user_type) == 0:
-            senior = SeniorHighSchool.get_senior_high(g.db,university_id)
+            senior = SeniorHighSchool.get_senior_high(g.db, university_id)
             university_name = senior.name
             major_name = ""
         else:
-            university = UniversityChina.get_university_china_info(g.db,university_id)
+            university = UniversityChina.get_university_china_info(g.db,
+                                                                   university_id)
             university_name = university.name
             major_id = int(data["majorid"])
-            major_name = MajorChina.get_major_china(g.db,major_id).major_name
+            major_name = MajorChina.get_major_china(g.db, major_id).major_name
         gpa = data["gpa"]
         User.register_second(g.db, phone, username, university_name, major_name,
-                             gpa,user_type)
-        user = User.get_user_info_by_phone(g.db,phone)
+                             gpa, user_type)
+        user = User.get_user_info_by_phone(g.db, phone)
         user_id = user.id
         session["user_id"] = user_id
         print user_id
@@ -117,10 +116,7 @@ def change_password():
 
 @allow_cross_domain
 def logout():
-    print session.keys()
     session.pop("user_id")
-  #  user_id = request.cookies.get("user_id")
-
     return jsonify(status="success")
 
 

@@ -59,8 +59,8 @@ def get_major_compare():
 def get_major_from_university_faculty():
     """投票根据学校和学院返回专业和投票信息"""
     if request.method == "GET":
-        university_id,faculty_id = map(request.args.get,
-                            ("universityid","facultyid"))
+        university_id,faculty_id = map(request.args.get, ("universityid",
+                                                          "facultyid"))
         major_list = []
         major_info = {}
         if faculty_id is None:

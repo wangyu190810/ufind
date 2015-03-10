@@ -1,5 +1,5 @@
 __author__ = 'wangyu'
-from flask import session, redirect
+from flask import session
 from functools import wraps
 from flask import make_response, jsonify, g
 

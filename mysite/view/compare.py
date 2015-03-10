@@ -8,9 +8,7 @@
 
 import json
 from flask import request, jsonify, g, session
-from mysite.model.user import User
 from mysite.model.university import University
-from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.compare import Compare, CompareInfo, CompareSupport
 from mysite.view.base import allow_cross_domain, get_timestamp
@@ -21,12 +19,8 @@ def set_compare():
     if request.method == "POST":
 
         data = json.loads(request.data)
-        print data
         comparelist = data["comparelist"]
-        print data
-        print comparelist
         description = data["description"]
-        print session
         user_id = session["user_id"]
         Compare.set_compare(connection=g.db, user_id=user_id,
                             description=description)
@@ -53,14 +47,12 @@ def get_compare():
             compare["description"] = row.description
             compare["date"] = get_timestamp(row.create_time)
             compare["studentid"] = row.user_id
-            #compare["major_id"] = row.major_id
-            print compareid
         for row in CompareInfo.get_compare_info(g.db, compareid):
             compare_info["universityid"] = row.university_id
             compare_info["major_id"] = row.major_id
             compare_info["supportnum"] = row.supportnum
             for university in University.get_university_info(g.db,
-                                                             university_id=row.university_id):
+                                                            university_id=row.university_id):
                 compare_info["universityname"] = university.name
                 compare_info["logo"] = university.schoollogo
             for major in Major.get_major_info(g.db,
