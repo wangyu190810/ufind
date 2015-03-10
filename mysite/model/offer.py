@@ -78,4 +78,4 @@ class Offer(Base):
     @classmethod
     def get_site_offer_num(cls,connection):
         """全站offer数量"""
-        return connection.query(func.count(Offer)).scalar()
+        return connection.query(func.count(Offer.id)).scalar()
