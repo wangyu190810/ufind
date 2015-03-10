@@ -8,7 +8,7 @@ from mysite.view.university import get_university, get_search_university, \
     get_university_info, get_university_list, get_state_university
 from mysite.view.major import search_major, get_major_compare
 from mysite.view.user import get_user_info, get_user_detail_info, \
-    get_user_in_university,update_user_bginf
+    get_user_in_university, update_user_bginf, get_user_base_info
 from mysite.view.score import set_user_score
 from mysite.view.compare import set_compare, get_compare, get_compare_list, \
     set_compare_support
@@ -82,6 +82,8 @@ app.add_url_rule("/api/set_user_score",view_func=set_user_score,
 
 app.add_url_rule("/api/update_user_bginf", view_func=update_user_bginf,
                  methods=["POST"])
+app.add_url_rule("/api/get_user_base_info",view_func=get_user_base_info,
+                 methods=["GET"])
 
 app.add_url_rule("/api/get_compare", view_func=get_compare,
                  methods=["GET"])

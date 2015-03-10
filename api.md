@@ -418,6 +418,18 @@
     
         "status":"success"
     }
+    
+9.1 接口
+    
+    获取个人的基本信息
+    方法：
+        GET
+    接口地址：
+        www.ufindoffer.com/api/get_user_base_info
+    访问方式:
+        www.ufindoffer.com/api/get_user_base_info
+    
+    
    
 9.2 接口
     

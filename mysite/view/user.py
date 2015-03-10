@@ -4,19 +4,21 @@ __author__ = 'wangyu'
 from flask import g, jsonify, request, session
 import json
 
-from mysite.model.user import User,UserFollow
-from mysite.view.base import allow_cross_domain,get_timestamp
+from mysite.model.user import User, UserFollow
+from mysite.view.base import allow_cross_domain, get_timestamp, \
+    validate_user_login
 from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
 from mysite.model.compare import CompareInfo, Compare
 from mysite.model.message import Message
+from mysite.model.score import Score
 
 
+@validate_user_login
 @allow_cross_domain
 def get_user_info():
     if request.method == "GET":
-        print request.args
         student_id = request.args.get("studentid")
         student_info = {}
         row = User.get_user_info(g.db, student_id)
@@ -33,28 +35,28 @@ def get_user_info():
         student_info["pic"] = row.pic
         student_info["grade"] = row.grade
         universityname = list()
-        for row in Offer.get_offer_student_info(g.db,student_id):
-            universityname.append(University.get_university_from_id(g.db,row.university_id).name)
+        for row in Offer.get_offer_student_info(g.db, student_id):
+            universityname.append(
+                University.get_university_from_id(g.db, row.university_id).name
+            )
         student_info["universityname"] = universityname
         student_info["status"] = "success"
         return json.dumps(student_info)
     return jsonify(status="false")
 
 
+@validate_user_login
 @allow_cross_domain
 def get_user_detail_info():
     if request.method == "GET":
-        student_id = request.args.get("studentid",0,int)
+        student_id = request.args.get("studentid", 0, int)
         student_info = dict()
         offers = list()
         login_user_id = session.get("user_id")
-        print student_id,login_user_id
-        print type(student_id),type(login_user_id)
-        print int(student_id),int(login_user_id)
 
         if login_user_id is None:
             login_user_id = -1
-        for row in Offer.get_offer_student_info(g.db,student_id):
+        for row in Offer.get_offer_student_info(g.db, student_id):
             offer_info = dict()
             for row_un in University.get_university_info(g.db,
                                                          row.university_id):
@@ -66,8 +68,8 @@ def get_user_detail_info():
             offer_info["grade"] = row.grade
             offer_info["offertype"] = row.offer_type
             if row.scholarship is not None:
-                offer_info["scholarship"] = str(row.scholarship)+\
-                                            row.scholarship_type
+                offer_info["scholarship"] = \
+                    str(row.scholarship) + row.scholarship_type
             else:
                 offer_info["scholarship"] = None
             offers.append(offer_info)
@@ -79,8 +81,9 @@ def get_user_detail_info():
             compareslist = list()
             compares_un = {}
             for row_ci in CompareInfo.get_compare_info(g.db, row_co.id):
-                for row_un in University.get_university_info(g.db,
-                                                             row_ci.university_id):
+                for row_un in University.get_university_info(
+                        g.db, row_ci.university_id
+                ):
                     compares_un["universityname"] = row_un.name
                     compares_un["universityid"] = row_un.id
                     compares_un["logo"] = row_un.schoollogo
@@ -88,21 +91,17 @@ def get_user_detail_info():
                                                            row_ci.major_id):
                     compares_un["majorname"] = row_ma.name
                     compares_un["supportnum"] = row_ci.supportnum
-                # for row_of in  Offer.get_offer_num(g.db,row_ci.university_id):
-                compares_un["offernum"] = Offer.get_offer_num(g.db,
-                                                              row_ci.university_id)
-                #    compares_un["offernum"] = row_of.count
-                #    print row_of.count
-                print compares_un["offernum"]
+                compares_un["offernum"] = Offer.get_offer_num(
+                    g.db, row_ci.university_id
+                )
                 compareslist.append(compares_un)
                 compares_un = {}
             compares_info["comparelist"] = compareslist
             compares.append(compares_info)
         student_info["compares"] = compares
         user = User.get_user_info(g.db, student_id)
-        print user
-        print type(user)
-        student_info["fannum"] = UserFollow.get_follow_count_user(g.db,student_id)
+        student_info["fannum"] = UserFollow.get_follow_count_user(g.db,
+                                                                  student_id)
         if user is None:
             student_info["description"] = ""
             student_info["bginf"] = ""
@@ -119,11 +118,11 @@ def get_user_detail_info():
             student_info["email"] = ""
 
         message = list()
-        for row_meg in Message.get_message_user(g.db,student_id):
+        for row_meg in Message.get_message_user(g.db, student_id):
             message_dict = dict()
             message_dict["messageid"] = row_meg.id
             user_id = row_meg.user_id
-            user = User.get_user_info(g.db,user_id)
+            user = User.get_user_info(g.db, user_id)
             message_dict["pic"] = user.pic
             message_dict["name"] = user.username
             message_dict["studentid"] = user_id
@@ -131,17 +130,19 @@ def get_user_detail_info():
             message_dict["time"] = get_timestamp(row_meg.create_time)
             message.append(message_dict)
         student_info["messages"] = message
-        # 这个位置的关注状态逻辑有点奇葩，以后要多注意
-        follow_status = UserFollow.get_follow_to_user(g.db,login_user_id,student_id)
+        u"""这个位置的关注状态逻辑有点奇葩，以后要多注意"""
+        follow_status = UserFollow.get_follow_to_user(g.db,
+                                                      login_user_id,
+                                                      student_id)
         if follow_status is not None:
             student_info["followed"] = "true"
         else:
             student_info["followed"] = "false"
         follows_list = list()
-        for row_follow in UserFollow.get_follow_id(g.db,student_id):
+        for row_follow in UserFollow.get_follow_id(g.db, student_id):
             follows = dict()
             follow_user_id = row_follow.follow_user_id
-            user = User.get_user_info(g.db,follow_user_id)
+            user = User.get_user_info(g.db, follow_user_id)
             follows["name"] = user.username
             follows["pic"] = user.pic
             follows["studentid"] = follow_user_id
@@ -191,8 +192,9 @@ def get_user_in_university():
         return jsonify(status="123")
 
 
+@validate_user_login
 def update_user_bginf():
-    """修改个人背景信息"""
+    u"""修改个人背景信息"""
     if request.method == "POST":
         bginf = request.form.get("bginf")
         user_id = session.get("user_id")
@@ -201,3 +203,35 @@ def update_user_bginf():
     return jsonify(status="false")
 
 
+@validate_user_login
+def get_user_base_info():
+    u"""获取个人信息，用来更细资料"""
+    if request.method == "GET":
+
+        user_id = session.get("user_id")
+        user = User.get_user_info(g.db, user_id)
+        user_info = dict()
+        user_info["type"] = user.type
+        user_info["bginf"] = user.bginf
+        user_info["static"] = "success"
+        data = dict()
+        score = Score.get_user_score(g.db, user_id)
+        GREmore = dict()
+        GREmore["V"] = score.GRE_v
+        GREmore["Q"] = score.GRE_q
+        GREmore["AW"] = score.GRE_aw
+        data["GERmore"] = GREmore
+        TOEFLmore = dict()
+        TOEFLmore["R"] = score.TOEFL_r
+        TOEFLmore["L"] = score.TOEFL_l
+        TOEFLmore["S"] = score.TOEFL_s
+        TOEFLmore["W"] = score.TOEFL_w
+        data["TOEFLmore"] = TOEFLmore
+        STAmore = dict()
+        STAmore["CR"] = score.SAT_cr
+        STAmore["W"] = score.SAT_w
+        STAmore["M"] = score.SAT_m
+        data["STAmore"] = STAmore
+        user_info["data"] = data
+        return json.dumps(user_info)
+    return jsonify(status="success")

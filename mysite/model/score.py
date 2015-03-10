@@ -72,6 +72,11 @@ class Score(Base):
 
     @classmethod
     def del_user_score(cls,connection,user_id):
-        """用户的分数只能有一个，所以采用只要从新填写分数，自动删除之前的分数"""
+        u"""用户的分数只能有一个，所以采用只要从新填写分数，自动删除之前的分数"""
         connection.query(Score).filter(Score.user_id == user_id).delete()
         connection.commit()
+
+    @classmethod
+    def get_user_score(cls,connection,user_id):
+        u"""获取用户的成绩"""
+        return connection.query(Score).filter(Score.user_id == user_id).scalar()

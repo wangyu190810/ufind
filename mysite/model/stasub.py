@@ -18,6 +18,7 @@ class Stasub(Base):
         connection.add(stasub)
         connection.commit()
 
+
 class SubContent(Base):
     __tablename__ = "subcontent"
     id = Column(Integer,primary_key=True,autoincrement=True)
