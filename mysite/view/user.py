@@ -241,6 +241,9 @@ def edit_user_info_page():
     if request.method == "GET":
         user_id = session.get("session_id")
         user = User.get_user_info(g.db,user_id)
+        print user
+        if user is None:
+            return jsonify(status="false")
         user_info = dict()
         user_info["status"] = "success"
         user_info["type"] = user.type
