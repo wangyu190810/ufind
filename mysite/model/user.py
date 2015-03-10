@@ -1,6 +1,6 @@
 # -*-coding:utf-8-*-
 __author__ = 'wangyu'
-from sqlalchemy import Column, String, Integer, Unicode, Float,func
+from sqlalchemy import Column, String, Integer, Unicode, Float, func
 
 import time
 
@@ -9,7 +9,7 @@ from base import Base
 
 class User(Base):
 
-    """用户信息表"""
+    u"""用户信息表"""
 
     __tablename__ = "user"
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -29,7 +29,8 @@ class User(Base):
     prevmajor = Column(Unicode(255), doc=u"专业，如果时高中字段为空")
     gender = Column(Integer, doc=u"性别：1表示男，0表示女")
     grade = Column(Unicode(255), doc=u"学生的级别")
-    type = Column(Integer, doc=u"高中还是大学：0表示高中，1表示大学,3表示研究生")
+    type = Column(Integer,
+                  doc=u"高中还是大学：0表示高中，1表示大学,3表示研究生")
     description = Column(Unicode(255), doc=u"描述")
     bginf = Column(Unicode(255), doc=u"背景信息")
 
@@ -57,7 +58,7 @@ class User(Base):
 
     @classmethod
     def register_second(cls, connection, phone, username,
-                        university_id, major_id, gpa,user_type):
+                        university_id, major_id, gpa, user_type):
         connection.query(User).filter(User.phone == phone).update(
             {User.username: username,
              User.prevuniversity: university_id,
@@ -95,35 +96,39 @@ class User(Base):
 
     @classmethod
     def get_user_name(cls, connection, user_id):
+        u"""用户的信息通过id获取"""
         return connection.query(User).filter(User.id == user_id).scalar()
 
     @classmethod
     def get_checknum(cls, connection, phone):
+        u"""验证码检测"""
         return connection.query(User.checknum). \
             filter(User.phone == phone).scalar()
 
     @classmethod
     def change_password(cls, connection, phone, password):
+        u"""修改密码"""
         connection.query(User).filter(User.phone == phone).update({
             User.password: password})
         connection.commit()
 
     @classmethod
     def get_user_info_by_phone(cls, connection, phone):
+        u"""电话获取用户分数"""
         return connection.query(User).filter(User.phone == phone).scalar()
 
     @classmethod
-    def update_user_bginf(cls,connection,user_id,bginf):
-        """更新个人背景信息"""
+    def update_user_bginf(cls, connection, user_id, bginf):
+        u"""更新个人背景信息"""
         connection.query(User).filter(User.id == user_id).\
             update({User.bginf: bginf})
         connection.commit()
 
     @classmethod
-    def update_user_grade(cls,connection,user_id,grade):
-        """更新个人学历"""
+    def update_user_grade(cls, connection, user_id, grade):
+        u"""更新个人学历"""
         connection.query(User).filter(User.id == user_id).\
-            update({User.grade:grade})
+            update({User.grade: grade})
         connection.commit()
 
 
@@ -137,14 +142,14 @@ class UserFollow(Base):
 
     @classmethod
     def set_follow(cls, connection, user_id, follow_user_id):
-        """关注用户"""
+        u"""关注用户"""
         user_follow = UserFollow(user_id=user_id, follow_user_id=follow_user_id)
         connection.add(user_follow)
         connection.commit()
 
     @classmethod
     def del_follow_id(cls, connection, user_id, follow_user_id):
-        """取消关注"""
+        u"""取消关注"""
         connection.query(UserFollow).\
             filter(UserFollow.user_id == user_id).\
             filter(UserFollow.follow_user_id == follow_user_id).delete()
@@ -152,27 +157,27 @@ class UserFollow(Base):
 
     @classmethod
     def get_follow_id(cls, connection, user_id):
-        """我的关注列表"""
+        u"""我的关注列表"""
         return connection.query(UserFollow).\
             filter(UserFollow.user_id == user_id)
 
     @classmethod
-    def get_follow_user_id(cls,connection,follow_user_id):
-        """别人关注我的列表"""
+    def get_follow_user_id(cls, connection, follow_user_id):
+        u"""别人关注我的列表"""
         return connection.query(UserFollow).filter(
             UserFollow.follow_user_id == follow_user_id
         )
 
 
     @classmethod
-    def get_follow_to_user(cls,connection,user_id,follow_user_id):
-        """或者两个用户之间的关注关系"""
+    def get_follow_to_user(cls, connection, user_id, follow_user_id):
+        u"""或者两个用户之间的关注关系"""
         return connection.query(UserFollow).\
             filter(UserFollow.user_id == user_id).\
             filter(UserFollow.follow_user_id == follow_user_id).scalar()
 
     @classmethod
-    def get_follow_count_user(cls,connection,follow_user_id):
-        """获取粉丝数量"""
+    def get_follow_count_user(cls, connection, follow_user_id):
+        u"""获取粉丝数量"""
         return connection.query(func.count(UserFollow)).\
             filter(UserFollow.follow_user_id == follow_user_id).scalar()
