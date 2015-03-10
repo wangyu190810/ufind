@@ -1,0 +1,1 @@
+ALTER TABLE user change grade grade varchar(255);

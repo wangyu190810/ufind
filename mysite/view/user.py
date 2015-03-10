@@ -31,6 +31,7 @@ def get_user_info():
         student_info["GMAT"] = row.GMAT
         student_info["SAT"] = row.SAT
         student_info["pic"] = row.pic
+        student_info["grade"] = row.grade
         universityname = list()
         for row in Offer.get_offer_student_info(g.db,student_id):
             universityname.append(University.get_university_from_id(g.db,row.university_id).name)

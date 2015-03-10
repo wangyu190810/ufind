@@ -28,7 +28,7 @@ class User(Base):
     prevuniversity = Column(Unicode(225), doc=u"国内学校")
     prevmajor = Column(Unicode(255), doc=u"专业，如果时高中字段为空")
     gender = Column(Integer, doc=u"性别：1表示男，0表示女")
-    grade = Column(Integer, doc=u"字段，筛选相关")
+    grade = Column(Unicode(255), doc=u"学生的级别")
     type = Column(Integer, doc=u"高中还是大学：0表示高中，1表示大学,3表示研究生")
     description = Column(Unicode(255), doc=u"描述")
     bginf = Column(Unicode(255), doc=u"背景信息")
@@ -115,9 +115,16 @@ class User(Base):
     @classmethod
     def update_user_bginf(cls,connection,user_id,bginf):
         """更新个人背景信息"""
-        return connection.query(User).filter(User.id == user_id).\
+        connection.query(User).filter(User.id == user_id).\
             update({User.bginf: bginf})
+        connection.commit()
 
+    @classmethod
+    def update_user_grade(cls,connection,user_id,grade):
+        """更新个人学历"""
+        connection.query(User).filter(User.id == user_id).\
+            update({User.grade:grade})
+        connection.commit()
 
 
 class UserFollow(Base):
