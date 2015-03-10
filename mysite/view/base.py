@@ -49,11 +49,11 @@ def allow_cross_domain(fun):
 
 
 def get_university_img(universityname, num,shape):
-    return "http://www.ufindoffer.com/unimg/all_un/"+str(universityname)+"/"+shape+"/"+str(num)+".jpg"
+    return "http://www.ufindoffer.com/images/unimg/all_un/"+str(universityname)+"/"+shape+"/"+str(num)+".jpg"
 
 
 def get_university_logo(universityname):
-    return "http://www.ufindoffer.com/unimg/all_logo/"+str(universityname)+".png"
+    return "http://www.ufindoffer.com/images/unimg/all_logo/"+str(universityname)+".png"
 
 
 def get_timestamp(create_time):
