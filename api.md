@@ -460,4 +460,14 @@
             }
         ]
     }
+
+11.2 接口
+
+    账号设置
+    方法：
+        POST
+    接口地址：
+        www.ufindoffer.com/api/edit_user_info_page
+    访问方式:
+        www.ufindoffer.com/api/edit_user_info_page
     
