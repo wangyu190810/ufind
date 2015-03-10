@@ -30,7 +30,7 @@ def set_offer():
             if offer_major_id is None:
                 break
             num += 1
-            User.update_user_grade(g.db,user_id=user_id,offer_grade)
+            User.update_user_grade(g.db,user_id=user_id,grade=offer_grade)
             Offer.set_offer(g.db,
                             user_id=user_id,
                             university_id=offer_university_id,
