@@ -137,7 +137,7 @@ def get_state_university():
             university_info["name"] = row.name
             university_info["chiname"] = row.chiname
             university_info["universityid"] = row.id
-            university_info["universitypic"] = get_university_img(row.name,2,u"地图长方形图片")
+            university_info["universitypic"] = get_university_img(row.name,2,u"方形图片")
             university_info["latitude"] = row.latitude
             university_info["longitude"] = row.longitude
             university_info["offernum"] = Offer.get_offer_num(g.db,row.id)
