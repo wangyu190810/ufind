@@ -235,3 +235,39 @@ def get_user_base_info():
         user_info["data"] = data
         return json.dumps(user_info)
     return jsonify(status="success")
+
+@validate_user_login
+def edit_user_info_page():
+    if request.method == "GET":
+        user_id = session.get("session_id")
+        user = User.get_user_info(user_id)
+        user_info = dict()
+        user_info["status"] = "success"
+        user_info["type"] = user.type
+        user_info["engname"] = user.username
+        user_info["pic"] = user.pic
+        user_info["phonenum"] = user.phone
+        user_info["email"] = user.email
+        user_info["password"] = user.password
+        user_info["universityname"] = user.prevuniversity
+        user_info["majorname"] = user.prevmajor
+        score = Score.get_user_score(g.db, user_id)
+        GREmore = dict()
+        GREmore["V"] = score.GRE_v
+        GREmore["Q"] = score.GRE_q
+        GREmore["AW"] = score.GRE_aw
+        user_info["GERmore"] = GREmore
+        TOEFLmore = dict()
+        TOEFLmore["R"] = score.TOEFL_r
+        TOEFLmore["L"] = score.TOEFL_l
+        TOEFLmore["S"] = score.TOEFL_s
+        TOEFLmore["W"] = score.TOEFL_w
+        user_info["TOEFLmore"] = TOEFLmore
+        STAmore = dict()
+        STAmore["CR"] = score.SAT_cr
+        STAmore["W"] = score.SAT_w
+        STAmore["M"] = score.SAT_m
+        user_info["STAmore"] = STAmore
+        return json.dumps(user_info)
+    return jsonify(status="success")
+
