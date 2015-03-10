@@ -47,12 +47,13 @@ def allow_cross_domain(fun):
         return rst
     return wrapper_fun
 
-def get_university_img(universityname, num):
-    return "http://www.22too.com/US(150115)/intimer/"+str(universityname)+"/"+str(num)+".jpg"
+
+def get_university_img(universityname, num,shape):
+    return "http://www.ufindoffer.com/unimg/all_un/"+str(universityname)+"/"+shape+"/"+str(num)+".jpg"
 
 
 def get_university_logo(universityname):
-    return "http://www.22too.com/US LOGO/"+str(universityname)+".png"
+    return "http://www.ufindoffer.com/unimg/all_logo/"+str(universityname)+".png"
 
 
 def get_timestamp(create_time):
