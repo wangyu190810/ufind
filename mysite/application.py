@@ -23,6 +23,7 @@ from mysite.view.sms import send_sms
 from mysite.view.china_school import search_major_name, search_university_china
 from mysite.view.user_follow import del_follow_user, set_follow_user
 from mysite.view.sub import get_sub
+from mysite.view.uploadhead import upload_file
 from config import Config
 
 
@@ -137,6 +138,9 @@ app.add_url_rule("/api/search_university_china",methods=["GET"],
 app.add_url_rule("/api/search_major_china",methods=["GET"],
                  view_func=search_major_name)
 
+
+app.add_url_rule("/api/upload_headimg",view_func=upload_file,
+                 methods=["GET", "POST"])
 
 @app.before_request
 def _before_request():

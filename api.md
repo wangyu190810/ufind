@@ -465,9 +465,21 @@
 
     账号设置
     方法：
-        POST
+        GET
     接口地址：
         www.ufindoffer.com/api/edit_user_info_page
     访问方式:
         www.ufindoffer.com/api/edit_user_info_page
+    
+
+12.1 接口
+
+    头像上传
+    方法：
+        POST
+    接口地址:
+        www.ufindoffer.com/api/upload_headimg
+    
+    使用form提交表单
+    
     
