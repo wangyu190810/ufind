@@ -239,7 +239,7 @@ def get_user_base_info():
 @validate_user_login
 def edit_user_info_page():
     if request.method == "GET":
-        user_id = session.get("session_id")
+        user_id = session.get("user_id")
         user = User.get_user_info(g.db,user_id)
         print user
         if user is None:
