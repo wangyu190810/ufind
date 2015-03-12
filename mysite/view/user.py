@@ -220,7 +220,7 @@ def get_user_base_info():
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
-        data["GERmore"] = GREmore
+        data["GREmore"] = GREmore
         TOEFLmore = dict()
         TOEFLmore["R"] = score.TOEFL_r
         TOEFLmore["L"] = score.TOEFL_l
