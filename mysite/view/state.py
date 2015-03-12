@@ -7,6 +7,8 @@
 # Description:
 
 import json
+from random import randint
+
 from flask import request,g
 from mysite.view.base import allow_cross_domain,login_user_info
 from mysite.model.state import State
@@ -40,7 +42,8 @@ def get_index():
             state["name"] = row.name
             state["latitude"] = row.latitude
             state["longitude"] = row.longitude
-            state["offernum"] = row.offernum
+            #state["offernum"] = row.offernum
+            state["offernum"] = randint(100, 300)
             country.append(state)
             state = {}
         local["USA"] = country
