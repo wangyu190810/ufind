@@ -471,6 +471,14 @@
     访问方式:
         www.ufindoffer.com/api/edit_user_info_page
     
+11.3 接口
+
+    账号设置：
+    方法：
+        POST
+    接口地址：
+        www.ufindoffer.com/api/update_user_info
+        
 
 12.1 接口
 
@@ -482,4 +490,5 @@
     
     使用form提交表单
     
-    
+  
+12.2 
