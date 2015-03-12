@@ -62,7 +62,7 @@ def get_university_state(statename):
 
 
 def get_user_hred_img(sex,max_num):
-    return "http://www.ufindoffer.com/images/unimg/head/"+sex+"/"+str(randint(1,max_num))+".jpg"
+    return "http://www.ufindoffer.com/images/unimg/head/"+sex+"/"+str(max_num)+".jpg"
 
 
 def get_timestamp(create_time):
