@@ -41,14 +41,14 @@ def get_random_head():
     if request.method == "GET":
         head_list = list()
         for row in range(1, 18):
-            girl = get_user_hred_img(u"女生",40)
+            girl = get_user_hred_img(u"无性别",row)
             boy = get_user_hred_img(u"男生",row)
             #if girl not in head_list:
             head_list.append(girl)
             #if boy not in head_list:
             head_list.append(boy)
         for row in range(1,40):
-            nosex = get_user_hred_img(u"无性别",row)
+            nosex = get_user_hred_img(u"女生",row)
             head_list.append(nosex)
         random.shuffle(head_list)
         return jsonify(status="success",
