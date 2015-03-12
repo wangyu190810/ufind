@@ -235,7 +235,7 @@ def get_user_base_info():
         user_info["data"] = data
         print user_info["data"]
         print user_info
-        return jsonify()
+        return jsonify(user_info)
     return jsonify(status="false")
 
 @validate_user_login
