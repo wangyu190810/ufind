@@ -215,6 +215,7 @@ def get_user_base_info():
         data = dict()
         score = Score.get_user_score(g.db, user_id)
         GREmore = dict()
+        GREmore["sub"] = list()
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
