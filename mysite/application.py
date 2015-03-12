@@ -29,7 +29,7 @@ from config import Config
 
 app = Flask(__name__)
 app.secret_key = Config.SUCCESS_KEY
-app.permanent_session_lifetime = timedelta(minutes=60)
+app.permanent_session_lifetime = timedelta(minutes=60*24)
 app.config["SQLALCHEMY_DATABASE_URI"] = Config.db
 
 app.sa_engine = create_engine(Config.db)
