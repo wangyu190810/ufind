@@ -4,6 +4,7 @@ from functools import wraps
 from flask import make_response, jsonify, g
 
 import time
+from random import randint
 from itsdangerous import Signer
 
 from mysite.model.user import User
@@ -58,6 +59,10 @@ def get_university_logo(universityname):
 
 def get_university_state(statename):
     return "http://www.ufindoffer.com/images/unimg/state/"+str(statename)+".jpg"
+
+
+def get_user_hred_img(sex,max_num):
+    return "http://www.ufindoffer.com/images/unimg/head/"+sex+"/"+str(randint(1,max_num))+".jpg"
 
 
 def get_timestamp(create_time):
