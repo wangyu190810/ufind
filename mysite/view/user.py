@@ -291,16 +291,16 @@ def update_user_info():
         User.update_user_info(g.db, user_id=user_id, username=username,
                               phone=phone, email=email,
                               prevuniversity=prevuniversity,prevmajor=prevmajor)
-        if request.form.get("IELTSmore[R]") is not None:
-            LELTSmoreR = request.form.get("IELTSmore[R]",0,int)
-            LELTSmoreL = request.form.get("IELTSmore[L]")
-            LELTSmoreS = request.form.get("IELTSmore[S]")
-            LELTSmoreW = request.form.get("IELTSmore[W]")
+        if request.form.get("IELTS[R]") is not None:
+            LELTSmoreR = request.form.get("IELTS[R]",0,int)
+            LELTSmoreL = request.form.get("IELTS[L]")
+            LELTSmoreS = request.form.get("IELTS[S]")
+            LELTSmoreW = request.form.get("IELTS[W]")
 
-            if request.form.get("GERmore[R]") is not None:
-                GREmoreV = request.form.get("GERmore[V]")
-                GREmoreQ = request.form.get("GERmore[Q]")
-                GREmoreAW = request.form.get("GERmore[AW]")
+            if request.form.get("GER[R]") is not None:
+                GREmoreV = request.form.get("GER[V]")
+                GREmoreQ = request.form.get("GER[Q]")
+                GREmoreAW = request.form.get("GER[AW]")
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     IELTS_r=LELTSmoreR,
                                     IELTS_l=LELTSmoreL,
@@ -312,11 +312,10 @@ def update_user_info():
 
                                     )
             else:
-                GMATmoreV = request.form.get("GMATmore[V]")
-                GMATmoreQ = request.form.get("GMATmore[Q]")
-                GMATmoreAW = request.form.get("GMATmore[AW]")
-                GMATmoreIR = request.form.get("GMATmore[IR]")
-                print GMATmoreAW,"GMATmoreAW"
+                GMATmoreV = request.form.get("GMAT[V]")
+                GMATmoreQ = request.form.get("GMAT[Q]")
+                GMATmoreAW = request.form.get("GMAT[AW]")
+                GMATmoreIR = request.form.get("GMAT[IR]")
                 Score.set_user_info(connection=g.db,
                                     user_id=user_id,
                                     IELTS_r=LELTSmoreR,
@@ -331,17 +330,16 @@ def update_user_info():
                                     )
 
 
-        elif request.form.get("TOEFLmore[R]") is not None:
-            TOEFLmoreR = request.form.get("TOEFLmore[R]")
-            TOEFLmoreL = request.form.get("TOEFLmore[L]")
-            TOEFLmoreS = request.form.get("TOEFLmore[S]")
-            TOEFLmoreW = request.form.get("TOEFLmore[W]")
+        elif request.form.get("TOEFL[R]") is not None:
+            TOEFLmoreR = request.form.get("TOEFL[R]")
+            TOEFLmoreL = request.form.get("TOEFL[L]")
+            TOEFLmoreS = request.form.get("TOEFL[S]")
+            TOEFLmoreW = request.form.get("TOEFL[W]")
 
-            if request.form.get("GERmore[R]") is not None:
-                GREmoreV = request.form.get("GERmore[V]")
-                GREmoreQ = request.form.get("GERmore[Q]")
-                GREmoreAW = request.form.get("GERmore[AW]")
-                print GREmoreAW,"GREmoreAV"
+            if request.form.get("GER[R]") is not None:
+                GREmoreV = request.form.get("GER[V]")
+                GREmoreQ = request.form.get("GER[Q]")
+                GREmoreAW = request.form.get("GER[AW]")
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     TOEFL_r =TOEFLmoreR,
                                     TOEFL_l =TOEFLmoreL,
@@ -353,10 +351,10 @@ def update_user_info():
 
                                     )
             else:
-                GMATmoreV = request.form.get("GMATmore[V]")
-                GMATmoreQ = request.form.get("GMATmore[Q]")
-                GMATmoreAW = request.form.get("GMATmore[AW]")
-                GMATmoreIR = request.form.get("GMATmore[IR]")
+                GMATmoreV = request.form.get("GMAT[V]")
+                GMATmoreQ = request.form.get("GMAT[Q]")
+                GMATmoreAW = request.form.get("GMAT[AW]")
+                GMATmoreIR = request.form.get("GMAT[IR]")
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     TOEFL_r =TOEFLmoreR,
                                     TOEFL_l =TOEFLmoreL,
