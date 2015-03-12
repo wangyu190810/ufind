@@ -231,7 +231,7 @@ def get_user_base_info():
         STAmore["CR"] = score.SAT_cr
         STAmore["W"] = score.SAT_w
         STAmore["M"] = score.SAT_m
-        data["STAmore"] = STAmore
+        data["SATmore"] = STAmore
         user_info["data"] = data
         return json.dumps(user_info)
     return jsonify(status="success")
