@@ -297,10 +297,10 @@ def update_user_info():
             LELTSmoreS = request.form.get("IELTS[S]")
             LELTSmoreW = request.form.get("IELTS[W]")
 
-            if request.form.get("GER[R]") is not None:
-                GREmoreV = request.form.get("GER[V]")
-                GREmoreQ = request.form.get("GER[Q]")
-                GREmoreAW = request.form.get("GER[AW]")
+            if request.form.get("GRE[R]") is not None:
+                GREmoreV = request.form.get("GRE[V]")
+                GREmoreQ = request.form.get("GRE[Q]")
+                GREmoreAW = request.form.get("GRE[AW]")
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     IELTS_r=LELTSmoreR,
                                     IELTS_l=LELTSmoreL,
@@ -336,10 +336,10 @@ def update_user_info():
             TOEFLmoreS = request.form.get("TOEFL[S]")
             TOEFLmoreW = request.form.get("TOEFL[W]")
 
-            if request.form.get("GER[R]") is not None:
-                GREmoreV = request.form.get("GER[V]")
-                GREmoreQ = request.form.get("GER[Q]")
-                GREmoreAW = request.form.get("GER[AW]")
+            if request.form.get("GRE[R]") is not None:
+                GREmoreV = request.form.get("GRE[V]")
+                GREmoreQ = request.form.get("GRE[Q]")
+                GREmoreAW = request.form.get("GRE[AW]")
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     TOEFL_r =TOEFLmoreR,
                                     TOEFL_l =TOEFLmoreL,
