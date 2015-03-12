@@ -259,7 +259,7 @@ def edit_user_info_page():
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
-        user_info["GERmore"] = GREmore
+        user_info["GREmore"] = GREmore
         TOEFLmore = dict()
         TOEFLmore["R"] = score.TOEFL_r
         TOEFLmore["L"] = score.TOEFL_l
