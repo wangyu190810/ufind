@@ -40,15 +40,15 @@ def upload_file():
 def get_random_head():
     if request.method == "GET":
         head_list = list()
-        girl = get_user_hred_img(u"女生",40)
-        boy = get_user_hred_img(u"男生",18)
-        nosex = get_user_hred_img(u"无性别",18)
         for row in range(4):
-            if get_user_hred_img(u"女生",40) not in head_list:
+            girl = get_user_hred_img(u"女生",40)
+            boy = get_user_hred_img(u"男生",18)
+            nosex = get_user_hred_img(u"无性别",18)
+            if girl not in head_list:
                 head_list.append(girl)
-            if get_user_hred_img(u"男生",18)not in head_list:
+            if boy not in head_list:
                 head_list.append(boy)
-            if get_user_hred_img(u"无性别",18) not in head_list:
+            if nosex not in head_list:
                 head_list.append(nosex)
         return jsonify(status="success",
                        imageslist=head_list)
