@@ -44,11 +44,11 @@ def get_random_head():
         boy = get_user_hred_img(u"男生",18)
         nosex = get_user_hred_img(u"无性别",18)
         for row in range(4):
-            if girl not in head_list:
+            if get_user_hred_img(u"女生",40) not in head_list:
                 head_list.append(girl)
-            if boy not in head_list:
+            if get_user_hred_img(u"男生",18)not in head_list:
                 head_list.append(boy)
-            if nosex not in head_list:
+            if get_user_hred_img(u"无性别",18) not in head_list:
                 head_list.append(nosex)
         return jsonify(status="success",
                        imageslist=head_list)
