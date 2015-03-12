@@ -285,7 +285,9 @@ def update_user_info():
         phone = request.form.get("phonenum")
         username = request.form.get("engname")
         email = request.form.get("email")
-
+        pic = request.form.get("pic")
+        if pic is not None:
+            User.update_user_pic(g.db,user_id,pic)
         prevmajor = request.form.get("majorid")
         prevuniversity = request.form.get("universityid")
         User.update_user_info(g.db, user_id=user_id, username=username,
