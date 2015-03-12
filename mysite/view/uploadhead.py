@@ -7,7 +7,7 @@ import os
 from config import Config
 from mysite.view.base import validate_user_login,get_user_hred_img
 from mysite.view.user import User
-
+import random
 
 def allowed_file(filename):
     return "." in filename and \
@@ -50,6 +50,7 @@ def get_random_head():
         for row in range(1,40):
             nosex = get_user_hred_img(u"无性别",row)
             head_list.append(nosex)
+        random.shuffle(head_list)
         return jsonify(status="success",
                        imageslist=head_list)
     return jsonify(status="false")
