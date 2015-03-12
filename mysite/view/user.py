@@ -213,7 +213,7 @@ def get_user_base_info():
         user_info = dict()
         user_info["type"] = user.type
         user_info["bginf"] = user.bginf
-        user_info["static"] = "success"
+        user_info["status"] = "success"
         data = dict()
         score = Score.get_user_score(g.db, user_id)
         GREmore = dict()
