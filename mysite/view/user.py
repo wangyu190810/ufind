@@ -274,3 +274,14 @@ def edit_user_info_page():
         return json.dumps(user_info)
     return jsonify(status="success")
 
+
+@validate_user_login
+def update_user_info():
+    U"""用户更新资料"""
+    if request.method == "POST":
+        print request.data
+        print request.form
+        return jsonify(status="success")
+    return jsonify(status="false")
+
+

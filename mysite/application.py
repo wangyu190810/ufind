@@ -9,7 +9,7 @@ from mysite.view.university import get_university, get_search_university, \
 from mysite.view.major import search_major, get_major_compare
 from mysite.view.user import get_user_info, get_user_detail_info, \
     get_user_in_university, update_user_bginf, get_user_base_info,\
-    edit_user_info_page
+    edit_user_info_page,update_user_info
 from mysite.view.score import set_user_score
 from mysite.view.compare import set_compare, get_compare, get_compare_list, \
     set_compare_support
@@ -88,7 +88,8 @@ app.add_url_rule("/api/get_user_base_info",view_func=get_user_base_info,
                  methods=["GET"])
 app.add_url_rule("/api/edit_user_info_page",view_func=edit_user_info_page,
                  methods=["GET"])
-
+app.add_url_rule("/api/update_user_info",view_func=update_user_info,
+                 methods=["GET"])
 app.add_url_rule("/api/get_compare", view_func=get_compare,
                  methods=["GET"])
 app.add_url_rule("/api/get_major_compare", view_func=get_major_compare,
