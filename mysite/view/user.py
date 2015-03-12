@@ -233,8 +233,10 @@ def get_user_base_info():
         STAmore["M"] = score.SAT_m
         data["SATmore"] = STAmore
         user_info["data"] = data
+        print user_id["data"]
+        print user_info
         return json.dumps(user_info)
-    return jsonify(status="success")
+    return jsonify(status="false")
 
 @validate_user_login
 def edit_user_info_page():
