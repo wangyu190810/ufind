@@ -461,6 +461,19 @@
         ]
     }
 
+10.2 接口
+
+    randompic 获得随机的头像url数组
+    方法:
+        GET
+    接口地址：
+        www.ufindoffer.com/api/get_random_head
+    访问方式:
+        www.ufindoffer.com/api/get_random_head
+        
+     
+
+
 11.2 接口
 
     账号设置

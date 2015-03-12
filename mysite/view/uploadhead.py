@@ -7,6 +7,8 @@ import os
 from config import Config
 from mysite.view.base import validate_user_login,get_user_hred_img
 from mysite.view.user import User
+
+
 def allowed_file(filename):
     return "." in filename and \
            filename.rsplit(".", 1)[1] in Config.allowed_extensions
