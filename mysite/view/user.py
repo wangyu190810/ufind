@@ -233,8 +233,6 @@ def get_user_base_info():
         data["bginf"] = user.bginf
         data["SATmore"] = STAmore
         user_info["data"] = data
-        print user_info["data"]
-        print user_info
         return jsonify(user_info)
     return jsonify(status="false")
 
