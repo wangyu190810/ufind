@@ -211,8 +211,6 @@ def get_user_base_info():
         user_id = session.get("user_id")
         user = User.get_user_info(g.db, user_id)
         user_info = dict()
-        user_info["type"] = user.type
-        user_info["bginf"] = user.bginf
         user_info["status"] = "success"
         data = dict()
         score = Score.get_user_score(g.db, user_id)
@@ -231,6 +229,8 @@ def get_user_base_info():
         STAmore["CR"] = score.SAT_cr
         STAmore["W"] = score.SAT_w
         STAmore["M"] = score.SAT_m
+        data["type"] = user.type
+        data["bginf"] = user.bginf
         data["SATmore"] = STAmore
         user_info["data"] = data
         print user_info["data"]
