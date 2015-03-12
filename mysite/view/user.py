@@ -281,6 +281,7 @@ def update_user_info():
     if request.method == "POST":
         print request.data
         print request.form
+        print request.files["head"]
         return jsonify(status="success")
     return jsonify(status="false")
 
