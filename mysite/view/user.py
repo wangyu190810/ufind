@@ -299,7 +299,7 @@ def update_user_info():
             LELTSmoreS = request.form.get("IELTS[S]")
             LELTSmoreW = request.form.get("IELTS[W]")
 
-            if request.form.get("GRE[R]") is not None:
+            if request.form.get("GRE[V]") is not None:
                 GREmoreV = request.form.get("GRE[V]")
                 GREmoreQ = request.form.get("GRE[Q]")
                 GREmoreAW = request.form.get("GRE[AW]")
@@ -338,7 +338,7 @@ def update_user_info():
             TOEFLmoreS = request.form.get("TOEFL[S]")
             TOEFLmoreW = request.form.get("TOEFL[W]")
 
-            if request.form.get("GRE[R]") is not None:
+            if request.form.get("GRE[V]") is not None:
                 GREmoreV = request.form.get("GRE[V]")
                 GREmoreQ = request.form.get("GRE[Q]")
                 GREmoreAW = request.form.get("GRE[AW]")
