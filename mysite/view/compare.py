@@ -11,8 +11,9 @@ from flask import request, jsonify, g, session
 from mysite.model.university import University
 from mysite.model.major import Major
 from mysite.model.compare import Compare, CompareInfo, CompareSupport
-from mysite.view.base import allow_cross_domain, get_timestamp
-
+from mysite.view.base import allow_cross_domain, get_timestamp,\
+    get_university_logo
+from mysite.model.offer import Offer
 
 @allow_cross_domain
 def set_compare():
@@ -58,14 +59,14 @@ def get_compare():
             for university in University.get_university_info(g.db,
                                                             university_id=row.university_id):
                 compare_info["universityname"] = university.name
-                compare_info["logo"] = university.schoollogo
+                compare_info["logo"] = get_university_logo(university.name)
             for major in Major.get_major_info(g.db,
                                               university_id=compare_info[
                                                   "universityid"],
                                               major_id=compare_info[
                                                   "major_id"]):
                 compare_info["majorname"] = major.name
-            compare_info["offernum"] = 12312
+            compare_info["offernum"] = Offer.get_offer_num(g.db,row.university_id)
             comparelist.append(compare_info)
 
             compare_info = {}
