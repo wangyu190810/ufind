@@ -17,23 +17,27 @@ from mysite.view.base import allow_cross_domain, get_timestamp
 @allow_cross_domain
 def set_compare():
     if request.method == "POST":
-        print request.form
-        data = json.loads(request.data)
-        comparelist = data["comparelist"]
-        description = data["description"]
-        user_id = session["user_id"]
+        data = request.form
+        print data
+
+        description = data.get("description")
+        user_id = session.get("user_id")
         Compare.set_compare(connection=g.db, user_id=user_id,
                             description=description)
         compare_id = Compare.get_compare_id(g.db)
-        for row in comparelist:
-            university_id = int(row["universityid"])
-            major_id = int(row["majorid"])
+        num = 0
+        while True:
+            major_id = data.get("comparelist["+str(num)+"][majorid]",0,int)
+            university_id = data.get("comparelist["+str(num)+"][universityid]",0,int)
+            if university_id is None:
+                break
+            num += 1
             CompareInfo.set_compare_info(g.db,
                                          compare_id=compare_id,
                                          university_id=university_id,
                                          major_id=major_id)
         return jsonify(status="success")
-
+    return jsonify(status="false")
 
 @allow_cross_domain
 def get_compare():
