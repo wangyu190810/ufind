@@ -32,6 +32,8 @@ def get_user_info():
         student_info["IELTS"] = row.IELTS
         student_info["GMAT"] = row.GMAT
         student_info["SAT"] = row.SAT
+        student_info["GRE"] = row.GRE
+
         student_info["pic"] = row.pic
         student_info["grade"] = row.grade
         universityname = list()
