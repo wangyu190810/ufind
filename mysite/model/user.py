@@ -163,6 +163,7 @@ class User(Base):
                 {User.GRE: gre,
                  User.IELTS: lelts}
             )
+            print "123123"
         elif lelts is None:
             connection.query(User).filter(User.id == user_id).update(
                 {
@@ -170,6 +171,7 @@ class User(Base):
                     User.GRE: gre
                 }
             )
+            print "123123"
         connection.commit()
 
 
