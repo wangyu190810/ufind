@@ -70,12 +70,12 @@ class Compare(Base):
 
     @classmethod
     def get_compare(cls,connection,compaer_id):
-        return connection.query(Compare).filter(Compare.id == compaer_id)
+        return connection.query(Compare).filter(Compare.id == compaer_id).scalar()
 
     @classmethod
     def get_compare_user_id(cls,connection,user_id):
         """用户的id获取用户发起国的投票"""
-        return connection.query(Compare).filter(Compare.user_id==user_id)
+        return connection.query(Compare).filter(Compare.user_id == user_id)
 
 
 class CompareSupport(Base):

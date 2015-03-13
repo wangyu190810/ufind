@@ -46,11 +46,11 @@ def get_compare():
         compare = {}
         compare_info = {}
         comparelist = []
-        for row in Compare.get_compare(g.db, compareid):
-            compare["compareid"] = row.id
-            compare["description"] = row.description
-            compare["date"] = get_timestamp(row.create_time)
-            compare["studentid"] = row.user_id
+        com = Compare.get_compare(g.db, compareid)
+        compare["compareid"] = com.id
+        compare["description"] = com.description
+        compare["date"] = get_timestamp(com.create_time)
+        compare["studentid"] = com.user_id
         for row in CompareInfo.get_compare_info(g.db, compareid):
             compare_info["universityid"] = row.university_id
             compare_info["major_id"] = row.major_id
