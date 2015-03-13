@@ -46,7 +46,7 @@ def get_compare():
         compare = {}
         compare_info = {}
         comparelist = []
-        com = Compare.get_compare(g.db, compareid)
+        com = Compare.get_compare(g.db, int(compareid))
         compare["compareid"] = com.id
         compare["description"] = com.description
         compare["date"] = get_timestamp(com.create_time)

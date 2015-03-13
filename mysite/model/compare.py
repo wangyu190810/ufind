@@ -49,6 +49,7 @@ class CompareInfo(Base):
             filter(CompareInfo.university_id == university_id).\
             filter(CompareInfo.major_id == major_id)
 
+
 class Compare(Base):
     """投票信息"""
     __tablename__ = "compare"
