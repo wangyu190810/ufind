@@ -51,10 +51,10 @@ def set_user_score():
 
                                     )
             else:
-                GMATmoreV = request.form.get("GMATmore[V]")
-                GMATmoreQ = request.form.get("GMATmore[Q]")
-                GMATmoreAW = request.form.get("GMATmore[AW]")
-                GMATmoreIR = request.form.get("GMATmore[IR]")
+                GMATmoreV = request.form.get("GMATmore[V]",0,int)
+                GMATmoreQ = request.form.get("GMATmore[Q]",0,int)
+                GMATmoreAW = request.form.get("GMATmore[AW]",0,int)
+                GMATmoreIR = request.form.get("GMATmore[IR]",0,int)
                 print GMATmoreAW,"GMATmoreAW"
                 Score.set_user_info(connection=g.db,
                                     user_id=user_id,
@@ -69,15 +69,15 @@ def set_user_score():
 
                                     )
         elif request.form.get("TOEFLmore[R]") is not None:
-            TOEFLmoreR = request.form.get("TOEFLmore[R]")
-            TOEFLmoreL = request.form.get("TOEFLmore[L]")
-            TOEFLmoreS = request.form.get("TOEFLmore[S]")
-            TOEFLmoreW = request.form.get("TOEFLmore[W]")
+            TOEFLmoreR = request.form.get("TOEFLmore[R]",0,int)
+            TOEFLmoreL = request.form.get("TOEFLmore[L]",0,int)
+            TOEFLmoreS = request.form.get("TOEFLmore[S]",0,int)
+            TOEFLmoreW = request.form.get("TOEFLmore[W]",0,int)
             sub_TOEFL = get_Total(TOEFLmoreL,TOEFLmoreR,TOEFLmoreS,TOEFLmoreW)
             if request.form.get("GREmore[V]") is not None:
-                GREmoreV = request.form.get("GREmore[V]")
-                GREmoreQ = request.form.get("GREmore[Q]")
-                GREmoreAW = request.form.get("GREmore[AW]")
+                GREmoreV = request.form.get("GREmore[V]",0,int)
+                GREmoreQ = request.form.get("GREmore[Q]",0,int)
+                GREmoreAW = request.form.get("GREmore[AW]",0,int)
                 print GREmoreAW,"GREmoreAV"
                 sub_GRE = get_gre(GREmoreV,GREmoreQ)
                 User.update_user_score(g.db,user_id=user_id,gre=sub_GRE,toefl=sub_TOEFL)
@@ -92,10 +92,10 @@ def set_user_score():
 
                                     )
             else:
-                GMATmoreV = request.form.get("GMATmore[V]")
-                GMATmoreQ = request.form.get("GMATmore[Q]")
-                GMATmoreAW = request.form.get("GMATmore[AW]")
-                GMATmoreIR = request.form.get("GMATmore[IR]")
+                GMATmoreV = request.form.get("GMATmore[V]",0,int)
+                GMATmoreQ = request.form.get("GMATmore[Q]",0,int)
+                GMATmoreAW = request.form.get("GMATmore[AW]",0,int)
+                GMATmoreIR = request.form.get("GMATmore[IR]",0,int)
                 print GMATmoreIR,"GMATmoreIR"
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     TOEFL_r =TOEFLmoreR,
