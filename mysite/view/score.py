@@ -33,10 +33,10 @@ def set_user_score():
             LELTSmoreS = request.form.get("IELTSmore[S]",0,int)
             LELTSmoreW = request.form.get("IELTSmore[W]",0,int)
             sub_TELTS = get_TELTS(LELTSmoreS,LELTSmoreL,LELTSmoreR,LELTSmoreW)
-            if request.form.get("GERmore[V]") is not None:
-                GREmoreV = request.form.get("GERmore[V]",0,int)
-                GREmoreQ = request.form.get("GERmore[Q]",0,int)
-                GREmoreAW = request.form.get("GERmore[AW]",0,int)
+            if request.form.get("GREmore[V]") is not None:
+                GREmoreV = request.form.get("GREmore[V]",0,int)
+                GREmoreQ = request.form.get("GREmore[Q]",0,int)
+                GREmoreAW = request.form.get("GREmore[AW]",0,int)
                 print GREmoreAW,"GREmoreAW"
                 sub_GRE = get_gre(GREmoreV,GREmoreQ)
                 User.update_user_score(g.db,user_id,gre=sub_GRE,lelts=sub_TELTS)
@@ -74,10 +74,10 @@ def set_user_score():
             TOEFLmoreS = request.form.get("TOEFLmore[S]")
             TOEFLmoreW = request.form.get("TOEFLmore[W]")
             sub_TOEFL = get_Total(TOEFLmoreL,TOEFLmoreR,TOEFLmoreS,TOEFLmoreW)
-            if request.form.get("GERmore[V]") is not None:
-                GREmoreV = request.form.get("GERmore[V]")
-                GREmoreQ = request.form.get("GERmore[Q]")
-                GREmoreAW = request.form.get("GERmore[AW]")
+            if request.form.get("GREmore[V]") is not None:
+                GREmoreV = request.form.get("GREmore[V]")
+                GREmoreQ = request.form.get("GREmore[Q]")
+                GREmoreAW = request.form.get("GREmore[AW]")
                 print GREmoreAW,"GREmoreAV"
                 sub_GRE = get_gre(GREmoreV,GREmoreQ)
                 User.update_user_score(g.db,user_id=user_id,gre=sub_GRE,toefl=sub_TOEFL)
