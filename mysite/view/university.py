@@ -102,7 +102,7 @@ def get_search_university():
                 university["name"] = row.name
                 university["chiname"] = row.chiname
                 university["id"] = row.id
-                university["logo"] = row.schoollogo
+                university["logo"] = get_university_logo(row.name)
                 universitylist.append(university)
                 university = {}
             return jsonify(namelist=universitylist,
@@ -112,7 +112,7 @@ def get_search_university():
                 university["name"] = row.name
                 university["chiname"] = row.chiname
                 university["id"] = row.id
-                university["logo"] = row.schoollogo
+                university["logo"] = get_university_logo(row.name)
                 universitylist.append(university)
                 university = {}
             return jsonify(namelist=universitylist,
