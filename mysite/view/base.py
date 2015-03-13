@@ -90,6 +90,14 @@ def get_gre(v, q):
     return v+q
 
 
+def get_GMAT(v,q):
+    return v + q
+
+
+def get_STA(CR,M,W):
+    return CR + M + W
+
+
 def set_sign_safe(sign_file):
     s = Signer(Config.login_sign)
     return s.sign(sign_file)
