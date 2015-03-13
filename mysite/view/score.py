@@ -13,7 +13,8 @@ from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.user import User
 from mysite.model.score import Score
-from mysite.view.base import allow_cross_domain,validate_user_login
+from mysite.view.base import allow_cross_domain, validate_user_login, get_gre,\
+    get_TELTS, get_Total
 
 
 @validate_user_login
@@ -31,12 +32,14 @@ def set_user_score():
             LELTSmoreL = request.form.get("IELTSmore[L]")
             LELTSmoreS = request.form.get("IELTSmore[S]")
             LELTSmoreW = request.form.get("IELTSmore[W]")
-
+            sub_TELTS = get_TELTS(LELTSmoreS,LELTSmoreL,LELTSmoreR,LELTSmoreW)
             if request.form.get("GERmore[V]") is not None:
                 GREmoreV = request.form.get("GERmore[V]")
                 GREmoreQ = request.form.get("GERmore[Q]")
                 GREmoreAW = request.form.get("GERmore[AW]")
                 print GREmoreAW,"GREmoreAW"
+                sub_GRE = get_gre(GREmoreV,GREmoreQ)
+                User.update_user_score(g.sb,user_id,gre=sub_GRE,lelts=sub_TELTS)
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     IELTS_r=LELTSmoreR,
                                     IELTS_l=LELTSmoreL,
@@ -65,19 +68,19 @@ def set_user_score():
                                     GMAT_ir=GMATmoreIR
 
                                     )
-
-
         elif request.form.get("TOEFLmore[R]") is not None:
             TOEFLmoreR = request.form.get("TOEFLmore[R]")
             TOEFLmoreL = request.form.get("TOEFLmore[L]")
             TOEFLmoreS = request.form.get("TOEFLmore[S]")
             TOEFLmoreW = request.form.get("TOEFLmore[W]")
-
+            sub_TOEFL = get_Total(TOEFLmoreL,TOEFLmoreR,TOEFLmoreS,TOEFLmoreW)
             if request.form.get("GERmore[V]") is not None:
                 GREmoreV = request.form.get("GERmore[V]")
                 GREmoreQ = request.form.get("GERmore[Q]")
                 GREmoreAW = request.form.get("GERmore[AW]")
                 print GREmoreAW,"GREmoreAV"
+                sub_GRE = get_gre(GREmoreV,GREmoreQ)
+                User.update_user_score(g.db,user_id=user_id,gre=sub_GRE,toefl=sub_TOEFL)
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     TOEFL_r =TOEFLmoreR,
                                     TOEFL_l =TOEFLmoreL,

@@ -154,6 +154,24 @@ class User(Base):
         )
         connection.commit()
 
+    @classmethod
+    def update_user_score(cls, connection, user_id,
+                          gre=None, toefl=None, lelts=None):
+        u"""分数计算结果的更新"""
+        if toefl is None:
+            connection.query(User).filter(User.id == user_id).update(
+                {User.GRE: gre,
+                 User.IELTS: lelts}
+            )
+        elif lelts is None:
+            connection.query(User).filter(User.id == user_id).update(
+                {
+                    User.TOEFL: toefl,
+                    User.GRE: gre
+                }
+            )
+        connection.commit()
+
 
 class UserFollow(Base):
 
