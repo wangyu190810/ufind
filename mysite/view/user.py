@@ -151,7 +151,23 @@ def get_user_detail_info():
             follows_list.append(follows)
         student_info["follows"] = follows_list
         student_info["status"] = "success"
-
+        score = Score.get_user_score(g.db, student_id)
+        GREmore = dict()
+        GREmore["sub"] = list()
+        GREmore["V"] = score.GRE_v
+        GREmore["Q"] = score.GRE_q
+        GREmore["AW"] = score.GRE_aw
+        student_info["GREmore"] = GREmore
+        TOEFLmore = dict()
+        TOEFLmore["R"] = score.TOEFL_r
+        TOEFLmore["L"] = score.TOEFL_l
+        TOEFLmore["S"] = score.TOEFL_s
+        TOEFLmore["W"] = score.TOEFL_w
+        student_info["TOEFLmore"] = TOEFLmore
+        STAmore = dict()
+        STAmore["CR"] = score.SAT_cr
+        STAmore["W"] = score.SAT_w
+        STAmore["M"] = score.SAT_m
         return json.dumps(student_info)
 
 
