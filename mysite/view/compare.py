@@ -27,8 +27,8 @@ def set_compare():
         compare_id = Compare.get_compare_id(g.db)
         num = 0
         while True:
-            major_id = data.get("comparelist["+str(num)+"][majorid]",0,int)
-            university_id = data.get("comparelist["+str(num)+"][universityid]",0,int)
+            major_id = data.get("comparelist["+str(num)+"][majorid]")
+            university_id = data.get("comparelist["+str(num)+"][universityid]")
             if university_id is None:
                 break
             num += 1
