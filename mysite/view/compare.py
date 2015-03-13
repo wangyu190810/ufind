@@ -17,7 +17,7 @@ from mysite.view.base import allow_cross_domain, get_timestamp
 @allow_cross_domain
 def set_compare():
     if request.method == "POST":
-
+        print request.form
         data = json.loads(request.data)
         comparelist = data["comparelist"]
         description = data["description"]
