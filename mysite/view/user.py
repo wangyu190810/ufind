@@ -168,6 +168,8 @@ def get_user_detail_info():
         STAmore["CR"] = score.SAT_cr
         STAmore["W"] = score.SAT_w
         STAmore["M"] = score.SAT_m
+        student_info["SATmore"] = STAmore
+
         return json.dumps(student_info)
 
 
