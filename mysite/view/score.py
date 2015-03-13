@@ -29,17 +29,17 @@ def set_user_score():
             User.update_user_bginf(g.db,user_id,bginf)
         if request.form.get("IELTSmore[R]") is not None:
             LELTSmoreR = request.form.get("IELTSmore[R]",0,int)
-            LELTSmoreL = request.form.get("IELTSmore[L]")
-            LELTSmoreS = request.form.get("IELTSmore[S]")
-            LELTSmoreW = request.form.get("IELTSmore[W]")
+            LELTSmoreL = request.form.get("IELTSmore[L]",0,int)
+            LELTSmoreS = request.form.get("IELTSmore[S]",0,int)
+            LELTSmoreW = request.form.get("IELTSmore[W]",0,int)
             sub_TELTS = get_TELTS(LELTSmoreS,LELTSmoreL,LELTSmoreR,LELTSmoreW)
             if request.form.get("GERmore[V]") is not None:
-                GREmoreV = request.form.get("GERmore[V]")
-                GREmoreQ = request.form.get("GERmore[Q]")
-                GREmoreAW = request.form.get("GERmore[AW]")
+                GREmoreV = request.form.get("GERmore[V]",0,int)
+                GREmoreQ = request.form.get("GERmore[Q]",0,int)
+                GREmoreAW = request.form.get("GERmore[AW]",0,int)
                 print GREmoreAW,"GREmoreAW"
                 sub_GRE = get_gre(GREmoreV,GREmoreQ)
-                User.update_user_score(g.sb,user_id,gre=sub_GRE,lelts=sub_TELTS)
+                User.update_user_score(g.db,user_id,gre=sub_GRE,lelts=sub_TELTS)
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     IELTS_r=LELTSmoreR,
                                     IELTS_l=LELTSmoreL,
