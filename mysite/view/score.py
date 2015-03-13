@@ -32,7 +32,7 @@ def set_user_score():
             LELTSmoreS = request.form.get("IELTSmore[S]")
             LELTSmoreW = request.form.get("IELTSmore[W]")
 
-            if request.form.get("GERmore[R]") is not None:
+            if request.form.get("GERmore[V]") is not None:
                 GREmoreV = request.form.get("GERmore[V]")
                 GREmoreQ = request.form.get("GERmore[Q]")
                 GREmoreAW = request.form.get("GERmore[AW]")
@@ -73,7 +73,7 @@ def set_user_score():
             TOEFLmoreS = request.form.get("TOEFLmore[S]")
             TOEFLmoreW = request.form.get("TOEFLmore[W]")
 
-            if request.form.get("GERmore[R]") is not None:
+            if request.form.get("GERmore[V]") is not None:
                 GREmoreV = request.form.get("GERmore[V]")
                 GREmoreQ = request.form.get("GERmore[Q]")
                 GREmoreAW = request.form.get("GERmore[AW]")
