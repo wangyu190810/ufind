@@ -85,7 +85,7 @@ def get_major_from_university_faculty():
             return jsonify(status="success",
                            majorlist=major_info)
         else:
-            for row in Major.get_major_info(g.sv,university_id,faculty_id):
+            for row in Major.get_major_info(g.db,university_id,faculty_id):
                 students = list()
                 major_info["majorid"] = row.id
                 major_info["name"] = row.name
