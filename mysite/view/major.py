@@ -47,7 +47,6 @@ def get_major_compare():
     if request.method == "GET":
         university_id, major_id = map(request.args.get,("universityid","majorid"))
         compare_id = []
-        print university_id,major_id
         for row in CompareInfo.get_compare_random(g.db,university_id,major_id):
             compare_id.append(str(row.compare_id))
 
@@ -80,7 +79,6 @@ def get_major_from_university_faculty():
                     student_info["prevuniversity"] = user.prevuniversity
                     students.append(student_info)
                     major_info["students"] = students
-                    print major_info.keys()
                 if major_info.get("students") is not None:
                     major_list.append(major_info)
             return jsonify(status="success",
