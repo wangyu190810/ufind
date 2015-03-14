@@ -81,8 +81,8 @@ def get_major_from_university_faculty():
                     student_info["GPA"] = user.GPA
                     student_info["prevuniversity"] = user.prevuniversity
                     students.append(student_info)
-                major_info["students"] = students
-            major_list.append(major_info)
+                    major_info["students"] = students
+                major_list.append(major_info)
             return jsonify(status="success",
                            majorlist=major_info)
         else:
@@ -102,8 +102,9 @@ def get_major_from_university_faculty():
                     student_info["GPA"] = user.GPA
                     student_info["prevuniversity"] = user.prevuniversity
                     students.append(student_info)
-                major_info["students"] = students
-            major_list.append(major_info)
+                    major_info["students"] = students
+                major_list.append(major_info)
+                print major_list
             return jsonify(status="success",
                            majorlist=major_list)
 
