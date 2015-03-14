@@ -81,9 +81,8 @@ def get_major_from_university_faculty():
                     students.append(student_info)
                     major_info["students"] = students
                     print major_info.keys()
-               # print major_info["students"]
-               # if len(major_info["students"]) != 0:
-                major_list.append(major_info)
+                if major_info.get("students") is not None:
+                    major_list.append(major_info)
             return jsonify(status="success",
                            majorlist=major_list)
         else:
@@ -107,7 +106,7 @@ def get_major_from_university_faculty():
                         student_info["prevuniversity"] = user.prevuniversity
                         students.append(student_info)
                         major_info["students"] = students
-                #if len(major_info.get("students")) != 0:
+                if major_info.get("students") is not None:
                     major_list.append(major_info)
             return jsonify(status="success",
                            majorlist=major_list)
