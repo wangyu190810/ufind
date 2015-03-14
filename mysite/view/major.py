@@ -78,7 +78,7 @@ def get_major_from_university_faculty():
                     user = User.get_user_info(g.db,row_major.user_id)
                     student_info["studentid"] = user.id
                     student_info["name"] = user.username
-                    student_info["GPA"] = user.gpa
+                    student_info["GPA"] = user.GPA
                     student_info["prevuniversity"] = user.prevuniversity
                     students.append(student_info)
                 major_info["students"] = students
@@ -98,7 +98,7 @@ def get_major_from_university_faculty():
                     user = User.get_user_info(g.db,row_major.user_id)
                     student_info["studentid"] = user.id
                     student_info["name"] = user.username
-                    student_info["GPA"] = user.gpa
+                    student_info["GPA"] = user.GPA
                     student_info["prevuniversity"] = user.prevuniversity
                     students.append(student_info)
                 major_info["students"] = students
