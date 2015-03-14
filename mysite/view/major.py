@@ -83,6 +83,7 @@ def get_major_from_university_faculty():
                     major_info["students"] = students
                     print major_info.keys()
                 print major_info
+                print major_info.get("students")
                 if len(major_info.get("students")) != 0:
                     major_list.append(major_info)
             return jsonify(status="success",
