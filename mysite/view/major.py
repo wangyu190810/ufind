@@ -68,7 +68,7 @@ def get_major_from_university_faculty():
                 major_info = {}
                 major_info["majorid"] = row.id
                 major_info["name"] = row.name
-                major_info["offernum"] = 123
+                major_info["offernum"] =Offer.get_offer_num_from_major(g.db,university_id,row.id)
                 major_info["offervote"]=None
                 #offervote = dict()
                 print major_info
@@ -92,7 +92,7 @@ def get_major_from_university_faculty():
                 major_info["name"] = row.name
 #                major_info["offernum"] = Offer.get_offer_num(g.db,
 #                                                                 university_id,)
-                major_info["offernum"] = 123
+                major_info["offernum"] = Offer.get_offer_num_from_major(g.db,university_id,row.id)
                 major_info["offervote"]=None
                 for row_major in Offer.get_user_id_from_major(g.db,row.id):
                     student_info = dict()
