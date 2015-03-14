@@ -48,7 +48,8 @@ def send_sms():
         print cc
         phonenum = eval(cc.keys()[0])
         phone = phonenum["phonenum"]
-        if len(phone) == 11:
+
+        if len(phone) == 11 and phone[:2] in ["13", "15", "17", "18"]:
             code = randint(1000, 9999)
             company = "游必有方"
             tpl_value = "#code#="+str(code)+"&#company#="+company
