@@ -62,10 +62,10 @@ def get_major_from_university_faculty():
         university_id,faculty_id = map(request.args.get, ("universityid",
                                                           "facultyid"))
         major_list = list()
-        major_info = {}
         if faculty_id is None:
             for row in Major.get_major_info_university(g.db, university_id):
                 students = list()
+                major_info = {}
                 major_info["majorid"] = row.id
                 major_info["name"] = row.name
                 major_info["offernum"] = 123
@@ -87,6 +87,7 @@ def get_major_from_university_faculty():
         else:
             for row in Major.get_major_info(g.db,university_id,faculty_id):
                 students = list()
+                major_info = {}
                 major_info["majorid"] = row.id
                 major_info["name"] = row.name
 #                major_info["offernum"] = Offer.get_offer_num(g.db,
