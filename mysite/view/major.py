@@ -64,13 +64,14 @@ def get_major_from_university_faculty():
         major_list = list()
         major_info = {}
         if faculty_id is None:
-            for row in Major.get_major_info(g.db,university_id):
+            for row in Major.get_major_info_university(g.db, university_id):
                 students = list()
                 major_info["majorid"] = row.id
                 major_info["name"] = row.name
                 major_info["offernum"] = 123
                 major_info["offervote"]=None
                 #offervote = dict()
+                print major_info
                 for row_major in Offer.get_user_id_from_major(g.db,row.id):
                     student_info = dict()
                     user = User.get_user_info(g.db,row_major.user_id)
