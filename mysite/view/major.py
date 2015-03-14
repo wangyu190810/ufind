@@ -70,7 +70,7 @@ def get_major_from_university_faculty():
                 major_info["name"] = row.name
                 major_info["offernum"] = 123
                 major_info["offervote"]=None
-                offervote = dict()
+                #offervote = dict()
                 for row_major in Offer.get_user_id_from_major(g.db,row.id):
                     student_info = dict()
                     user = User.get_user_info(g.db,row_major.user_id)
@@ -82,7 +82,7 @@ def get_major_from_university_faculty():
                     major_info["students"] = students
                 major_list.append(major_info)
             return jsonify(status="success",
-                           majorlist=major_info)
+                           majorlist=major_list)
         else:
             for row in Major.get_major_info(g.db,university_id,faculty_id):
                 students = list()
