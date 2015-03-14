@@ -65,13 +65,12 @@ def get_major_from_university_faculty():
         if faculty_id is None:
             for row in Major.get_major_info_university(g.db, university_id):
                 students = list()
-                major_info = {}
+                major_info = dict()
                 major_info["majorid"] = row.id
                 major_info["name"] = row.name
-                major_info["offernum"] =Offer.get_offer_num_from_major(g.db,university_id,row.id)
-                major_info["offervote"]=None
+                major_info["offernum"] = Offer.get_offer_num_from_major(g.db,university_id,row.id)
+                major_info["offervote"]= None
                 #offervote = dict()
-                print major_info
                 for row_major in Offer.get_user_id_from_major(g.db,row.id):
                     student_info = dict()
                     user = User.get_user_info(g.db,row_major.user_id)
@@ -82,9 +81,9 @@ def get_major_from_university_faculty():
                     students.append(student_info)
                     major_info["students"] = students
                     print major_info.keys()
-                print major_info["students"]
-                if len(major_info["students"]) != 0:
-                    major_list.append(major_info)
+               # print major_info["students"]
+               # if len(major_info["students"]) != 0:
+                major_list.append(major_info)
             return jsonify(status="success",
                            majorlist=major_list)
         else:
@@ -108,7 +107,7 @@ def get_major_from_university_faculty():
                         student_info["prevuniversity"] = user.prevuniversity
                         students.append(student_info)
                         major_info["students"] = students
-                if len(major_info.get("students")) != 0:
+                #if len(major_info.get("students")) != 0:
                     major_list.append(major_info)
             return jsonify(status="success",
                            majorlist=major_list)
