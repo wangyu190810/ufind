@@ -61,7 +61,7 @@ def get_major_from_university_faculty():
     if request.method == "GET":
         university_id,faculty_id = map(request.args.get, ("universityid",
                                                           "facultyid"))
-        major_list = []
+        major_list = list()
         major_info = {}
         if faculty_id is None:
             for row in Major.get_major_info(g.db,university_id):
@@ -82,6 +82,7 @@ def get_major_from_university_faculty():
                     student_info["prevuniversity"] = user.prevuniversity
                     students.append(student_info)
                 major_info["students"] = students
+            major_list.append(major_info)
             return jsonify(status="success",
                            majorlist=major_info)
         else:
@@ -102,8 +103,9 @@ def get_major_from_university_faculty():
                     student_info["prevuniversity"] = user.prevuniversity
                     students.append(student_info)
                 major_info["students"] = students
+            major_list.append(major_info)
             return jsonify(status="success",
-                           majorlist=major_info)
+                           majorlist=major_list)
 
 
 
