@@ -81,30 +81,34 @@ def get_major_from_university_faculty():
                     student_info["prevuniversity"] = user.prevuniversity
                     students.append(student_info)
                     major_info["students"] = students
-                major_list.append(major_info)
+                if len(major_info.get("students")) != 0:
+                    major_list.append(major_info)
             return jsonify(status="success",
                            majorlist=major_list)
         else:
-            for row in Major.get_major_info(g.db,university_id,faculty_id):
-                students = list()
-                major_info = {}
-                major_info["majorid"] = row.id
-                major_info["name"] = row.name
+            faculty_list = faculty_id.split(",")
+            for faculty_id in faculty_list:
+                for row in Major.get_major_info(g.db,university_id,faculty_id):
+                    students = list()
+                    major_info = {}
+                    major_info["majorid"] = row.id
+                    major_info["name"] = row.name
 #                major_info["offernum"] = Offer.get_offer_num(g.db,
 #                                                                 university_id,)
-                major_info["offernum"] = Offer.get_offer_num_from_major(g.db,university_id,row.id)
-                major_info["offervote"]=None
-                for row_major in Offer.get_user_id_from_major(g.db,row.id):
-                    student_info = dict()
-                    user = User.get_user_info(g.db,row_major.user_id)
-                    student_info["studentid"] = user.id
-                    student_info["name"] = user.username
-                    student_info["GPA"] = user.GPA
-                    student_info["prevuniversity"] = user.prevuniversity
-                    students.append(student_info)
-                    major_info["students"] = students
-                major_list.append(major_info)
-                print major_list
+                    major_info["offernum"] = Offer.get_offer_num_from_major(g.db,university_id,row.id)
+                    major_info["offervote"]=None
+                    for row_major in Offer.get_user_id_from_major(g.db,row.id):
+                        student_info = dict()
+                        user = User.get_user_info(g.db,row_major.user_id)
+                        student_info["studentid"] = user.id
+                        student_info["name"] = user.username
+                        student_info["GPA"] = user.GPA
+                        student_info["prevuniversity"] = user.prevuniversity
+                        students.append(student_info)
+                        major_info["students"] = students
+                if len(major_info.get("students")) != 0:
+                    major_list.append(major_info)
+                    print major_list
             return jsonify(status="success",
                            majorlist=major_list)
 
