@@ -6,7 +6,8 @@ from datetime import timedelta
 
 from mysite.view.university import get_university, get_search_university, \
     get_university_info, get_university_list, get_state_university
-from mysite.view.major import search_major, get_major_compare
+from mysite.view.major import search_major, get_major_compare,\
+    get_major_from_university_faculty
 from mysite.view.user import get_user_info, get_user_detail_info, \
     get_user_in_university, update_user_bginf, get_user_base_info,\
     edit_user_info_page,update_user_info
@@ -100,7 +101,8 @@ app.add_url_rule("/api/get_offer_student_id", view_func=get_offer_student,
                  methods=["GET"])
 app.add_url_rule("/api/university_list", view_func=get_university_list,
                  methods=["GET"])
-
+app.add_url_rule("/api/get_major_form_university_faculty", methods=["GET"],
+                 view_func=get_major_from_university_faculty)
 
 app.add_url_rule("/api/set_message", view_func=set_message,
                  methods=["POST"])

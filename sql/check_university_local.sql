@@ -7,3 +7,4 @@ UPDATE university SET latitude=-19.329342, longitude=146.760859 WHERE id = 223;
 UPDATE university SET latitude=-30.489737, longitude=151.640977 WHERE id = 233;
 
 
+select id,name,chiname,latitude,longitude from university where longitude is null;

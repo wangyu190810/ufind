@@ -39,6 +39,15 @@
     接口地址
         www.ufindoffer.com/api/search_major?searchname=EE&universityid=1
 
+接口3.0 
+
+    方式
+        GET
+    接口地址：
+        www.ufindoffer.com/api/get_major_form_university_faculty
+    访问方式：
+        www.ufindoffer.com/api/get_major_form_university_faculty?universityid=1&facultyid=1
+
 接口3.1
     
     方式
