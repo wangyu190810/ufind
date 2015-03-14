@@ -57,7 +57,7 @@ def get_major_compare():
 
 @allow_cross_domain
 def get_major_from_university_faculty():
-    """投票根据学校和学院返回专业和投票信息"""
+    """投票根据学校和学院返回专业信息"""
     if request.method == "GET":
         university_id,faculty_id = map(request.args.get, ("universityid",
                                                           "facultyid"))
@@ -71,6 +71,7 @@ def get_major_from_university_faculty():
                 major_info["offernum"] = Offer.get_offer_student(g.db,
                                                                  university_id,
                                                                  row.id)
+                major_info["offervote"]=None
                 offervote = dict()
                 for row_major in Offer.get_user_id_from_major(g.db,row.id):
                     student_info = dict()
@@ -80,13 +81,42 @@ def get_major_from_university_faculty():
                     student_info["GPA"] = user.gpa
                     student_info["prevuniversity"] = user.prevuniversity
                     students.append(student_info)
-                for row_un in University.get_university_info(g.db,university_id):
-                    pass
+                major_info["students"] = students
+            return jsonify(status="success",
+                           majorlist=major_info)
+        else:
+            for row in Major.get_major_info(g.sv,university_id,faculty_id):
+                students = list()
+                major_info["majorid"] = row.id
+                major_info["name"] = row.name
+                major_info["offernum"] = Offer.get_offer_student(g.db,
+                                                                 university_id,
+                                                                 row.id)
+                major_info["offervote"]=None
+                for row_major in Offer.get_user_id_from_major(g.db,row.id):
+                    student_info = dict()
+                    user = User.get_user_info(g.db,row_major.user_id)
+                    student_info["studentid"] = user.id
+                    student_info["name"] = user.username
+                    student_info["GPA"] = user.gpa
+                    student_info["prevuniversity"] = user.prevuniversity
+                    students.append(student_info)
+                major_info["students"] = students
+            return jsonify(status="success",
+                           majorlist=major_info)
 
-                for major_row in CompareInfo.get_compare_about_major(g.db,row.id):
-                    for compare_row in CompareInfo.get_compare_info(g.db,major_row.id):
-                        for university_row in University.get_university_info(g.db,compare_row.university_id):
-                            offervote["compuniversityid"] = compare_row.university_id
-                            offervote["compname"] = university_row.name
-                            offervote["compmajor"] = university_row.major
+
+
+#
+#
+#           for row_un in University.get_university_info(g.db,university_id):
+#                    pass
+#
+#                for major_row in CompareInfo.get_compare_about_major(g.db,row.id):
+#                    for compare_row in CompareInfo.get_compare_info(g.db,major_row.id):
+#                        for university_row in University.get_university_info(g.db,compare_row.university_id):
+#                            offervote["compuniversityid"] = compare_row.university_id
+#                            offervote["compname"] = university_row.name
+#                            offervote["compmajor"] = university_row.major
+#
 
