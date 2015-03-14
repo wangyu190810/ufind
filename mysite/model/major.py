@@ -30,6 +30,12 @@ class Major(Base):
                filter(Major.name.like("%"+searchname+"%")).\
                filter(Major.university_id == university_id)
 
+    @classmethod
+    def get_major_info_university(cls,connection,university_id):
+        return connection.query(Major).filter(
+            Major.university_id == university_id
+        )
+
 
     @classmethod
     def get_major_info(cls, connection, university_id, faculty_id=None,major_id=None):
