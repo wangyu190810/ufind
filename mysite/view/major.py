@@ -74,6 +74,7 @@ def get_major_from_university_faculty():
                     student_info = dict()
                     user = User.get_user_info(g.db,row_major.user_id)
                     student_info["studentid"] = user.id
+                    student_info["studentimg"] = user.pic
                     student_info["name"] = user.username
                     student_info["GPA"] = user.GPA
                     student_info["prevuniversity"] = user.prevuniversity
@@ -100,6 +101,7 @@ def get_major_from_university_faculty():
                         user = User.get_user_info(g.db,row_major.user_id)
                         student_info["studentid"] = user.id
                         student_info["name"] = user.username
+                        student_info["studentimg"] = user.pic
                         student_info["GPA"] = user.GPA
                         student_info["prevuniversity"] = user.prevuniversity
                         students.append(student_info)
