@@ -33,6 +33,7 @@ def get_university():
             for row in University.get_university_info(g.db,university_id):
                 university["name"] = row.name
                 university["chiname"] = row.chiname
+                university["universitypic"] = get_university_img(row.name,2,u"地图长方形图片")
                 university_info.append(university)
 
             for row in Faculty.get_faculty_info(g.db, university_id):
