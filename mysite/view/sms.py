@@ -48,15 +48,20 @@ def send_sms():
         print cc
         phonenum = eval(cc.keys()[0])
         phone = phonenum["phonenum"]
+        sms_type = phonenum.get("type")
+        print phonenum
+        user = User.get_user_info_by_phone(g.db,phone)
+        print user
 
-        if len(phone) == 11 and phone[:2] in ["13", "15", "17", "18"]:
-            code = randint(1000, 9999)
-            company = "游必有方"
-            tpl_value = "#code#="+str(code)+"&#company#="+company
-            result = tpl_send_sms(Config.apikey, 1, tpl_value, phone)
-            code_num = json.loads(result)["code"]
-            if code_num == 0:
+        if (user is None and sms_type == 0) or (user is not None and sms_type == 1):
+            if len(phone) == 11 and phone[:2] in ["13", "15", "17", "18"]:
+                code = randint(1000, 9999)
+                company = "游必有方"
+                tpl_value = "#code#="+str(code)+"&#company#="+company
+                result = tpl_send_sms(Config.apikey, 1, tpl_value, phone)
+                code_num = json.loads(result)["code"]
+                if code_num == 0:
 
-                print User.set_sms_checknum(g.db, phone, code)
-                return jsonify(status="success")
+                    print User.set_sms_checknum(g.db, phone, code)
+                    return jsonify(status="success")
         return jsonify(status="false")
