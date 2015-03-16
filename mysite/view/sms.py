@@ -52,7 +52,9 @@ def send_sms():
         print phonenum
         user = User.get_user_info_by_phone(g.db,phone)
         print user
-
+        print type(sms_type)
+        if sms_type == 0:
+            print 123
         if (user is None and sms_type == 0) or (user is not None and sms_type == 1):
             if len(phone) == 11 and phone[:2] in ["13", "15", "17", "18"]:
                 code = randint(1000, 9999)
@@ -62,6 +64,7 @@ def send_sms():
                 code_num = json.loads(result)["code"]
                 if code_num == 0:
 
-                    print User.set_sms_checknum(g.db, phone, code)
+                    User.set_sms_checknum(g.db, phone, code)
                     return jsonify(status="success")
         return jsonify(status="false")
+    return jsonify(status="false")
