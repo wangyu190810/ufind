@@ -50,19 +50,19 @@ def allow_cross_domain(fun):
 
 
 def get_university_img(universityname, num,shape):
-    return "http://www.ufindoffer.com/images/unimg/all_un/"+str(universityname)+"/"+shape+"/"+str(num)+".jpg"
+    return u"http://www.ufindoffer.com/images/unimg/all_un/"+universityname+u"/"+shape+u"/"+unicode(num)+".jpg"
 
 
 def get_university_logo(universityname):
-    return "http://www.ufindoffer.com/images/unimg/all_logo/"+str(universityname)+".png"
+    return u"http://www.ufindoffer.com/images/unimg/all_logo/"+universityname+".png"
 
 
 def get_university_state(statename):
-    return "http://www.ufindoffer.com/images/unimg/state/"+str(statename)+".jpg"
+    return u"http://www.ufindoffer.com/images/unimg/state/"+statename+".jpg"
 
 
 def get_user_hred_img(sex,max_num):
-    return "http://www.ufindoffer.com/images/unimg/head/"+sex+"/"+str(max_num)+".jpg"
+    return u"http://www.ufindoffer.com/images/unimg/head/"+unicode(sex)+"/"+unicode(max_num)+".jpg"
 
 
 def get_timestamp(create_time):
