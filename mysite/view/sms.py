@@ -45,17 +45,11 @@ def send_sms():
     if request.method == "POST":
         data = request.form
         cc = data.to_dict()
-        print cc
         phonenum = eval(cc.keys()[0])
         phone = phonenum["phonenum"]
         sms_type = phonenum.get("type")
-        print phonenum
         user = User.get_user_info_by_phone(g.db,phone)
-        print user
-        print type(sms_type)
-        if sms_type == 0:
-            print 123
-        if (user is None and sms_type == 0) or (user is not None and sms_type == 1):
+        if (user is None and sms_type == 0) or (user is not None and sms_type is None):
             if len(phone) == 11 and phone[:2] in ["13", "15", "17", "18"]:
                 code = randint(1000, 9999)
                 company = "游必有方"
@@ -66,5 +60,5 @@ def send_sms():
 
                     User.set_sms_checknum(g.db, phone, code)
                     return jsonify(status="success")
-        return jsonify(status="false")
+        return jsonify(status="registered")
     return jsonify(status="false")
