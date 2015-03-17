@@ -248,6 +248,8 @@ def get_user_base_info():
         user_info["status"] = "success"
         data = dict()
         score = Score.get_user_score(g.db, user_id)
+        if score is None:
+            return jsonify(user_info)
         GREmore = dict()
         GREmore["sub"] = list()
         GREmore["V"] = score.GRE_v
