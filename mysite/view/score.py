@@ -78,6 +78,7 @@ def set_user_score():
             TOEFLmoreL = request.form.get("TOEFLmore[L]", 0, int)
             TOEFLmoreS = request.form.get("TOEFLmore[S]", 0, int)
             TOEFLmoreW = request.form.get("TOEFLmore[W]", 0, int)
+            print request.form["TOEFLmore[W]"]
             sub_TOEFL = get_Total(TOEFLmoreL, TOEFLmoreR, TOEFLmoreS,
                                   TOEFLmoreW)
             if request.form.get("GREmore[V]") is not None:
