@@ -104,7 +104,7 @@ class User(Base):
     @classmethod
     def get_checknum(cls, connection, phone):
         u"""验证码检测"""
-        return connection.query(User.checknum,User.checknum_time). \
+        return connection.query(User). \
             filter(User.phone == phone).scalar()
 
     @classmethod
