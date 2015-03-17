@@ -165,9 +165,9 @@ def get_user_detail_info():
         student_info["GREmore"] = GREmore
         GMATmore = dict()
         GMATmore["V"] = score.GMAT_v
-        GMATmore["Q"] = score.GMAT_v
-        GMATmore["AW"] = score.GMAT_v
-        GMATmore["IR"] = score.GMAT_v
+        GMATmore["Q"] = score.GMAT_q
+        GMATmore["AW"] = score.GMAT_aw
+        GMATmore["IR"] = score.GMAT_ir
         student_info["GMATmore"] = GMATmore
         IELTSmore = dict()
         IELTSmore["R"] = score.IELTS_r
