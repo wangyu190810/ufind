@@ -49,7 +49,7 @@ def send_sms():
         phone = phonenum["phonenum"]
         sms_type = phonenum.get("type")
         user = User.get_user_info_by_phone(g.db,phone)
-        if (user is None and sms_type == 0) or (user is not None and sms_type is None):
+        if (user.username is None and sms_type == 0) or (user is not None and sms_type is None):
             if len(phone) == 11 and phone[:2] in ["13", "15", "17", "18"]:
                 code = randint(1000, 9999)
                 company = "游必有方"
