@@ -106,3 +106,9 @@ def set_sign_safe(sign_file):
 def get_sign_safe(true_file):
     s= Signer(Config.login_sign)
     return s.unsign(true_file)
+
+
+def checknum_timeout(sms_time):
+    if ((time.time() - sms_time) / 60) > 30:
+        return True
+    return False

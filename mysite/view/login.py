@@ -2,7 +2,7 @@
 __author__ = 'wangyu'
 from flask import g, session, request, jsonify
 
-from mysite.view.base import allow_cross_domain, set_sign_safe
+from mysite.view.base import allow_cross_domain, set_sign_safe,checknum_timeout
 from mysite.model.user import User
 from mysite.model.university_china import UniversityChina, SeniorHighSchool, \
     MajorChina
@@ -63,9 +63,11 @@ def register_first():
         check = User.get_checknum(g.db, phonenum)
         if check is None:
             return jsonify(status="false")
-        elif check == int(checknum):
+        elif check.checknum == int(checknum) and checknum_timeout(check.checknum_time):
             User.register_first(g.db, email, password, phonenum)
             return jsonify(status="success")
+        elif checknum_timeout(check.checknum_time):
+            return jsonify(status="checknum_timeout")
         else:
             return jsonify(status="false")
 
@@ -107,8 +109,8 @@ def change_password():
         phone = data["phonenum"]
         password = data["password"]
         checknum = data["checknum"]
-        check_num = User.get_checknum(g.db, phone)
-        if check_num == int(checknum):
+        check = User.get_checknum(g.db, phone)
+        if check.checknum == int(checknum) and checknum_timeout(check.checknum_time):
             User.change_password(g.db, phone, password)
             return jsonify(status="success")
         return jsonify(status="false")

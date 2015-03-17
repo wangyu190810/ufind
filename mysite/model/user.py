@@ -18,6 +18,7 @@ class User(Base):
     email = Column(String(80), doc=u"邮箱")
     phone = Column(Integer, doc=u"电话")
     checknum = Column(Integer, doc=u"验证码")
+    checknum_time = Column(Integer,doc=u"验证码时间")
     pic = Column(Unicode(255), doc=u"头像")
     GPA = Column(Float(10), doc=u"")
     TOEFL = Column(Float(10), doc=u"")
@@ -85,12 +86,13 @@ class User(Base):
         phonenum = connection.query(User.phone). \
             filter(User.phone == phone).scalar()
         if len(str(phonenum)) < 10:
-            user = User(phone=phone, checknum=checknum)
+            user = User(phone=phone, checknum=checknum,checknum_time=time.time())
             connection.add(user)
             connection.commit()
         else:
             connection.query(User).filter(User.phone == phone).update(
-                {User.checknum: checknum}
+                {User.checknum: checknum,
+                 User.checknum_time: time.time()}
             )
             connection.commit()
 
@@ -102,7 +104,7 @@ class User(Base):
     @classmethod
     def get_checknum(cls, connection, phone):
         u"""验证码检测"""
-        return connection.query(User.checknum). \
+        return connection.query(User.checknum,User.checknum_time). \
             filter(User.phone == phone).scalar()
 
     @classmethod
