@@ -110,5 +110,5 @@ def get_sign_safe(true_file):
 
 def checknum_timeout(sms_time):
     if ((time.time() - sms_time) / 60) > 30:
-        return True
-    return False
+        return False
+    return True
