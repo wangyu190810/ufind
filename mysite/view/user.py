@@ -152,6 +152,8 @@ def get_user_detail_info():
         student_info["follows"] = follows_list
         student_info["status"] = "success"
         score = Score.get_user_score(g.db, student_id)
+        if score is None:
+            return jsonify(student_info)
         GREmore = dict()
         GREmore["sub"] = list()
         GREmore["V"] = score.GRE_v
