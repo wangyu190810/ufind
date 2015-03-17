@@ -63,10 +63,10 @@ def register_first():
         check = User.get_checknum(g.db, phonenum)
         if check is None:
             return jsonify(status="false")
-        elif check.checknum == int(checknum) and checknum_timeout(check.checknum_time):
-            User.register_first(g.db, email, password, phonenum)
-            return jsonify(status="success")
-        elif checknum_timeout(check.checknum_time):
+        elif check.checknum == int(checknum):
+            if checknum_timeout(check.checknum_time):
+                User.register_first(g.db, email, password, phonenum)
+                return jsonify(status="success")
             return jsonify(status="checknum_timeout")
         else:
             return jsonify(status="false")
