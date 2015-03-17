@@ -125,12 +125,15 @@ def get_user_detail_info():
             message_dict["messageid"] = row_meg.id
             user_id = row_meg.user_id
             user = User.get_user_info(g.db, user_id)
-            message_dict["pic"] = user.pic
-            message_dict["name"] = user.username
-            message_dict["studentid"] = user_id
-            message_dict["content"] = row_meg.message
-            message_dict["time"] = get_timestamp(row_meg.create_time)
-            message.append(message_dict)
+            if user is None:
+                message.append(message_dict)
+            else:
+                message_dict["pic"] = user.pic
+                message_dict["name"] = user.username
+                message_dict["studentid"] = user_id
+                message_dict["content"] = row_meg.message
+                message_dict["time"] = get_timestamp(row_meg.create_time)
+                message.append(message_dict)
         student_info["messages"] = message
         u"""这个位置的关注状态逻辑有点奇葩，以后要多注意"""
         follow_status = UserFollow.get_follow_to_user(g.db,
