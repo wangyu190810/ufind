@@ -157,6 +157,17 @@ class User(Base):
         connection.commit()
 
     @classmethod
+    def update_user_description(cls, connection, user_id, description):
+        u"""更新用户描述"""
+        connection.query(User).filter(User.id == user_id).update(
+            {
+                User.description: description
+            }
+        )
+        connection.commit()
+
+
+    @classmethod
     def update_user_score(cls, connection, user_id,
                           gre=None, toefl=None, lelts=None,GMAT=None):
         u"""分数计算结果的更新"""

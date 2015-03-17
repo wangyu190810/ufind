@@ -514,3 +514,24 @@
     
   
 12.2 
+    
+    更新描述：
+    
+    方法：
+        POST
+    接口地址：
+        www.ufindoffer.com/update_user_description
+    
+    input:
+    {
+        "description":"asdfa"
+    }
+    
+    output:
+    {
+        "status":success
+    }
+    
+12.3 
+
+    

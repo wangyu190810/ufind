@@ -10,7 +10,7 @@ from mysite.view.major import search_major, get_major_compare,\
     get_major_from_university_faculty
 from mysite.view.user import get_user_info, get_user_detail_info, \
     get_user_in_university, update_user_bginf, get_user_base_info,\
-    edit_user_info_page,update_user_info
+    edit_user_info_page, update_user_info,update_user_description
 from mysite.view.score import set_user_score
 from mysite.view.compare import set_compare, get_compare, get_compare_list, \
     set_compare_support
@@ -85,11 +85,13 @@ app.add_url_rule("/api/set_user_score",view_func=set_user_score,
 
 app.add_url_rule("/api/update_user_bginf", view_func=update_user_bginf,
                  methods=["POST"])
-app.add_url_rule("/api/get_user_base_info",view_func=get_user_base_info,
+app.add_url_rule("/api/update_user_description",view_func=update_user_description,
+                 methods=["POST"])
+app.add_url_rule("/api/get_user_base_info", view_func=get_user_base_info,
                  methods=["GET"])
-app.add_url_rule("/api/edit_user_info_page",view_func=edit_user_info_page,
+app.add_url_rule("/api/edit_user_info_page", view_func=edit_user_info_page,
                  methods=["GET"])
-app.add_url_rule("/api/update_user_info",view_func=update_user_info,
+app.add_url_rule("/api/update_user_info", view_func=update_user_info,
                  methods=["POST"])
 app.add_url_rule("/api/get_compare", view_func=get_compare,
                  methods=["GET"])

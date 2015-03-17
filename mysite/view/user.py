@@ -410,4 +410,15 @@ def update_user_info():
         return jsonify(status="success")
     return jsonify(status="false")
 
+@validate_user_login
+def update_user_description():
+    if request.method == "POST":
+        description = request.form.get("description")
+        user_id = session.get("user_id")
+        User.update_user_description(g.db,user_id,description)
+        return jsonify(status="success")
+    return jsonify(status="false")
+
+
+
 
