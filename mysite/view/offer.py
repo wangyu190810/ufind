@@ -45,7 +45,7 @@ def set_offer():
         for row in Offer.get_offer_student_info(g.db,user_id):
             offer_dict = dict()
             offer_dict["universityid"] = row.university_id
-            offer_dict["universityname"] = University.get_university_from_id(g.db,row.university_id).name
+            offer_dict["universityname"] = University.get_university_from_id(g.db,row.university_id).chiname
             offer_dict["twodim"] = get_university_img(offer_dict["universityname"],1,u"方形图片")
             offer_list.append(offer_dict)
         return jsonify(status="success",
