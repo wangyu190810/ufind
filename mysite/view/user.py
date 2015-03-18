@@ -214,7 +214,7 @@ def get_user_in_university():
         page_list = []
         student_list = []
         student = {}
-        if faculty_id is None:
+        if faculty_id is not None:
             if major_id is None:
                 major_id = None
             for row in Offer.get_user_id_from_university(g.db,
