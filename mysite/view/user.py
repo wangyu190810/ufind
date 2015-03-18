@@ -195,26 +195,27 @@ def get_user_in_university():
     if request.method == "POST":
         print request.form
         data = request.form
-        return jsonify(status="success")
+        #return jsonify(status="success")
         #data = json.loads(request.data)
-        university_id = data["universityid"]
-        faculty_id = data["facultyid"]
-        major_id = data["majorid"]
-        grade = data["grade"]
-        GPA = data["GPA"]
-        TOEFL = data["TOEFL"]
-        GRE = data["GRE"]
-        IELTS = data["IELTS"]
-        GMAT = data["GMAT"]
-        SAT = data["SAT"]
-        page = data["page"]
+
+        university_id = data.get("universityid")
+        faculty_id = data.get("facultyid")
+        major_id = data.get("majorid")
+     #   grade = data.get("grade")
+     #   GPA = data["GPA"]
+     #   TOEFL = data["TOEFL"]
+     #   GRE = data["GRE"]
+     #   IELTS = data["IELTS"]
+     #   GMAT = data["GMAT"]
+     #   SAT = data["SAT"]
+        page = data.get("page")
         compares = {}
         compare_list = []
         page_list = []
         student_list = []
         student = {}
-        if faculty_id == "":
-            if major_id == "":
+        if faculty_id is None:
+            if major_id is None:
                 major_id = None
             for row in Offer.get_user_id_from_university(g.db,
                                                          int(university_id),
