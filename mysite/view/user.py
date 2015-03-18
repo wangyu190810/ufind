@@ -193,6 +193,8 @@ def get_user_detail_info():
 @allow_cross_domain
 def get_user_in_university():
     if request.method == "POST":
+        print request.form
+        data = request.form
         data = json.loads(request.data)
         university_id = data["universityid"]
         faculty_id = data["facultyid"]

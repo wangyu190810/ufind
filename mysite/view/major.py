@@ -26,7 +26,7 @@ def search_major():
 
         print searchname,university_id
         if university_id is None:
-            for row in  Major.search_maior(g.db, searchname):
+            for row in Major.search_maior(g.db, searchname):
                 major["name"] = row.name
                 major["chiname"] = row.chiname
                 major["id"] = row.id
