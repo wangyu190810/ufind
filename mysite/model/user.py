@@ -180,38 +180,6 @@ class User(Base):
             }
         )
         connection.commit()
-        
-# #        if toefl is None:
-#            if GMAT is None:
-#                connection.query(User).filter(User.id == user_id).update(
-#                    {
-#                        User.GRE: gre,
-#                        User.IELTS: lelts
-#                    }
-#                )
-#            else:
-#                connection.query(User).filter(User.id == user_id).update(
-#                    {
-#                        User.GMAT: GMAT,
-#                        User.IELTS: lelts
-#                    }
-#                )
-#         elif lelts is None:
-#            if GMAT is None:
-#                connection.query(User).filter(User.id == user_id).update(
-#                    {
-#                        User.TOEFL: toefl,
-#                        User.GRE: gre
-#                    }
-#                )
-#            else:
-#                connection.query(User).filter(User.id == user_id).update(
-#                    {
-#                        User.GMAT: GMAT,
-#                        User.IELTS: toefl
-#                    }
-#                )
-#        connection.commit()
 
 
 class UserFollow(Base):
