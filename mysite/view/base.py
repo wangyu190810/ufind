@@ -65,6 +65,10 @@ def get_user_hred_img(sex,max_num):
     return u"http://www.ufindoffer.com/images/unimg/head/"+unicode(sex)+"/"+unicode(max_num)+".jpg"
 
 
+def get_user_twodim(universityname):
+    return u"http://www.ufindoffer.com/images/unimg/twodim/"+universityname+".jpg"
+
+
 def get_timestamp(create_time):
     timeArray = time.localtime(create_time)
     return time.strftime("%Y-%m-%d %H:%M:%S", timeArray)

@@ -10,7 +10,7 @@ import json
 from flask import request,jsonify,g,session
 from mysite.model.university import University
 from mysite.model.offer import Offer
-from mysite.view.base import allow_cross_domain,get_university_img
+from mysite.view.base import allow_cross_domain,get_university_img,get_user_twodim
 from mysite.model.user import User
 
 @allow_cross_domain
@@ -45,7 +45,7 @@ def set_offer():
             offer_dict = dict()
             offer_dict["universityid"] = row.university_id
             offer_dict["universityname"] = University.get_university_from_id(g.db,row.university_id).chiname
-            offer_dict["twodim"] = get_university_img(offer_dict["universityname"],1,u"方形图片")
+            offer_dict["twodim"] = get_user_twodim(offer_dict["universityname"])
             offer_list.append(offer_dict)
         return jsonify(status="success",
                        offerlist=offer_list,
