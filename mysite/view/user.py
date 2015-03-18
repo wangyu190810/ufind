@@ -220,7 +220,7 @@ def get_user_in_university():
             for row in Offer.get_user_id_from_university(g.db,
                                                          int(university_id),
                                                          int(major_id)):
-                student_list.append(str(row.user_id))
+                student_list.append(row.user_id)
                 student["studentlist"] = student_list
                 page = len(student_list) / 15
             student["more"] = ""

@@ -171,42 +171,50 @@ class User(Base):
     def update_user_score(cls, connection, user_id,
                           gre=None, toefl=None, lelts=None,GMAT=None):
         u"""分数计算结果的更新"""
-        if toefl is None:
-            if GMAT is None:
-                connection.query(User).filter(User.id == user_id).update(
-                    {
-                        User.GRE: gre,
-                        User.IELTS: lelts
-                    }
-                )
-            else:
-                connection.query(User).filter(User.id == user_id).update(
-                    {
-                        User.GMAT: GMAT,
-                        User.IELTS: lelts
-                    }
-                )
-
-        elif lelts is None:
-            if GMAT is None:
-                connection.query(User).filter(User.id == user_id).update(
-                    {
-                        User.TOEFL: toefl,
-                        User.GRE: gre
-                    }
-                )
-            else:
-                connection.query(User).filter(User.id == user_id).update(
-                    {
-                        User.GMAT: GMAT,
-                        User.IELTS: toefl
-                    }
-                )
+        connection.query(User).filter(User.id == user_id).update(
+            {
+                User.GRE: gre,
+                User.GMAT: GMAT,
+                User.TOEFL: toefl,
+                User.IELTS: lelts
+            }
+        )
         connection.commit()
+        
+# #        if toefl is None:
+#            if GMAT is None:
+#                connection.query(User).filter(User.id == user_id).update(
+#                    {
+#                        User.GRE: gre,
+#                        User.IELTS: lelts
+#                    }
+#                )
+#            else:
+#                connection.query(User).filter(User.id == user_id).update(
+#                    {
+#                        User.GMAT: GMAT,
+#                        User.IELTS: lelts
+#                    }
+#                )
+#         elif lelts is None:
+#            if GMAT is None:
+#                connection.query(User).filter(User.id == user_id).update(
+#                    {
+#                        User.TOEFL: toefl,
+#                        User.GRE: gre
+#                    }
+#                )
+#            else:
+#                connection.query(User).filter(User.id == user_id).update(
+#                    {
+#                        User.GMAT: GMAT,
+#                        User.IELTS: toefl
+#                    }
+#                )
+#        connection.commit()
 
 
 class UserFollow(Base):
-
     __tablename__ = "user_follow"
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, doc=u"用户id")
