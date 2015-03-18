@@ -520,7 +520,7 @@
     方法：
         POST
     接口地址：
-        www.ufindoffer.com/update_user_description
+        www.ufindoffer.com/api/update_user_description
     
     input:
     {
