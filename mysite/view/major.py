@@ -23,6 +23,8 @@ def search_major():
         major_list = []
         major = {}
         searchname,university_id = map(request.args.get,("searchname","universityid"))
+
+        print searchname,university_id
         if university_id is None:
             for row in  Major.search_maior(g.db, searchname):
                 major["name"] = row.name
@@ -32,6 +34,7 @@ def search_major():
                 major = {}
             return jsonify(namelist=major_list,status="success")
         else:
+
             for row in Major.search_maior(g.db, searchname, university_id):
                 major["name"] = row.name
                 major["chiname"] = row.chiname
