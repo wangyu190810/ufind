@@ -76,20 +76,24 @@ def register_first():
 def register_second():
     if request.method == "POST":
         data = request.form
-        phone = data["phonenum"]
-        username = data["username"]
-        university_id = data["universityid"]
-        user_type = data["type"]
+        phone = data.get("phonenum")
+        username = data.get("username")
+        university_id = data.get("universityid")
+        user_type = data.get("type")
         print data
         if int(user_type) == 0:
             senior = SeniorHighSchool.get_senior_high(g.db, university_id)
             university_name = senior.name
-            major_name = ""
+            senior_dict = dict()
+            senior_dict["1"] = "文科"
+            senior_dict["2"] = "理科"
+            senior_dict["3"] = "其他"
+            major_name = data.get("majorid")
         else:
             university = UniversityChina.get_university_china_info(g.db,
                                                                    university_id)
             university_name = university.name
-            major_id = int(data["majorid"])
+            major_id = int(data.get("majorid"))
             major_name = MajorChina.get_major_china(g.db, major_id).major_name
         gpa = data["gpa"]
         User.register_second(g.db, phone, username, university_name, major_name,

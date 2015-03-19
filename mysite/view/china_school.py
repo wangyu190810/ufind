@@ -55,8 +55,16 @@ def search_major_name():
         if int(school_type) == 0:
             major = dict()
             search_info = list()
-            major["name"] = ""
-            major["id"] = ""
+            major["name"] = "文科"
+            major["id"] = 1
+            search_info.append(major)
+            major = dict()
+            major["name"] = "理科"
+            major["id"] = 2
+            search_info.append(major)
+            major = dict()
+            major["name"] = "其他"
+            major["id"] = 3
             search_info.append(major)
             return json.dumps(search_info)
     return json.dumps({"static": "success"})
