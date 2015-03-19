@@ -88,7 +88,7 @@ def register_second():
             senior_dict["1"] = "文科"
             senior_dict["2"] = "理科"
             senior_dict["3"] = "其他"
-            major_name = data.get("majorid")
+            major_name = senior_dict.get(data.get("majorid"))
         else:
             university = UniversityChina.get_university_china_info(g.db,
                                                                    university_id)
