@@ -34,6 +34,8 @@ class User(Base):
                   doc=u"高中还是大学：0表示高中，1表示大学,3表示研究生")
     description = Column(Unicode(255), doc=u"描述")
     bginf = Column(Unicode(255), doc=u"背景信息")
+    create_time = Column(Integer,doc=u"注册时间")
+
 
     @classmethod
     def get_user_info(cls, connection, user_id):
@@ -59,13 +61,15 @@ class User(Base):
 
     @classmethod
     def register_second(cls, connection, phone, username,
-                        university_id, major_id, gpa, user_type):
+                        university_id, major_id, gpa, user_type,
+                        create_time):
         connection.query(User).filter(User.phone == phone).update(
             {User.username: username,
              User.prevuniversity: university_id,
              User.prevmajor: major_id,
              User.GPA: gpa,
-             User.type: user_type}
+             User.type: user_type,
+             User.create_time: create_time}
         )
         connection.commit()
 

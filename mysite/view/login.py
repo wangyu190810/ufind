@@ -7,6 +7,7 @@ from mysite.model.user import User
 from mysite.model.university_china import UniversityChina, SeniorHighSchool, \
     MajorChina
 
+from time import time
 
 @allow_cross_domain
 def login():
@@ -96,8 +97,9 @@ def register_second():
             major_id = int(data.get("majorid"))
             major_name = MajorChina.get_major_china(g.db, major_id).major_name
         gpa = data["gpa"]
+        create_time  = time()
         User.register_second(g.db, phone, username, university_name, major_name,
-                             gpa, user_type)
+                             gpa, user_type, create_time)
         user = User.get_user_info_by_phone(g.db, phone)
         user_id = user.id
         session["user_id"] = user_id
