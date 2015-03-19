@@ -80,6 +80,7 @@ def register_second():
         username = data["username"]
         university_id = data["universityid"]
         user_type = data["type"]
+        print data 
         if int(user_type) == 0:
             senior = SeniorHighSchool.get_senior_high(g.db, university_id)
             university_name = senior.name
