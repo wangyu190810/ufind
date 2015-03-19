@@ -51,7 +51,7 @@ def set_offer():
             offer_list.append(offer_dict)
         return jsonify(status="success",
                        offerlist=offer_list,
-                       bginf=User.get_user_info(g.db,user_id).bginf)
+                       description=User.get_user_info(g.db,user_id).description)
 
 @allow_cross_domain
 def get_offer_student():
