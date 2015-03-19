@@ -65,7 +65,7 @@ def get_user_hred_img(sex,max_num):
     return u"http://www.ufindoffer.com/images/unimg/head/"+unicode(sex)+"/"+unicode(max_num)+".jpg"
 
 
-def get_user_twodim(universityname):
+def get_university_twodim(universityname):
     return u"http://www.ufindoffer.com/images/unimg/twodim/"+universityname+".jpg"
 
 

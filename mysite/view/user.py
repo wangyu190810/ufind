@@ -6,7 +6,7 @@ import json
 
 from mysite.model.user import User, UserFollow
 from mysite.view.base import allow_cross_domain, get_timestamp, \
-    validate_user_login
+    validate_user_login,get_university_logo,get_university_twodim
 from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
@@ -63,10 +63,10 @@ def get_user_detail_info():
             for row_un in University.get_university_info(g.db,
                                                          row.university_id):
                 offer_info["universityname"] = row_un.name
-                offer_info["logo"] = row_un.schoollogo
+                offer_info["logo"] = get_university_logo(row_un.name)
+                offer_info["twodimcode"] = get_university_twodim(row_un.name)
             for row_ma in Major.get_major_info_by_id(g.db, row.major_id):
                 offer_info["majorname"] = row_ma.name
-            offer_info["twodimcode"] = ""
             offer_info["grade"] = row.grade
             offer_info["offertype"] = row.offer_type
             if row.scholarship is not None:
