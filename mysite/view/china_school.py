@@ -13,7 +13,7 @@ from mysite.view.base import allow_cross_domain
 def search_university_china():
     if request.method == "GET":
         search, school_type = map(request.args.get, ("name", "type"))
-        if int(school_type) == 0:
+        if int(school_type) == 1:
             university = dict()
             search_info = list()
             for row in UniversityChina.search_university_china(g.db, search):
@@ -23,7 +23,7 @@ def search_university_china():
                 university = dict()
 
             return json.dumps(search_info)
-        if int(school_type) == 1:
+        if int(school_type) == 0:
             school = dict()
             search_info = list()
             for row in SeniorHighSchool.search_senior_high(g.db, search,
@@ -40,7 +40,7 @@ def search_university_china():
 def search_major_name():
     if request.method == "GET":
         name, school_type = map(request.args.get, ("name", "type"))
-        if int(school_type) == 0:
+        if int(school_type) == 1:
             major = dict()
             search_info = list()
             major_name = name
@@ -52,7 +52,7 @@ def search_major_name():
                 search_info.append(major)
                 major = dict()
             return json.dumps(search_info)
-        if int(school_type) == 1:
+        if int(school_type) == 0:
             major = dict()
             search_info = list()
             major["name"] = ""
