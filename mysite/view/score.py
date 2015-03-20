@@ -20,10 +20,8 @@ from mysite.view.base import allow_cross_domain, validate_user_login, get_gre, \
 @validate_user_login
 @allow_cross_domain
 def set_user_score():
-    print request.data
     if request.method == "POST":
         user_id = session.get("user_id")
-        print request.form
         if request.form.get("bginf") is not None:
             bginf = request.form.get("bginf")
             User.update_user_bginf(g.db, user_id, bginf)
@@ -38,7 +36,6 @@ def set_user_score():
                 GREmoreV = request.form.get("GREmore[V]", 0, int)
                 GREmoreQ = request.form.get("GREmore[Q]", 0, int)
                 GREmoreAW = request.form.get("GREmore[AW]", 0, int)
-                print GREmoreAW, "GREmoreAW"
                 sub_GRE = get_gre(GREmoreV, GREmoreQ)
                 User.update_user_score(g.db, user_id, gre=sub_GRE,
                                        lelts=sub_TELTS)
@@ -57,7 +54,6 @@ def set_user_score():
                 GMATmoreQ = request.form.get("GMATmore[Q]", 0, int)
                 GMATmoreAW = request.form.get("GMATmore[AW]", 0, int)
                 GMATmoreIR = request.form.get("GMATmore[IR]", 0, int)
-                print GMATmoreAW, "GMATmoreAW"
                 sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
                 User.update_user_score(g.db, user_id=user_id,
                                        lelts=sub_TELTS, GMAT=sub_GMAT)
@@ -78,14 +74,12 @@ def set_user_score():
             TOEFLmoreL = request.form.get("TOEFLmore[L]", 0, int)
             TOEFLmoreS = request.form.get("TOEFLmore[S]", 0, int)
             TOEFLmoreW = request.form.get("TOEFLmore[W]", 0, int)
-            print request.form["TOEFLmore[W]"]
             sub_TOEFL = get_Total(TOEFLmoreL, TOEFLmoreR, TOEFLmoreS,
                                   TOEFLmoreW)
             if request.form.get("GREmore[V]") is not None:
                 GREmoreV = request.form.get("GREmore[V]", 0, int)
                 GREmoreQ = request.form.get("GREmore[Q]", 0, int)
                 GREmoreAW = request.form.get("GREmore[AW]", 0, int)
-                print GREmoreAW, "GREmoreAV"
                 sub_GRE = get_gre(GREmoreV, GREmoreQ)
                 User.update_user_score(g.db, user_id=user_id, gre=sub_GRE,
                                        toefl=sub_TOEFL)
@@ -104,7 +98,6 @@ def set_user_score():
                 GMATmoreQ = request.form.get("GMATmore[Q]", 0, int)
                 GMATmoreAW = request.form.get("GMATmore[AW]", 0, int)
                 GMATmoreIR = request.form.get("GMATmore[IR]", 0, int)
-                print GMATmoreIR, "GMATmoreIR"
                 sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
                 User.update_user_score(g.db, user_id=user_id,
                                        toefl=TOEFLmoreW, GMAT=sub_GMAT)

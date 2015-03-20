@@ -6,7 +6,8 @@ import json
 
 from mysite.model.user import User, UserFollow
 from mysite.view.base import allow_cross_domain, get_timestamp, \
-    validate_user_login,get_university_logo,get_university_twodim
+    validate_user_login,get_university_logo,get_university_twodim,\
+    get_GMAT, get_gre, get_TELTS, get_Total,get_STA
 from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
@@ -325,8 +326,6 @@ def edit_user_info_page():
 def update_user_info():
     U"""用户更新资料"""
     if request.method == "POST":
-        print request.data
-        print request.form
         user_id = session.get("user_id")
         phone = request.form.get("phonenum")
         username = request.form.get("engname")
@@ -344,12 +343,17 @@ def update_user_info():
             LELTSmoreL = request.form.get("IELTS[L]")
             LELTSmoreS = request.form.get("IELTS[S]")
             LELTSmoreW = request.form.get("IELTS[W]")
-
+            sub_TELTS = get_TELTS(LELTSmoreS, LELTSmoreL, LELTSmoreR,
+                                  LELTSmoreW)
             if request.form.get("GRE[V]") is not None:
                 GREmoreV = request.form.get("GRE[V]")
                 GREmoreQ = request.form.get("GRE[Q]")
                 GREmoreAW = request.form.get("GRE[AW]")
-                Score.set_user_info(connection=g.db,user_id=user_id,
+                sub_GRE = get_gre(GREmoreV, GREmoreQ)
+                User.update_user_score(g.db,user_id, gre=sub_GRE,
+                                       lelts=sub_TELTS)
+                Score.set_user_info(connection=g.db, user_id=user_id,
+
                                     IELTS_r=LELTSmoreR,
                                     IELTS_l=LELTSmoreL,
                                     IELTS_s=LELTSmoreS,
@@ -364,6 +368,9 @@ def update_user_info():
                 GMATmoreQ = request.form.get("GMAT[Q]")
                 GMATmoreAW = request.form.get("GMAT[AW]")
                 GMATmoreIR = request.form.get("GMAT[IR]")
+                sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
+                User.update_user_score(g.db, user_id=user_id,
+                                       lelts=sub_TELTS, GMAT=sub_GMAT)
                 Score.set_user_info(connection=g.db,
                                     user_id=user_id,
                                     IELTS_r=LELTSmoreR,
@@ -383,11 +390,15 @@ def update_user_info():
             TOEFLmoreL = request.form.get("TOEFL[L]")
             TOEFLmoreS = request.form.get("TOEFL[S]")
             TOEFLmoreW = request.form.get("TOEFL[W]")
-
+            sub_TOEFL = get_Total(TOEFLmoreL, TOEFLmoreR, TOEFLmoreS,
+                                  TOEFLmoreW)
             if request.form.get("GRE[V]") is not None:
                 GREmoreV = request.form.get("GRE[V]")
                 GREmoreQ = request.form.get("GRE[Q]")
                 GREmoreAW = request.form.get("GRE[AW]")
+                sub_GRE = get_gre(GREmoreV, GREmoreQ)
+                User.update_user_score(g.db, user_id=user_id, gre=sub_GRE,
+                                       toefl=sub_TOEFL)
                 Score.set_user_info(connection=g.db,user_id=user_id,
                                     TOEFL_r =TOEFLmoreR,
                                     TOEFL_l =TOEFLmoreL,
@@ -403,7 +414,11 @@ def update_user_info():
                 GMATmoreQ = request.form.get("GMAT[Q]")
                 GMATmoreAW = request.form.get("GMAT[AW]")
                 GMATmoreIR = request.form.get("GMAT[IR]")
+                sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
+                User.update_user_score(g.db, user_id=user_id,
+                                       toefl=TOEFLmoreW, GMAT=sub_GMAT)
                 Score.set_user_info(connection=g.db,user_id=user_id,
+
                                     TOEFL_r =TOEFLmoreR,
                                     TOEFL_l =TOEFLmoreL,
                                     TOEFL_s =TOEFLmoreS,
