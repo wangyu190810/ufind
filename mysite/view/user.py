@@ -217,21 +217,24 @@ def get_user_in_university():
         student = {}
         if faculty_id is not None:
             if major_id is None:
-                major_id = None
-            for row in Offer.get_user_id_from_university(g.db,
+                for row_major in Major.get_major_from_faculty(g.sb,university_id,faculty_id):
+                    for row in Offer.get_user_id_from_university(g.db,
                                                          university_id,
-                                                         major_id):
-                student_list.append(row.user_id)
-                student["studentlist"] = student_list
-                page = len(student_list) / 15
+                                                         row_major.id):
+                        student_list.append(row.user_id)
+            elif major_id is not None:
+                for row in Offer.get_user_id_from_university(g.db,
+                                                        university_id,
+                                                        major_id):
+                    student_list.append(row.user_id)
+            student["studentlist"] = student_list
+            page = len(student_list) / 15
             student["more"] = ""
             if int(page) > 1:
                 student["more"] = "true"
             student["status"] = "success"
-
             return json.dumps(student)
-
-        return jsonify(status="123")
+        return jsonify(status="false")
 
 
 @validate_user_login

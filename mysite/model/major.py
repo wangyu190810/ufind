@@ -36,6 +36,14 @@ class Major(Base):
             Major.university_id == university_id
         )
 
+    @classmethod
+    def get_major_from_faculty(cls,connection,university_id,faculty_id):
+        return connection.query(Major).filter(
+            Major.university_id == university_id
+        ).filter(
+            Major.faculty_id == faculty_id
+        )
+
 
     @classmethod
     def get_major_info(cls, connection, university_id, faculty_id=None,major_id=None):
