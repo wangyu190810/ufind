@@ -393,6 +393,11 @@ def update_user_info():
             TOEFLmoreW = request.form.get("TOEFL[W]",0,int)
             sub_TOEFL = get_Total(TOEFLmoreL, TOEFLmoreR, TOEFLmoreS,
                                   TOEFLmoreW)
+            print sub_TOEFL
+            print TOEFLmoreR
+            print TOEFLmoreL
+            print TOEFLmoreS
+            print TOEFLmoreW
             if request.form.get("GRE[V]") is not None:
                 GREmoreV = request.form.get("GRE[V]",0,int)
                 GREmoreQ = request.form.get("GRE[Q]",0,int)
