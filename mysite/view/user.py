@@ -217,7 +217,7 @@ def get_user_in_university():
         student = {}
         if faculty_id is not None:
             if major_id is None:
-                for row_major in Major.get_major_from_faculty(g.sb,university_id,faculty_id):
+                for row_major in Major.get_major_from_faculty(g.db,university_id,faculty_id):
                     for row in Offer.get_user_id_from_university(g.db,
                                                          university_id,
                                                          row_major.id):
