@@ -393,11 +393,6 @@ def update_user_info():
             TOEFLmoreW = request.form.get("TOEFL[W]",0,int)
             sub_TOEFL = get_Total(TOEFLmoreL, TOEFLmoreR, TOEFLmoreS,
                                   TOEFLmoreW)
-            print sub_TOEFL
-            print TOEFLmoreR
-            print TOEFLmoreL
-            print TOEFLmoreS
-            print TOEFLmoreW
             if request.form.get("GRE[V]") is not None:
                 GREmoreV = request.form.get("GRE[V]",0,int)
                 GREmoreQ = request.form.get("GRE[Q]",0,int)
@@ -422,7 +417,7 @@ def update_user_info():
                 GMATmoreIR = request.form.get("GMAT[IR]",0,int)
                 sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
                 User.update_user_score(g.db, user_id=user_id,
-                                       toefl=TOEFLmoreW, GMAT=sub_GMAT)
+                                       toefl=sub_TOEFL, GMAT=sub_GMAT)
                 Score.set_user_info(connection=g.db,user_id=user_id,
 
                                     TOEFL_r =TOEFLmoreR,
