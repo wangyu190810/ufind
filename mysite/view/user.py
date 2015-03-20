@@ -235,7 +235,7 @@ def get_user_in_university():
                     info.append(student)
                 major_list["majorlist"] = info
                 major_list["status"] = "success"
-                return json.dumps(student)
+                return json.dumps(major_list)
             elif major_id is not None:
                 for row in Offer.get_user_id_from_university(g.db,
                                                         university_id,
