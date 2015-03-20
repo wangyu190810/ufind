@@ -218,8 +218,8 @@ def get_user_in_university():
             if major_id is None:
                 major_id = None
             for row in Offer.get_user_id_from_university(g.db,
-                                                         int(university_id),
-                                                         int(major_id)):
+                                                         university_id,
+                                                         major_id):
                 student_list.append(row.user_id)
                 student["studentlist"] = student_list
                 page = len(student_list) / 15
