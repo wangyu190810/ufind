@@ -386,6 +386,7 @@ def update_user_info():
 
 
         elif request.form.get("TOEFL[R]") is not None:
+            print request.form
             TOEFLmoreR = request.form.get("TOEFL[R]",0,int)
             TOEFLmoreL = request.form.get("TOEFL[L]",0,int)
             TOEFLmoreS = request.form.get("TOEFL[S]",0,int)
