@@ -214,19 +214,34 @@ def get_user_in_university():
         compare_list = []
         page_list = []
         student_list = []
+
         student = {}
         if faculty_id is not None:
             if major_id is None:
+                major_list = dict()
+                info = list()
                 for row_major in Major.get_major_from_faculty(g.db,university_id,faculty_id):
                     for row in Offer.get_user_id_from_university(g.db,
                                                          university_id,
                                                          row_major.id):
                         student_list.append(row.user_id)
+                    student["studentlist"] = student_list
+                    student["majorid"] = row_major.id
+                    student["majorname"] = row_major.name
+                    page = len(student_list) / 15
+                    student["more"] = ""
+                    if int(page) > 1:
+                        student["more"] = "true"
+                    info.append(student)
+                major_list["majorlist"] = info
+                major_list["status"] = "success"
+                return json.dumps(student)
             elif major_id is not None:
                 for row in Offer.get_user_id_from_university(g.db,
                                                         university_id,
                                                         major_id):
                     student_list.append(row.user_id)
+
             student["studentlist"] = student_list
             page = len(student_list) / 15
             student["more"] = ""
