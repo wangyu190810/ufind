@@ -340,15 +340,15 @@ def update_user_info():
                               prevuniversity=prevuniversity,prevmajor=prevmajor)
         if request.form.get("IELTS[R]") is not None:
             LELTSmoreR = request.form.get("IELTS[R]",0,int)
-            LELTSmoreL = request.form.get("IELTS[L]")
-            LELTSmoreS = request.form.get("IELTS[S]")
-            LELTSmoreW = request.form.get("IELTS[W]")
+            LELTSmoreL = request.form.get("IELTS[L]",0,int)
+            LELTSmoreS = request.form.get("IELTS[S]",0,int)
+            LELTSmoreW = request.form.get("IELTS[W]",0,int)
             sub_TELTS = get_TELTS(LELTSmoreS, LELTSmoreL, LELTSmoreR,
                                   LELTSmoreW)
             if request.form.get("GRE[V]") is not None:
-                GREmoreV = request.form.get("GRE[V]")
-                GREmoreQ = request.form.get("GRE[Q]")
-                GREmoreAW = request.form.get("GRE[AW]")
+                GREmoreV = request.form.get("GRE[V]",0,int)
+                GREmoreQ = request.form.get("GRE[Q]",0,int)
+                GREmoreAW = request.form.get("GRE[AW]",0,int)
                 sub_GRE = get_gre(GREmoreV, GREmoreQ)
                 User.update_user_score(g.db,user_id, gre=sub_GRE,
                                        lelts=sub_TELTS)
@@ -364,10 +364,10 @@ def update_user_info():
 
                                     )
             else:
-                GMATmoreV = request.form.get("GMAT[V]")
-                GMATmoreQ = request.form.get("GMAT[Q]")
-                GMATmoreAW = request.form.get("GMAT[AW]")
-                GMATmoreIR = request.form.get("GMAT[IR]")
+                GMATmoreV = request.form.get("GMAT[V]",0,int)
+                GMATmoreQ = request.form.get("GMAT[Q]",0,int)
+                GMATmoreAW = request.form.get("GMAT[AW]",0,int)
+                GMATmoreIR = request.form.get("GMAT[IR]",0,int)
                 sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
                 User.update_user_score(g.db, user_id=user_id,
                                        lelts=sub_TELTS, GMAT=sub_GMAT)
@@ -386,16 +386,16 @@ def update_user_info():
 
 
         elif request.form.get("TOEFL[R]") is not None:
-            TOEFLmoreR = request.form.get("TOEFL[R]")
-            TOEFLmoreL = request.form.get("TOEFL[L]")
-            TOEFLmoreS = request.form.get("TOEFL[S]")
-            TOEFLmoreW = request.form.get("TOEFL[W]")
+            TOEFLmoreR = request.form.get("TOEFL[R]",0,int)
+            TOEFLmoreL = request.form.get("TOEFL[L]",0,int)
+            TOEFLmoreS = request.form.get("TOEFL[S]",0,int)
+            TOEFLmoreW = request.form.get("TOEFL[W]",0,int)
             sub_TOEFL = get_Total(TOEFLmoreL, TOEFLmoreR, TOEFLmoreS,
                                   TOEFLmoreW)
             if request.form.get("GRE[V]") is not None:
-                GREmoreV = request.form.get("GRE[V]")
-                GREmoreQ = request.form.get("GRE[Q]")
-                GREmoreAW = request.form.get("GRE[AW]")
+                GREmoreV = request.form.get("GRE[V]",0,int)
+                GREmoreQ = request.form.get("GRE[Q]",0,int)
+                GREmoreAW = request.form.get("GRE[AW]",0,int)
                 sub_GRE = get_gre(GREmoreV, GREmoreQ)
                 User.update_user_score(g.db, user_id=user_id, gre=sub_GRE,
                                        toefl=sub_TOEFL)
@@ -410,10 +410,10 @@ def update_user_info():
 
                                     )
             else:
-                GMATmoreV = request.form.get("GMAT[V]")
-                GMATmoreQ = request.form.get("GMAT[Q]")
-                GMATmoreAW = request.form.get("GMAT[AW]")
-                GMATmoreIR = request.form.get("GMAT[IR]")
+                GMATmoreV = request.form.get("GMAT[V]",0,int)
+                GMATmoreQ = request.form.get("GMAT[Q]",0,int)
+                GMATmoreAW = request.form.get("GMAT[AW]",0,int)
+                GMATmoreIR = request.form.get("GMAT[IR]",0,int)
                 sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
                 User.update_user_score(g.db, user_id=user_id,
                                        toefl=TOEFLmoreW, GMAT=sub_GMAT)
