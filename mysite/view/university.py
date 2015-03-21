@@ -84,7 +84,7 @@ def get_university_info():
                 img_num = 2
                 if num/3:
                     img_num = 1
-                
+
                 major["pic"] = get_main_major(img_num,major_row.main_major)
                # major["pic2"] = get_main_major(2,major_row.main_major)
                 majorlist.append(major)

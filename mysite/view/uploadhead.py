@@ -47,7 +47,7 @@ def get_random_head():
             head_list.append(girl)
             #if boy not in head_list:
             head_list.append(boy)
-        for row in range(1,40):
+        for row in range(1,39):
             nosex = get_user_hred_img(u"女生",row)
             head_list.append(nosex)
         random.shuffle(head_list)
