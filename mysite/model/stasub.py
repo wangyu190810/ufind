@@ -18,6 +18,17 @@ class Stasub(Base):
         connection.add(stasub)
         connection.commit()
 
+    @classmethod
+    def del_sub(cls,connection,user_id):
+        u"""删除sub"""
+        return connection.query(Stasub).filter(Stasub.user_id==user_id).delete()
+
+    @classmethod
+    def get_sub(cls,connection,user_id):
+        u"""获取sub"""
+        return connection.query(Stasub).filter(Stasub.user_id == user_id).scalar()
+
+
 
 class SubContent(Base):
     __tablename__ = "subcontent"

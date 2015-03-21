@@ -14,7 +14,7 @@ from mysite.model.major import Major
 from mysite.model.compare import CompareInfo, Compare
 from mysite.model.message import Message
 from mysite.model.score import Score
-
+from mysite.model.stasub import Stasub
 
 @validate_user_login
 @allow_cross_domain
@@ -158,8 +158,16 @@ def get_user_detail_info():
         score = Score.get_user_score(g.db, student_id)
         if score is None:
             return jsonify(student_info)
+
+        sub_list = list()
+        for row in Stasub.get_sub(g.db,user_id):
+            sub = dict()
+            sub["id"] = row.id
+            sub["grade"] = row.grade
+            sub_list.append(sub)
         GREmore = dict()
-        GREmore["sub"] = list()
+
+        GREmore["sub"] =sub_list
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
@@ -356,6 +364,20 @@ def update_user_info():
         print request.form
         if pic is not None:
             User.update_user_pic(g.db,user_id,pic)
+        if request.form.get("GRE[sub][0][id]"):
+            Stasub.del_sub(g.db,user_id)
+            num = 0
+            while True:
+                if request.form.get("'GRE[sub]["+num+"][id]'"):
+                    sub_id = request.form.get("'GRE[sub]["+num+"][id]'",0,int)
+                    grade = request.form.get("GRE[sub][0][grade]",0,int)
+                    sub_type = 0
+                    if sub_id >10:
+                        sub_type = 1
+                    Stasub.set_sub(g.db, sub_id=sub_id, grade=grade,
+                                   sub_type=sub_type, user_id=user_id)
+                break
+
         prevmajor = request.form.get("majorid")
         prevuniversity = request.form.get("universityid")
         User.update_user_info(g.db, user_id=user_id, username=username,

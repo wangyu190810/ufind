@@ -15,7 +15,7 @@ from mysite.model.user import User
 from mysite.model.score import Score
 from mysite.view.base import allow_cross_domain, validate_user_login, get_gre, \
     get_TELTS, get_Total, get_GMAT
-
+from mysite.model.stasub import Stasub
 
 @validate_user_login
 @allow_cross_domain
@@ -25,7 +25,21 @@ def set_user_score():
         if request.form.get("bginf") is not None:
             bginf = request.form.get("bginf")
             User.update_user_bginf(g.db, user_id, bginf)
-        print request.form
+        if request.form.get("GRE[sub][0][id]"):
+            Stasub.del_sub(g.db,user_id)
+            num = 0
+
+            while True:
+                if request.form.get("'GRE[sub]["+num+"][id]'"):
+                    sub_id = request.form.get("'GRE[sub]["+num+"][id]'",0,int)
+                    grade = request.form.get("GRE[sub][0][grade]",0,int)
+                    sub_type = 0
+                    if sub_id >10:
+                        sub_type = 1
+                    Stasub.set_sub(g.db, sub_id=sub_id, grade=grade,
+                                   sub_type=sub_type, user_id=user_id)
+                break
+
 
         if request.form.get("IELTSmore[R]") is not None:
             LELTSmoreR = request.form.get("IELTSmore[R]", 0, int)
