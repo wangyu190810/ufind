@@ -26,7 +26,7 @@ class Stasub(Base):
     @classmethod
     def get_sub(cls,connection,user_id):
         u"""获取sub"""
-        return connection.query(Stasub).filter(Stasub.user_id == user_id).scalar()
+        return connection.query(Stasub).filter(Stasub.user_id == user_id)
 
 
 
