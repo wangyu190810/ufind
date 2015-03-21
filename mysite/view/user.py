@@ -368,8 +368,8 @@ def update_user_info():
             Stasub.del_sub(g.db,user_id)
             num = 0
             while True:
-                if request.form.get("'GRE[sub]["+num+"][id]'"):
-                    sub_id = request.form.get("'GRE[sub]["+num+"][id]'",0,int)
+                if request.form.get("'GRE[sub]["+str(num)+"][id]'"):
+                    sub_id = request.form.get("'GRE[sub]["+str(num)+"][id]'",0,int)
                     grade = request.form.get("GRE[sub][0][grade]",0,int)
                     sub_type = 0
                     if sub_id >10:
