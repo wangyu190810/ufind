@@ -80,7 +80,8 @@ def get_university_info():
                                             faculty["facultyid"]):
                 major["majorid"] = major_row.id
                 major["name"] = major_row.name
-                major["pic"] = get_main_major(1,major_row.main_major)
+                major["pic1"] = get_main_major(1,major_row.main_major)
+                major["pic2"] = get_main_major(2,major_row.main_major)
                 majorlist.append(major)
                 major = {}
             faculty["majorlist"] = majorlist
