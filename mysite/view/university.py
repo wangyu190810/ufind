@@ -74,13 +74,13 @@ def get_university_info():
             faculty["facultyid"] = row.id
             faculty["chiname"] = row.chiname
             faculty["name"] = row.name
-            faculty["pic"] = get_main_major(1,row.main_major)
-            for row in Major.get_major_info(g.db,
+            #faculty["pic"] = get_main_major(1,row.main_major)
+            for major_row in Major.get_major_info(g.db,
                                             university_info["universityid"],
                                             faculty["facultyid"]):
-                major["majorid"] = row.id
-                major["name"] = row.name
-                major["pic"] = get_main_major(1,row.main_major)
+                major["majorid"] = major_row.id
+                major["name"] = major_row.name
+                major["pic"] = get_main_major(1,major_row.main_major)
                 majorlist.append(major)
                 major = {}
             faculty["majorlist"] = majorlist
