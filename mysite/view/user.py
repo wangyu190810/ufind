@@ -353,6 +353,7 @@ def update_user_info():
         username = request.form.get("engname")
         email = request.form.get("email")
         pic = request.form.get("pic")
+        print request.form
         if pic is not None:
             User.update_user_pic(g.db,user_id,pic)
         prevmajor = request.form.get("majorid")
