@@ -352,7 +352,7 @@ def edit_user_info_page():
         IELTSmore["R"] = score.IELTS_r
         IELTSmore["L"] = score.IELTS_l
         IELTSmore["S"] = score.IELTS_s
-        IELTSmore[""] = score.IELTS_w
+        IELTSmore["W"] = score.IELTS_w
         user_info["IELTSmore"] = IELTSmore
         return json.dumps(user_info)
     return jsonify(status="success")
