@@ -326,7 +326,7 @@ def edit_user_info_page():
         user_info["pic"] = user.pic
         user_info["phonenum"] = user.phone
         user_info["email"] = user.email
-        user_info["password"] = user.password
+        #user_info["password"] = user.password
         user_info["universityname"] = user.prevuniversity
         user_info["majorname"] = user.prevmajor
         score = Score.get_user_score(g.db, user_id)
