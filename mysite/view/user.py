@@ -160,7 +160,7 @@ def get_user_detail_info():
             return jsonify(student_info)
 
         sub_list = list()
-        for row in Stasub.get_sub(g.db,user_id):
+        for row in Stasub.get_sub(g.db,student_id):
             sub = dict()
             sub["id"] = row.id
             sub["grade"] = row.grade
