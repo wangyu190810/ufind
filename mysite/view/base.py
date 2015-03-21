@@ -69,6 +69,10 @@ def get_university_twodim(universityname):
     return u"http://www.ufindoffer.com/images/unimg/twodim/"+universityname+".jpg"
 
 
+def get_main_major(num,name):
+    return u"http://www.ufindoffer.com/images/unimg/major/"+name+str(num)+".png"
+
+
 def get_timestamp(create_time):
     timeArray = time.localtime(create_time)
     return time.strftime("%Y-%m-%d %H:%M:%S", timeArray)

@@ -13,7 +13,7 @@ from flask import request,jsonify,g
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.view.base import allow_cross_domain,get_university_img,\
-    get_university_logo,get_university_state
+    get_university_logo,get_university_state,get_main_major
 from mysite.model.offer import Offer
 from mysite.model.state import State
 
@@ -74,12 +74,13 @@ def get_university_info():
             faculty["facultyid"] = row.id
             faculty["chiname"] = row.chiname
             faculty["name"] = row.name
+            faculty["pic"] = get_main_major(1,row.name)
             for row in Major.get_major_info(g.db,
                                             university_info["universityid"],
                                             faculty["facultyid"]):
                 major["majorid"] = row.id
                 major["name"] = row.name
-                major["pic"] = ""
+                major["pic"] = get_main_major(1,row.name)
                 majorlist.append(major)
                 major = {}
             faculty["majorlist"] = majorlist
