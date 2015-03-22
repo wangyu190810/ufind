@@ -149,10 +149,13 @@ def get_user_detail_info():
             follows = dict()
             follow_user_id = row_follow.follow_user_id
             user = User.get_user_info(g.db, follow_user_id)
-            follows["name"] = user.username
-            follows["pic"] = user.pic
-            follows["studentid"] = follow_user_id
-            follows_list.append(follows)
+            if user is None:
+                follows_list.append(follows)
+            else:
+                follows["name"] = user.username
+                follows["pic"] = user.pic
+                follows["studentid"] = follow_user_id
+                follows_list.append(follows)
         student_info["follows"] = follows_list
         student_info["status"] = "success"
         score = Score.get_user_score(g.db, student_id)
