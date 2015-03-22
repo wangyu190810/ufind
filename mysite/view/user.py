@@ -300,6 +300,9 @@ def get_user_base_info():
         user_info = dict()
         user_info["status"] = "success"
         data = dict()
+        data["type"] = str(user.type)
+        data["bginf"] = user.bginf
+        user_info["data"] = data
         score = Score.get_user_score(g.db, user_id)
         if score is None:
             return jsonify(user_info)
@@ -338,8 +341,7 @@ def get_user_base_info():
         STAmore["CR"] = score.SAT_cr
         STAmore["W"] = score.SAT_w
         STAmore["M"] = score.SAT_m
-        data["type"] = str(user.type)
-        data["bginf"] = user.bginf
+
         if STAmore.get("CR") != 0:
             data["SATmore"] = STAmore
         IELTSmore = dict()
@@ -356,7 +358,6 @@ def get_user_base_info():
         GMATmore["IR"] = score.GMAT_ir
         if GMATmore.get("V") != 0:
             data["GMATmore"] = GMATmore
-        user_info["data"] = data
 
         return jsonify(user_info)
     return jsonify(status="false")
