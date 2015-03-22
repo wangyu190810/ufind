@@ -371,7 +371,7 @@ def edit_user_info_page():
         STAmore["CR"] = score.SAT_cr
         STAmore["W"] = score.SAT_w
         STAmore["M"] = score.SAT_m
-        user_info["STAmore"] = STAmore
+        user_info["SATmore"] = STAmore
         IELTSmore = dict()
         IELTSmore["R"] = score.IELTS_r
         IELTSmore["L"] = score.IELTS_l
