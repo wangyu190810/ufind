@@ -346,7 +346,7 @@ def edit_user_info_page():
 
         for sub in Stasub.get_sub(g.db,user_id):
             sub_dict = dict()
-            sub_dict["id"] = sub.id
+            sub_dict["id"] = sub.sub_id
             sub_dict["grade"] = sub.grade
             sub_list.append(sub_dict)
         print sub_list
