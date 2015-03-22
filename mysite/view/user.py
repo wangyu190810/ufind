@@ -195,6 +195,12 @@ def get_user_detail_info():
         STAmore["W"] = score.SAT_w
         STAmore["M"] = score.SAT_m
         student_info["SATmore"] = STAmore
+        GMATmore = dict()
+        GMATmore["V"] = score.GMAT_v
+        GMATmore["Q"] = score.GMAT_q
+        GMATmore["AW"] = score.GMAT_aw
+        GMATmore["IR"] = score.GMAT_ir
+        student_info["GMATmore"] = GMATmore
 
         return json.dumps(student_info)
 
@@ -372,6 +378,7 @@ def edit_user_info_page():
         IELTSmore["S"] = score.IELTS_s
         IELTSmore["W"] = score.IELTS_w
         user_info["IELTSmore"] = IELTSmore
+        print user_info
         return json.dumps(user_info)
     return jsonify(status="success")
 
