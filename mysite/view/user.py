@@ -349,7 +349,6 @@ def get_user_base_info():
         IELTSmore["W"] = score.IELTS_w
         if IELTSmore.get("R") != 0:
             data["IELTSmore"] = IELTSmore
-        user_info["data"] = data
         GMATmore = dict()
         GMATmore["V"] = score.GMAT_v
         GMATmore["Q"] = score.GMAT_q
@@ -357,6 +356,7 @@ def get_user_base_info():
         GMATmore["IR"] = score.GMAT_ir
         if GMATmore.get("V") != 0:
             data["GMATmore"] = GMATmore
+        user_info["data"] = data
 
         return jsonify(user_info)
     return jsonify(status="false")
