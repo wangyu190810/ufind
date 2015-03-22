@@ -331,7 +331,7 @@ def get_user_base_info():
         STAmore["CR"] = score.SAT_cr
         STAmore["W"] = score.SAT_w
         STAmore["M"] = score.SAT_m
-        data["type"] = user.type
+        data["type"] = str(user.type)
         data["bginf"] = user.bginf
         if STAmore.get("CR") != 0:
             data["SATmore"] = STAmore
