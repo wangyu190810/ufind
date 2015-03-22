@@ -307,6 +307,13 @@ def get_user_base_info():
         #GREmore["sub"] = list()
         sub_list = list()
 
+        data["GREmore"] = None
+        data["TOEFLmore"] = None
+
+        data["SATmore"] = None
+        data["IELTSmore"] = None
+
+        data["GMATmore"] = None
         for sub in Stasub.get_sub(g.db,user_id):
             sub_dict = dict()
             sub_dict["id"] = sub.sub_id
