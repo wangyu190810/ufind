@@ -290,13 +290,14 @@ def get_user_base_info():
             return jsonify(user_info)
         GREmore = dict()
         #GREmore["sub"] = list()
-        sub_list = list
+        sub_list = list()
 
         for sub in Stasub.get_sub(g.db,user_id):
             sub_dict = dict()
             sub_dict["id"] = sub.id
             sub_dict["grade"] = sub.grade
             sub_list.append(sub_dict)
+            
         GREmore["sub"] = sub_list
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
