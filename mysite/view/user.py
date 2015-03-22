@@ -335,7 +335,22 @@ def get_user_base_info():
         data["bginf"] = user.bginf
         if STAmore.get("CR") != 0:
             data["SATmore"] = STAmore
+        IELTSmore = dict()
+        IELTSmore["R"] = score.IELTS_r
+        IELTSmore["L"] = score.IELTS_l
+        IELTSmore["S"] = score.IELTS_s
+        IELTSmore["W"] = score.IELTS_w
+        if IELTSmore.get("R") != 0:
+            user_info["IELTSmore"] = IELTSmore
         user_info["data"] = data
+        GMATmore = dict()
+        GMATmore["V"] = score.GMAT_v
+        GMATmore["Q"] = score.GMAT_q
+        GMATmore["AW"] = score.GMAT_aw
+        GMATmore["IR"] = score.GMAT_ir
+        if GMATmore.get("V") != 0:
+            user_info["GMATmore"] = GMATmore
+
         return jsonify(user_info)
     return jsonify(status="false")
 
