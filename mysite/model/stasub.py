@@ -12,8 +12,8 @@ class Stasub(Base):
     user_id = Column(Integer)
 
     @classmethod
-    def set_sub(cls,connection,sud_id,grade,sub_type,user_id):
-        stasub = Stasub(sud_id=sud_id, grade=grade,
+    def set_sub(cls,connection,sub_id,grade,sub_type,user_id):
+        stasub = Stasub(sub_id=sub_id, grade=grade,
                         sub_type=sub_type, user_id=user_id)
         connection.add(stasub)
         connection.commit()
