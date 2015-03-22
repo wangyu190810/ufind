@@ -82,7 +82,7 @@ def get_university_info():
                 major["majorid"] = major_row.id
                 major["name"] = major_row.name
                 img_num = 2
-                if num/3:
+                if num % 3:
                     img_num = 1
                 print img_num
                 print num
