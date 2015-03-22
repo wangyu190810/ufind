@@ -364,7 +364,7 @@ def edit_user_info_page():
             return jsonify(status="false")
         user_info = dict()
         user_info["status"] = "success"
-        user_info["type"] = user.type
+        user_info["type"] = type(user.type)
         user_info["engname"] = user.username
         user_info["pic"] = user.pic
         user_info["phonenum"] = user.phone

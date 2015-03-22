@@ -65,6 +65,11 @@ def get_major_from_university_faculty():
                                                 ("universityid",
                                                 "facultyid",
                                                 "majorid"))
+
+        PPA_to = request.form.get("GPA[to]")
+        GPA_form = request.form.get("GPA[from]")
+
+
         major_list = list()
         if faculty_id is None and major_id is None:
             for row in Major.get_major_info_university(g.db, university_id):
