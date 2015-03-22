@@ -371,7 +371,7 @@ def edit_user_info_page():
             return jsonify(status="false")
         user_info = dict()
         user_info["status"] = "success"
-        user_info["type"] = str(user.type)
+        user_info["type"] = user.type
         user_info["engname"] = user.username
         user_info["pic"] = user.pic
         user_info["phonenum"] = user.phone
@@ -380,8 +380,8 @@ def edit_user_info_page():
         user_info["universityname"] = user.prevuniversity
         user_info["majorname"] = user.prevmajor
         score = Score.get_user_score(g.db, user_id)
-        #if score is None:
-        #    return json.dumps(user_info)
+        if score is None:
+            return json.dumps(user_info)
         GREmore = dict()
         sub_list = list()
 
