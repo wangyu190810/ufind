@@ -70,12 +70,12 @@ def get_university_info():
             university_info["pic1"] = get_university_img(row.name,1,u"长方形图片")
             university_info["pic2"] = get_university_img(row.name,2,u"长方形图片")
             university_info["link"] = link
-        num = 1
         for row in Faculty.get_faculty_info(g.db, university_id):
             faculty["facultyid"] = row.id
             faculty["chiname"] = row.chiname
             faculty["name"] = row.name
             #faculty["pic"] = get_main_major(1,row.main_major)
+            num = 1
             for major_row in Major.get_major_info(g.db,
                                             university_info["universityid"],
                                             faculty["facultyid"]):
@@ -92,6 +92,9 @@ def get_university_info():
                 major = {}
 
                 num += 1
+                if num == 4:
+                    break
+
             faculty["majorlist"] = majorlist
             majorlist = []
             facultylist.append(faculty)
