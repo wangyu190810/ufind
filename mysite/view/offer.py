@@ -51,7 +51,8 @@ def set_offer():
 
             offer_dict["universityname"] = university_name.chiname
             offer_dict["twodim"] = get_university_twodim(university_name.name)
-            offer_list.append(offer_dict)
+            if offer_dict not in offer_list:
+                offer_list.append(offer_dict)
         return jsonify(status="success",
                        offerlist=offer_list,
                        description=User.get_user_info(g.db,user_id).description)
