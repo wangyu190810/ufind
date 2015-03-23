@@ -468,7 +468,7 @@ def update_user_info():
                 else:
                     break
 
-        Stasub.del_sub(g.db,user_id)
+        #Stasub.del_sub(g.db,user_id)
         if request.form.get("SAT[sub][0][grade]"):
             num = 0
             while True:
