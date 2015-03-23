@@ -198,7 +198,7 @@ def get_user_detail_info():
         if TOEFLmore.get("R") != 0:
             student_info["TOEFLmore"] = TOEFLmore
         SATmore = dict()
-        SATmore["CR"] = score.SAT_cr
+        SATmore["R"] = score.SAT_cr
         SATmore["W"] = score.SAT_w
         SATmore["M"] = score.SAT_m
         if SATmore.get("W") != 0:
@@ -339,7 +339,7 @@ def get_user_base_info():
             data["TOEFLmore"] = TOEFLmore
         SATmore = dict()
         SATmore["sub"] = sub_list
-        SATmore["CR"] = score.SAT_cr
+        SATmore["R"] = score.SAT_cr
         SATmore["W"] = score.SAT_w
         SATmore["M"] = score.SAT_m
 
