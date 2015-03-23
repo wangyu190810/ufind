@@ -26,8 +26,9 @@ def set_user_score():
         if request.form.get("bginf") is not None:
             bginf = request.form.get("bginf")
             User.update_user_bginf(g.db, user_id, bginf)
+
+        Stasub.del_sub(g.db,user_id)
         if request.form.get("GRE[sub][0][id]"):
-            Stasub.del_sub(g.db,user_id)
             num = 0
 
             while True:

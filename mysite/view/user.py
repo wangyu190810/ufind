@@ -451,8 +451,9 @@ def update_user_info():
                 return jsonify(status="false")
         if pic is not None:
             User.update_user_pic(g.db,user_id,pic)
+
+        Stasub.del_sub(g.db,user_id)
         if request.form.get("GRE[sub][0][id]"):
-            Stasub.del_sub(g.db,user_id)
             num = 0
             while True:
                 if request.form.get("GRE[sub]["+str(num)+"][id]"):
