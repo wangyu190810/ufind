@@ -65,7 +65,10 @@ class Score(Base):
                           GMAT_v=GMAT_v,
                           GMAT_q=GMAT_q,
                           GMAT_aw=GMAT_aw,
-                          GMAT_ir=GMAT_ir
+                          GMAT_ir=GMAT_ir,
+                          SAT_cr=SAT_cr,
+                          SAT_m=SAT_m,
+                          SAT_w=SAT_w
             )
             connection.add(score)
             connection.commit()

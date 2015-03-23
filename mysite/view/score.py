@@ -14,7 +14,7 @@ from mysite.model.major import Major
 from mysite.model.user import User
 from mysite.model.score import Score
 from mysite.view.base import allow_cross_domain, validate_user_login, get_gre, \
-    get_TELTS, get_Total, get_GMAT
+    get_TELTS, get_Total, get_GMAT,get_SAT
 from mysite.model.stasub import Stasub
 
 @validate_user_login
@@ -41,6 +41,8 @@ def set_user_score():
                                    sub_type=sub_type, user_id=user_id)
                 break
 
+        if request.form.get("SATmore[M]"):
+            pass
 
         if request.form.get("IELTSmore[R]") is not None:
             LELTSmoreR = request.form.get("IELTSmore[R]", 0, int)
@@ -64,7 +66,24 @@ def set_user_score():
                                     GRE_v=GREmoreV,
                                     GRE_q=GREmoreQ,
                                     GRE_aw=GREmoreAW
-
+                )
+            elif request.form.get("SATmore[M]"):
+                sat_m = request.form.get("SATmore[M]", 0, int)
+                sat_cr = request.form.get("SATmore[CR]", 0, int)
+                sat_w = request.form.get("SATmore[W]", 0, int)
+                sub_sat = get_SAT(sat_cr,sat_w,sat_m)
+                User.update_user_score(g.db,user_id=user_id,
+                                       lelts=sub_TELTS,
+                                       sat=sub_sat)
+                Score.set_user_info(connection=g.db,
+                                    user_id=user_id,
+                                    IELTS_r=LELTSmoreR,
+                                    IELTS_l=LELTSmoreL,
+                                    IELTS_s=LELTSmoreS,
+                                    IELTS_w=LELTSmoreW,
+                                    SAT_m=sat_m,
+                                    SAT_w=sat_w,
+                                    SAT_cr=sat_cr
                 )
             else:
                 GMATmoreV = request.form.get("GMATmore[V]", 0, int)
@@ -109,6 +128,24 @@ def set_user_score():
                                     GRE_q=GREmoreQ,
                                     GRE_aw=GREmoreAW
 
+                )
+            elif request.form.get("SATmore[M]"):
+                sat_m = request.form.get("SATmore[M]", 0, int)
+                sat_cr = request.form.get("SATmore[CR]", 0, int)
+                sat_w = request.form.get("SATmore[W]", 0, int)
+                sub_sat = get_SAT(sat_cr,sat_w,sat_m)
+                User.update_user_score(g.db,user_id=user_id,
+                                       toefl=sub_TOEFL,
+                                       sat=sub_sat)
+                Score.set_user_info(connection=g.db,
+                                    user_id=user_id,
+                                    TOEFL_r=TOEFLmoreR,
+                                    TOEFL_l=TOEFLmoreL,
+                                    TOEFL_s=TOEFLmoreS,
+                                    TOEFL_w=TOEFLmoreW,
+                                    SAT_m=sat_m,
+                                    SAT_w=sat_w,
+                                    SAT_cr=sat_cr
                 )
             else:
                 GMATmoreV = request.form.get("GMATmore[V]", 0, int)

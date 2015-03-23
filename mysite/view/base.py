@@ -102,7 +102,7 @@ def get_GMAT(v,q):
     return v + q
 
 
-def get_STA(CR,M,W):
+def get_SAT(CR,M,W):
     return CR + M + W
 
 

@@ -173,14 +173,17 @@ class User(Base):
 
     @classmethod
     def update_user_score(cls, connection, user_id,
-                          gre=None, toefl=None, lelts=None,GMAT=None):
+                          gre=None, toefl=None,
+                          lelts=None, GMAT=None,
+                          sat=None):
         u"""分数计算结果的更新"""
         connection.query(User).filter(User.id == user_id).update(
             {
                 User.GRE: gre,
                 User.GMAT: GMAT,
                 User.TOEFL: toefl,
-                User.IELTS: lelts
+                User.IELTS: lelts,
+                User.SAT: sat
             }
         )
         connection.commit()
