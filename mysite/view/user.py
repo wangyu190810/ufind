@@ -7,7 +7,7 @@ import json
 from mysite.model.user import User, UserFollow
 from mysite.view.base import allow_cross_domain, get_timestamp, \
     validate_user_login,get_university_logo,get_university_twodim,\
-    get_GMAT, get_gre, get_TELTS, get_Total,get_STA
+    get_GMAT, get_gre, get_TELTS, get_Total,get_SAT
 from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
@@ -479,6 +479,25 @@ def update_user_info():
                                     GRE_aw=GREmoreAW
 
                                     )
+            elif request.form.get("SATmore[M]"):
+                sat_m = request.form.get("SATmore[M]", 0, int)
+                sat_cr = request.form.get("SATmore[CR]", 0, int)
+                sat_w = request.form.get("SATmore[W]", 0, int)
+                sub_sat = get_SAT(sat_cr,sat_w,sat_m)
+                User.update_user_score(g.db,user_id=user_id,
+                                       lelts=sub_TELTS,
+                                       sat=sub_sat)
+                Score.set_user_info(connection=g.db,
+                                    user_id=user_id,
+                                    IELTS_r=LELTSmoreR,
+                                    IELTS_l=LELTSmoreL,
+                                    IELTS_s=LELTSmoreS,
+                                    IELTS_w=LELTSmoreW,
+                                    SAT_m=sat_m,
+                                    SAT_w=sat_w,
+                                    SAT_cr=sat_cr
+                )
+
             else:
                 GMATmoreV = request.form.get("GMAT[V]",0,int)
                 GMATmoreQ = request.form.get("GMAT[Q]",0,int)
@@ -526,6 +545,24 @@ def update_user_info():
                                     GRE_aw=GREmoreAW
 
                                     )
+            elif request.form.get("SATmore[M]"):
+                sat_m = request.form.get("SATmore[M]", 0, int)
+                sat_cr = request.form.get("SATmore[CR]", 0, int)
+                sat_w = request.form.get("SATmore[W]", 0, int)
+                sub_sat = get_SAT(sat_cr,sat_w,sat_m)
+                User.update_user_score(g.db,user_id=user_id,
+                                       toefl=sub_TOEFL,
+                                       sat=sub_sat)
+                Score.set_user_info(connection=g.db,
+                                    user_id=user_id,
+                                    TOEFL_r=TOEFLmoreR,
+                                    TOEFL_l=TOEFLmoreL,
+                                    TOEFL_s=TOEFLmoreS,
+                                    TOEFL_w=TOEFLmoreW,
+                                    SAT_m=sat_m,
+                                    SAT_w=sat_w,
+                                    SAT_cr=sat_cr
+                )
             else:
                 GMATmoreV = request.form.get("GMAT[V]",0,int)
                 GMATmoreQ = request.form.get("GMAT[Q]",0,int)
