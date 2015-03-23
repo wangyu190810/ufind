@@ -121,7 +121,9 @@ class User(Base):
     @classmethod
     def change_password_old(cls,connection,user_id,password,passwordold):
         u"""更新用户密码"""
-        if connection.query(User).filter(User.id==user_id).filter(User.password==passwordold):
+        if not connection.query(User).\
+                filter(User.id == user_id).\
+                filter(User.password == passwordold).scalar():
             return False
 
         connection.query(User).\
