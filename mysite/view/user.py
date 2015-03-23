@@ -420,6 +420,13 @@ def edit_user_info_page():
         if IELTSmore.get("R") != 0:
             user_info["IELTSmore"] = IELTSmore
         print user_info
+        GMATmore = dict()
+        GMATmore["V"] = score.GMAT_v
+        GMATmore["Q"] = score.GMAT_q
+        GMATmore["AW"] = score.GMAT_aw
+        GMATmore["IR"] = score.GMAT_ir
+        if GMATmore.get("V") != 0:
+            user_info["GMATmore"] = GMATmore
         return json.dumps(user_info)
     return jsonify(status="success")
 
