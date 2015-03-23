@@ -41,6 +41,21 @@ def set_user_score():
                                    sub_type=sub_type, user_id=user_id)
                 break
 
+        if request.form.get("SATmore[sub][0][grade]"):
+            Stasub.del_sub(g.db,user_id)
+            num = 0
+
+            while True:
+                if request.form.get("SATmore[sub]["+str(num)+"][id]"):
+                    sub_id = request.form.get("SATmore[sub]["+str(num)+"][id]",0,int)
+                    grade = request.form.get("SATmore[sub][0][grade]",0,int)
+                    sub_type = 0
+                    if sub_id >10:
+                        sub_type = 1
+                    Stasub.set_sub(g.db, sub_id=sub_id, grade=grade,
+                                   sub_type=sub_type, user_id=user_id)
+                break
+
         if request.form.get("SATmore[M]"):
             pass
 
