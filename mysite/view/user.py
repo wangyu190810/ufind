@@ -407,7 +407,7 @@ def edit_user_info_page():
             user_info["TOEFLmore"] = TOEFLmore
         SATmore = dict()
         SATmore["sub"] = sub_list
-        SATmore["R"] = score.SAT_cr
+        SATmore["CR"] = score.SAT_cr
         SATmore["W"] = score.SAT_w
         SATmore["M"] = score.SAT_m
         if SATmore.get("M") != 0:
