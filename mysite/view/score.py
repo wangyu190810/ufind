@@ -43,8 +43,8 @@ def set_user_score():
                 else:
                     break
 
+        Stasub.del_sub(g.db,user_id)
         if request.form.get("SATmore[sub][0][grade]"):
-            Stasub.del_sub(g.db,user_id)
             num = 0
 
             while True:
