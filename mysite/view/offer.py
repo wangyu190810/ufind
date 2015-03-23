@@ -31,6 +31,8 @@ def set_offer():
                 break
             num += 1
             User.update_user_grade(g.db,user_id=user_id,grade=offer_grade)
+            User.del_same_offer(g.db,university_id=offer_university_id,
+                                major_id =offer_major_id,user_id=user_id)
             Offer.set_offer(g.db,
                             user_id=user_id,
                             university_id=offer_university_id,

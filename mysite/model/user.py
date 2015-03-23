@@ -29,7 +29,7 @@ class User(Base):
     prevuniversity = Column(Unicode(225), doc=u"国内学校")
     prevmajor = Column(Unicode(255), doc=u"专业，如果时高中字段为空")
     gender = Column(Integer, doc=u"性别：1表示男，0表示女")
-    grade = Column(Unicode(255), doc=u"学生的级别")
+    grade = Column(Unicode(255), doc=u"申请的级别学生的级别")
     type = Column(Integer,
                   doc=u"高中还是大学：0表示高中，1表示大学,3表示研究生")
     description = Column(Unicode(255), doc=u"描述")

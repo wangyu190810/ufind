@@ -85,3 +85,12 @@ class Offer(Base):
         return connection.query(func.count(Offer.id)).\
             filter(Offer.university_id == university_id).\
             filter(Offer.major_id == major_id).scalar()
+
+    @classmethod
+    def del_same_offer(cls,connection,university_id,major_id,user_id):
+        """删除用户的重复offer"""
+        connection.query(Offer).\
+            filter(Offer.university_id == university_id).\
+            filter(Offer.user_id == user_id).\
+            filter(Offer.major_id == major_id).delete()
+        connection.commit()
