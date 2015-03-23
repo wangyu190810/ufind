@@ -337,13 +337,14 @@ def get_user_base_info():
         TOEFLmore["W"] = score.TOEFL_w
         if TOEFLmore.get("W") != 0:
             data["TOEFLmore"] = TOEFLmore
-        STAmore = dict()
-        STAmore["CR"] = score.SAT_cr
-        STAmore["W"] = score.SAT_w
-        STAmore["M"] = score.SAT_m
+        SATmore = dict()
+        SATmore["sub"] = sub_list
+        SATmore["CR"] = score.SAT_cr
+        SATmore["W"] = score.SAT_w
+        SATmore["M"] = score.SAT_m
 
-        if STAmore.get("CR") != 0:
-            data["SATmore"] = STAmore
+        if SATmore.get("CR") != 0:
+            data["SATmore"] = SATmore
         IELTSmore = dict()
         IELTSmore["R"] = score.IELTS_r
         IELTSmore["L"] = score.IELTS_l
