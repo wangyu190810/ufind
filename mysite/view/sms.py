@@ -48,6 +48,7 @@ def send_sms():
         phonenum = eval(cc.keys()[0])
         phone = phonenum["phonenum"]
         sms_type = phonenum.get("type")
+        print request.form
         user = User.get_user_info_by_phone(g.db,phone)
         if (user is None and sms_type == 0) or (user is not None and sms_type is None):
             if len(phone) == 11 and phone[:2] in ["13", "15", "17", "18"]:
