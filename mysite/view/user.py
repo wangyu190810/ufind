@@ -73,8 +73,7 @@ def get_user_detail_info():
             if row.scholarship is not None:
                 offer_info["scholarship"] = \
                     str(row.scholarship) + row.scholarship_type
-            else:
-                offer_info["scholarship"] = None
+                #offer_info["scholarship"] = None
             offers.append(offer_info)
         student_info["offers"] = offers
         compares = []
