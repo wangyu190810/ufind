@@ -434,6 +434,13 @@ def update_user_info():
         email = request.form.get("email")
         pic = request.form.get("pic")
         print request.form
+        if request.form.get("checknum"):
+            pass
+        if request.form.get("passwordold"):
+            password = request.form.get("password")
+            passwordold = request.form.get("passwordold")
+            if not User.change_password_old(g.db,user_id,password,passwordold):
+                return jsonify(status="false")
         if pic is not None:
             User.update_user_pic(g.db,user_id,pic)
         if request.form.get("GRE[sub][0][id]"):

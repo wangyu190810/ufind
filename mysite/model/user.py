@@ -113,10 +113,32 @@ class User(Base):
 
     @classmethod
     def change_password(cls, connection, phone, password):
-        u"""修改密码"""
+        u"""手机修改密码"""
         connection.query(User).filter(User.phone == phone).update({
             User.password: password})
         connection.commit()
+
+    @classmethod
+    def change_password_old(cls,connection,user_id,password,passwordold):
+        u"""更新用户密码"""
+        if connection.query(User).filter(User.id==user_id).filter(User.password==passwordold):
+            return False
+
+        connection.query(User).\
+            filter(User.id == user_id).\
+            filter(User.password == passwordold).update(
+            {
+                User.password: password
+            }
+        )
+        return True
+
+    @classmethod
+    def update_user_phone(cls,connection,user_id,phone,checknum):
+        # TODO
+        if connection.query(User).filter(user_id):
+            pass
+
 
     @classmethod
     def get_user_info_by_phone(cls, connection, phone):
