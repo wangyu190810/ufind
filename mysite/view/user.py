@@ -451,14 +451,14 @@ def update_user_info():
                                    sub_type=sub_type, user_id=user_id)
                 break
 
-        if request.form.get("SATmore[sub][0][grade]"):
+        if request.form.get("SAT[sub][0][grade]"):
             Stasub.del_sub(g.db,user_id)
             num = 0
 
             while True:
-                if request.form.get("SATmore[sub]["+str(num)+"][id]"):
-                    sub_id = request.form.get("SATmore[sub]["+str(num)+"][id]",0,int)
-                    grade = request.form.get("SATmore[sub][0][grade]",0,int)
+                if request.form.get("SAT[sub]["+str(num)+"][id]"):
+                    sub_id = request.form.get("SAT[sub]["+str(num)+"][id]",0,int)
+                    grade = request.form.get("SAT[sub][0][grade]",0,int)
                     sub_type = 0
                     if sub_id >10:
                         sub_type = 1
@@ -497,10 +497,10 @@ def update_user_info():
                                     GRE_aw=GREmoreAW
 
                                     )
-            elif request.form.get("SATmore[M]"):
-                sat_m = request.form.get("SATmore[M]", 0, int)
-                sat_cr = request.form.get("SATmore[CR]", 0, int)
-                sat_w = request.form.get("SATmore[W]", 0, int)
+            elif request.form.get("SAT[M]"):
+                sat_m = request.form.get("SAT[M]", 0, int)
+                sat_cr = request.form.get("SAT[CR]", 0, int)
+                sat_w = request.form.get("SAT[W]", 0, int)
                 sub_sat = get_SAT(sat_cr,sat_w,sat_m)
                 User.update_user_score(g.db,user_id=user_id,
                                        lelts=sub_TELTS,
@@ -563,10 +563,10 @@ def update_user_info():
                                     GRE_aw=GREmoreAW
 
                                     )
-            elif request.form.get("SATmore[M]"):
-                sat_m = request.form.get("SATmore[M]", 0, int)
-                sat_cr = request.form.get("SATmore[CR]", 0, int)
-                sat_w = request.form.get("SATmore[W]", 0, int)
+            elif request.form.get("SAT[M]"):
+                sat_m = request.form.get("SAT[M]", 0, int)
+                sat_cr = request.form.get("SAT[CR]", 0, int)
+                sat_w = request.form.get("SAT[W]", 0, int)
                 sub_sat = get_SAT(sat_cr,sat_w,sat_m)
                 User.update_user_score(g.db,user_id=user_id,
                                        toefl=sub_TOEFL,
