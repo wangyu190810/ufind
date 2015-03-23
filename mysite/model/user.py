@@ -124,6 +124,7 @@ class User(Base):
         if not connection.query(User).\
                 filter(User.id == user_id).\
                 filter(User.password == passwordold).scalar():
+            print "asdadsf"
             return False
 
         connection.query(User).\

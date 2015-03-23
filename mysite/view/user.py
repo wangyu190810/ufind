@@ -440,6 +440,7 @@ def update_user_info():
             password = request.form.get("password")
             passwordold = request.form.get("passwordold")
             if not User.change_password_old(g.db,user_id,password,passwordold):
+                print "123124"
                 return jsonify(status="false")
         if pic is not None:
             User.update_user_pic(g.db,user_id,pic)
