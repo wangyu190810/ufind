@@ -39,8 +39,9 @@ def set_user_score():
                         sub_type = 1
                     Stasub.set_sub(g.db, sub_id=sub_id, grade=grade,
                                    sub_type=sub_type, user_id=user_id)
-                num += 1
-                break
+                    num += 1
+                else:
+                    break
 
         if request.form.get("SATmore[sub][0][grade]"):
             Stasub.del_sub(g.db,user_id)
@@ -55,11 +56,9 @@ def set_user_score():
                         sub_type = 1
                     Stasub.set_sub(g.db, sub_id=sub_id, grade=grade,
                                    sub_type=sub_type, user_id=user_id)
-                num += 1
-                break
-
-        if request.form.get("SATmore[M]"):
-            pass
+                    num += 1
+                else:
+                    break
 
         if request.form.get("IELTSmore[R]") is not None:
             LELTSmoreR = request.form.get("IELTSmore[R]", 0, int)
