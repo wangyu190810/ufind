@@ -251,7 +251,9 @@ def get_user_in_university():
                         print user
                         if user:
                             print GPA_to
-                            if GPA_to is not None:
+                            print GPA_form
+                            print get_gap_compare(GPA_to,GPA_form,user.GPA)
+                            if GPA_to != 0:
 
                                 if get_gap_compare(GPA_to,GPA_form,user.GPA):
                                     student_list.append(row.user_id)
