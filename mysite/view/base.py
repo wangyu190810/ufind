@@ -119,9 +119,9 @@ def get_compare_score(GPA_TO,GPA_from,GPA):
     print type(GPA_TO)
     print type(GPA_from)
 
-    if float(GPA_from) < float(GPA) and float(GPA_TO) > float(GPA):
+    if float(GPA_from) <= float(GPA) and float(GPA_TO) >= float(GPA):
         return True
-    elif float(GPA_from) > float(GPA) and float(GPA_TO) < float(GPA):
+    elif float(GPA_from) >= float(GPA) and float(GPA_TO) <= float(GPA):
         return True
     return False
 
