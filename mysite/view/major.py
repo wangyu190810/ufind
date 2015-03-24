@@ -12,7 +12,7 @@ from mysite.model.university import University
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.compare import CompareInfo
-from mysite.view.base import allow_cross_domain,get_gap_compare
+from mysite.view.base import allow_cross_domain
 from mysite.model.offer import Offer
 from mysite.model.user import User
 
