@@ -106,7 +106,7 @@ def get_SAT(CR,M,W):
     return CR + M + W
 
 
-def get_gap_compare(GPA_TO,GPA_from,GPA):
+def get_compare_score(GPA_TO,GPA_from,GPA):
     #if GPA_TO > GPA and GPA_from < GPA:
     print GPA
     print GPA_TO
@@ -120,9 +120,12 @@ def get_gap_compare(GPA_TO,GPA_from,GPA):
     print type(GPA_from)
 
     if float(GPA_from) < float(GPA) and float(GPA_TO) > float(GPA):
-
+        return True
+    elif float(GPA_from) > float(GPA) and float(GPA_TO) < float(GPA):
         return True
     return False
+
+
 
 
 def set_sign_safe(sign_file):

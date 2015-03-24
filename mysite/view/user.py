@@ -7,7 +7,7 @@ import json
 from mysite.model.user import User, UserFollow
 from mysite.view.base import allow_cross_domain, get_timestamp, \
     validate_user_login,get_university_logo,get_university_twodim,\
-    get_GMAT, get_gre, get_TELTS, get_Total,get_SAT,get_gap_compare
+    get_GMAT, get_gre, get_TELTS, get_Total,get_SAT,get_compare_score
 from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
@@ -224,12 +224,12 @@ def get_user_in_university():
         university_id = data.get("universityid")
         faculty_id = data.get("facultyid")
         major_id = data.get("majorid")
-        GPA_to = data.get("GPA[to]",float)
-        GPA_form = data.get("GPA[from]",float)
-        TOEFL_to = request.form.get("TOEFL[to]")
-        TOEFL_form = request.form.get("TOEFL[from]")
-        GER_to = request.form.get("GRE[to]")
-        GER_form = request.form.get("GRE[from]")
+        GPA_to = data.get("GPA[to]",0.0,float)
+        GPA_form = data.get("GPA[from]",0.0,float)
+        TOEFL_to = request.form.get("TOEFL[to]",0.0,float)
+        TOEFL_form = request.form.get("TOEFL[from]",0.0,float)
+        GER_to = request.form.get("GRE[to]",0.0,float)
+        GER_form = request.form.get("GRE[from]",0.0,float)
         TOEFL_form = request.form.get("TOEFL[from]")
         TOEFL_form = request.form.get("TOEFL[from]")#   SAT = data["SAT"]
         page = data.get("page")
@@ -252,10 +252,20 @@ def get_user_in_university():
                         if user:
                             print GPA_to
                             print GPA_form
-                            print get_gap_compare(GPA_to,GPA_form,user.GPA)
-                            if GPA_to != 0:
+                            print get_compare_score(GPA_to,GPA_form,user.GPA)
+                            if GPA_to != 0.0:
+                                if TOEFL_to != 0.0:
+                                    if GER_to != 0.0:
+                                        if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                                            get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and\
+                                            get_compare_score(GER_to,GER_form,user.GRE):
 
-                                if get_gap_compare(GPA_to,GPA_form,user.GPA):
+                                                student_list.append(row.user_id)
+                                    if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                                            get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL):
+
+                                        student_list.append(row.user_id)
+                                if get_compare_score(GPA_to,GPA_form,user.GPA):
                                     student_list.append(row.user_id)
                             else:
                                 student_list.append(row.user_id)
