@@ -128,9 +128,12 @@ def get_major_from_university_faculty():
                         student_info["studentimg"] = user.pic
                         student_info["GPA"] = user.GPA
                         student_info["prevuniversity"] = user.prevuniversity
+                        print student_info
                         if GPA_to is not None:
+                            print "123124"
                             if get_gap_compare(GPA_to,GPA_form,user.GPA):
                                 students.append(student_info)
+                                print "asdfasdf"
                         else:
                             students.append(student_info)
                         major_info["students"] = students
