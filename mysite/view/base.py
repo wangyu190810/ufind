@@ -108,7 +108,11 @@ def get_SAT(CR,M,W):
 
 def get_gap_compare(GPA_TO,GPA_from,GPA):
     #if GPA_TO > GPA and GPA_from < GPA:
+    print GPA
+    print GPA_TO
+    print GPA_from
     if GPA_from < GPA < GPA_TO:
+
         return True
     return False
 
