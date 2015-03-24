@@ -287,6 +287,28 @@ def get_user_in_university():
                 for row in Offer.get_user_id_from_university(g.db,
                                                         university_id,
                                                         major_id):
+                    user = User.get_user_info(g.db,row.user_id)
+                    print user
+                    if user:
+                        print GPA_to
+                        print GPA_form
+                        print get_compare_score(GPA_to,GPA_form,user.GPA)
+                        if GPA_to != 0.0:
+                            if TOEFL_to != 0.0:
+                                if GER_to != 0.0:
+                                    if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                                        get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and\
+                                        get_compare_score(GER_to,GER_form,user.GRE):
+
+                                                student_list.append(row.user_id)
+                                elif get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                                        get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL):
+
+                                    student_list.append(row.user_id)
+                            elif get_compare_score(GPA_to,GPA_form,user.GPA):
+                                student_list.append(row.user_id)
+                        else:
+                            student_list.append(row.user_id)
                     student_list.append(row.user_id)
 
             student = dict()
