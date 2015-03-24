@@ -261,11 +261,11 @@ def get_user_in_university():
                                             get_compare_score(GER_to,GER_form,user.GRE):
 
                                                 student_list.append(row.user_id)
-                                    if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                                    elif get_compare_score(GPA_to,GPA_form,user.GPA) and \
                                             get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL):
 
                                         student_list.append(row.user_id)
-                                if get_compare_score(GPA_to,GPA_form,user.GPA):
+                                elif get_compare_score(GPA_to,GPA_form,user.GPA):
                                     student_list.append(row.user_id)
                             else:
                                 student_list.append(row.user_id)
