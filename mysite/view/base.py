@@ -111,7 +111,7 @@ def get_gap_compare(GPA_TO,GPA_from,GPA):
     print GPA
     print GPA_TO
     print GPA_from
-    if GPA_from < GPA < GPA_TO:
+    if GPA_from < GPA and GPA_TO > GPA:
 
         return True
     return False
