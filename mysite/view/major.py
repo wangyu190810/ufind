@@ -106,6 +106,7 @@ def get_major_from_university_faculty():
                     major_info["students"] = students
                 if major_info.get("students") is not None:
                     major_list.append(major_info)
+                print "zxcvzxcvzvc"
             return jsonify(status="success",
                            majorlist=major_list)
         elif major_id is None:
@@ -161,6 +162,7 @@ def get_major_from_university_faculty():
                     student_info["prevuniversity"] = user.prevuniversity
                     students.append(student_info)
                     major_info["students"] = students
+                print "123123123"
                 if major_info.get("students") is not None:
                     major_list.append(major_info)
             return jsonify(status="success",
