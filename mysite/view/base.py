@@ -106,6 +106,12 @@ def get_SAT(CR,M,W):
     return CR + M + W
 
 
+def get_gap_compare(GPA_TO,GPA_from,GPA):
+    if GPA_TO < GPA and GPA_from > GPA:
+        return True
+    return False
+
+
 def set_sign_safe(sign_file):
     s = Signer(Config.login_sign)
     return s.sign(sign_file)

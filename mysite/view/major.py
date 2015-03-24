@@ -12,7 +12,7 @@ from mysite.model.university import University
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
 from mysite.model.compare import CompareInfo
-from mysite.view.base import allow_cross_domain
+from mysite.view.base import allow_cross_domain,get_gap_compare
 from mysite.model.offer import Offer
 from mysite.model.user import User
 
@@ -66,8 +66,15 @@ def get_major_from_university_faculty():
                                                 "facultyid",
                                                 "majorid"))
 
-        PPA_to = request.form.get("GPA[to]")
+        GPA_to = request.form.get("GPA[to]")
         GPA_form = request.form.get("GPA[from]")
+        TOEFL_to = request.form.get("TOEFL[to]")
+        TOEFL_form = request.form.get("TOEFL[from]")
+        GER_to = request.form.get("GRE[to]")
+        GER_form = request.form.get("GRE[from]")
+        TOEFL_form = request.form.get("TOEFL[from]")
+        TOEFL_form = request.form.get("TOEFL[from]")
+
 
 
         major_list = list()
@@ -91,7 +98,11 @@ def get_major_from_university_faculty():
                         student_info["name"] = user.username
                         student_info["GPA"] = user.GPA
                         student_info["prevuniversity"] = user.prevuniversity
-                        students.append(student_info)
+                        if GPA_to is not None:
+                            if get_gap_compare(GPA_to,GPA_form,user.GPA):
+                                students.append(student_info)
+                        else:
+                            students.append(student_info)
                     major_info["students"] = students
                 if major_info.get("students") is not None:
                     major_list.append(major_info)
