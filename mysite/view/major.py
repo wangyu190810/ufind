@@ -66,14 +66,7 @@ def get_major_from_university_faculty():
                                                 "facultyid",
                                                 "majorid"))
 
-        GPA_to = request.form.get("GPA[to]")
-        GPA_form = request.form.get("GPA[from]")
-        TOEFL_to = request.form.get("TOEFL[to]")
-        TOEFL_form = request.form.get("TOEFL[from]")
-        GER_to = request.form.get("GRE[to]")
-        GER_form = request.form.get("GRE[from]")
-        TOEFL_form = request.form.get("TOEFL[from]")
-        TOEFL_form = request.form.get("TOEFL[from]")
+
 
 
 
@@ -98,11 +91,8 @@ def get_major_from_university_faculty():
                         student_info["name"] = user.username
                         student_info["GPA"] = user.GPA
                         student_info["prevuniversity"] = user.prevuniversity
-                        if GPA_to is not None:
-                            if get_gap_compare(GPA_to,GPA_form,user.GPA):
-                                students.append(student_info)
-                        else:
-                            students.append(student_info)
+
+                        students.append(student_info)
                     major_info["students"] = students
                 if major_info.get("students") is not None:
                     major_list.append(major_info)
@@ -129,14 +119,7 @@ def get_major_from_university_faculty():
                         student_info["studentimg"] = user.pic
                         student_info["GPA"] = user.GPA
                         student_info["prevuniversity"] = user.prevuniversity
-                        print student_info
-                        if GPA_to is not None:
-                            print "123124"
-                            if get_gap_compare(GPA_to,GPA_form,user.GPA):
-                                students.append(student_info)
-                                print "asdfasdf"
-                        else:
-                            students.append(student_info)
+                        students.append(student_info)
                         major_info["students"] = students
                     if major_info.get("students") is not None:
                         major_list.append(major_info)

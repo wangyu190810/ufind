@@ -7,7 +7,7 @@ import json
 from mysite.model.user import User, UserFollow
 from mysite.view.base import allow_cross_domain, get_timestamp, \
     validate_user_login,get_university_logo,get_university_twodim,\
-    get_GMAT, get_gre, get_TELTS, get_Total,get_SAT
+    get_GMAT, get_gre, get_TELTS, get_Total,get_SAT,get_gap_compare
 from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
@@ -224,13 +224,14 @@ def get_user_in_university():
         university_id = data.get("universityid")
         faculty_id = data.get("facultyid")
         major_id = data.get("majorid")
-     #   grade = data.get("grade")
-     #   GPA = data["GPA"]
-     #   TOEFL = data["TOEFL"]
-     #   GRE = data["GRE"]
-     #   IELTS = data["IELTS"]
-     #   GMAT = data["GMAT"]
-     #   SAT = data["SAT"]
+        GPA_to = request.form.get("GPA[to]")
+        GPA_form = request.form.get("GPA[from]")
+        TOEFL_to = request.form.get("TOEFL[to]")
+        TOEFL_form = request.form.get("TOEFL[from]")
+        GER_to = request.form.get("GRE[to]")
+        GER_form = request.form.get("GRE[from]")
+        TOEFL_form = request.form.get("TOEFL[from]")
+        TOEFL_form = request.form.get("TOEFL[from]")#   SAT = data["SAT"]
         page = data.get("page")
         compares = {}
         compare_list = []
@@ -246,7 +247,14 @@ def get_user_in_university():
                     for row in Offer.get_user_id_from_university(g.db,
                                                          university_id,
                                                          row_major.id):
-                        student_list.append(row.user_id)
+                        user = User.get_user_info(g.db,row.user_id)
+                        if user:
+
+                            if GPA_to is not None:
+                                if get_gap_compare(GPA_to,GPA_form,user.GPA):
+                                    student_list.append(row.user_id)
+                            else:
+                                student_list.append(row.user_id)
                     student["studentlist"] = student_list
                     student["majorid"] = row_major.id
                     student["majorname"] = row_major.name
