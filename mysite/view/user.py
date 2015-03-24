@@ -230,8 +230,8 @@ def get_user_in_university():
         TOEFL_form = request.form.get("TOEFL[from]",0.0,float)
         GER_to = request.form.get("GRE[to]",0.0,float)
         GER_form = request.form.get("GRE[from]",0.0,float)
-        TOEFL_form = request.form.get("TOEFL[from]")
-        TOEFL_form = request.form.get("TOEFL[from]")#   SAT = data["SAT"]
+        #TOEFL_form = request.form.get("TOEFL[from]")
+        #TOEFL_form = request.form.get("TOEFL[from]")#   SAT = data["SAT"]
         page = data.get("page")
         compares = {}
         compare_list = []
@@ -248,7 +248,6 @@ def get_user_in_university():
                                                          university_id,
                                                          row_major.id):
                         user = User.get_user_info(g.db,row.user_id)
-                        print user
                         if user:
                             print GPA_to
                             print GPA_form
