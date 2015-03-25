@@ -19,6 +19,7 @@ def set_offer():
     if request.method == "POST":
         data = request.form
         user_id = session["user_id"]
+        print data
         num = 0
         while True:
             offer_major_id = data.get("offers["+str(num)+"][majorid]")
