@@ -23,7 +23,7 @@ def set_offer():
         num = 0
         while True:
             offer_major_id = data.get("offers["+str(num)+"][majorid]")
-            offer_grade = data.get("offers["+str(num)+"][grade]")
+            offer_grade = data.get("offers["+str(num)+"][grade]","Bachelor")
             offer_university_id = data.get("offers["+str(num)+"][universityid]")
             offer_type = data.get("offers["+str(num)+"][offertype]")
             scholarship_type = data.get("offers["+str(num)+"][scholarship][type]")
