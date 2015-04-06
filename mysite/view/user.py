@@ -242,8 +242,8 @@ def get_user_in_university():
                 major_list = dict()
                 info = list()
                 for row_major in Major.get_major_from_faculty(g.db,university_id,faculty_id):
-                    student_list = []
-                    student = {}
+                    student_list = list()
+                    student = dict()
                     for row in Offer.get_user_id_from_university(g.db,
                                                          university_id,
                                                          row_major.id):
@@ -664,6 +664,7 @@ def update_user_info():
 
         return jsonify(status="success")
     return jsonify(status="false")
+
 
 @validate_user_login
 def update_user_description():
