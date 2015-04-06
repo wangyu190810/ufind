@@ -148,13 +148,12 @@ def get_university_list():
         return jsonify(university=name)
 
 
-# @allow_cross_domain
+@allow_cross_domain
 def get_state_university():
     if request.method == "GET":
         university = {}
         state_id = request.args.get("stateid")
-        university["statepic"] = get_university_state(
-            State.get_state_name(g.db, state_id).name)
+        university["statepic"] = get_university_state(State.get_state_name(g.db, state_id).name)
         universitylist = []
         university_info = {}
         for row in University.get_state_university(g.db, state_id):
