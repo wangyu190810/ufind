@@ -45,8 +45,7 @@ def allow_cross_domain(fun):
         rst.headers['Access-Control-Allow-Methods'] = 'PUT,GET,POST,DELETE'
         allow_headers = "Referer,Accept,Origin,User-Agent"
         rst.headers['Access-Control-Allow-Headers'] = allow_headers
-        rst.headers["Access-Control-Allow-Credentials"] = True
-
+        # rst.headers["Access-Control-Allow-Credentials"] = True
         return rst
     return wrapper_fun
 
