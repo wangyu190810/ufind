@@ -46,7 +46,7 @@ def get_university():
                            status="success")
 
 
-@allow_cross_domain
+#@allow_cross_domain
 def get_university_info():
     if request.method == "GET":
         university_id = request.args.get("universityid")
@@ -58,7 +58,7 @@ def get_university_info():
         link = {}
         for row in University.get_university_info(g.db, university_id):
             university_info["universityid"] = row.id
-            university_info["universitylogo"] = get_university_logo(row.name,)
+            university_info["universitylogo"] = get_university_logo(row.name)
             link["baidu"] = row.baidu
             link["wiki"] = row.wiki
             link["official"] = row.official
@@ -140,7 +140,7 @@ def get_university_list():
         return jsonify(university=name)
 
 
-@allow_cross_domain
+# @allow_cross_domain
 def get_state_university():
     if request.method == "GET":
         university = {}

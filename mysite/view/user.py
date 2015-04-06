@@ -246,8 +246,8 @@ def get_user_in_university():
                 major_list = dict()
                 info = list()
                 for row_major in Major.get_major_from_faculty(g.db,university_id,faculty_id):
-                    student_list = []
-                    student = {}
+                    student_list = list()
+                    student = dict()
                     for row in Offer.get_user_id_from_university(g.db,
                                                          university_id,
                                                          row_major.id):
@@ -352,7 +352,7 @@ def get_user_base_info():
         if score is None:
             return jsonify(user_info)
         GREmore = dict()
-        #GREmore["sub"] = list()
+        # GREmore["sub"] = list()
         sub_list = list()
 
         data["GREmore"] = None
@@ -423,7 +423,7 @@ def edit_user_info_page():
         user_info["pic"] = user.pic
         user_info["phonenum"] = user.phone
         user_info["email"] = user.email
-        #user_info["password"] = user.password
+        # user_info["password"] = user.password
         user_info["universityname"] = user.prevuniversity
         user_info["majorname"] = user.prevmajor
         score = Score.get_user_score(g.db, user_id)
