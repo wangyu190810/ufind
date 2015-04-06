@@ -6,7 +6,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.schema import MetaData
 
 
-
 metadata = MetaData()
 Base = declarative_base()
 #
@@ -37,6 +36,3 @@ Base = declarative_base()
 #     @classmethod
 #     def index_blog(cls):
 #         g.db.query(cls).filter_by(desc(cls.id)).limit(1)
-#
-
-

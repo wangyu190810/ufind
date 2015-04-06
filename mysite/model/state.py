@@ -9,7 +9,7 @@ from base import Base
 
 
 class State(Base):
-    """地区"""
+    u"""地区"""
     __tablename__ = "state"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(Unicode(255))
@@ -19,14 +19,14 @@ class State(Base):
     offernum = Column(Integer)
 
     @classmethod
-    def get_state_info(cls,connection):
+    def get_state_info(cls, connection):
         return connection.query(State)
 
     @classmethod
-    def get_index(cls,connection,country):
+    def get_index(cls, connection, country):
         return connection.query(State).\
             filter(State.country == country)
 
     @classmethod
-    def get_state_name(cls,connection,state_id):
+    def get_state_name(cls, connection, state_id):
         return connection.query(State).filter(State.id == state_id).scalar()

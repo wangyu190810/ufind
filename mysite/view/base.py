@@ -26,7 +26,7 @@ def login_user_info(func):
     @wraps(func)
     def _login_user_info(*args, **kwargs):
         if "user_id" in session:
-            user = User.get_user_info(g.db,session["user_id"])
+            user = User.get_user_info(g.db, session["user_id"])
             student = dict()
             student["studentid"] = user.id
             student["studentname"] = user.username
@@ -51,7 +51,7 @@ def allow_cross_domain(fun):
     return wrapper_fun
 
 
-def get_university_img(universityname, num,shape):
+def get_university_img(universityname, num, shape):
     return u"http://www.ufindoffer.com/images/unimg/all_un/"+universityname+u"/"+shape+u"/"+unicode(num)+".jpg"
 
 
@@ -63,7 +63,7 @@ def get_university_state(statename):
     return u"http://www.ufindoffer.com/images/unimg/state/"+statename+".jpg"
 
 
-def get_user_hred_img(sex,max_num):
+def get_user_hred_img(sex, max_num):
     return u"http://www.ufindoffer.com/images/unimg/head/"+unicode(sex)+"/"+unicode(max_num)+".jpg"
 
 
@@ -71,7 +71,7 @@ def get_university_twodim(universityname):
     return u"http://www.ufindoffer.com/images/unimg/twodim/"+universityname+".jpg"
 
 
-def get_main_major(num,name):
+def get_main_major(num, name):
     return u"http://www.ufindoffer.com/images/unimg/major/"+name+str(num)+".png"
 
 
@@ -100,25 +100,21 @@ def get_gre(v, q):
     return v+q
 
 
-def get_GMAT(v,q):
+def get_GMAT(v, q):
     return v + q
 
 
-def get_SAT(CR,M,W):
+def get_SAT(CR, M, W):
     return CR + M + W
 
 
-def get_compare_score(GPA_TO,GPA_from,GPA):
-    #if GPA_TO > GPA and GPA_from < GPA:
-
-
+def get_compare_score(GPA_TO, GPA_from, GPA):
+    # if GPA_TO > GPA and GPA_from < GPA:
     if float(GPA_from) <= float(GPA) and float(GPA_TO) >= float(GPA):
         return True
     elif float(GPA_from) >= float(GPA) and float(GPA_TO) <= float(GPA):
         return True
     return False
-
-
 
 
 def set_sign_safe(sign_file):
@@ -127,7 +123,7 @@ def set_sign_safe(sign_file):
 
 
 def get_sign_safe(true_file):
-    s= Signer(Config.login_sign)
+    s = Signer(Config.login_sign)
     return s.unsign(true_file)
 
 

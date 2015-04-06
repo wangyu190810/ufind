@@ -7,7 +7,7 @@ from flask import request, jsonify, g, session
 from mysite.model.user import User
 from mysite.model.score import Score
 from mysite.view.base import allow_cross_domain, validate_user_login, get_gre, \
-    get_TELTS, get_Total, get_GMAT,get_SAT
+    get_TELTS, get_Total, get_GMAT, get_SAT
 from mysite.model.stasub import Stasub
 
 
@@ -21,16 +21,16 @@ def set_user_score():
             bginf = request.form.get("bginf")
             User.update_user_bginf(g.db, user_id, bginf)
 
-        Stasub.del_sub(g.db,user_id)
+        Stasub.del_sub(g.db, user_id)
         if request.form.get("GRE[sub][0][id]"):
             num = 0
 
             while True:
                 if request.form.get("GRE[sub]["+str(num)+"][id]"):
-                    sub_id = request.form.get("GRE[sub]["+str(num)+"][id]",0,int)
-                    grade = request.form.get("GRE[sub]["+str(num)+"][grade]",0,int)
+                    sub_id = request.form.get("GRE[sub]["+str(num)+"][id]", 0, int)
+                    grade = request.form.get("GRE[sub]["+str(num)+"][grade]", 0, int)
                     sub_type = 0
-                    if sub_id >10:
+                    if sub_id > 10:
                         sub_type = 1
                     Stasub.set_sub(g.db, sub_id=sub_id, grade=grade,
                                    sub_type=sub_type, user_id=user_id)
@@ -43,10 +43,10 @@ def set_user_score():
 
             while True:
                 if request.form.get("SATmore[sub]["+str(num)+"][id]"):
-                    sub_id = request.form.get("SATmore[sub]["+str(num)+"][id]",0,int)
-                    grade = request.form.get("SATmore[sub]["+str(num)+"][grade]",0,int)
+                    sub_id = request.form.get("SATmore[sub]["+str(num)+"][id]", 0, int)
+                    grade = request.form.get("SATmore[sub]["+str(num)+"][grade]", 0, int)
                     sub_type = 0
-                    if sub_id >10:
+                    if sub_id > 10:
                         sub_type = 1
                     Stasub.set_sub(g.db, sub_id=sub_id, grade=grade,
                                    sub_type=sub_type, user_id=user_id)
@@ -76,13 +76,13 @@ def set_user_score():
                                     GRE_v=GREmoreV,
                                     GRE_q=GREmoreQ,
                                     GRE_aw=GREmoreAW
-                )
+                                    )
             elif request.form.get("SATmore[M]"):
                 sat_m = request.form.get("SATmore[M]", 0, int)
                 sat_cr = request.form.get("SATmore[CR]", 0, int)
                 sat_w = request.form.get("SATmore[W]", 0, int)
-                sub_sat = get_SAT(sat_cr,sat_w,sat_m)
-                User.update_user_score(g.db,user_id=user_id,
+                sub_sat = get_SAT(sat_cr, sat_w, sat_m)
+                User.update_user_score(g.db, user_id=user_id,
                                        lelts=sub_TELTS,
                                        sat=sub_sat)
                 Score.set_user_info(connection=g.db,
@@ -94,7 +94,7 @@ def set_user_score():
                                     SAT_m=sat_m,
                                     SAT_w=sat_w,
                                     SAT_cr=sat_cr
-                )
+                                    )
             else:
                 GMATmoreV = request.form.get("GMATmore[V]", 0, int)
                 GMATmoreQ = request.form.get("GMATmore[Q]", 0, int)
@@ -113,8 +113,7 @@ def set_user_score():
                                     GMAT_q=GMATmoreQ,
                                     GMAT_aw=GMATmoreAW,
                                     GMAT_ir=GMATmoreIR
-
-                )
+                                    )
         elif request.form.get("TOEFLmore[R]") is not None:
             TOEFLmoreR = request.form.get("TOEFLmore[R]", 0, int)
             TOEFLmoreL = request.form.get("TOEFLmore[L]", 0, int)
@@ -137,14 +136,13 @@ def set_user_score():
                                     GRE_v=GREmoreV,
                                     GRE_q=GREmoreQ,
                                     GRE_aw=GREmoreAW
-
-                )
+                                    )
             elif request.form.get("SATmore[M]"):
                 sat_m = request.form.get("SATmore[M]", 0, int)
                 sat_cr = request.form.get("SATmore[CR]", 0, int)
                 sat_w = request.form.get("SATmore[W]", 0, int)
-                sub_sat = get_SAT(sat_cr,sat_w,sat_m)
-                User.update_user_score(g.db,user_id=user_id,
+                sub_sat = get_SAT(sat_cr, sat_w, sat_m)
+                User.update_user_score(g.db, user_id=user_id,
                                        toefl=sub_TOEFL,
                                        sat=sub_sat)
                 Score.set_user_info(connection=g.db,
@@ -156,7 +154,7 @@ def set_user_score():
                                     SAT_m=sat_m,
                                     SAT_w=sat_w,
                                     SAT_cr=sat_cr
-                )
+                                    )
             else:
                 GMATmoreV = request.form.get("GMATmore[V]", 0, int)
                 GMATmoreQ = request.form.get("GMATmore[Q]", 0, int)
@@ -174,6 +172,5 @@ def set_user_score():
                                     GMAT_q=GMATmoreQ,
                                     GMAT_aw=GMATmoreAW,
                                     GMAT_ir=GMATmoreIR
-                )
+                                    )
         return jsonify(status="success")
-

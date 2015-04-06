@@ -8,7 +8,7 @@ from flask import request, g, jsonify, session
 
 from mysite.model.message import Message
 from mysite.model.user import User
-from mysite.view.base import validate_user_login,allow_cross_domain,get_timestamp
+from mysite.view.base import validate_user_login, allow_cross_domain, get_timestamp
 
 
 @allow_cross_domain
@@ -18,12 +18,12 @@ def get_message():
         message_user_id = request.args.get("user_id")
         messagelist = list()
         message = dict()
-        for row in Message.get_message_user(g.db,message_user_id):
+        for row in Message.get_message_user(g.db, message_user_id):
             user_message = dict()
             user_message["studentid"] = row.user_id
             user_message["messageid"] = row.id
             user_message["time"] = get_timestamp(row.create_time)
-            user = User.get_user_name(g.db,row.user_id)
+            user = User.get_user_name(g.db, row.user_id)
             user_message["name"] = user.username
             user_message["pic"] = user.pic
             user_message["content"] = row.message
@@ -42,7 +42,7 @@ def set_message():
         user_id = session.get("user_id")
         message = request.form.get("message")
         message_user_id = request.form.get("message_user_id")
-        Message.set_message(g.db,user_id,message_user_id,message)
+        Message.set_message(g.db, user_id, message_user_id, message)
         return jsonify(status="success")
     return jsonify(status="false")
 
@@ -54,7 +54,7 @@ def set_message_to_gov():
         user_id = session.get("user_id")
         data = request.form
         message = data["content"]
-        Message.set_message_to_gov(g.db,user_id,message)
+        Message.set_message_to_gov(g.db, user_id, message)
         return jsonify(status="success")
     return jsonify(status="false")
 
@@ -66,9 +66,9 @@ def del_message_to_user():
         data = request.form
         user_id = session.get("user_id")
         message_id = data["message_id"]
-        message = Message.get_message_info(g.db,message_id)
+        message = Message.get_message_info(g.db, message_id)
         if message.message_user_id == int(user_id):
-            Message.del_message_to_user(g.db,message_id)
+            Message.del_message_to_user(g.db, message_id)
             return jsonify(status="success")
         return jsonify(status="codeerror")
     return jsonify(status="false")

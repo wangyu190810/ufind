@@ -13,12 +13,11 @@ from mysite.model.user import User
 
 @allow_cross_domain
 def search_major():
-    """专业搜索"""
+    u"""专业搜索"""
     if request.method == "GET":
         major_list = []
         major = {}
-        searchname,university_id = map(request.args.get,
-                                       ("searchname", "universityid"))
+        searchname, university_id = map(request.args.get, ("searchname", "universityid"))
 
         if university_id is None:
             for row in Major.search_maior(g.db, searchname):
@@ -42,7 +41,7 @@ def search_major():
 
 @allow_cross_domain
 def get_major_compare():
-    """返回投票信息"""
+    u"""返回投票信息"""
     if request.method == "GET":
         university_id, major_id = map(request.args.get,
                                       ("universityid", "majorid"))
@@ -58,16 +57,11 @@ def get_major_compare():
 
 @allow_cross_domain
 def get_major_from_university_faculty():
-    """投票根据学校和学院返回专业信息"""
+    u"""投票根据学校和学院返回专业信息"""
     if request.method == "GET":
-        university_id,faculty_id,major_id = map(request.args.get,
-                                                ("universityid",
-                                                "facultyid",
-                                                "majorid"))
-
-
-
-
+        university_id, faculty_id, major_id = map(request.args.get, ("universityid",
+                                                                     "facultyid",
+                                                                     "majorid"))
 
         major_list = list()
         if faculty_id is None and major_id is None:
@@ -76,12 +70,12 @@ def get_major_from_university_faculty():
                 major_info = dict()
                 major_info["majorid"] = row.id
                 major_info["name"] = row.name
-                major_info["offernum"] = Offer.get_offer_num_from_major(g.db,university_id,row.id)
-                major_info["offervote"]= None
-                #offervote = dict()
-                for row_major in Offer.get_user_id_from_major(g.db,row.id):
+                major_info["offernum"] = Offer.get_offer_num_from_major(g.db, university_id, row.id)
+                major_info["offervote"] = None
+                # offervote = dict()
+                for row_major in Offer.get_user_id_from_major(g.db, row.id):
                     student_info = dict()
-                    user = User.get_user_info(g.db,row_major.user_id)
+                    user = User.get_user_info(g.db, row_major.user_id)
                     if user is None:
                         students.append(student_info)
                     else:
@@ -101,18 +95,18 @@ def get_major_from_university_faculty():
         elif major_id is None:
             faculty_list = faculty_id.split(",")
             for faculty_id in faculty_list:
-                for row in Major.get_major_info(g.db,university_id,faculty_id):
+                for row in Major.get_major_info(g.db, university_id, faculty_id):
                     students = list()
                     major_info = {}
                     major_info["majorid"] = row.id
                     major_info["name"] = row.name
 #                major_info["offernum"] = Offer.get_offer_num(g.db,
 #                                                                 university_id,)
-                    major_info["offernum"] = Offer.get_offer_num_from_major(g.db,university_id,row.id)
-                    major_info["offervote"]=None
-                    for row_major in Offer.get_user_id_from_major(g.db,row.id):
+                    major_info["offernum"] = Offer.get_offer_num_from_major(g.db, university_id, row.id)
+                    major_info["offervote"] = None
+                    for row_major in Offer.get_user_id_from_major(g.db, row.id):
                         student_info = dict()
-                        user = User.get_user_info(g.db,row_major.user_id)
+                        user = User.get_user_info(g.db, row_major.user_id)
                         student_info["studentid"] = user.id
                         student_info["name"] = user.username
                         student_info["studentimg"] = user.pic
@@ -126,17 +120,17 @@ def get_major_from_university_faculty():
                            majorlist=major_list)
         elif major_id is not None:
             students = list()
-            for row in Major.get_major_info(g.db,university_id=university_id,major_id=major_id):
+            for row in Major.get_major_info(g.db, university_id=university_id, major_id=major_id):
                 major_info = dict()
                 major_info["majorid"] = row.id
                 major_info["name"] = row.name
 #               or_info["offernum"] = Offer.get_offer_num(g.db,
 #                                                         university_id,)
-                major_info["offernum"] = Offer.get_offer_num_from_major(g.db,university_id,row.id)
-                major_info["offervote"]=None
-                for row_major in Offer.get_user_id_from_major(g.db,row.id):
+                major_info["offernum"] = Offer.get_offer_num_from_major(g.db, university_id, row.id)
+                major_info["offervote"] = None
+                for row_major in Offer.get_user_id_from_major(g.db, row.id):
                     student_info = dict()
-                    user = User.get_user_info(g.db,row_major.user_id)
+                    user = User.get_user_info(g.db, row_major.user_id)
                     student_info["studentid"] = user.id
                     student_info["name"] = user.username
                     student_info["studentimg"] = user.pic
@@ -149,5 +143,3 @@ def get_major_from_university_faculty():
                     major_list.append(major_info)
             return jsonify(status="success",
                            majorlist=major_list)
-
-

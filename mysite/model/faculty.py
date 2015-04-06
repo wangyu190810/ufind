@@ -9,7 +9,7 @@ from base import Base
 
 
 class Faculty(Base):
-    """学院"""
+    u"""学院"""
     __tablename__ = "faculty"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(Unicode(255))
@@ -23,8 +23,3 @@ class Faculty(Base):
         else:
             return connection.query(Faculty).filter(Faculty.university_id
                                                     == university_id)
-
-
-
-
-

@@ -20,7 +20,7 @@ class User(Base):
     email = Column(String(80), doc=u"邮箱")
     phone = Column(Integer, doc=u"电话")
     checknum = Column(Integer, doc=u"验证码")
-    checknum_time = Column(Integer,doc=u"验证码时间")
+    checknum_time = Column(Integer, doc=u"验证码时间")
     pic = Column(Unicode(255), doc=u"头像")
     GPA = Column(Float(10), doc=u"")
     TOEFL = Column(Float(10), doc=u"")
@@ -36,8 +36,7 @@ class User(Base):
                   doc=u"高中还是大学：0表示高中，1表示大学,3表示研究生")
     description = Column(Unicode(255), doc=u"描述")
     bginf = Column(Unicode(255), doc=u"背景信息")
-    create_time = Column(Integer,doc=u"注册时间")
-
+    create_time = Column(Integer, doc=u"注册时间")
 
     @classmethod
     def get_user_info(cls, connection, user_id):
@@ -92,7 +91,7 @@ class User(Base):
         phonenum = connection.query(User.phone). \
             filter(User.phone == phone).scalar()
         if len(str(phonenum)) < 10:
-            user = User(phone=phone, checknum=checknum,checknum_time=time.time())
+            user = User(phone=phone, checknum=checknum, checknum_time=time.time())
             connection.add(user)
             connection.commit()
         else:
@@ -121,7 +120,7 @@ class User(Base):
         connection.commit()
 
     @classmethod
-    def change_password_old(cls,connection,user_id,password,passwordold):
+    def change_password_old(cls, connection, user_id, password, passwordold):
         u"""更新用户密码"""
         if not connection.query(User).\
                 filter(User.id == user_id).\
@@ -138,7 +137,7 @@ class User(Base):
         return True
 
     @classmethod
-    def update_user_phone(cls,connection,user_id,phone,checknum):
+    def update_user_phone(cls, connection, user_id, phone, checknum):
         u"""更新个人电话"""
         connection.query(User).filter(user_id).update(
                 {
@@ -148,7 +147,6 @@ class User(Base):
                 }
         )
         connection.commit()
-
 
     @classmethod
     def get_user_info_by_phone(cls, connection, phone):
@@ -255,7 +253,6 @@ class UserFollow(Base):
         return connection.query(UserFollow).filter(
             UserFollow.follow_user_id == follow_user_id
         )
-
 
     @classmethod
     def get_follow_to_user(cls, connection, user_id, follow_user_id):

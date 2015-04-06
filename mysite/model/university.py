@@ -10,13 +10,13 @@ from base import Base
 
 
 class University(Base):
-    """学校"""
+    u"""学校"""
     __tablename__ = "university"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(Unicode(255))
     chiname = Column(Unicode(255))
     short_name = Column(Unicode(255), doc=u"大学缩写")
-    rank = Column(Integer,doc=u"排名")
+    rank = Column(Integer, doc=u"排名")
     schoollogo = Column(Unicode(255), doc=u"学校图标")
     official = Column(Unicode(1000), doc=u"学校的官网地址")
     baidu = Column(Unicode(1000), doc=u"百度介绍")
@@ -30,13 +30,12 @@ class University(Base):
     state_id = Column(Integer, doc=u"地区id")
     city = Column(Unicode(255))
 
-
     @classmethod
     def get_university_info(cls, connection, university_id=None):
         if university_id is None:
             return connection.query(University)
-            #return connection.query(University).all()
-            #return connection.execute(stmt)
+            # return connection.query(University).all()
+            # return connection.execute(stmt)
 
         else:
             return connection.query(University).filter(University.id
@@ -71,7 +70,7 @@ class University(Base):
 
     @classmethod
     def update_university_GPA_TOEFL(cls, connection, university_id, TOEFL, GPA):
-        """学校的GPA分数和TOEFL分数"""
+        u"""学校的GPA分数和TOEFL分数"""
         connection.query(University).filter(University.id == university_id).\
             update(
             {

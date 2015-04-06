@@ -89,9 +89,9 @@ def register_second():
             senior = SeniorHighSchool.get_senior_high(g.db, university_id)
             university_name = senior.name
             senior_dict = dict()
-            senior_dict["1"] = "文科"
-            senior_dict["2"] = "理科"
-            senior_dict["3"] = "其他"
+            senior_dict["1"] = u"文科"
+            senior_dict["2"] = u"理科"
+            senior_dict["3"] = u"其他"
             major_name = senior_dict.get(data.get("majorid"))
         else:
             university = UniversityChina.get_university_china_info(g.db,
@@ -106,7 +106,7 @@ def register_second():
         user = User.get_user_info_by_phone(g.db, phone)
         user_id = user.id
         session["user_id"] = user_id
-        User.update_user_pic(g.db,user_id,
+        User.update_user_pic(g.db, user_id,
                              """http://www.ufindoffer.com/images/unimg/head
                              /%E6%97%A0%E6%80%A7%E5%88%AB/9.jpg""")
         return jsonify(status="success",
@@ -133,6 +133,3 @@ def change_password():
 def logout():
     session.pop("user_id")
     return jsonify(status="success")
-
-
-

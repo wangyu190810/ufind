@@ -165,7 +165,7 @@ def get_user_detail_info():
             return jsonify(student_info)
 
         sub_list = list()
-        for row in Stasub.get_sub(g.db,student_id):
+        for row in Stasub.get_sub(g.db, student_id):
             sub = dict()
             sub["id"] = row.id
             sub["grade"] = row.grade
@@ -221,8 +221,8 @@ def get_user_in_university():
     if request.method == "POST":
         print request.form
         data = request.form
-        #return jsonify(status="success")
-        #data = json.loads(request.data)
+        # return jsonify(status="success")
+        # data = json.loads(request.data)
 
         university_id = data.get("universityid")
         faculty_id = data.get("facultyid")
@@ -233,8 +233,8 @@ def get_user_in_university():
         TOEFL_form = request.form.get("TOEFL[from]",0.0,float)
         GER_to = request.form.get("GRE[to]",0.0,float)
         GER_form = request.form.get("GRE[from]",0.0,float)
-        #TOEFL_form = request.form.get("TOEFL[from]")
-        #TOEFL_form = request.form.get("TOEFL[from]")#   SAT = data["SAT"]
+        # TOEFL_form = request.form.get("TOEFL[from]")
+        # TOEFL_form = request.form.get("TOEFL[from]")#   SAT = data["SAT"]
         page = data.get("page")
         compares = {}
         compare_list = []
@@ -303,11 +303,11 @@ def get_user_in_university():
                                         get_compare_score(GER_to,GER_form,user.GRE):
 
                                                 student_list.append(row.user_id)
-                                elif get_compare_score(GPA_to,GPA_form,user.GPA) and \
-                                        get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL):
+                                elif get_compare_score(GPA_to, GPA_form, user.GPA) and \
+                                        get_compare_score(TOEFL_to, TOEFL_form, user.TOEFL):
 
                                     student_list.append(row.user_id)
-                            elif get_compare_score(GPA_to,GPA_form,user.GPA):
+                            elif get_compare_score(GPA_to,GPA_form, user.GPA):
                                 student_list.append(row.user_id)
                         else:
                             student_list.append(row.user_id)
@@ -514,13 +514,13 @@ def update_user_info():
                 else:
                     break
 
-        #Stasub.del_sub(g.db,user_id)
+        # Stasub.del_sub(g.db,user_id)
         if request.form.get("SAT[sub][0][grade]"):
             num = 0
             while True:
                 if request.form.get("SAT[sub]["+str(num)+"][id]"):
-                    sub_id = request.form.get("SAT[sub]["+str(num)+"][id]",0,int)
-                    grade = request.form.get("SAT[sub]["+str(num)+"][grade]",0,int)
+                    sub_id = request.form.get("SAT[sub]["+str(num)+"][id]", 0, int)
+                    grade = request.form.get("SAT[sub]["+str(num)+"][grade]", 0, int)
                     sub_type = 0
                     if sub_id >10:
                         sub_type = 1
@@ -565,8 +565,8 @@ def update_user_info():
                 sat_m = request.form.get("SAT[M]", 0, int)
                 sat_cr = request.form.get("SAT[CR]", 0, int)
                 sat_w = request.form.get("SAT[W]", 0, int)
-                sub_sat = get_SAT(sat_cr,sat_w,sat_m)
-                User.update_user_score(g.db,user_id=user_id,
+                sub_sat = get_SAT(sat_cr, sat_w, sat_m)
+                User.update_user_score(g.db, user_id=user_id,
                                        lelts=sub_TELTS,
                                        sat=sub_sat)
                 Score.set_user_info(connection=g.db,
@@ -578,7 +578,7 @@ def update_user_info():
                                     SAT_m=sat_m,
                                     SAT_w=sat_w,
                                     SAT_cr=sat_cr
-                )
+                                    )
 
             else:
                 GMATmoreV = request.form.get("GMAT[V]",0,int)
@@ -631,8 +631,8 @@ def update_user_info():
                 sat_m = request.form.get("SAT[M]", 0, int)
                 sat_cr = request.form.get("SAT[CR]", 0, int)
                 sat_w = request.form.get("SAT[W]", 0, int)
-                sub_sat = get_SAT(sat_cr,sat_w,sat_m)
-                User.update_user_score(g.db,user_id=user_id,
+                sub_sat = get_SAT(sat_cr, sat_w, sat_m)
+                User.update_user_score(g.db, user_id=user_id,
                                        toefl=sub_TOEFL,
                                        sat=sub_sat)
                 Score.set_user_info(connection=g.db,
@@ -644,21 +644,21 @@ def update_user_info():
                                     SAT_m=sat_m,
                                     SAT_w=sat_w,
                                     SAT_cr=sat_cr
-                )
+                                    )
             else:
-                GMATmoreV = request.form.get("GMAT[V]",0,int)
-                GMATmoreQ = request.form.get("GMAT[Q]",0,int)
-                GMATmoreAW = request.form.get("GMAT[AW]",0,int)
-                GMATmoreIR = request.form.get("GMAT[IR]",0,int)
+                GMATmoreV = request.form.get("GMAT[V]", 0, int)
+                GMATmoreQ = request.form.get("GMAT[Q]", 0, int)
+                GMATmoreAW = request.form.get("GMAT[AW]", 0, int)
+                GMATmoreIR = request.form.get("GMAT[IR]", 0, int)
                 sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
                 User.update_user_score(g.db, user_id=user_id,
                                        toefl=sub_TOEFL, GMAT=sub_GMAT)
-                Score.set_user_info(connection=g.db,user_id=user_id,
+                Score.set_user_info(connection=g.db, user_id=user_id,
 
-                                    TOEFL_r =TOEFLmoreR,
-                                    TOEFL_l =TOEFLmoreL,
-                                    TOEFL_s =TOEFLmoreS,
-                                    TOEFL_w =TOEFLmoreW,
+                                    TOEFL_r=TOEFLmoreR,
+                                    TOEFL_l=TOEFLmoreL,
+                                    TOEFL_s=TOEFLmoreS,
+                                    TOEFL_w=TOEFLmoreW,
                                     GMAT_v=GMATmoreV,
                                     GMAT_q=GMATmoreQ,
                                     GMAT_aw=GMATmoreAW,
@@ -668,15 +668,12 @@ def update_user_info():
         return jsonify(status="success")
     return jsonify(status="false")
 
+
 @validate_user_login
 def update_user_description():
     if request.method == "POST":
         description = request.form.get("description")
         user_id = session.get("user_id")
-        User.update_user_description(g.db,user_id,description)
+        User.update_user_description(g.db, user_id, description)
         return jsonify(status="success")
     return jsonify(status="false")
-
-
-
-

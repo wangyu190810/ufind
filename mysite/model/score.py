@@ -8,7 +8,7 @@ from base import Base
 
 
 class Score(Base):
-    """用户信息表"""
+    u"""用户信息表"""
     __tablename__ = "score"
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, default=0, doc=u"用户id")
@@ -83,6 +83,6 @@ class Score(Base):
         connection.commit()
 
     @classmethod
-    def get_user_score(cls,connection,user_id):
+    def get_user_score(cls, connection, user_id):
         u"""获取用户的成绩"""
         return connection.query(Score).filter(Score.user_id == user_id).scalar()

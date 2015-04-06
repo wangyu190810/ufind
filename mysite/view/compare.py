@@ -39,6 +39,7 @@ def set_compare():
         return jsonify(status="success")
     return jsonify(status="false")
 
+
 @allow_cross_domain
 def get_compare():
     if request.method == "GET":
@@ -55,8 +56,7 @@ def get_compare():
             compare_info["universityid"] = row.university_id
             compare_info["major_id"] = row.major_id
             compare_info["supportnum"] = row.supportnum
-            for university in University.get_university_info(g.db,
-                                                            university_id=row.university_id):
+            for university in University.get_university_info(g.db, university_id=row.university_id):
                 compare_info["universityname"] = university.name
                 compare_info["logo"] = get_university_logo(university.name)
             for major in Major.get_major_info(g.db,
@@ -65,7 +65,7 @@ def get_compare():
                                               major_id=compare_info[
                                                   "major_id"]):
                 compare_info["majorname"] = major.name
-            compare_info["offernum"] = Offer.get_offer_num(g.db,row.university_id)
+            compare_info["offernum"] = Offer.get_offer_num(g.db, row.university_id)
             comparelist.append(compare_info)
 
             compare_info = {}
@@ -88,27 +88,25 @@ def set_compare_support():
 def get_compare_list():
     if request.method == "POST":
         print request.form
-        data = request.form
-       # #data = json.loads(request.data)
-       # university_id = data["universityid"]
-       # faculty_id = data["facultyid"]
-       # major_id = data["majorid"]
-       # grade = data["grade"]
-       # GPA = data["GPA"]
-       # TOEFL = data["TOEFL"]
-       # GRE = data["GRE"]
-       # IELTS = data["IELTS"]
-       # GMAT = data["GMAT"]
-       # SAT = data["SAT"]
-       # page = data["page"]
-       # compares = {}
-       # compare_list = []
-       # for row in CompareInfo.get_compare_university_major(g.db, university_id,
-       #                                                     major_id):
+        # data = request.form
+        # data = json.loads(request.data)
+        # university_id = data["universityid"]
+        # faculty_id = data["facultyid"]
+        # major_id = data["majorid"]
+        # grade = data["grade"]
+        # GPA = data["GPA"]
+        # TOEFL = data["TOEFL"]
+        # GRE = data["GRE"]
+        # IELTS = data["IELTS"]
+        # GMAT = data["GMAT"]
+        # SAT = data["SAT"]
+        # page = data["page"]
+        # compares = {}
+        # compare_list = []
+        # for row in CompareInfo.get_compare_university_major(g.db, university_id,
+        #                                                     major_id):
 #            compare_list.append(str(row.compare_id))
 #
 #        return jsonify(compares=compare_list,
 #                       status="success")
     return jsonify(status="success")
-
-
