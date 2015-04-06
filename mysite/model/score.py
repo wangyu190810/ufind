@@ -1,6 +1,9 @@
-# -*-coding:utf-8-*-
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
-from sqlalchemy import Column, String, TEXT, Integer, Unicode, Float
+
+from sqlalchemy import Column, Integer
+
 from base import Base
 
 

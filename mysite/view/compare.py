@@ -1,19 +1,18 @@
-#! /usr/bin/python
-# -*- coding:utf-8 -*-
-# Filename: university.py
-# Author: wangyu190810
-# E-mail: wo190810401@gmail.com
-# Date: 2015-01-22
-# Description:
+# -*-coding: utf-8-*-
+
+__author__ = 'wangyu'
 
 import json
+
 from flask import request, jsonify, g, session
+
 from mysite.model.university import University
 from mysite.model.major import Major
 from mysite.model.compare import Compare, CompareInfo, CompareSupport
 from mysite.view.base import allow_cross_domain, get_timestamp,\
     get_university_logo
 from mysite.model.offer import Offer
+
 
 @allow_cross_domain
 def set_compare():

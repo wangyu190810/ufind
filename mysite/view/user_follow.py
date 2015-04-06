@@ -1,8 +1,8 @@
-# -*-coding:utf-8-*-
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
 
 from flask import g, jsonify, request,session
-import json
 
 from mysite.view.base import allow_cross_domain
 from mysite.model.user import UserFollow

@@ -1,10 +1,12 @@
-# -*-coding:utf-8-*-
-__author__ = ''
+# -*-coding: utf-8-*-
+
+__author__ = 'wangyu'
+
+from time import time
+
 from sqlalchemy.schema import Column
 from sqlalchemy.types import Integer, Unicode
 from sqlalchemy.sql import func
-
-from time import time
 
 from base import Base
 

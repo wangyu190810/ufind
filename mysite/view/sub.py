@@ -1,8 +1,10 @@
-# -*-coding:utf-8-*-
-__author__ = 'Administrator'
+# -*-coding: utf-8-*-
+
+__author__ = 'wangyu'
+
 from flask import g,jsonify,request
 
-from mysite.model.stasub import SubContent,Stasub
+from mysite.model.stasub import SubContent
 
 
 def get_sub():

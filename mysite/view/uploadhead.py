@@ -1,13 +1,16 @@
 # -*-coding:utf-8-*-
 __author__ = 'Administrator'
-from flask import g, jsonify,request,redirect,session
-from werkzeug.utils import secure_filename
-import os
 
+from flask import g, jsonify,request,redirect,session
+
+import os
+import random
+
+from flask import g, jsonify, request, session
 from config import Config
 from mysite.view.base import validate_user_login,get_user_hred_img
 from mysite.view.user import User
-import random
+from werkzeug.utils import secure_filename
 
 
 def allowed_file(filename):

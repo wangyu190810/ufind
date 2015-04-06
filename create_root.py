@@ -1,7 +1,9 @@
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
+
 from mysite.model.user import User
 from mysite.application import app
-from flask import g
 
 
 def root():
@@ -11,5 +13,7 @@ def root():
     app.DBSession.add(user)
     app.DBSession.commit()
 
-root()
+
+if __name__ == '__main__':
+    root()
 

@@ -1,5 +1,7 @@
-# -*-coding:utf8-*-
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
+
 from flask import g, session, request, jsonify
 
 from mysite.view.base import allow_cross_domain, set_sign_safe,\

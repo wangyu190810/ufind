@@ -1,5 +1,7 @@
-#-*-coding:utf-8-*-
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
+
 
 class Config(object):
     db = "mysql://root:1234@localhost/ufind?charset=utf8"

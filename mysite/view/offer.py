@@ -1,17 +1,12 @@
-#! /usr/bin/python
-# -*- coding:utf-8 -*-
-# Filename: university.py
-# Author: 22too
-# E-mail: wo190810401@gmail.com
-# Date: 2015-01-22
-# Description:
+# -*-coding: utf-8-*-
 
+__author__ = 'wangyu'
 
 from flask import request,jsonify,g,session
+
 from mysite.model.university import University
 from mysite.model.offer import Offer
-from mysite.view.base import allow_cross_domain,get_university_img,\
-    get_university_twodim
+from mysite.view.base import allow_cross_domain, get_university_twodim
 from mysite.model.user import User
 
 

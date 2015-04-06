@@ -1,8 +1,12 @@
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
+
+from datetime import timedelta
+
 from flask import Flask, g, current_app
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
-from datetime import timedelta
 
 from mysite.view.university import get_university, get_search_university, \
     get_university_info, get_university_list, get_state_university

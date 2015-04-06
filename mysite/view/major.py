@@ -1,11 +1,15 @@
-#! /usr/bin/python
+# -*-coding: utf-8-*-
+
+__author__ = 'wangyu'
 
 from flask import request, jsonify, g
+
 from mysite.model.major import Major
 from mysite.model.compare import CompareInfo
 from mysite.view.base import allow_cross_domain
 from mysite.model.offer import Offer
 from mysite.model.user import User
+
 
 @allow_cross_domain
 def search_major():

@@ -1,8 +1,13 @@
-# -*-coding:utf-8-*-
-from sqlalchemy.schema import Column
-from sqlalchemy.types import Integer, Unicode,DateTime
+# -*-coding: utf-8-*-
+
+__author__ = 'wangyu'
+
 from time import time
+
 from sqlalchemy import func
+from sqlalchemy.schema import Column
+from sqlalchemy.types import Integer, Unicode
+
 from mysite.model.base import Base
 
 

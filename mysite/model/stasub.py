@@ -1,7 +1,11 @@
-# -*-coding:utf-8-*-
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
-from sqlalchemy import Column, String, TEXT, Integer, Unicode, Float
+
+from sqlalchemy import Column, Integer, Unicode
+
 from base import Base
+
 
 class Stasub(Base):
     __tablename__ = "sub"

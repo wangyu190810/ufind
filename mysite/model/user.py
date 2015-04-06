@@ -1,8 +1,10 @@
-# -*-coding:utf-8-*-
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
-from sqlalchemy import Column, String, Integer, Unicode, Float, func
 
 import time
+
+from sqlalchemy import Column, String, Integer, Unicode, Float, func
 
 from base import Base
 

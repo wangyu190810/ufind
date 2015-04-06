@@ -1,7 +1,11 @@
-#!-*-coding:utf-8-*-
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
-from flask import render_template,request,g,redirect,jsonify,session
+
 import json
+
+from flask import request, g, jsonify, session
+
 from mysite.model.message import Message
 from mysite.model.user import User
 from mysite.view.base import validate_user_login,allow_cross_domain,get_timestamp
