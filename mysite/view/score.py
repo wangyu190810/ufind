@@ -1,12 +1,11 @@
 #! /usr/bin/python
 # -*- coding:utf-8 -*-
 # Filename: university.py
-#Author: wangyu190810
-#E-mail: wo190810401@gmail.com
-#Date: 2015-01-22
-#Description:
+# Author: 22too
+# E-mail: wo190810401@gmail.com
+# Date: 2015-01-22
+# Description:"""主要是对于填写offer接口的分数处理，处理操作为填充到数据库"""
 
-import json
 from flask import request, jsonify, g, session
 from mysite.model.university import University
 from mysite.model.faculty import Faculty
@@ -16,6 +15,7 @@ from mysite.model.score import Score
 from mysite.view.base import allow_cross_domain, validate_user_login, get_gre, \
     get_TELTS, get_Total, get_GMAT,get_SAT
 from mysite.model.stasub import Stasub
+
 
 @validate_user_login
 @allow_cross_domain
@@ -44,7 +44,6 @@ def set_user_score():
                 else:
                     break
 
-        #Stasub.del_sub(g.db,user_id)
         if request.form.get("SATmore[sub][0][grade]"):
             num = 0
 

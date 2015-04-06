@@ -6,6 +6,7 @@ from mysite.model.message import Message
 from mysite.model.user import User
 from mysite.view.base import validate_user_login,allow_cross_domain,get_timestamp
 
+
 @allow_cross_domain
 @validate_user_login
 def get_message():
@@ -26,7 +27,6 @@ def get_message():
             messagelist.append(user_message)
 
         message["messages"] = messagelist
-        print(message)
         return json.dumps(message)
     return jsonify(status="false")
 
@@ -37,11 +37,7 @@ def set_message():
     if request.method == "POST":
         user_id = session.get("user_id")
         message = request.form.get("message")
-        #print data
         message_user_id = request.form.get("message_user_id")
-
-
-        print message_user_id,message
         Message.set_message(g.db,user_id,message_user_id,message)
         return jsonify(status="success")
     return jsonify(status="false")
@@ -57,6 +53,7 @@ def set_message_to_gov():
         Message.set_message_to_gov(g.db,user_id,message)
         return jsonify(status="success")
     return jsonify(status="false")
+
 
 @allow_cross_domain
 @validate_user_login
