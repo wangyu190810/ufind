@@ -23,7 +23,7 @@ class University(Base):
     wiki = Column(Unicode(1000), doc=u"wiki介绍")
     menaGPA = Column(Unicode(255), doc=u"GPA评价分数")
     menaTOEFL = Column(Unicode(255), doc=u"托福评价分数")
-    menaILETS = Column(Unicode(255), doc=u"雅思分数")
+    menaILETS = Column(Integer, doc=u"雅思分数")
     latitude = Column(Unicode(40), doc=u"经度")
     longitude = Column(Unicode(40), doc=u"纬度")
     country = Column(Unicode(255))
