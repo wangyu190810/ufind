@@ -21,7 +21,9 @@ class University(Base):
     official = Column(Unicode(1000), doc=u"学校的官网地址")
     baidu = Column(Unicode(1000), doc=u"百度介绍")
     wiki = Column(Unicode(1000), doc=u"wiki介绍")
-    menaGPA = Column(Unicode(255), doc=u"")
+    menaGPA = Column(Unicode(255), doc=u"GPA评价分数")
+    menaTOEFL = Column(Unicode(255), doc=u"托福评价分数")
+    menaILETS = Column(Unicode(255), doc=u"雅思分数")
     latitude = Column(Unicode(40), doc=u"经度")
     longitude = Column(Unicode(40), doc=u"纬度")
     country = Column(Unicode(255))
@@ -55,7 +57,7 @@ class University(Base):
     @classmethod
     def university_name_list(cls, connection):
         return connection.query(University.name).\
-            filter(University.latitude == None)
+            filter(University.latitude is None)
 
     @classmethod
     def get_state_university(cls, connection, state_id):
@@ -63,6 +65,18 @@ class University(Base):
             filter(University.state_id == state_id)
 
     @classmethod
-    def get_university_from_id(cls,connection,univerity_id):
+    def get_university_from_id(cls, connection, university_id):
         return connection.query(University).\
-            filter(University.id == univerity_id).scalar()
+            filter(University.id == university_id).scalar()
+
+    @classmethod
+    def update_university_GPA_TOEFL(cls, connection, university_id, TOEFL, GPA):
+        """学校的GPA分数和TOEFL分数"""
+        connection.query(University).filter(University.id == university_id).\
+            update(
+            {
+                University.menaTOEFL: TOEFL,
+                University.menaGPA: GPA
+            }
+        )
+        connection.commit()

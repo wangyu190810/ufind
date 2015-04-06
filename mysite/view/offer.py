@@ -21,6 +21,7 @@ def set_offer():
         data = request.form
         user_id = session["user_id"]
         num = 0
+        user = User.get_user_info(g.db,user_id)
         while True:
             offer_major_id = data.get("offers["+str(num)+"][majorid]")
             offer_grade = data.get("offers["+str(num)+"][grade]","Bachelor")
@@ -42,8 +43,16 @@ def set_offer():
                             offer_type=offer_type,
                             grade=offer_grade,
                             scholarship=scholarship_money,
-                            scholarship_type=scholarship_type
-            )
+                            scholarship_type=scholarship_type)
+            for offer_user in Offer.get_user_id_from_university(g.db,
+                                                                university_id=offer_university_id):
+                offer_user.user_id
+            if user is not None:
+                University.update_university_GPA_TOEFL(g.db,
+                                                       university_id=
+                                                       offer_university_id,
+                                                       GPA=user.GPA,
+                                                       TOEFL=user.TOEFL)
         offer_list = list()
         for row in Offer.get_offer_student_info(g.db,user_id):
             offer_dict = dict()
@@ -54,6 +63,7 @@ def set_offer():
             offer_dict["twodim"] = get_university_twodim(university_name.name)
             if offer_dict not in offer_list:
                 offer_list.append(offer_dict)
+
         return jsonify(status="success",
                        offerlist=offer_list,
                        description=User.get_user_info(g.db,user_id).description)
