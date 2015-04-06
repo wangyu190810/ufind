@@ -1,0 +1,1 @@
+ALTER TABLE university ADD menaILETS INT(11) default 0;
