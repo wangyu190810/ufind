@@ -1,11 +1,11 @@
-# -*-coding:utf-8-*-
-__author__ = ''
-from sqlalchemy.schema import Table, Column
-from sqlalchemy.types import Integer, Unicode, Float
-from sqlalchemy.sql import select
+# -*-coding: utf-8-*-
+
+__author__ = 'wangyu'
+
+from sqlalchemy.schema import Column
+from sqlalchemy.types import Integer, Unicode
 
 from base import Base
-from datetime import datetime
 
 
 class Faculty(Base):

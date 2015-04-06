@@ -1,15 +1,9 @@
-#! /usr/bin/python
-# -*- coding:utf-8 -*-
-# Filename: university.py
-# Author: 22too
-# E-mail: wo190810401@gmail.com
-# Date: 2015-01-22
-# Description:"""主要是对于填写offer接口的分数处理，处理操作为填充到数据库"""
+# -*-coding: utf-8-*-
+
+__author__ = 'wangyu'
 
 from flask import request, jsonify, g, session
-from mysite.model.university import University
-from mysite.model.faculty import Faculty
-from mysite.model.major import Major
+
 from mysite.model.user import User
 from mysite.model.score import Score
 from mysite.view.base import allow_cross_domain, validate_user_login, get_gre, \

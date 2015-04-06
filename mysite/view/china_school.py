@@ -1,9 +1,11 @@
-# -*-coding:utf-8-*-
-__author__ = 'Administrator'
-# Description:
+# -*-coding: utf-8-*-
+
+__author__ = 'wangyu'
 
 import json
-from flask import request,  g
+
+from flask import request, g
+
 from mysite.model.university_china import UniversityChina, SeniorHighSchool,\
     MajorChina
 from mysite.view.base import allow_cross_domain

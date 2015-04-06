@@ -1,17 +1,11 @@
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.schema import MetaData
-from sqlalchemy import create_engine,desc
+
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.ext.declarative import as_declarative
 from sqlalchemy.schema import MetaData
-from flask import g
-
-from config import Config
-import hashlib
 
 
-from datetime import date
 
 metadata = MetaData()
 Base = declarative_base()

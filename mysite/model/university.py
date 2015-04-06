@@ -1,11 +1,11 @@
-# -*-coding:utf-8-*-
-__author__ = ''
-from sqlalchemy.schema import Table, Column
-from sqlalchemy.types import Integer, Unicode, Float
-from sqlalchemy.sql import select
-from sqlalchemy.orm import aliased
-from datetime import datetime
+# -*-coding: utf-8-*-
+
+__author__ = 'wangyu'
+
+from sqlalchemy.schema import Column
+from sqlalchemy.types import Integer, Unicode
 from sqlalchemy import or_
+
 from base import Base
 
 

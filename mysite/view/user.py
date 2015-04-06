@@ -1,13 +1,15 @@
-# -*-coding:utf-8-*-
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
 
-from flask import g, jsonify, request, session
 import json
+
+from flask import g, jsonify, request, session
 
 from mysite.model.user import User, UserFollow
 from mysite.view.base import allow_cross_domain, get_timestamp, \
-    validate_user_login,get_university_logo,get_university_twodim,\
-    get_GMAT, get_gre, get_TELTS, get_Total,get_SAT,get_compare_score
+    validate_user_login, get_university_logo, get_university_twodim,\
+    get_GMAT, get_gre, get_TELTS, get_Total, get_SAT, get_compare_score
 from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
@@ -15,6 +17,7 @@ from mysite.model.compare import CompareInfo, Compare
 from mysite.model.message import Message
 from mysite.model.score import Score
 from mysite.model.stasub import Stasub
+
 
 @validate_user_login
 @allow_cross_domain
@@ -73,7 +76,7 @@ def get_user_detail_info():
             if row.scholarship is not None:
                 offer_info["scholarship"] = \
                     str(row.scholarship) + row.scholarship_type
-                #offer_info["scholarship"] = None
+                # offer_info["scholarship"] = None
             offers.append(offer_info)
         student_info["offers"] = offers
         compares = []
@@ -238,6 +241,7 @@ def get_user_in_university():
         page_list = []
 
         if faculty_id is not None:
+            student_list = []
             if major_id is None:
                 major_list = dict()
                 info = list()
@@ -282,7 +286,6 @@ def get_user_in_university():
                 major_list["status"] = "success"
                 return json.dumps(major_list)
             elif major_id is not None:
-                student_list = []
                 for row in Offer.get_user_id_from_university(g.db,
                                                         university_id,
                                                         major_id):

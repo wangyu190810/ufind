@@ -1,21 +1,19 @@
-#! /usr/bin/python
-# -*- coding:utf-8 -*-
-# Filename: university.py
-# Author: wangyu190810
-# E-mail: wo190810401@gmail.com
-# Date: 2015-01-22
-# Description:
+# -*-coding: utf-8-*-
+
+__author__ = 'wangyu'
 
 import json
-from mysite.model.university import University
-from flask import request,jsonify,g
 
+from flask import request, jsonify, g
+
+from mysite.model.university import University
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
-from mysite.view.base import allow_cross_domain,get_university_img,\
-    get_university_logo,get_university_state,get_main_major
+from mysite.view.base import allow_cross_domain, get_university_img,\
+    get_university_logo, get_university_state, get_main_major
 from mysite.model.offer import Offer
 from mysite.model.state import State
+
 
 @allow_cross_domain
 def get_university():
@@ -26,7 +24,7 @@ def get_university():
         if university_id == 0:
             for university in University.get_university_info(connection=g.db):
                 c = university.__dict__
-            return jsonify(data=json.dumps(c), status=u"success")
+                return jsonify(data=json.dumps(c), status=u"success")
         else:
             university_info = []
             faculty_info = []
@@ -58,7 +56,7 @@ def get_university_info():
         majorlist = []
         major = {}
         link = {}
-        for row in University.get_university_info(g.db,university_id):
+        for row in University.get_university_info(g.db, university_id):
             university_info["universityid"] = row.id
             university_info["universitylogo"] = get_university_logo(row.name,)
             link["baidu"] = row.baidu

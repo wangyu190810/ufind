@@ -1,11 +1,13 @@
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
-from flask import session
-from functools import wraps
-from flask import make_response, jsonify, g
 
 import time
-from random import randint
+from functools import wraps
 from itsdangerous import Signer
+
+from flask import session
+from flask import make_response, jsonify, g
 
 from mysite.model.user import User
 from config import Config

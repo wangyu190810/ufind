@@ -1,16 +1,19 @@
+# -*-coding: utf-8-*-
 
-# -*- coding:utf-8 -*-
-# Time: 14-2-22 下午11:48
-# Desc: 短信http接口的python代码调用示例
+__author__ = 'wangyu'
+
+import json
 import httplib
 import urllib
 from random import randint
-import json
-from flask import request, jsonify,g
-from config import Config
 
+from flask import request, jsonify,g
+
+from config import Config
 from mysite.model.user import User
 from mysite.view.base import allow_cross_domain
+
+
 # 服务地址
 host = "yunpian.com"
 # 端口号

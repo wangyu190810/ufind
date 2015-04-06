@@ -1,9 +1,11 @@
-#-*-coding:utf-8-*-
+# -*-coding: utf-8-*-
+
 __author__ = 'wangyu'
+
 
 class Config(object):
     db = "mysql://root:1234@localhost/ufind?charset=utf8"
-    SUCCESS_KEY = "@åßßßßßå∂åß∂œ∑œ∑œ∑œ∑œœ∑åßåß∂åß∂ΩΩΩ≈çΩ≈ç"
+    SUCCESS_KEY = "change me "
     REDIS_URL = "redis:://:"
     apikey = ""
     login_sign = u"随意的签名"

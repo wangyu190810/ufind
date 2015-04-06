@@ -1,16 +1,13 @@
-#! /usr/bin/python
-# -*- coding:utf-8 -*-
-# Filename: university.py
-# Author: wangyu190810
-# E-mail: wo190810401@gmail.com
-# Date: 2015-01-22
-# Description:
+# -*-coding: utf-8-*-
+
+__author__ = 'wangyu'
 
 import json
 from random import randint
 
 from flask import request,g
-from mysite.view.base import allow_cross_domain,login_user_info
+
+from mysite.view.base import allow_cross_domain
 from mysite.model.state import State
 from mysite.model.offer import Offer
 
