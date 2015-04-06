@@ -59,6 +59,7 @@ def login_from_cookie():
 @allow_cross_domain
 def register_first():
     if request.method == "POST":
+        import ipdb;ipdb.set_trace()
         data = request.form
         email = data["email"]
         password = data["password"]
