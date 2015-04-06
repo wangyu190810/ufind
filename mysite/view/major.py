@@ -1,5 +1,5 @@
 #! /usr/bin/python
-
+# -*-coding:utf-8-*-
 from flask import request, jsonify, g
 from mysite.model.major import Major
 from mysite.model.compare import CompareInfo

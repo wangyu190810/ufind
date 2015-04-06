@@ -16,14 +16,18 @@ class Faculty(Base):
     chiname = Column(Unicode(255))
     university_id = Column(Integer)
 
+    # @classmethod
+    # def get_faculty_info(cls, connection, university_id=None):
+    #     if university_id is None:
+    #         return connection.query(Faculty).filter_by()
+    #     else:
+    #         return connection.query(Faculty).filter(Faculty.university_id
+    #                                                 == university_id)
+    #
+    #
     @classmethod
     def get_faculty_info(cls, connection, university_id=None):
-        if university_id is None:
-            return connection.query(Faculty).filter_by()
-        else:
-            return connection.query(Faculty).filter(Faculty.university_id
-                                                    == university_id)
-
+        return connection.query(Faculty).limit(6)
 
 
 
