@@ -2,12 +2,14 @@
 __author__ = 'wangyu'
 from flask import g, session, request, jsonify
 
-from mysite.view.base import allow_cross_domain, set_sign_safe,checknum_timeout
+from mysite.view.base import allow_cross_domain, set_sign_safe,\
+    checknum_timeout
 from mysite.model.user import User
 from mysite.model.university_china import UniversityChina, SeniorHighSchool, \
     MajorChina
 
 from time import time
+
 
 @allow_cross_domain
 def login():
@@ -81,7 +83,6 @@ def register_second():
         username = data.get("username")
         university_id = data.get("universityid")
         user_type = data.get("type")
-        print data
         if int(user_type) == 0:
             senior = SeniorHighSchool.get_senior_high(g.db, university_id)
             university_name = senior.name
@@ -97,13 +98,15 @@ def register_second():
             major_id = int(data.get("majorid"))
             major_name = MajorChina.get_major_china(g.db, major_id).major_name
         gpa = data["gpa"]
-        create_time  = time()
+        create_time = time()
         User.register_second(g.db, phone, username, university_name, major_name,
                              gpa, user_type, create_time)
         user = User.get_user_info_by_phone(g.db, phone)
         user_id = user.id
         session["user_id"] = user_id
-        User.update_user_pic(g.db,user_id,"http://www.ufindoffer.com/images/unimg/head/%E6%97%A0%E6%80%A7%E5%88%AB/9.jpg")
+        User.update_user_pic(g.db,user_id,
+                             """http://www.ufindoffer.com/images/unimg/head
+                             /%E6%97%A0%E6%80%A7%E5%88%AB/9.jpg""")
         return jsonify(status="success",
                        cookie=set_sign_safe(str(user_id)))
     return jsonify(status="false")
@@ -117,7 +120,8 @@ def change_password():
         password = data["password"]
         checknum = data["checknum"]
         check = User.get_checknum(g.db, phone)
-        if check.checknum == int(checknum) and checknum_timeout(check.checknum_time):
+        if check.checknum == int(checknum) and \
+                checknum_timeout(check.checknum_time):
             User.change_password(g.db, phone, password)
             return jsonify(status="success")
         return jsonify(status="false")
