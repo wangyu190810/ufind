@@ -46,7 +46,7 @@ def get_university():
                            status="success")
 
 
-@allow_cross_domain
+#@allow_cross_domain
 def get_university_info():
     if request.method == "GET":
         university_id = request.args.get("universityid")
