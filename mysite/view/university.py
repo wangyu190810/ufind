@@ -58,15 +58,15 @@ def get_university_info():
         link = {}
         for row in University.get_university_info(g.db, university_id):
             university_info["universityid"] = row.id
-            university_info["universitylogo"] = get_university_logo(row.name,)
+            university_info["universitylogo"] = get_university_logo(row.name)
             link["baidu"] = row.baidu
             link["wiki"] = row.wiki
             link["official"] = row.official
             university_info["name"] = row.name
             university_info["chiname"] = row.chiname
-            university_info["offernum"] = Offer.get_offer_num(g.db,row.id)
-            university_info["pic1"] = get_university_img(row.name,1,u"长方形图片")
-            university_info["pic2"] = get_university_img(row.name,2,u"长方形图片")
+            university_info["offernum"] = Offer.get_offer_num(g.db, row.id)
+            university_info["pic1"] = get_university_img(row.name, 1, u"长方形图片")
+            university_info["pic2"] = get_university_img(row.name, 2, u"长方形图片")
             university_info["link"] = link
         for row in Faculty.get_faculty_info(g.db, university_id):
             faculty["facultyid"] = row.id
@@ -138,7 +138,7 @@ def get_university_list():
         return jsonify(university=name)
 
 
-@allow_cross_domain
+#@allow_cross_domain
 def get_state_university():
     if request.method == "GET":
         university = {}
@@ -147,7 +147,7 @@ def get_state_university():
             State.get_state_name(g.db, state_id).name)
         universitylist = []
         university_info = {}
-        for row in University.get_state_university(g.db,state_id):
+        for row in University.get_state_university(g.db, state_id):
             university_info["name"] = row.name
             university_info["chiname"] = row.chiname
             university_info["universityid"] = row.id
