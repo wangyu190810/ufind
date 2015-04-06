@@ -10,7 +10,8 @@ from flask import request, jsonify, g
 
 from config import Config
 from models.user import User
-from views.base import allow_cross_domain
+
+from lib.decorators import allow_cross_domain
 
 
 u"""服务地址"""

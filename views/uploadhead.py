@@ -8,8 +8,9 @@ from flask import g, jsonify, request, session
 from werkzeug.utils import secure_filename
 
 from config import Config
-from views.base import validate_user_login,get_user_hred_img
-from views.user import User
+from models.user import User
+from lib.get_static import get_user_hred_img
+from lib.decorators import validate_user_login
 
 
 def allowed_file(filename):

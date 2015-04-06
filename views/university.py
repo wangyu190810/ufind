@@ -5,13 +5,14 @@ import json
 
 from flask import request, jsonify, g
 
-from models.university import University
-from models.faculty import Faculty
-from models.major import Major
-from views.base import allow_cross_domain, get_university_img,\
-    get_university_logo, get_university_state, get_main_major
 from models.offer import Offer
+from models.major import Major
 from models.state import State
+from models.faculty import Faculty
+from models.university import University
+
+from lib.decorators import allow_cross_domain
+from lib.get_static import get_university_img, get_university_logo, get_university_state, get_main_major
 
 
 @allow_cross_domain

@@ -5,17 +5,18 @@ import json
 
 from flask import g, jsonify, request, session
 
-from models.user import User, UserFollow
-from models.offer import Offer
-from models.university import University
-from models.major import Major
-from models.compare import CompareInfo, Compare
-from models.message import Message
 from models.score import Score
+from models.major import Major
+from models.offer import Offer
 from models.stasub import Stasub
-from views.base import allow_cross_domain, get_timestamp, \
-    validate_user_login, get_university_logo, get_university_twodim,\
-    get_GMAT, get_gre, get_TELTS, get_Total, get_SAT, get_compare_score
+from models.message import Message
+from models.university import University
+from models.user import User, UserFollow
+from models.compare import CompareInfo, Compare
+
+from lib.decorators import allow_cross_domain, validate_user_login
+from lib.get_static import get_university_logo, get_university_twodim
+from lib.utils import get_timestamp, get_GMAT, get_gre, get_TELTS, get_Total, get_SAT, get_compare_score
 
 
 @validate_user_login
@@ -406,6 +407,7 @@ def get_user_base_info():
 
         return jsonify(user_info)
     return jsonify(status="false")
+
 
 @validate_user_login
 def edit_user_info_page():

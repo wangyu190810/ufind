@@ -7,7 +7,7 @@ from flask import request, g
 
 from models.university_china import UniversityChina, SeniorHighSchool,\
     MajorChina
-from views.base import allow_cross_domain
+from lib.decorators import allow_cross_domain
 
 
 @allow_cross_domain

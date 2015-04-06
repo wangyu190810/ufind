@@ -5,9 +5,10 @@ from flask import request, jsonify, g, session
 
 from models.user import User
 from models.score import Score
-from views.base import allow_cross_domain, validate_user_login, get_gre, \
-    get_TELTS, get_Total, get_GMAT, get_SAT
 from models.stasub import Stasub
+
+from lib.decorators import allow_cross_domain, validate_user_login
+from lib.utils import get_gre, get_TELTS, get_Total, get_GMAT, get_SAT
 
 
 @validate_user_login

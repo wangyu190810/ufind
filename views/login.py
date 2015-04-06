@@ -5,11 +5,11 @@ from time import time
 
 from flask import g, session, request, jsonify
 
-from views.base import allow_cross_domain, set_sign_safe,\
-    checknum_timeout
 from models.user import User
-from models.university_china import UniversityChina, SeniorHighSchool, \
-    MajorChina
+from models.university_china import UniversityChina, SeniorHighSchool, MajorChina
+
+from lib.decorators import allow_cross_domain
+from lib.utils import set_sign_safe, checknum_timeout
 
 
 @allow_cross_domain

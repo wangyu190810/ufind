@@ -5,12 +5,14 @@ import json
 
 from flask import request, jsonify, g, session
 
-from models.university import University
-from models.major import Major
-from models.compare import Compare, CompareInfo, CompareSupport
-from views.base import allow_cross_domain, get_timestamp,\
-    get_university_logo
 from models.offer import Offer
+from models.major import Major
+from models.university import University
+from models.compare import Compare, CompareInfo, CompareSupport
+
+from lib.utils import get_timestamp
+from lib.decorators import allow_cross_domain
+from lib.get_static import get_university_logo
 
 
 @allow_cross_domain

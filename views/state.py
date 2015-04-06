@@ -6,9 +6,10 @@ from random import randint
 
 from flask import request, g
 
-from views.base import allow_cross_domain
 from models.state import State
 from models.offer import Offer
+
+from lib.decorators import allow_cross_domain
 
 
 @allow_cross_domain

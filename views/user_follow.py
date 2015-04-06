@@ -3,8 +3,8 @@
 
 from flask import g, jsonify, request, session
 
-from views.base import allow_cross_domain
 from models.user import UserFollow
+from lib.decorators import allow_cross_domain
 
 
 @allow_cross_domain
