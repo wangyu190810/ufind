@@ -59,12 +59,13 @@ def login_from_cookie():
 @allow_cross_domain
 def register_first():
     if request.method == "POST":
-        import ipdb;ipdb.set_trace()
         data = request.form
+
         email = data["email"]
         password = data["password"]
         phonenum = data["phonenum"]
         checknum = data["checknum"]
+
         check = User.get_checknum(g.db, phonenum)
         if check is None:
             return jsonify(status="false")
@@ -81,28 +82,39 @@ def register_first():
 def register_second():
     if request.method == "POST":
         data = request.form
+
         phone = data.get("phonenum")
         username = data.get("username")
         university_id = data.get("universityid")
+        gpa = data["gpa"]
         user_type = data.get("type")
+
         if int(user_type) == 0:
+            senior_dict = {
+                '1': u"文科",
+                '2': u"理科",
+                '3': u"其他"
+            }
             senior = SeniorHighSchool.get_senior_high(g.db, university_id)
             university_name = senior.name
-            senior_dict = dict()
-            senior_dict["1"] = u"文科"
-            senior_dict["2"] = u"理科"
-            senior_dict["3"] = u"其他"
+
             major_name = senior_dict.get(data.get("majorid"))
         else:
-            university = UniversityChina.get_university_china_info(g.db,
-                                                                   university_id)
+            university = UniversityChina.get_university_china_info(g.db, university_id)
             university_name = university.name
             major_id = int(data.get("majorid"))
+
             major_name = MajorChina.get_major_china(g.db, major_id).major_name
-        gpa = data["gpa"]
+
         create_time = time()
-        User.register_second(g.db, phone, username, university_name, major_name,
-                             gpa, user_type, create_time)
+        User.register_second(g.db,
+                             phone,
+                             username,
+                             university_name,
+                             major_name,
+                             gpa,
+                             user_type,
+                             create_time)
         user = User.get_user_info_by_phone(g.db, phone)
         user_id = user.id
         session["user_id"] = user_id
@@ -118,12 +130,13 @@ def register_second():
 def change_password():
     if request.method == "POST":
         data = request.form
+
         phone = data["phonenum"]
         password = data["password"]
         checknum = data["checknum"]
+
         check = User.get_checknum(g.db, phone)
-        if check.checknum == int(checknum) and \
-                checknum_timeout(check.checknum_time):
+        if check.checknum == int(checknum) and checknum_timeout(check.checknum_time):
             User.change_password(g.db, phone, password)
             return jsonify(status="success")
         return jsonify(status="false")

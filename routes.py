@@ -3,13 +3,13 @@
 
 from flask import current_app, g
 
+from views.user import get_user_info, get_user_detail_info, \
+    get_user_in_university, update_user_bginf, get_user_base_info,\
+    edit_user_info_page, update_user_info, update_user_description
 from views.university import get_university, get_search_university, \
     get_university_info, get_university_list, get_state_university
 from views.major import search_major, get_major_compare,\
     get_major_from_university_faculty
-from views.user import get_user_info, get_user_detail_info, \
-    get_user_in_university, update_user_bginf, get_user_base_info,\
-    edit_user_info_page, update_user_info, update_user_description
 from views.score import set_user_score
 from views.compare import set_compare, get_compare, get_compare_list, \
     set_compare_support
@@ -30,12 +30,14 @@ from app import ufindoffer_app
 
 app = ufindoffer_app()
 
-app.add_url_rule("/api/login", view_func=login,
-                 methods=["GET", "POST"])
-app.add_url_rule("/api/login_cookie", view_func=login_from_cookie,
-                 methods=["GET"])
-app.add_url_rule("/api/logout", view_func=logout,
-                 methods=["GET", "POST"])
+# ---- User 相关API -----
+app.add_url_rule("/api/login", view_func=login, methods=["GET", "POST"])
+app.add_url_rule("/api/login_cookie", view_func=login_from_cookie, methods=["GET"])
+app.add_url_rule("/api/logout", view_func=logout, methods=["GET", "POST"])
+app.add_url_rule("/api/register_first", view_func=register_first, methods=["POST"])
+app.add_url_rule("/api/register_second", view_func=register_second, methods=["POST"])
+app.add_url_rule("/api/change_password", view_func=change_password, methods=["POST"])
+app.add_url_rule("/api/send_sms", view_func=send_sms, methods=["POST"])
 
 app.add_url_rule("/api/get_university",
                  view_func=get_university, methods=["GET"])
@@ -103,14 +105,6 @@ app.add_url_rule("/api/get_state_university", view_func=get_state_university,
                  methods=["GET"])
 app.add_url_rule("/api/index", view_func=get_index,
                  methods=["GET"])
-app.add_url_rule("/api/register_first", view_func=register_first,
-                 methods=["POST"])
-app.add_url_rule("/api/register_second", view_func=register_second,
-                 methods=["POST"])
-app.add_url_rule("/api/change_password", view_func=change_password,
-                 methods=["POST"])
-app.add_url_rule("/api/send_sms", view_func=send_sms,
-                 methods=["POST"])
 # app.add_url_rule("/googlefad2f2add41d5dac.html",
 
 # view_func=google)
