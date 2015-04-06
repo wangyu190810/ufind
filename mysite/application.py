@@ -160,6 +160,6 @@ def _before_request():
 
 
 @app.teardown_request
-def teardown_request():
+def teardown_request(*args, **kwargs):
     current_app.DBSession.remove()
     g.db.close()

@@ -48,6 +48,7 @@ def get_university():
 
 #@allow_cross_domain
 def get_university_info():
+    print request.data
     if request.method == "GET":
         university_id = request.args.get("universityid")
         university_info = {}
@@ -56,8 +57,15 @@ def get_university_info():
         majorlist = []
         major = {}
         link = {}
-        for row in University.get_university_info(g.db, university_id):
+        print type(university_id)
+
+        row = University.get_university_info(g.db, university_id)
+        print row
+        print row.id
+        return jsonify(status="success")
+        if row is not None:
             university_info["universityid"] = row.id
+            #print row
             university_info["universitylogo"] = get_university_logo(row.name)
             link["baidu"] = row.baidu
             link["wiki"] = row.wiki
