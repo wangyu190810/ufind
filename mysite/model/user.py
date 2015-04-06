@@ -124,7 +124,6 @@ class User(Base):
         if not connection.query(User).\
                 filter(User.id == user_id).\
                 filter(User.password == passwordold).scalar():
-            print "asdadsf"
             return False
 
         connection.query(User).\
@@ -138,9 +137,15 @@ class User(Base):
 
     @classmethod
     def update_user_phone(cls,connection,user_id,phone,checknum):
-        # TODO
-        if connection.query(User).filter(user_id):
-            pass
+        u"""更新个人电话"""
+        connection.query(User).filter(user_id).update(
+                {
+                    User.phone: phone,
+                    User.checknum: checknum,
+                    User.checknum_time: time.time()
+                }
+        )
+        connection.commit()
 
 
     @classmethod
