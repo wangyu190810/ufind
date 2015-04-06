@@ -9,8 +9,8 @@ from random import randint
 from flask import request, jsonify, g
 
 from config import Config
-from ufindoffer.models.user import User
-from ufindoffer.views.base import allow_cross_domain
+from models.user import User
+from views.base import allow_cross_domain
 
 
 u"""服务地址"""

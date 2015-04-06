@@ -3,11 +3,11 @@
 
 from flask import request, jsonify, g, session
 
-from ufindoffer.models.user import User
-from ufindoffer.models.score import Score
-from ufindoffer.views.base import allow_cross_domain, validate_user_login, get_gre, \
+from models.user import User
+from models.score import Score
+from views.base import allow_cross_domain, validate_user_login, get_gre, \
     get_TELTS, get_Total, get_GMAT, get_SAT
-from ufindoffer.models.stasub import Stasub
+from models.stasub import Stasub
 
 
 @validate_user_login

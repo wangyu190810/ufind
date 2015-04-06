@@ -8,27 +8,27 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
 from config import Config
-from ufindoffer.views.university import get_university, get_search_university, \
+from views.university import get_university, get_search_university, \
     get_university_info, get_university_list, get_state_university
-from ufindoffer.views.major import search_major, get_major_compare,\
+from views.major import search_major, get_major_compare,\
     get_major_from_university_faculty
-from ufindoffer.views.user import get_user_info, get_user_detail_info, \
+from views.user import get_user_info, get_user_detail_info, \
     get_user_in_university, update_user_bginf, get_user_base_info,\
     edit_user_info_page, update_user_info, update_user_description
-from ufindoffer.views.score import set_user_score
-from ufindoffer.views.compare import set_compare, get_compare, get_compare_list, \
+from views.score import set_user_score
+from views.compare import set_compare, get_compare, get_compare_list, \
     set_compare_support
-from ufindoffer.views.offer import set_offer, get_offer_student
-from ufindoffer.views.login import login, logout, register_first, register_second,\
+from views.offer import set_offer, get_offer_student
+from views.login import login, logout, register_first, register_second,\
     change_password, login_from_cookie
-from ufindoffer.views.message import set_message, get_message, set_message_to_gov,\
+from views.message import set_message, get_message, set_message_to_gov,\
     del_message_to_user
-from ufindoffer.views.state import get_index
-from ufindoffer.views.sms import send_sms
-from ufindoffer.views.china_school import search_major_name, search_university_china
-from ufindoffer.views.user_follow import del_follow_user, set_follow_user
-from ufindoffer.views.sub import get_sub
-from ufindoffer.views.uploadhead import upload_file, get_random_head
+from views.state import get_index
+from views.sms import send_sms
+from views.china_school import search_major_name, search_university_china
+from views.user_follow import del_follow_user, set_follow_user
+from views.sub import get_sub
+from views.uploadhead import upload_file, get_random_head
 
 
 app = Flask(__name__)
@@ -38,18 +38,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = Config.db
 
 app.sa_engine = create_engine(Config.db)
 app.DBSession = scoped_session(sessionmaker(bind=app.sa_engine))
-#
-# app.add_url_rule("/",view_func=index,methods=["GET", "POST"])
-# app.add_url_rule("/edit",view_func=edit,methods=["GET", "POST"])
-# app.add_url_rule("/change/<int:blog_id>",view_func=blog_change,methods=["GET","POST"])
-# app.add_url_rule("/search",view_func=search,methods=["GET"])
-#
-# app.add_url_rule("/arch",view_func=arch,methods=["GET"])
-# app.add_url_rule("/blog/<int:blog_id>",view_func=blog,methods=["GET","POST"])
-# app.add_url_rule("/tag/<tag>",view_func=blog_tag,methods=["GET","POST"])
-# app.add_url_rule("/classify/<name>",view_func=blog_classify,methods=["GET","POST"])
-#
-#
+
 app.add_url_rule("/api/login", view_func=login,
                  methods=["GET", "POST"])
 app.add_url_rule("/api/login_cookie", view_func=login_from_cookie,

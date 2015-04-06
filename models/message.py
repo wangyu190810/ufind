@@ -5,7 +5,7 @@ from time import time
 
 from sqlalchemy import Column, Integer, TEXT
 
-from .base import Base
+from models.base import Base
 
 
 class Message(Base):

@@ -3,11 +3,11 @@
 
 from flask import request, jsonify, g
 
-from ufindoffer.models.major import Major
-from ufindoffer.models.compare import CompareInfo
-from ufindoffer.views.base import allow_cross_domain
-from ufindoffer.models.offer import Offer
-from ufindoffer.models.user import User
+from models.major import Major
+from models.compare import CompareInfo
+from views.base import allow_cross_domain
+from models.offer import Offer
+from models.user import User
 
 
 @allow_cross_domain

@@ -5,9 +5,9 @@ import json
 
 from flask import request, g
 
-from ufindoffer.models.university_china import UniversityChina, SeniorHighSchool,\
+from models.university_china import UniversityChina, SeniorHighSchool,\
     MajorChina
-from ufindoffer.views.base import allow_cross_domain
+from views.base import allow_cross_domain
 
 
 @allow_cross_domain

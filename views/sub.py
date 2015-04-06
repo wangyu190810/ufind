@@ -3,7 +3,7 @@
 
 from flask import g, jsonify, request
 
-from ufindoffer.models.stasub import SubContent
+from models.stasub import SubContent
 
 
 def get_sub():

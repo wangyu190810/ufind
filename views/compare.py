@@ -5,12 +5,12 @@ import json
 
 from flask import request, jsonify, g, session
 
-from ufindoffer.models.university import University
-from ufindoffer.models.major import Major
-from ufindoffer.models.compare import Compare, CompareInfo, CompareSupport
-from ufindoffer.views.base import allow_cross_domain, get_timestamp,\
+from models.university import University
+from models.major import Major
+from models.compare import Compare, CompareInfo, CompareSupport
+from views.base import allow_cross_domain, get_timestamp,\
     get_university_logo
-from ufindoffer.models.offer import Offer
+from models.offer import Offer
 
 
 @allow_cross_domain

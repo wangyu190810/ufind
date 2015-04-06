@@ -5,7 +5,7 @@ import time
 
 from sqlalchemy import Column, String, Integer, Unicode, Float, func
 
-from .base import Base
+from models.base import Base
 
 
 class User(Base):

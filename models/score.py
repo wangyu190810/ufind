@@ -3,7 +3,7 @@
 
 from sqlalchemy import Column, Integer
 
-from .base import Base
+from models.base import Base
 
 
 class Score(Base):

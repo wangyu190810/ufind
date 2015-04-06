@@ -4,8 +4,7 @@
 from sqlalchemy.schema import Column
 from sqlalchemy.types import Integer, Unicode
 
-
-from .base import Base
+from models.base import Base
 
 
 class Major(Base):

@@ -3,12 +3,11 @@
 
 import time
 from functools import wraps
+
 from itsdangerous import Signer
+from flask import session, make_response, jsonify, g
 
-from flask import session
-from flask import make_response, jsonify, g
-
-from ufindoffer.models.user import User
+from models.user import User
 from config import Config
 
 

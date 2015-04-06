@@ -5,9 +5,9 @@ import json
 
 from flask import request, g, jsonify, session
 
-from ufindoffer.models.message import Message
-from ufindoffer.models.user import User
-from ufindoffer.views.base import validate_user_login, allow_cross_domain, get_timestamp
+from models.message import Message
+from models.user import User
+from views.base import validate_user_login, allow_cross_domain, get_timestamp
 
 
 @allow_cross_domain

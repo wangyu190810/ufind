@@ -5,13 +5,13 @@ import json
 
 from flask import request, jsonify, g
 
-from ufindoffer.models.university import University
-from ufindoffer.models.faculty import Faculty
-from ufindoffer.models.major import Major
-from ufindoffer.views.base import allow_cross_domain, get_university_img,\
+from models.university import University
+from models.faculty import Faculty
+from models.major import Major
+from views.base import allow_cross_domain, get_university_img,\
     get_university_logo, get_university_state, get_main_major
-from ufindoffer.models.offer import Offer
-from ufindoffer.models.state import State
+from models.offer import Offer
+from models.state import State
 
 
 @allow_cross_domain

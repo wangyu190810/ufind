@@ -5,10 +5,11 @@ import os
 import random
 
 from flask import g, jsonify, request, session
-from config import Config
-from ufindoffer.views.base import validate_user_login,get_user_hred_img
-from ufindoffer.views.user import User
 from werkzeug.utils import secure_filename
+
+from config import Config
+from views.base import validate_user_login,get_user_hred_img
+from views.user import User
 
 
 def allowed_file(filename):
@@ -26,7 +27,7 @@ def upload_file():
             filename = secure_filename(head.filename)
             print filename
             head.save(os.path.join(Config.upload_folder, filename))
-            link = "http://www.ufindoffer.com/images/medivh/"+filename
+            link = "http://www.com/images/medivh/"+filename
             User.update_user_pic(g.db, user_id, link)
             return jsonify(status="success")
             # return jsonify(status="success")

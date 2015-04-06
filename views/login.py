@@ -1,15 +1,15 @@
 # coding: utf-8
 # email: khahux@163.com
 
+from time import time
+
 from flask import g, session, request, jsonify
 
-from ufindoffer.views.base import allow_cross_domain, set_sign_safe,\
+from views.base import allow_cross_domain, set_sign_safe,\
     checknum_timeout
-from ufindoffer.models.user import User
-from ufindoffer.models.university_china import UniversityChina, SeniorHighSchool, \
+from models.user import User
+from models.university_china import UniversityChina, SeniorHighSchool, \
     MajorChina
-
-from time import time
 
 
 @allow_cross_domain
@@ -106,7 +106,7 @@ def register_second():
         user_id = user.id
         session["user_id"] = user_id
         User.update_user_pic(g.db, user_id,
-                             """http://www.ufindoffer.com/images/unimg/head
+                             """http://www.com/images/unimg/head
                              /%E6%97%A0%E6%80%A7%E5%88%AB/9.jpg""")
         return jsonify(status="success",
                        cookie=set_sign_safe(str(user_id)))

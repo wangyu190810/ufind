@@ -6,9 +6,9 @@ from random import randint
 
 from flask import request, g
 
-from ufindoffer.views.base import allow_cross_domain
-from ufindoffer.models.state import State
-from ufindoffer.models.offer import Offer
+from views.base import allow_cross_domain
+from models.state import State
+from models.offer import Offer
 
 
 @allow_cross_domain

@@ -5,7 +5,7 @@ from sqlalchemy.schema import Column
 from sqlalchemy.types import Integer, Unicode
 from sqlalchemy import or_
 
-from .base import Base
+from models.base import Base
 
 
 class UniversityChina(Base):

@@ -3,7 +3,7 @@
 
 from sqlalchemy import Column, Integer, Unicode
 
-from .base import Base
+from models.base import Base
 
 
 class Stasub(Base):

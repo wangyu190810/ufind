@@ -5,15 +5,15 @@ import json
 
 from flask import g, jsonify, request, session
 
-from ufindoffer.models.user import User, UserFollow
-from ufindoffer.models.offer import Offer
-from ufindoffer.models.university import University
-from ufindoffer.models.major import Major
-from ufindoffer.models.compare import CompareInfo, Compare
-from ufindoffer.models.message import Message
-from ufindoffer.models.score import Score
-from ufindoffer.models.stasub import Stasub
-from ufindoffer.views.base import allow_cross_domain, get_timestamp, \
+from models.user import User, UserFollow
+from models.offer import Offer
+from models.university import University
+from models.major import Major
+from models.compare import CompareInfo, Compare
+from models.message import Message
+from models.score import Score
+from models.stasub import Stasub
+from views.base import allow_cross_domain, get_timestamp, \
     validate_user_login, get_university_logo, get_university_twodim,\
     get_GMAT, get_gre, get_TELTS, get_Total, get_SAT, get_compare_score
 

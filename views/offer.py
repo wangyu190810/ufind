@@ -3,10 +3,10 @@
 
 from flask import request, jsonify, g, session
 
-from ufindoffer.models.university import University
-from ufindoffer.models.offer import Offer
-from ufindoffer.views.base import allow_cross_domain, get_university_twodim
-from ufindoffer.models.user import User
+from models.university import University
+from models.offer import Offer
+from views.base import allow_cross_domain, get_university_twodim
+from models.user import User
 
 
 @allow_cross_domain
