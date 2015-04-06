@@ -4,6 +4,8 @@
 
 doc/*
 
+.idea
+
 config.py
 
 sql/*
