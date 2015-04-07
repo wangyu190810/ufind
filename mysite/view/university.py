@@ -80,33 +80,30 @@ def get_university_info():
                                                             school_id=row.id):
                                                             #university_id=university_id,
                                                             #faculty_id=row.id):
-                print dir(row_major)
-                print row_major.has_key
-                print row_major[1]
 
                 #print row_major.major_id
                 #print row_major.countmajor
-            num = 1
-            major_info = Major.get_major_info(g.db,row_major[1])
+                num = 1
+                major_info = Major.get_major_info(g.db,row_major[1])
             # for major_row in Major.get_major_info(g.db,
             #                                 university_info["universityid"],
             #                                 faculty["facultyid"]):
-            if major_info:
-                major["majorid"] = major_info.id
-                major["name"] = major_info.name
-                img_num = 2
-                if num % 3:
-                    img_num = 1
-                check = 1
-                major["pic"] = get_main_major(img_num,major_info.main_major)
-                major["check"] = major_info.main_major
-               # major["pic2"] = get_main_major(2,major_row.main_major)
-               #  for row_check in majorlist:
-               #      if major.get("check") in row_check.get("check"):
-               #          check = 0
-               #  if check:
-               #      num += 1
-                majorlist.append(major)
+                if major_info:
+                    major["majorid"] = major_info.id
+                    major["name"] = major_info.name
+                    img_num = 2
+                    if num % 3:
+                        img_num = 1
+                    check = 1
+                    major["pic"] = get_main_major(img_num,major_info.main_major)
+                    major["check"] = major_info.main_major
+                    major["pic2"] = get_main_major(2,major_info.main_major)
+                    for row_check in majorlist:
+                        if major.get("check") in row_check.get("check"):
+                            check = 0
+                    if check:
+                        num += 1
+                        majorlist.append(major)
 
                 major = {}
 
