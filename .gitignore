@@ -1,12 +1,11 @@
-.DS_Store
+# Created by .ignore support plugin (hsz.mobi)
+
+*.py[ocd]
+
+doc/*
+
 .idea
 
-
-*.py[cod]
-*.sw[po]
-
-
 config.py
-doc/
-*/txt
-*/json
+
+sql/*

@@ -1,1 +1,0 @@
-INSERT INTO `university` VALUES (287,'The Open University','开放大学',NULL,46,NULL,'http://www.open.ac.uk/','http://baike.baidu.com/view/859564.htm?fromtitle=The+Open+University&type=syn','http://en.wikipedia.org/wiki/Open_University',NULL,'51.541','-0.142998','Uk',90,NULL,0);
