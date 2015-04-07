@@ -108,15 +108,20 @@ class Offer(Base):
     def get_index_from_offer_num(cls, connection,university_id,school_id):
 
         sql = text("""(select count(user_id) as countmajor,major_id as id from offer
-        where university_id=:university_id and  school1_id=:school_id
+        where university_id=:university_id_1 and  school1_id=:school_id_1
         group by major_id
         order by countmajor desc)
         union
         (select 0 as countmajor, id from major
-        where university_id=:university_id and  faculty_id=:school_id and id not
-        in (select major_id from offer where university_id=:university_id and
-        school1_id=:school_id)
+        where university_id=:university_id_2 and  faculty_id=:school_id_2 and id not
+        in (select major_id from offer where university_id=:university_id_3 and
+        school1_id=:school_id_3)
         order by rand()
         limit 3)""")
-        return connection.execute(sql,university_id=university_id,school_id=school_id)#, university_id=university_id,
-                                  #faculty_id=faculty_id)
+        return connection.execute(sql,
+                                  university_id_1=university_id,
+                                  school_id_1=school_id,
+                                  university_id_2=university_id,
+                                  school_id_2=school_id,
+                                  university_id_3=university_id,
+                                  school_id_3=school_id,)
