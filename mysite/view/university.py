@@ -91,13 +91,14 @@ def get_university_info():
                 if major_info:
                     major["majorid"] = major_info.id
                     major["name"] = major_info.name
-                    img_num = 1
+                    img_num = 2
                     if num % 3:
-                        img_num = 2
+                        img_num = 1
                     check = 1
                     major["pic"] = get_main_major(img_num,major_info.main_major)
                     major["check"] = major_info.main_major
-                    #major["pic2"] = get_main_major(2,major_info.main_major)
+                    major["pic2"] = get_main_major(2,major_info.main_major)
+                    print major
                     for row_check in majorlist:
                         if major.get("check") in row_check.get("check"):
                             check = 0
