@@ -76,9 +76,9 @@ def get_university_info():
             faculty["chiname"] = row.chiname
             faculty["name"] = row.name
             #faculty["pic"] = get_main_major(1,row.main_major)
-            for row_major in Offer.get_index_from_offer_num(g.db,
-                                                            university_id=university_id,
-                                                            faculty_id=row.id):
+            for row_major in Offer.get_index_from_offer_num(g.db):
+                                                            #university_id=university_id,
+                                                            #faculty_id=row.id):
                 print dir(row_major)
                 print row_major.major_id
                 print row_major.countmajor
