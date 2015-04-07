@@ -101,12 +101,12 @@ def get_university_info():
                 major["pic"] = get_main_major(img_num,major_info.main_major)
                 major["check"] = major_info.main_major
                # major["pic2"] = get_main_major(2,major_row.main_major)
-                for row_check in majorlist:
-                    if major.get("check") in row_check.get("check"):
-                        check = 0
-                if check:
-                    num += 1
-                    majorlist.append(major)
+               #  for row_check in majorlist:
+               #      if major.get("check") in row_check.get("check"):
+               #          check = 0
+               #  if check:
+               #      num += 1
+                majorlist.append(major)
 
                 major = {}
 
