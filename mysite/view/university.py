@@ -101,7 +101,10 @@ def get_university_info():
 
                 if num == 4:
                     break
-
+            for row_major in Offer.get_index_from_offer_num(g.db,university_id,major_id=2):
+                print dir(row_major)
+                print row_major.major_id
+                print row_major.countmajor
             faculty["majorlist"] = majorlist
             majorlist = []
             facultylist.append(faculty)

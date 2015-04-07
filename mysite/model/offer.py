@@ -2,7 +2,7 @@
 __author__ = ''
 from sqlalchemy.schema import Column
 from sqlalchemy.types import Integer, Unicode
-from sqlalchemy.sql import func
+from sqlalchemy.sql import func,text
 
 from time import time
 
@@ -94,3 +94,10 @@ class Offer(Base):
             filter(Offer.user_id == user_id).\
             filter(Offer.major_id == major_id).delete()
         connection.commit()
+
+    @classmethod
+    def get_index_from_offer_num(cls,connection,university_id,major_id):
+        sql = text("select count(user_id) as countmajor, major_id from offer"
+                   " where university_id = :university_id and faculty_id "
+                   "= :faculty_id group by major_id order by countmajor")
+        connection.execute(sql,university_id,major_id)
