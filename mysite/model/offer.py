@@ -124,4 +124,4 @@ class Offer(Base):
                                   university_id_2=university_id,
                                   school_id_2=school_id,
                                   university_id_3=university_id,
-                                  school_id_3=school_id,)
+                                  school_id_3=school_id)
