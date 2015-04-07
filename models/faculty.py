@@ -17,25 +17,7 @@ class Faculty(Base):
 
     @classmethod
     def get_faculty_info(cls, connection, university_id=None):
-<<<<<<< HEAD:models/faculty.py
-<<<<<<< HEAD:mysite/model/faculty.py
+
         return connection.query(Faculty).limit(6)
-=======
-        if university_id is None:
-            return connection.query(Faculty).filter_by()
-        else:
-            return connection.query(Faculty).filter(Faculty.university_id
-                                                    == university_id)
-
->>>>>>> fixbug:mysite/model/faculty.py
 
 
-
-
-=======
-        if university_id is None:
-            return connection.query(Faculty).filter_by()
-        else:
-            return connection.query(Faculty).filter(Faculty.university_id
-                                                    == university_id)
->>>>>>> 906fe4c29000ededa1036345f7ffa9361e383900:models/faculty.py
