@@ -81,9 +81,8 @@ def get_university_info():
                                                             #faculty_id=row.id):
                 print dir(row_major)
                 print row_major.has_key
-                print row_major[0]
-                print row_major[0][0]
-                print row_major.get("major_id")
+                print row_major[1]
+
                 #print row_major.major_id
                 #print row_major.countmajor
             num = 1
