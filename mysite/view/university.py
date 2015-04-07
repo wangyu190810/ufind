@@ -80,8 +80,9 @@ def get_university_info():
                                                             #university_id=university_id,
                                                             #faculty_id=row.id):
                 print dir(row_major)
-                print row_major.major_id
-                print row_major.countmajor
+                print row_major.get("major_id")
+                #print row_major.major_id
+                #print row_major.countmajor
             num = 1
             for major_row in Major.get_major_info(g.db,
                                             university_info["universityid"],
