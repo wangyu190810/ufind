@@ -108,7 +108,7 @@ def get_university_info():
 
                 major = {}
 
-                if num == 4:
+                if num == 5:
                     break
 
             faculty["majorlist"] = majorlist
