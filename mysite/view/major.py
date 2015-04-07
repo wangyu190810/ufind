@@ -1,6 +1,6 @@
 #! /usr/bin/python
 # -*-coding:utf-8-*-
-from flask import request, jsonify, g
+from flask import request, jsonify, g,session
 from mysite.model.major import Major
 from mysite.model.compare import CompareInfo
 from mysite.view.base import allow_cross_domain
@@ -13,6 +13,12 @@ def search_major():
     if request.method == "GET":
         major_list = []
         major = {}
+        user_id = session.get("user_id")
+        user = User.get_user_info(g.db,user_id)
+        major_type = -1
+        if user:
+            major_type = user.type
+
         searchname,university_id = map(request.args.get,
                                        ("searchname", "universityid"))
 
@@ -26,7 +32,7 @@ def search_major():
             return jsonify(namelist=major_list,
                            status="success")
         else:
-            for row in Major.search_maior(g.db, searchname, university_id):
+            for row in Major.search_maior(g.db, searchname, university_id,major_type):
                 major["name"] = row.name
                 major["chiname"] = row.chiname
                 major["id"] = row.id

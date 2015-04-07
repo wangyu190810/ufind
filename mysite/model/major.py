@@ -24,14 +24,15 @@ class Major(Base):
 
 
     @classmethod
-    def search_maior(cls, connection, searchname, university_id=None):
+    def search_maior(cls, connection, searchname, university_id=None,major_type=None):
         if university_id is None:
            return connection.query(Major).\
                filter(Major.name.like("%"+searchname+"%"))
         else:
            return connection.query(Major).\
                filter(Major.name.like("%"+searchname+"%")).\
-               filter(Major.university_id == university_id)
+               filter(Major.university_id == university_id).\
+               filter(Major.main_major == major_type)
 
     @classmethod
     def get_major_info_university(cls,connection,university_id):
