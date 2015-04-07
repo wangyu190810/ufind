@@ -13,6 +13,7 @@ from mysite.model.offer import Offer
 from mysite.view.base import allow_cross_domain,get_university_img,\
     get_university_twodim
 from mysite.model.user import User
+from mysite.model.major import Major
 
 @allow_cross_domain
 def set_offer():
@@ -34,10 +35,16 @@ def set_offer():
             User.update_user_grade(g.db,user_id=user_id,grade=offer_grade)
             Offer.del_same_offer(g.db,university_id=offer_university_id,
                                 major_id =offer_major_id,user_id=user_id)
+            major_id = Major.get_major_info(g.db,offer_major_id)
+            school1_id = 0
+            if major_id:
+                school1_id = major_id.school1_id
+
             Offer.set_offer(g.db,
                             user_id=user_id,
                             university_id=offer_university_id,
                             major_id=offer_major_id,
+                            school1_id=school1_id,
                             result=1,
                             offer_type=offer_type,
                             grade=offer_grade,

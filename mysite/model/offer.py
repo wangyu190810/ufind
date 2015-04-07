@@ -20,18 +20,21 @@ class Offer(Base):
     offer_type = Column(Unicode(80),doc=u"offer的类型，没有没有奖学金")
     scholarship = Column(Integer, doc=u"奖学金的数值")
     scholarship_type = Column(Unicode(80), doc=u"奖学金的类型")
+    school1_id = Column(Integer, doc=u"学院ID")
     create_time = Column(Integer, default=lambda: time())
 
     @classmethod
     def set_offer(cls, connection, user_id,
                   university_id, major_id,
                   result, grade,
+                  school1_id,
                   offer_type,
                   scholarship=None,
                   scholarship_type=None):
         offer = Offer(user_id=user_id, university_id=university_id,
                       major_id=major_id, result=result,
                       grade=grade,
+                      school1_id=school1_id,
                       offer_type=offer_type,
                       scholarship=scholarship,
                       scholarship_type=scholarship_type)
@@ -97,6 +100,7 @@ class Offer(Base):
 
     @classmethod
     def get_index_from_offer_num(cls, connection):
+
         sql = text("""(select count(user_id) as countmajor,major_id as id from offer
         where university_id=2 and  school1_id=1
         group by major_id
