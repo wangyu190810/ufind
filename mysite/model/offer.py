@@ -100,4 +100,4 @@ class Offer(Base):
         sql = text("select count(user_id) as countmajor, major_id from offer"
                    " where university_id = :university_id and faculty_id "
                    "= :faculty_id group by major_id order by countmajor")
-        connection.execute(sql, university_id, faculty_id)
+        return connection.execute(sql, university_id, faculty_id)
