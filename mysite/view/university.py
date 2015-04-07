@@ -92,6 +92,7 @@ def get_university_info():
                     major["majorid"] = major_info.id
                     major["name"] = major_info.name
                     img_num = 2
+                    num = len(majorlist) + 1
                     if num % 3:
                         img_num = 1
                     check = 1
@@ -103,7 +104,6 @@ def get_university_info():
                         if major.get("check") in row_check.get("check"):
                             check = 0
                     if check:
-                        num += 1
                         majorlist.append(major)
 
                 major = {}
