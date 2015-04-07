@@ -1,11 +1,15 @@
 <<<<<<< HEAD:mysite/view/major.py
 #! /usr/bin/python
+<<<<<<< HEAD:views/major.py
 # -*-coding:utf-8-*-
 =======
 # coding: utf-8
 # email: khahux@163.com
 
 >>>>>>> 906fe4c29000ededa1036345f7ffa9361e383900:views/major.py
+=======
+
+>>>>>>> fixbug:mysite/view/major.py
 from flask import request, jsonify, g
 
 from models.user import User
