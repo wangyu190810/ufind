@@ -38,7 +38,7 @@ def set_offer():
             major_id = Major.get_major_info(g.db,offer_major_id)
             school1_id = 0
             if major_id:
-                school1_id = major_id.school1_id
+                school1_id = major_id.faculty_id
 
             Offer.set_offer(g.db,
                             user_id=user_id,
