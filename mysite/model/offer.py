@@ -21,6 +21,8 @@ class Offer(Base):
     scholarship = Column(Integer, doc=u"奖学金的数值")
     scholarship_type = Column(Unicode(80), doc=u"奖学金的类型")
     school1_id = Column(Integer, doc=u"学院ID")
+    school2_id = Column(Integer, doc=u"学院ID")
+    school3_id = Column(Integer, doc=u"学院ID")
     create_time = Column(Integer, default=lambda: time())
 
     @classmethod
@@ -28,6 +30,8 @@ class Offer(Base):
                   university_id, major_id,
                   result, grade,
                   school1_id,
+                  school2_id,
+                  school3_id,
                   offer_type,
                   scholarship=None,
                   scholarship_type=None):
@@ -35,6 +39,8 @@ class Offer(Base):
                       major_id=major_id, result=result,
                       grade=grade,
                       school1_id=school1_id,
+                      school2_id=school2_id,
+                      school3_id=school3_id,
                       offer_type=offer_type,
                       scholarship=scholarship,
                       scholarship_type=scholarship_type)
