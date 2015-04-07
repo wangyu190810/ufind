@@ -33,11 +33,9 @@ class University(Base):
     def get_university_info(cls, connection, university_id=None):
         if university_id is None:
             return connection.query(University)
-            # return connection.query(University).all()
-            # return connection.execute(stmt)
         else:
-            import ipdb;ipdb.set_trace()
-            return connection.query(University).filter(University.id == university_id).saclar()
+            return connection.query(University).filter(University.id ==
+                                                       university_id).saclar()
 
     @classmethod
     def search_university(cls, connection, searchname=None, stateid=None):
