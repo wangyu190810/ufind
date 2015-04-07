@@ -84,8 +84,6 @@ def get_university_info():
                 img_num = 2
                 if num % 3:
                     img_num = 1
-                print img_num
-                print num
                 check = 1
                 major["pic"] = get_main_major(img_num,major_row.main_major)
                 major["check"] = major_row.main_major
@@ -94,12 +92,12 @@ def get_university_info():
                     if major.get("check") in row_check.get("check"):
                         check = 0
                 if check:
-
+                    num += 1
                     majorlist.append(major)
 
                 major = {}
 
-                num += 1
+
                 if num == 4:
                     break
 
@@ -139,6 +137,8 @@ def get_search_university():
                 university = {}
             return jsonify(namelist=universitylist,
                            stattus="success")
+
+
 @allow_cross_domain
 def get_university_list():
     if request.method == "GET":
