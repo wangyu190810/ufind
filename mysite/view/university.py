@@ -17,6 +17,7 @@ from mysite.view.base import allow_cross_domain,get_university_img,\
 from mysite.model.offer import Offer
 from mysite.model.state import State
 
+
 @allow_cross_domain
 def get_university():
     if request.method == "GET":
