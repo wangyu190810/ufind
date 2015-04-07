@@ -35,7 +35,7 @@ class University(Base):
             return connection.query(University)
         else:
             return connection.query(University).filter(University.id ==
-                                                       university_id).saclar()
+                                                       university_id)
 
     @classmethod
     def search_university(cls, connection, searchname=None, stateid=None):
