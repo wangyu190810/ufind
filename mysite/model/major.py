@@ -32,7 +32,7 @@ class Major(Base):
            return connection.query(Major).\
                filter(Major.name.like("%"+searchname+"%")).\
                filter(Major.university_id == university_id).\
-               filter(Major.main_major == major_type)
+               filter(Major.major_type == major_type)
 
     @classmethod
     def get_major_info_university(cls,connection,university_id):

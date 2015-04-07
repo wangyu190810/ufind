@@ -18,7 +18,6 @@ def search_major():
         major_type = -1
         if user:
             major_type = user.type
-
         searchname,university_id = map(request.args.get,
                                        ("searchname", "universityid"))
 
