@@ -88,9 +88,10 @@ def get_university_info():
                 print num
                 check = 1
                 major["pic"] = get_main_major(img_num,major_row.main_major)
+                major["check"] = major_row.main_major
                # major["pic2"] = get_main_major(2,major_row.main_major)
                 for row_check in majorlist:
-                    if major.get("pic") in row_check.get("pic"):
+                    if major.get("check") in row_check.get("check"):
                         check = 0
                 if check:
 
