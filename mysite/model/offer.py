@@ -95,9 +95,12 @@ class Offer(Base):
             filter(Offer.major_id == major_id).limit(2)
 
     @classmethod
-    def get_site_offer_num(cls,connection):
+    def get_site_offer_num(cls,connection,user_type=None):
         """全站offer数量"""
-        return connection.query(func.count(Offer.id)).scalar()
+        if user_type is None:
+            return connection.query(func.count(Offer.id)).scalar()
+        return connection.query(func.count(Offer.id)).\
+            filter(Offer.user_type == user_type).scalar()
 
     @classmethod
     def get_offer_num_from_major(cls,connection,university_id,major_id):

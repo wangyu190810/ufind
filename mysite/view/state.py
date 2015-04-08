@@ -9,10 +9,11 @@
 import json
 from random import randint
 
-from flask import request,g
+from flask import request, g, session
 from mysite.view.base import allow_cross_domain,login_user_info
 from mysite.model.state import State
 from mysite.model.offer import Offer
+from mysite.model.user import User
 
 
 @allow_cross_domain
@@ -37,13 +38,18 @@ def get_index():
         state = {}
         local = {}
         data = {}
+        user_type = None
+        user = User.get_user_info(g.db,user_id=session.get("user_id"))
+        if user:
+            user_type = user.type
+
         for row in State.get_index(g.db,"USA"):
             state["stateid"] = row.id
             state["name"] = row.name
             state["latitude"] = row.latitude
             state["longitude"] = row.longitude
             #state["offernum"] = row.offernum
-            state["offernum"] = randint(100, 300)
+            state["offernum"] = row.offernum
             country.append(state)
             state = {}
         local["USA"] = country
@@ -71,6 +77,6 @@ def get_index():
         statelist["UK"] = local["UK"]
         statelist["AUS"] = local["AUS"]
         data["statelist"] = statelist
-        data["offernum"] = Offer.get_site_offer_num(g.db)
+        data["offernum"] = Offer.get_site_offer_num(g.db, user_type)
         data["status"] = "success"
         return json.dumps(data)

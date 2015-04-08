@@ -168,6 +168,10 @@ def get_university_list():
 def get_state_university():
     if request.method == "GET":
         university = {}
+        user = User.get_user_info(g.db,user_id=session.get("user_id"))
+        user_type = None
+        if user:
+            user_type = user.type
         state_id = request.args.get("stateid")
         university["statepic"] = get_university_state(
             State.get_state_name(g.db, state_id).name)
@@ -180,7 +184,7 @@ def get_state_university():
             university_info["universitypic"] = get_university_img(row.name,2,u"方形图片")
             university_info["latitude"] = row.latitude
             university_info["longitude"] = row.longitude
-            university_info["offernum"] = Offer.get_offer_num(g.db,row.id)
+            university_info["offernum"] = Offer.get_offer_num(g.db,row.id,user_type)
             university_info["meanGPA"] = "32"
             university_info["meanTOEFL"] = "123"
             universitylist.append(university_info)
