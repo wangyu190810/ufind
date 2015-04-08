@@ -75,63 +75,63 @@ def set_offer():
                     state_offer_1 += offer_1
                     state_offer += offer
                 State.set_offer_num(g.db,state_id,state_offer,state_offer_0,state_offer_1)
-            # # 大学分数的计算
-            # offer_GPA = 0
-            # offer_GPA_0 = 0
-            # offer_GPA_1 = 0
-            # offer_TOEFL = 0
-            # offer_IELTS = 0
-            # offer_num = 0
-            # GPA_0_num = 0
-            # GPA_1_num = 0
-            # for offer_user in Offer.get_user_id_from_university(g.db,offer_university_id):
-            #     of_user = User.get_user_info(g.db,offer_user.user_id)
-            #     offer_GPA += of_user.GPA
-            #     offer_TOEFL += of_user.TOEFL
-            #     offer_IELTS += of_user.IELTS
-            #     if of_user:
-            #         if of_user.type == 0:
-            #             offer_GPA_0 += of_user.GPA
-            #             GPA_0_num += 1
-            #         else:
-            #             offer_GPA_1 += of_user.GPA
-            #             GPA_1_num += 1
-            #     offer_num += 1
-            # if offer_num == 0 or GPA_0_num == 0 or GPA_1_num == 0:
-            #     offer_num == 1
-            #     GPA_0_num == 1
-            #     GPA_1_num == 1
-            # try:
-            #     GPA = offer_GPA/float(offer_num)
-            # except ZeroDivisionError:
-            #     GPA = 0
-            # try:
-            #     GPA_0 = offer_GPA_0/float(GPA_0_num)
-            # except ZeroDivisionError:
-            #     GPA_0 = 0
-            # try:
-            #     GPA_1 = offer_GPA_1/float(GPA_1_num)
-            # except ZeroDivisionError:
-            #     GPA_1 = 0
-            # try:
-            #     TOEFL = offer_TOEFL/float(offer_num)
-            # except ZeroDivisionError:
-            #     TOEFL = 0
-            # try:
-            #     IELTS = offer_IELTS/float(offer_num)
-            # except ZeroDivisionError:
-            #     IELTS = 0
-            # University.set_GPA_TOEFL_IELTS(g.db,offer_university_id,GPA,GPA_0,GPA_1,TOEFL,IELTS)
+            # 大学分数的计算
+            offer_GPA = 0
+            offer_GPA_0 = 0
+            offer_GPA_1 = 0
+            offer_TOEFL = 0
+            offer_IELTS = 0
+            offer_num = 0
+            GPA_0_num = 0
+            GPA_1_num = 0
+            for offer_user in Offer.get_user_id_from_university(g.db,offer_university_id):
+                of_user = User.get_user_info(g.db,offer_user.user_id)
+                offer_GPA += of_user.GPA
+                offer_TOEFL += of_user.TOEFL
+                offer_IELTS += of_user.IELTS
+                if of_user:
+                    if of_user.type == 0:
+                        offer_GPA_0 += of_user.GPA
+                        GPA_0_num += 1
+                    else:
+                        offer_GPA_1 += of_user.GPA
+                        GPA_1_num += 1
+                offer_num += 1
+            if offer_num == 0 or GPA_0_num == 0 or GPA_1_num == 0:
+                offer_num == 1
+                GPA_0_num == 1
+                GPA_1_num == 1
+            try:
+                GPA = offer_GPA/float(offer_num)
+            except ZeroDivisionError:
+                GPA = 0
+            try:
+                GPA_0 = offer_GPA_0/float(GPA_0_num)
+            except ZeroDivisionError:
+                GPA_0 = 0
+            try:
+                GPA_1 = offer_GPA_1/float(GPA_1_num)
+            except ZeroDivisionError:
+                GPA_1 = 0
+            try:
+                TOEFL = offer_TOEFL/float(offer_num)
+            except ZeroDivisionError:
+                TOEFL = 0
+            try:
+                IELTS = offer_IELTS/float(offer_num)
+            except ZeroDivisionError:
+                IELTS = 0
+            University.set_GPA_TOEFL_IELTS(g.db,offer_university_id,GPA,GPA_0,GPA_1,TOEFL,IELTS)
         offer_list = list()
-        for row_user in Offer.get_offer_student_info(g.db,user_id):
-            offer_dict = dict()
-            offer_dict["universityid"] = row_user.university_id
-            university_name = University.get_university_from_id(g.db,row_user.university_id)
-            if university_name:
-                offer_dict["universityname"] = university_name.chiname
-                offer_dict["twodim"] = get_university_twodim(university_name.name)
-                if offer_dict not in offer_list:
-                    offer_list.append(offer_dict)
+        # for row_user in Offer.get_offer_student_info(g.db,user_id):
+        #     offer_dict = dict()
+        #     offer_dict["universityid"] = row_user.university_id
+        #     university_name = University.get_university_from_id(g.db,row_user.university_id)
+        #     if university_name:
+        #         offer_dict["universityname"] = university_name.chiname
+        #         offer_dict["twodim"] = get_university_twodim(university_name.name)
+        #         if offer_dict not in offer_list:
+        #             offer_list.append(offer_dict)
         return jsonify(status="success",
                        offerlist=offer_list,
                        description=User.get_user_info(g.db,user_id).description)
