@@ -75,7 +75,7 @@ class University(Base):
     def set_GPA_TOEFL_IELTS(cls,connection,university_id,GPA,GPA_0,GPA_1,TOEFL,IELTS):
         connection.query(University).filter(University.id == university_id).update(
             {
-                University.menaGPA: GPA,
+                University.menaGPA_Total: GPA,
                 University.menaGPA_0: GPA_0,
                 University.menaGPA_1: GPA_1,
                 University.menaTOEFL: TOEFL,
