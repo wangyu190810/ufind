@@ -22,6 +22,10 @@ class University(Base):
     baidu = Column(Unicode(1000), doc=u"百度介绍")
     wiki = Column(Unicode(1000), doc=u"wiki介绍")
     menaGPA = Column(Unicode(255), doc=u"")
+    menaGPA_0 = Column(Integer, doc=u"")
+    menaGPA_1 = Column(Integer, doc=u"")
+    menaTOEFL = Column(Integer, doc=u"")
+    menaIELTS = Column(Integer, doc=u"")
     latitude = Column(Unicode(40), doc=u"经度")
     longitude = Column(Unicode(40), doc=u"纬度")
     country = Column(Unicode(255))
@@ -66,3 +70,16 @@ class University(Base):
     def get_university_from_id(cls,connection,univerity_id):
         return connection.query(University).\
             filter(University.id == univerity_id).scalar()
+
+    @classmethod
+    def set_GPA_TOEFL_IELTS(cls,connection,university_id,GPA,GPA_0,GPA_1,TOEFL,IELTS):
+        connection.query(University).filter(University.id == university_id).update(
+            {
+                University.menaGPA: GPA,
+                University.menaGPA_0: GPA_0,
+                University.menaGPA_1: GPA_1,
+                University.menaTOEFL: TOEFL,
+                University.menaIELTS: IELTS
+            }
+        )
+        connection.commit()
