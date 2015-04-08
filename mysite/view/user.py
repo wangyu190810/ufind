@@ -221,6 +221,11 @@ def get_user_in_university():
         data = request.form
         #return jsonify(status="success")
         #data = json.loads(request.data)
+        user_id = session.get("user_id")
+        user = User.get_user_info(user_id)
+        type = -1
+        if user:
+            user_type = user.type
 
         university_id = data.get("universityid")
         faculty_id = data.get("facultyid")
@@ -247,7 +252,8 @@ def get_user_in_university():
                     student = {}
                     for row in Offer.get_user_id_from_university(g.db,
                                                          university_id,
-                                                         row_major.id):
+                                                         row_major.id,
+                                                         user_type):
                         user = User.get_user_info(g.db,row.user_id)
                         if user:
                             print GPA_to
@@ -286,7 +292,8 @@ def get_user_in_university():
                 student_list = []
                 for row in Offer.get_user_id_from_university(g.db,
                                                         university_id,
-                                                        major_id):
+                                                        major_id,
+                                                        user_type):
                     user = User.get_user_info(g.db,row.user_id)
                     print user
                     if user:
