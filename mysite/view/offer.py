@@ -60,9 +60,8 @@ def set_offer():
                             offer_type=offer_type,
                             grade=offer_grade,
                             scholarship=scholarship_money,
-                            scholarship_type=scholarship_type
-            )
-            un = University.get_university_from_id(g.db,offer_university_id)
+                            scholarship_type=scholarship_type)
+            un = University.get_university_from_id(g.db, offer_university_id)
             if un:
                 state_id = un.state_id
                 state_offer_0 = 0
@@ -124,10 +123,10 @@ def set_offer():
             #     IELTS = 0
             # University.set_GPA_TOEFL_IELTS(g.db,offer_university_id,GPA,GPA_0,GPA_1,TOEFL,IELTS)
         offer_list = list()
-        for row in Offer.get_offer_student_info(g.db,user_id):
+        for row_user in Offer.get_offer_student_info(g.db,user_id):
             offer_dict = dict()
-            offer_dict["universityid"] = row.university_id
-            university_name = University.get_university_from_id(g.db,row.university_id)
+            offer_dict["universityid"] = row_user.university_id
+            university_name = University.get_university_from_id(g.db,row_user.university_id)
             if university_name:
                 offer_dict["universityname"] = university_name.chiname
                 offer_dict["twodim"] = get_university_twodim(university_name.name)
