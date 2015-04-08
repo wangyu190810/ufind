@@ -130,7 +130,7 @@ class Offer(Base):
         major_id order by countmajor desc) union (select 0 as countmajor,
         id from major where university_id=%s and  faculty_id=%s and id not in
         (select major_id from offer where university_id=%s and school1_id=%s)
-        order by rand() limit 3)""" %(university_id,school_id,university_id,school_id,university_id,school_id)
+        order by rand() limit 5)""" %(university_id,school_id,university_id,school_id,university_id,school_id)
         # return connection.execute(sql,
         #                           university_id_1=university_id,
         #                           school_id_1=school_id,
