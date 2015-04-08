@@ -64,7 +64,7 @@ def get_user_detail_info():
             offer_info = dict()
             print row.university_id
             print type(row.university_id)
-            for row_un in University.get_university_info(g.db,row.university_id):
+            for row_un in University.get_university_info(g.db,str(row.university_id)):
                 offer_info["universityname"] = row_un.name
                 offer_info["logo"] = get_university_logo(row_un.name)
                 offer_info["twodimcode"] = get_university_twodim(row_un.name)
