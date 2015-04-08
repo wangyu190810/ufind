@@ -14,6 +14,7 @@ from mysite.view.base import allow_cross_domain,get_university_img,\
     get_university_twodim
 from mysite.model.user import User
 from mysite.model.major import Major
+from mysite.model.state import State
 
 @allow_cross_domain
 def set_offer():
@@ -61,6 +62,20 @@ def set_offer():
                             scholarship=scholarship_money,
                             scholarship_type=scholarship_type
             )
+            un = University.get_university_from_id(g.db,offer_university_id)
+            if un:
+                state_id = un.state_id
+                state_offer_0 = 0
+                state_offer_1 = 0
+                state_offer = 0
+                for row_un in University.get_state_university(g.db,state_id):
+                    offer_0 = Offer.get_offer_num(g.db,row_un.id,0)
+                    offer_1 = Offer.get_offer_num(g.db,row_un.id,1)
+                    offer = Offer.get_offer_num(g.db,row_un.id)
+                    state_offer_0 += offer_0
+                    state_offer_1 += offer_1
+                    state_offer += offer
+                State.set_offer_num(g.db,state_id,state_offer,state_offer_0,state_offer_1)
         offer_list = list()
         for row in Offer.get_offer_student_info(g.db,user_id):
             offer_dict = dict()
