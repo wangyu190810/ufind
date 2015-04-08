@@ -125,17 +125,17 @@ def set_offer():
                 IELTS = offer_IELTS/float(offer_num)
             except ZeroDivisionError:
                 IELTS = 0
-            University.set_GPA_TOEFL_IELTS(g.db,offer_university_id,GPA,GPA_0,GPA_1,TOEFL,IELTS)
+            University.set_GPA_TOEFL_IELTS(g.db,offer_university_id,None,GPA_0,GPA_1,TOEFL,IELTS)
         offer_list = list()
-        # for row_user in Offer.get_offer_student_info(g.db,user_id):
-        #     offer_dict = dict()
-        #     offer_dict["universityid"] = row_user.university_id
-        #     university_name = University.get_university_from_id(g.db,row_user.university_id)
-        #     if university_name:
-        #         offer_dict["universityname"] = university_name.chiname
-        #         offer_dict["twodim"] = get_university_twodim(university_name.name)
-        #         if offer_dict not in offer_list:
-        #             offer_list.append(offer_dict)
+        for row_user in Offer.get_offer_student_info(g.db,user_id):
+            offer_dict = dict()
+            offer_dict["universityid"] = row_user.university_id
+            university_name = University.get_university_from_id(g.db,row_user.university_id)
+            if university_name:
+                offer_dict["universityname"] = university_name.chiname
+                offer_dict["twodim"] = get_university_twodim(university_name.name)
+                if offer_dict not in offer_list:
+                    offer_list.append(offer_dict)
         return jsonify(status="success",
                        offerlist=offer_list,
                        description=User.get_user_info(g.db,user_id).description)
