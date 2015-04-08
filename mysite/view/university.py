@@ -126,7 +126,6 @@ def get_university_info():
         return json.dumps(university_info)
 
 
-@allow_cross_domain
 def get_search_university():
     if request.method == "GET":
         searchname, stateid = map(request.args.get,("searchname","stateid"))

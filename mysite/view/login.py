@@ -11,7 +11,6 @@ from mysite.model.university_china import UniversityChina, SeniorHighSchool, \
 from time import time
 
 
-@allow_cross_domain
 def login():
     data = request.form
     login_auth = data["email"]
