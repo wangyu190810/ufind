@@ -67,9 +67,9 @@ class University(Base):
             filter(University.state_id == state_id)
 
     @classmethod
-    def get_university_from_id(cls,connection,univerity_id):
+    def get_university_from_id(cls,connection, university_id):
         return connection.query(University).\
-            filter(University.id == univerity_id).scalar()
+            filter(University.id == university_id).scalar()
 
     @classmethod
     def set_GPA_TOEFL_IELTS(cls,connection,university_id,GPA,GPA_0,GPA_1,TOEFL,IELTS):
