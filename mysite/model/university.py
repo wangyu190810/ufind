@@ -37,9 +37,12 @@ class University(Base):
             #return connection.execute(stmt)
 
         else:
-            return connection.query(University).filter(University.id
-                                                       == university_id)
+            try:
+                ret = connection.query(University).filter(University.id == university_id)
+            except:
+                ret = None
 
+            return ret
     @classmethod
     def search_university(cls, connection, searchname=None, stateid=None):
         if stateid == None:
