@@ -127,7 +127,7 @@ def set_offer():
         for row in Offer.get_offer_student_info(g.db,user_id):
             offer_dict = dict()
             offer_dict["universityid"] = row.university_id
-            university_name = University.get_university_from_id(g.db,university_id=row.university_id)
+            university_name = University.get_university_from_id(g.db,offer_university_id)
             if university_name:
                 offer_dict["universityname"] = university_name.chiname
                 offer_dict["twodim"] = get_university_twodim(university_name.name)
