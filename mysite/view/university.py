@@ -8,7 +8,7 @@
 
 import json
 from mysite.model.university import University
-from flask import request,jsonify,g
+from flask import request, jsonify, g, session
 
 from mysite.model.faculty import Faculty
 from mysite.model.major import Major
@@ -16,6 +16,7 @@ from mysite.view.base import allow_cross_domain,get_university_img,\
     get_university_logo,get_university_state,get_main_major
 from mysite.model.offer import Offer
 from mysite.model.state import State
+from mysite.model.user import User
 
 
 @allow_cross_domain
@@ -52,6 +53,11 @@ def get_university():
 @allow_cross_domain
 def get_university_info():
     if request.method == "GET":
+        user = User.get_user_info(g.db, user_id=session.get("user_id"))
+        user_type = -1
+        if user:
+            user_type = user.type
+
         university_id = request.args.get("universityid")
         university_info = {}
         facultylist = []
@@ -67,7 +73,7 @@ def get_university_info():
             link["official"] = row.official
             university_info["name"] = row.name
             university_info["chiname"] = row.chiname
-            university_info["offernum"] = Offer.get_offer_num(g.db,row.id)
+            university_info["offernum"] = Offer.get_offer_num(g.db,row.id,user_type=user_type)
             university_info["pic1"] = get_university_img(row.name,1,u"长方形图片")
             university_info["pic2"] = get_university_img(row.name,2,u"长方形图片")
             university_info["link"] = link

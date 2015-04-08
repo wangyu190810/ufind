@@ -65,10 +65,15 @@ class Offer(Base):
             filter(Offer.user_id == student_id)
 
     @classmethod
-    def get_offer_num(cls, connection, university_id):
+    def get_offer_num(cls, connection, university_id,user_type=None):
         """查看当前学校的off数量"""
+        if user_type is None:
+            return connection.query(func.count(Offer)). \
+                filter(Offer.university_id == university_id).scalar()
+
         return connection.query(func.count(Offer)). \
-            filter(Offer.university_id == university_id).scalar()
+            filter(Offer.university_id == university_id).\
+            filter(Offer.user_type == user_type).scalar()
 
 
     @classmethod
