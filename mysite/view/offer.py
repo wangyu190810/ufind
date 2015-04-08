@@ -98,6 +98,10 @@ def set_offer():
                         offer_GPA_1 += of_user.GPA
                         GPA_1_num += 1
                 offer_num += 1
+            if offer_num == 0 or GPA_0_num == 0 or GPA_1_num ==0:
+                offer_num == 1
+                GPA_0_num == 1
+                GPA_1_num == 1
             GPA = offer_GPA/float(offer_num)
             GPA_0 = offer_GPA_0/float(GPA_0_num)
             GPA_1 = offer_GPA_1/float(GPA_1_num)
