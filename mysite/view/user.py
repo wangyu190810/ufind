@@ -62,8 +62,7 @@ def get_user_detail_info():
             login_user_id = -1
         for row in Offer.get_offer_student_info(g.db, student_id):
             offer_info = dict()
-            for row_un in University.get_university_info(g.db,
-                                                         row.university_id):
+            for row_un in University.get_university_info(g.db,row.university_id):
                 offer_info["universityname"] = row_un.name
                 offer_info["logo"] = get_university_logo(row_un.name)
                 offer_info["twodimcode"] = get_university_twodim(row_un.name)
