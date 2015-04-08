@@ -16,7 +16,7 @@ from mysite.model.user import User
 from mysite.model.major import Major
 from mysite.model.state import State
 
-@allow_cross_domain
+#@allow_cross_domain
 def set_offer():
     if request.method == "POST":
         data = request.form
