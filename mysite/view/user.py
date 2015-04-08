@@ -222,8 +222,8 @@ def get_user_in_university():
         #return jsonify(status="success")
         #data = json.loads(request.data)
         user_id = session.get("user_id")
-        user = User.get_user_info(user_id)
-        type = -1
+        user = User.get_user_info(g.db,user_id)
+        user_type = -1
         if user:
             user_type = user.type
 
