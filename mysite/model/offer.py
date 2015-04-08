@@ -24,6 +24,7 @@ class Offer(Base):
     school2_id = Column(Integer, doc=u"学院ID")
     school3_id = Column(Integer, doc=u"学院ID")
     create_time = Column(Integer, default=lambda: time())
+    user_type = Column(Integer,doc=u"用户类型")
 
     @classmethod
     def set_offer(cls, connection, user_id,
@@ -33,6 +34,7 @@ class Offer(Base):
                   school2_id,
                   school3_id,
                   offer_type,
+                  user_type,
                   scholarship=None,
                   scholarship_type=None):
         offer = Offer(user_id=user_id, university_id=university_id,
@@ -41,6 +43,7 @@ class Offer(Base):
                       school1_id=school1_id,
                       school2_id=school2_id,
                       school3_id=school3_id,
+                      user_type=user_type,
                       offer_type=offer_type,
                       scholarship=scholarship,
                       scholarship_type=scholarship_type)
@@ -48,11 +51,12 @@ class Offer(Base):
         connection.commit()
 
     @classmethod
-    def get_offer_student(cls, connection, unviersity_id, major_id):
+    def get_offer_student(cls, connection, unviersity_id, major_id, user_type):
         """根据学校和专业随机的返回两个学生的id"""
         return connection.query(Offer). \
             filter(Offer.university_id == unviersity_id). \
-            filter(Offer.major_id == major_id).limit(2)
+            filter(Offer.major_id == major_id).\
+            filter(Offer.user_type == user_type).limit(2)
 
     @classmethod
     def get_offer_student_info(cls, connection, student_id):

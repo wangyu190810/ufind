@@ -25,6 +25,7 @@ def get_user_info():
         row = User.get_user_info(g.db, student_id)
         if row is None:
             return jsonify(status="false")
+
         student_info["prevuniversity"] = row.prevuniversity
         student_info["name"] = row.username
         student_info["prevmajor"] = row.prevmajor

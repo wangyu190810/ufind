@@ -20,7 +20,11 @@ def set_offer():
     if request.method == "POST":
         data = request.form
         user_id = session["user_id"]
-        print data
+        user = User.get_user_info(g.db,user_id)
+        user_type = None
+        if user:
+            user_type = user.type
+
         num = 0
         while True:
             offer_major_id = data.get("offers["+str(num)+"][majorid]")
@@ -50,6 +54,7 @@ def set_offer():
                             school1_id=school1_id,
                             school2_id=school2_id,
                             school3_id=school3_id,
+                            user_type=user_type,
                             result=1,
                             offer_type=offer_type,
                             grade=offer_grade,
@@ -73,9 +78,15 @@ def set_offer():
 @allow_cross_domain
 def get_offer_student():
     if request.method == "GET":
+        user_id = session.get("user_id")
+        user = User.get_user_info(g.db,user_id)
+        user_type = -1
+        if user:
+            user_type = user.type
+
         university_id,major_id = map(request.args.get,("universityid","majorid"))
         student_list = []
-        for row in Offer.get_offer_student(g.db,university_id,major_id):
+        for row in Offer.get_offer_student(g.db,university_id,major_id,user_type):
             student_list.append(row.user_id)
         return jsonify(studentlist=student_list,
                        status="success")
