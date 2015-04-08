@@ -188,7 +188,7 @@ def get_state_university():
             if user_type is None:
 
                 university_info["meanGPA"] = row.menaGPA_Total
-            elif user_type == 1:
+            elif user_type == 0:
                 university_info["meanGPA"] = row.menaGPA_0
             else:
                 university_info["meanGPA"] = row.menaGPA_1
