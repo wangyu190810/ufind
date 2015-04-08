@@ -187,9 +187,9 @@ def get_state_university():
             university_info["offernum"] = Offer.get_offer_num(g.db,row.id,user_type)
             university_info["meanGPA"] = row.menaGPA
             if row.country == "USA":
-                university_info["meanTOEFL"] = row.meanTOEFL
+                university_info["meanTOEFL"] = row.menaTOEFL
             else:
-                university_info["meanIELTS"] = row.meanIELTS
+                university_info["meanIELTS"] = row.menaTOEFL
             universitylist.append(university_info)
             university_info = {}
         university["universitylist"] = universitylist
