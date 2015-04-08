@@ -21,7 +21,7 @@ class University(Base):
     official = Column(Unicode(1000), doc=u"学校的官网地址")
     baidu = Column(Unicode(1000), doc=u"百度介绍")
     wiki = Column(Unicode(1000), doc=u"wiki介绍")
-    menaGPA_Total = Column(Unicode(255), doc=u"")
+    menaGPA_Total = Column(Integer, doc=u"")
     menaGPA_0 = Column(Integer, doc=u"")
     menaGPA_1 = Column(Integer, doc=u"")
     menaTOEFL = Column(Integer, doc=u"")
