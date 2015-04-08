@@ -86,9 +86,12 @@ def set_offer():
             GPA_1_num = 0
             for offer_user in Offer.get_user_id_from_university(g.db,offer_university_id):
                 of_user = User.get_user_info(g.db,offer_user.user_id)
-                offer_GPA += of_user.GPA
-                offer_TOEFL += of_user.TOEFL
-                offer_IELTS += of_user.IELTS
+                if of_user.GPA is not None:
+                    offer_GPA += of_user.GPA
+                if of_user.TOEFL is not None:
+                    offer_TOEFL += of_user.TOEFL
+                if of_user.IELTS is not None:
+                    offer_IELTS += of_user.IELTS
                 if of_user:
                     if of_user.type == 0:
                         offer_GPA_0 += of_user.GPA
