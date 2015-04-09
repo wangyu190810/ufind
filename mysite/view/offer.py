@@ -57,7 +57,7 @@ def set_offer():
                 elif 200 <= offer_num < 300:
                     num_wechar = 3
 
-            wechat=set_university_offer_wechat(University.get_university_from_id(g.db,offer_university_id).name,user_type,num_wechar)
+            wechat=set_university_offer_wechat(University.get_university_from_id(g.db,offer_university_id).short_name,user_type,num_wechar)
             Offer.set_offer(g.db,
                             user_id=user_id,
                             university_id=offer_university_id,
