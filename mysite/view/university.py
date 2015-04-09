@@ -195,7 +195,7 @@ def get_state_university():
             if row.country == "USA":
                 university_info["meanTOEFL"] = float("%0.2f" %row.menaTOEFL)
             else:
-                university_info["meanIELTS"] = float("%0.2f" %row.meanIELTS)
+                university_info["meanIELTS"] = float("%0.2f" %row.menaIELTS)
             universitylist.append(university_info)
             university_info = {}
         university["universitylist"] = universitylist
