@@ -232,13 +232,15 @@ def get_user_in_university():
         faculty_id = data.get("facultyid")
         major_id = data.get("majorid")
         GPA_to = data.get("GPA[to]",0.0,float)
-        GPA_form = data.get("GPA[from]",0.0,float)
-        TOEFL_to = request.form.get("TOEFL[to]",0.0,float)
-        TOEFL_form = request.form.get("TOEFL[from]",0.0,float)
-        GER_to = request.form.get("GRE[to]",0.0,float)
-        GER_form = request.form.get("GRE[from]",0.0,float)
-        #TOEFL_form = request.form.get("TOEFL[from]")
-        #TOEFL_form = request.form.get("TOEFL[from]")#   SAT = data["SAT"]
+        GPA_form = data.get("GPA[from]",1000,float)
+        TOEFL_to = request.form.get("TOEFL[to]",10000,float)
+        TOEFL_form = request.form.get("TOEFL[from]",10000,float)
+        GRE_to = request.form.get("GRE[to]",0.0,float)
+        GRE_form = request.form.get("GRE[from]",1000,float)
+        IELTS_to= request.form.get("IELTS[to]",0.0,float)
+        IELTS_form = request.form.get("IELTS[from]",1000,float)
+        GMAT_to = request.form.get("GMAT[to]",0.0,float)
+        GMAT_form = request.form.get("GMAT[to]",1000,float)
         page = data.get("page")
         compares = {}
         compare_list = []
@@ -260,21 +262,27 @@ def get_user_in_university():
                             print GPA_to
                             print GPA_form
                             print get_compare_score(GPA_to,GPA_form,user.GPA)
-                            if GPA_to != 0.0:
-                                if TOEFL_to != 0.0:
-                                    if GER_to != 0.0:
-                                        if get_compare_score(GPA_to,GPA_form,user.GPA) and \
-                                            get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and\
-                                            get_compare_score(GER_to,GER_form,user.GRE):
-
-                                                student_list.append(row.user_id)
-                                    elif get_compare_score(GPA_to,GPA_form,user.GPA) and \
-                                            get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL):
-
-                                        student_list.append(row.user_id)
-                                elif get_compare_score(GPA_to,GPA_form,user.GPA):
-                                    student_list.append(row.user_id)
-                            else:
+                            if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                                get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
+                                get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
+                                get_compare_score(GRE_to,GRE_form,user.GRE) and \
+                                get_compare_score(GMAT_to,GRE_form,user.GMAT):
+                            # if GPA_to != 0.0:
+                            #     if TOEFL_to != 0.0:
+                            #         if GER_to != 0.0:
+                            #             if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                            #                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and\
+                            #                 get_compare_score(GER_to,GER_form,user.GRE):
+                            #
+                            #                     student_list.append(row.user_id)
+                            #         elif get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                            #                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL):
+                            #
+                            #             student_list.append(row.user_id)
+                            #     elif get_compare_score(GPA_to,GPA_form,user.GPA):
+                            #         student_list.append(row.user_id)
+                            # else:
+                            #     student_list.append(row.user_id)
                                 student_list.append(row.user_id)
                     student["studentlist"] = student_list
                     student["majorid"] = row_major.id
@@ -301,26 +309,48 @@ def get_user_in_university():
                         print GPA_to
                         print GPA_form
                         print get_compare_score(GPA_to,GPA_form,user.GPA)
-                        if GPA_to != 0.0:
-                            if TOEFL_to != 0.0:
-                                print TOEFL_to,"TOEFL_to"
-                                if GER_to != 0.0:
-                                    print GER_to,"TOEFL_to"
-                                    if get_compare_score(GPA_to,GPA_form,user.GPA) and \
-                                        get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and\
-                                        get_compare_score(GER_to,GER_form,user.GRE):
-
-                                                student_list.append(row.user_id)
-                                elif get_compare_score(GPA_to,GPA_form,user.GPA) and \
-                                        get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL):
-
-                                    student_list.append(row.user_id)
-                            elif get_compare_score(GPA_to,GPA_form,user.GPA):
-                                print "234234"
-                                student_list.append(row.user_id)
-                        else:
-                            student_list.append(row.user_id)
+                        # if GPA_to != 0.0:
+                        #     if TOEFL_to != 0.0:
+                        #         print TOEFL_to,"TOEFL_to"
+                        #         if GER_to != 0.0:
+                        #             print GER_to,"TOEFL_to"
+                        #             if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                        #                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and\
+                        #                 get_compare_score(GER_to,GER_form,user.GRE):
+                        #
+                        #                         student_list.append(row.user_id)
+                        #         elif get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                        #                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL):
+                        #
+                        #             student_list.append(row.user_id)
+                        #     elif get_compare_score(GPA_to,GPA_form,user.GPA):
+                        #         print "234234"
+                        #         student_list.append(row.user_id)
+                        # else:
+                        #     student_list.append(row.user_id)
                     #student_list.append(row.user_id)
+                        if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                                get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
+                                get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
+                                get_compare_score(GRE_to,GRE_form,user.GRE) and \
+                                get_compare_score(GMAT_to,GRE_form,user.GMAT):
+                            # if GPA_to != 0.0:
+                            #     if TOEFL_to != 0.0:
+                            #         if GER_to != 0.0:
+                            #             if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                            #                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and\
+                            #                 get_compare_score(GER_to,GER_form,user.GRE):
+                            #
+                            #                     student_list.append(row.user_id)
+                            #         elif get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                            #                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL):
+                            #
+                            #             student_list.append(row.user_id)
+                            #     elif get_compare_score(GPA_to,GPA_form,user.GPA):
+                            #         student_list.append(row.user_id)
+                            # else:
+                            #     student_list.append(row.user_id)
+                                student_list.append(row.user_id)
         # else:
         #     student_list = []
         #     for row in Offer.get_user_id_from_university(g.db,

@@ -119,7 +119,8 @@ def get_SAT(CR,M,W):
 def get_compare_score(GPA_TO,GPA_from,GPA):
     #if GPA_TO > GPA and GPA_from < GPA:
 
-
+    if GPA is None:
+        return True
     if float(GPA_from) <= float(GPA) and float(GPA_TO) >= float(GPA):
         return True
     elif float(GPA_from) >= float(GPA) and float(GPA_TO) <= float(GPA):
