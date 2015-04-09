@@ -303,7 +303,9 @@ def get_user_in_university():
                         print get_compare_score(GPA_to,GPA_form,user.GPA)
                         if GPA_to != 0.0:
                             if TOEFL_to != 0.0:
+                                print TOEFL_to,"TOEFL_to"
                                 if GER_to != 0.0:
+                                    print GER_to,"TOEFL_to"
                                     if get_compare_score(GPA_to,GPA_form,user.GPA) and \
                                         get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and\
                                         get_compare_score(GER_to,GER_form,user.GRE):
