@@ -87,8 +87,6 @@ def get_university_info():
                                                             #university_id=university_id,
                                                             #faculty_id=row.id):
 
-                #print row_major.major_id
-                #print row_major.countmajor
                 num = 1
                 major_info = Major.get_major_info_by_id_scalar(g.db,row_major[1])
             # for major_row in Major.get_major_info(g.db,
@@ -105,7 +103,7 @@ def get_university_info():
                     major["pic"] = get_main_major(img_num,major_info.main_major)
                     major["check"] = major_info.main_major
                     major["pic2"] = get_main_major(2,major_info.main_major)
-                    print major
+
                     for row_check in majorlist:
                         if major.get("check") in row_check.get("check"):
                             check = 0

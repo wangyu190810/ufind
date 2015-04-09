@@ -45,7 +45,7 @@ def get_index():
 
 
 
-        for row in State.get_index(g.db,"USA"):
+        for row in State.get_index(g.db,u"USA"):
             state["stateid"] = row.id
             state["name"] = row.name
             state["latitude"] = row.latitude
@@ -61,7 +61,7 @@ def get_index():
             state = {}
         local["USA"] = country
         country = []
-        for row in State.get_index(g.db,"UK"):
+        for row in State.get_index(g.db,u"UK"):
             state["stateid"] = row.id
             state["name"] = row.name
             state["latitude"] = row.latitude
@@ -76,7 +76,7 @@ def get_index():
             state = {}
         local["UK"] = country
         country = []
-        for row in State.get_index(g.db,"AUS"):
+        for row in State.get_index(g.db,u"AUS"):
             state["stateid"] = row.id
             state["name"] = row.name
             state["latitude"] = row.latitude

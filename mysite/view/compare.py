@@ -88,7 +88,6 @@ def set_compare_support():
 @allow_cross_domain
 def get_compare_list():
     if request.method == "POST":
-        print request.form
         data = request.form
        # #data = json.loads(request.data)
        # university_id = data["universityid"]

@@ -62,8 +62,7 @@ def get_user_detail_info():
             login_user_id = -1
         for row in Offer.get_offer_student_info(g.db, student_id):
             offer_info = dict()
-            print row.university_id
-            print type(row.university_id)
+
             for row_un in University.get_university_info(g.db,str(row.university_id)):
                 offer_info["universityname"] = row_un.name
                 offer_info["logo"] = get_university_logo(row_un.name)
@@ -218,7 +217,6 @@ def get_user_detail_info():
 @allow_cross_domain
 def get_user_in_university():
     if request.method == "POST":
-        print request.form
         data = request.form
         #return jsonify(status="success")
         #data = json.loads(request.data)
@@ -261,9 +259,7 @@ def get_user_in_university():
                                                          grade):
                         user = User.get_user_info(g.db,row.user_id)
                         if user:
-                            print GPA_to
-                            print GPA_form
-                            print get_compare_score(GPA_to,GPA_form,user.GPA)
+
                             if get_compare_score(GPA_to,GPA_form,user.GPA) and \
                                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
                                 get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
@@ -356,7 +352,7 @@ def get_user_base_info():
             sub_dict["id"] = sub.sub_id
             sub_dict["grade"] = sub.grade
             sub_list.append(sub_dict)
-        print sub_list
+
         GREmore["sub"] = sub_list
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
@@ -402,7 +398,7 @@ def edit_user_info_page():
     if request.method == "GET":
         user_id = session.get("user_id")
         user = User.get_user_info(g.db,user_id)
-        print user
+
         if user is None:
             return jsonify(status="false")
         user_info = dict()
@@ -426,7 +422,7 @@ def edit_user_info_page():
             sub_dict["id"] = sub.sub_id
             sub_dict["grade"] = sub.grade
             sub_list.append(sub_dict)
-        print sub_list
+
         GREmore["sub"] = sub_list
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
@@ -454,7 +450,7 @@ def edit_user_info_page():
         IELTSmore["W"] = score.IELTS_w
         if IELTSmore.get("R") != 0:
             user_info["IELTSmore"] = IELTSmore
-        print user_info
+
         GMATmore = dict()
         GMATmore["V"] = score.GMAT_v
         GMATmore["Q"] = score.GMAT_q
@@ -475,14 +471,14 @@ def update_user_info():
         username = request.form.get("engname")
         email = request.form.get("email")
         pic = request.form.get("pic")
-        print request.form
+
         if request.form.get("checknum"):
             pass
         if request.form.get("passwordold"):
             password = request.form.get("password")
             passwordold = request.form.get("passwordold")
             if not User.change_password_old(g.db,user_id,password,passwordold):
-                print "123124"
+
                 return jsonify(status="false")
         if pic is not None:
             User.update_user_pic(g.db,user_id,pic)
@@ -592,7 +588,7 @@ def update_user_info():
 
 
         elif request.form.get("TOEFL[R]") is not None:
-            print request.form
+
             TOEFLmoreR = request.form.get("TOEFL[R]",0,int)
             TOEFLmoreL = request.form.get("TOEFL[L]",0,int)
             TOEFLmoreS = request.form.get("TOEFL[S]",0,int)
