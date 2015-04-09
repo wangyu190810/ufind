@@ -187,15 +187,15 @@ def get_state_university():
             university_info["offernum"] = Offer.get_offer_num(g.db, row.id, user_type)
             if user_type is None:
 
-                university_info["meanGPA"] = row.menaGPA_Total
+                university_info["meanGPA"] = float("%0.2f" %row.menaGPA_Total)
             elif user_type == 0:
-                university_info["meanGPA"] = row.menaGPA_0
+                university_info["meanGPA"] = float("%0.2f" %row.menaGPA_0)
             else:
-                university_info["meanGPA"] = row.menaGPA_1
+                university_info["meanGPA"] = float("%0.2f" %row.menaGPA_1)
             if row.country == "USA":
-                university_info["meanTOEFL"] = row.menaTOEFL
+                university_info["meanTOEFL"] = float("%0.2f" %row.menaTOEFL)
             else:
-                university_info["meanIELTS"] = row.menaTOEFL
+                university_info["meanIELTS"] = float("%0.2f" %row.meanIELTS)
             universitylist.append(university_info)
             university_info = {}
         university["universitylist"] = universitylist
