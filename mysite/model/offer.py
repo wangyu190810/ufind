@@ -153,23 +153,6 @@ class Offer(Base):
         id from major where university_id=%s and  faculty_id=%s and id not in
         (select major_id from offer where university_id=%s and school1_id=%s)
         order by rand() limit 8)""" %(university_id,school_id,university_id,school_id,university_id,school_id)
-        # return connection.execute(sql,
-        #                           university_id_1=university_id,
-        #                           school_id_1=school_id,
-        #
-        #                           university_id_2=university_id,
-        #                           school_id_2=school_id,
-        #
-        #                           university_id_3=university_id,
-        #                           school_id_3=school_id)
-        print university_id,school_id
+
+
         return connection.execute(sql)
-        # return connection.execute(sql,(
-        #                           university_id,
-        #                           school_id,
-        #
-        #                           university_id,
-        #                           school_id,
-        #
-        #                           university_id,
-        #                           school_id))
