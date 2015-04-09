@@ -25,6 +25,8 @@ class Offer(Base):
     school3_id = Column(Integer, doc=u"学院ID")
     create_time = Column(Integer, default=lambda: time())
     user_type = Column(Integer,doc=u"用户类型")
+    wechat = Column(Unicode(255),doc=u"每个offer拥有唯一的微信图片")
+
 
     @classmethod
     def set_offer(cls, connection, user_id,
@@ -35,8 +37,10 @@ class Offer(Base):
                   school3_id,
                   offer_type,
                   user_type,
+                  wechat,
                   scholarship=None,
-                  scholarship_type=None):
+                  scholarship_type=None,
+                  ):
         offer = Offer(user_id=user_id, university_id=university_id,
                       major_id=major_id, result=result,
                       grade=grade,
@@ -46,7 +50,8 @@ class Offer(Base):
                       user_type=user_type,
                       offer_type=offer_type,
                       scholarship=scholarship,
-                      scholarship_type=scholarship_type)
+                      scholarship_type=scholarship_type,
+                      wechat=wechat)
         connection.add(offer)
         connection.commit()
 

@@ -11,7 +11,7 @@ from flask import request,jsonify,g,session
 from mysite.model.university import University
 from mysite.model.offer import Offer
 from mysite.view.base import allow_cross_domain,get_university_img,\
-    get_university_twodim
+    get_university_twodim,set_university_offer_wechat
 from mysite.model.user import User
 from mysite.model.major import Major
 from mysite.model.state import State
@@ -48,6 +48,16 @@ def set_offer():
                 school1_id = major_id.faculty_id
                 school2_id = major_id.School2_ID
                 school3_id = major_id.School3_ID
+            offer_num = Offer.get_offer_num(g.db,offer_university_id,user_type)
+            if offer_num:
+                if offer_num < 100:
+                    num_wechar = 1
+                elif 100 <= offer_num < 200:
+                    num_wechar = 2
+                elif 200 <= offer_num < 300:
+                    num_wechar = 3
+
+            wechat=set_university_offer_wechat(University.get_university_from_id(g.db,offer_university_id).name,user_type,num_wechar)
             Offer.set_offer(g.db,
                             user_id=user_id,
                             university_id=offer_university_id,
@@ -57,6 +67,7 @@ def set_offer():
                             school3_id=school3_id,
                             user_type=user_type,
                             result=1,
+                            wechat=wechat,
                             offer_type=offer_type,
                             grade=offer_grade,
                             scholarship=scholarship_money,

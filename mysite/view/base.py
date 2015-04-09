@@ -69,6 +69,10 @@ def get_university_twodim(universityname):
     return u"http://www.ufindoffer.com/images/unimg/twodim/"+universityname+".jpg"
 
 
+def set_university_offer_wechat(universityname,user_type,num):
+    return u"http://www.ufindoffer.com/images/unimg/twodim/"+universityname+str(num)+user_type+".jpg"
+
+
 def get_main_major(num,name):
     return u"http://www.ufindoffer.com/images/unimg/major/"+name+str(num)+".png"
 
