@@ -117,6 +117,7 @@ def set_offer():
                 offer_num == 1
                 GPA_0_num == 1
                 GPA_1_num == 1
+            print offer_num,GPA_0_num,GPA_1_num
             try:
                 GPA = offer_GPA/float(offer_num)
             except ZeroDivisionError:
