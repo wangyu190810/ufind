@@ -145,7 +145,7 @@ def set_offer():
             university_name = University.get_university_from_id(g.db,row_user.university_id)
             if university_name:
                 offer_dict["universityname"] = university_name.chiname
-                offer_dict["twodim"] = get_university_twodim(university_name.name)
+                offer_dict["twodim"] = row_user.wechat
                 if offer_dict not in offer_list:
                     offer_list.append(offer_dict)
         return jsonify(status="success",
