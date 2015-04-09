@@ -123,23 +123,23 @@ def set_offer():
                 GPA_1_num == 1
             print offer_num,GPA_0_num,GPA_1_num
             try:
-                GPA = offer_GPA/float(offer_num)
+                GPA = float("%2f" %offer_GPA/float(offer_num))
             except ZeroDivisionError:
                 GPA = 0
             try:
-                GPA_0 = offer_GPA_0/float(GPA_0_num)
+                GPA_0 = float("%2f" %offer_GPA_0/float(GPA_0_num))
             except ZeroDivisionError:
                 GPA_0 = 0
             try:
-                GPA_1 = offer_GPA_1/float(GPA_1_num)
+                GPA_1 = float("%2f" %offer_GPA_1/float(GPA_1_num))
             except ZeroDivisionError:
                 GPA_1 = 0
             try:
-                TOEFL = offer_TOEFL/float(offer_num)
+                TOEFL = float("%2f" %offer_TOEFL/float(offer_num))
             except ZeroDivisionError:
                 TOEFL = 0
             try:
-                IELTS = offer_IELTS/float(offer_num)
+                IELTS = float("%2f" %offer_IELTS/float(offer_num))
             except ZeroDivisionError:
                 IELTS = 0
             print offer_university_id,GPA,GPA_0,GPA_1,TOEFL,IELTS
