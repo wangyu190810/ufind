@@ -74,7 +74,8 @@ def set_university_offer_wechat(universityname,user_type,num):
         wechat_type = "Bachelor"
     else:
         wechat_type = "Master/PHD"
-    return u"123"
+    print universityname,user_type,num
+    print type(universityname),type(user_type),type(num)
     return u"http://www.ufindoffer.com/images/unimg/twodim/"+universityname+wechat_type+str(num)+".jpg"
 
 
