@@ -314,6 +314,7 @@ def get_user_in_university():
 
                                     student_list.append(row.user_id)
                             elif get_compare_score(GPA_to,GPA_form,user.GPA):
+                                print "234234"
                                 student_list.append(row.user_id)
                         else:
                             student_list.append(row.user_id)
