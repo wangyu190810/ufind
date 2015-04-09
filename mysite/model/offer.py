@@ -100,7 +100,7 @@ class Offer(Base):
     @classmethod
     def get_user_id_from_major(cls, connection, major_id,user_type=None):
         """根据专业id查找学生信息"""
-        if user_type:
+        if user_type is not None:
             return connection.query(Offer).\
                 filter(Offer.major_id == major_id).\
                 filter(Offer.user_type == user_type).limit(2)
