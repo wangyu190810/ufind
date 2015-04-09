@@ -72,6 +72,8 @@ def get_major_from_university_faculty():
         user_type = None
         if user:
             user_type = user.type
+        print user_type
+        print type(user_type)
         major_list = list()
         if faculty_id is None and major_id is None:
             for row in Major.get_major_info_university(g.db, university_id):
@@ -98,7 +100,6 @@ def get_major_from_university_faculty():
                     major_info["students"] = students
                 if major_info.get("students") is not None:
                     major_list.append(major_info)
-                print "zxcvzxcvzvc"
             return jsonify(status="success",
                            majorlist=major_list)
         elif major_id is None:
@@ -137,6 +138,7 @@ def get_major_from_university_faculty():
 #                                                         university_id,)
                 major_info["offernum"] = Offer.get_offer_num_from_major(g.db,university_id,row.id)
                 major_info["offervote"]=None
+                print user_type
                 for row_major in Offer.get_user_id_from_major(g.db,row.id,user_type):
                     student_info = dict()
                     user = User.get_user_info(g.db,row_major.user_id)
