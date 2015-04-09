@@ -49,6 +49,7 @@ def set_offer():
                 school2_id = major_id.School2_ID
                 school3_id = major_id.School3_ID
             offer_num = Offer.get_offer_num(g.db,offer_university_id,user_type)
+            num_wechar = 1
             if offer_num:
                 if offer_num < 100:
                     num_wechar = 1
