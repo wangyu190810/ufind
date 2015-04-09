@@ -266,7 +266,7 @@ def get_user_in_university():
                                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
                                 get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
                                 get_compare_score(GRE_to,GRE_form,user.GRE) and \
-                                get_compare_score(GMAT_to,GRE_form,user.GMAT):
+                                get_compare_score(GMAT_to,GMAT_form,user.GMAT):
                             # if GPA_to != 0.0:
                             #     if TOEFL_to != 0.0:
                             #         if GER_to != 0.0:
@@ -333,7 +333,7 @@ def get_user_in_university():
                                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
                                 get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
                                 get_compare_score(GRE_to,GRE_form,user.GRE) and \
-                                get_compare_score(GMAT_to,GRE_form,user.GMAT):
+                                get_compare_score(GMAT_to,GMAT_form,user.GMAT):
                             # if GPA_to != 0.0:
                             #     if TOEFL_to != 0.0:
                             #         if GER_to != 0.0:
@@ -350,7 +350,7 @@ def get_user_in_university():
                             #         student_list.append(row.user_id)
                             # else:
                             #     student_list.append(row.user_id)
-                                student_list.append(row.user_id)
+                            student_list.append(row.user_id)
         # else:
         #     student_list = []
         #     for row in Offer.get_user_id_from_university(g.db,
