@@ -233,7 +233,7 @@ def get_user_in_university():
         major_id = data.get("majorid")
         GPA_to = data.get("GPA[to]",0.0,float)
         GPA_form = data.get("GPA[from]",1000,float)
-        TOEFL_to = request.form.get("TOEFL[to]",10000,float)
+        TOEFL_to = request.form.get("TOEFL[to]",0.0,float)
         TOEFL_form = request.form.get("TOEFL[from]",10000,float)
         GRE_to = request.form.get("GRE[to]",0.0,float)
         GRE_form = request.form.get("GRE[from]",1000,float)
