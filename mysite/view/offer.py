@@ -138,6 +138,7 @@ def set_offer():
                 IELTS = offer_IELTS/float(offer_num)
             except ZeroDivisionError:
                 IELTS = 0
+            print offer_university_id,GPA,GPA_0,GPA_1,TOEFL,IELTS
             University.set_GPA_TOEFL_IELTS(g.db,offer_university_id,GPA,GPA_0,GPA_1,TOEFL,IELTS)
         offer_list = list()
         for row_user in Offer.get_offer_student_info(g.db,user_id):
