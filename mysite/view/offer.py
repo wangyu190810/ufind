@@ -49,16 +49,16 @@ def set_offer():
                 school2_id = major_id.School2_ID
                 school3_id = major_id.School3_ID
             offer_num = Offer.get_offer_num(g.db,offer_university_id,user_type)
-            num_wechar = 1
+            num_wechat = 1
             if offer_num:
                 if offer_num < 100:
-                    num_wechar = 1
+                    num_wechat = 1
                 elif 100 <= offer_num < 200:
-                    num_wechar = 2
+                    num_wechat = 2
                 elif 200 <= offer_num < 300:
-                    num_wechar = 3
+                    num_wechat = 3
 
-            wechat=set_university_offer_wechat(University.get_university_from_id(g.db,offer_university_id).short_name,user_type,num_wechar)
+            wechat=set_university_offer_wechat(University.get_university_from_id(g.db,offer_university_id).short_name,user_type,num_wechat)
             Offer.set_offer(g.db,
                             user_id=user_id,
                             university_id=offer_university_id,
