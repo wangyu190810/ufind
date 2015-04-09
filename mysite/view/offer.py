@@ -20,7 +20,6 @@ from mysite.model.state import State
 def set_offer():
     if request.method == "POST":
         data = request.form
-        print data
         user_id = session["user_id"]
         user = User.get_user_info(g.db,user_id)
         user_type = None
@@ -30,7 +29,7 @@ def set_offer():
         num = 0
         while True:
             offer_major_id = data.get("offers["+str(num)+"][majorid]")
-            offer_grade = data.get("offers["+str(num)+"][grade]","PhD")
+            offer_grade = data.get("offers["+str(num)+"][grade]","Bachelor")
             offer_university_id = data.get("offers["+str(num)+"][universityid]")
             offer_type = data.get("offers["+str(num)+"][offertype]")
             scholarship_type = data.get("offers["+str(num)+"][scholarship][type]")
