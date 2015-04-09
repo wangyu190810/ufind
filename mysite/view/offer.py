@@ -40,7 +40,7 @@ def set_offer():
             User.update_user_grade(g.db,user_id=user_id,grade=offer_grade)
             Offer.del_same_offer(g.db,university_id=offer_university_id,
                                 major_id =offer_major_id,user_id=user_id)
-            major_id = Major.get_major_info(g.db,offer_major_id)
+            major_id = Major.get_major_info_by_id_scalar(g.db,offer_major_id)
             school1_id = 0
             school2_id = 0
             school3_id = 0

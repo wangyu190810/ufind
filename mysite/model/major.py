@@ -71,5 +71,5 @@ class Major(Base):
         return connection.query(Major).filter(Major.id == major_id)
 
     @classmethod
-    def get_major_info(cls,connection,major_id):
+    def get_major_info_by_id_scalar(cls,connection,major_id):
         return connection.query(Major).filter(Major.id == major_id).scalar()

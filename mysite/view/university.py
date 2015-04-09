@@ -90,7 +90,7 @@ def get_university_info():
                 #print row_major.major_id
                 #print row_major.countmajor
                 num = 1
-                major_info = Major.get_major_info(g.db,row_major[1])
+                major_info = Major.get_major_info_by_id_scalar(g.db,row_major[1])
             # for major_row in Major.get_major_info(g.db,
             #                                 university_info["universityid"],
             #                                 faculty["facultyid"]):

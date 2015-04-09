@@ -105,7 +105,7 @@ def get_major_from_university_faculty():
         elif major_id is None:
             faculty_list = faculty_id.split(",")
             for faculty_id in faculty_list:
-                for row in Major.get_major_info(g.db,university_id,faculty_id):
+                for row in Major.get_major_info(connection=g.db,university_id=university_id,faculty_id=faculty_id):
                     students = list()
                     major_info = {}
                     major_info["majorid"] = row.id
