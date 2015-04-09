@@ -244,7 +244,7 @@ def get_user_in_university():
         compare_list = []
         page_list = []
 
-        if faculty_id is not None:
+        if faculty_id is not None and faculty_id != "":
             if major_id is None:
                 major_list = dict()
                 info = list()
