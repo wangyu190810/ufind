@@ -318,7 +318,7 @@ def get_user_in_university():
                         else:
                             student_list.append(row.user_id)
                     student_list.append(row.user_id)
-        elif major_id is not None:
+        else:
             student_list = []
             for row in Offer.get_user_id_from_university(g.db,
                                                         university_id,
