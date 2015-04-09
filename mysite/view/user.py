@@ -241,6 +241,7 @@ def get_user_in_university():
         IELTS_form = request.form.get("IELTS[from]",1000,float)
         GMAT_to = request.form.get("GMAT[to]",0.0,float)
         GMAT_form = request.form.get("GMAT[from]",1000,float)
+        grade = request.form.get("grade")
         page = data.get("page")
         compares = {}
         compare_list = []
@@ -256,7 +257,8 @@ def get_user_in_university():
                     for row in Offer.get_user_id_from_university(g.db,
                                                          university_id,
                                                          row_major.id,
-                                                         user_type):
+                                                         user_type,
+                                                         grade):
                         user = User.get_user_info(g.db,row.user_id)
                         if user:
                             print GPA_to
@@ -302,7 +304,8 @@ def get_user_in_university():
                 for row in Offer.get_user_id_from_university(g.db,
                                                         university_id,
                                                         major_id,
-                                                        user_type):
+                                                        user_type,
+                                                        grade):
                     user = User.get_user_info(g.db,row.user_id)
                     print user
                     if user:
