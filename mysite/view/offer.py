@@ -96,9 +96,12 @@ def set_offer():
             offer_num = 0
             GPA_0_num = 0
             GPA_1_num = 0
+            offer_user_list = list()
             for offer_user in Offer.get_user_id_from_university(g.db,offer_university_id):
                 of_user = User.get_user_info(g.db,offer_user.user_id)
-                if of_user is not None:
+
+                if of_user is not None and of_user.user_id not in offer_user_list:
+
                     if of_user.GPA is not None:
                         offer_GPA += of_user.GPA
                     if of_user.TOEFL is not None:
@@ -113,6 +116,7 @@ def set_offer():
                             offer_GPA_1 += of_user.GPA
                             GPA_1_num += 1
                     offer_num += 1
+                    offer_user_list.append(of_user.user_id)
             if offer_num == 0 or GPA_0_num == 0 or GPA_1_num == 0:
                 offer_num == 1
                 GPA_0_num == 1
