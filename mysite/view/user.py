@@ -240,7 +240,7 @@ def get_user_in_university():
         IELTS_to= request.form.get("IELTS[to]",0.0,float)
         IELTS_form = request.form.get("IELTS[from]",1000,float)
         GMAT_to = request.form.get("GMAT[to]",0.0,float)
-        GMAT_form = request.form.get("GMAT[to]",1000,float)
+        GMAT_form = request.form.get("GMAT[from]",1000,float)
         page = data.get("page")
         compares = {}
         compare_list = []
