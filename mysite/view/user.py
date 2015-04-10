@@ -7,7 +7,8 @@ import json
 from mysite.model.user import User, UserFollow
 from mysite.view.base import allow_cross_domain, get_timestamp, \
     validate_user_login,get_university_logo,get_university_twodim,\
-    get_GMAT, get_gre, get_TELTS, get_Total,get_SAT,get_compare_score
+    get_GMAT, get_gre, get_TELTS, get_Total,get_SAT,get_compare_score,\
+    checknum_timeout
 from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
@@ -253,8 +254,10 @@ def get_user_in_university():
         check_num = request.form.get("checknum")
         print request.form
         if phone:
-            User.update_user_phone(g.db,user.id,phone,user.phone_old,)
-
+            if user.checknum == int(check_num) and checknum_timeout(user.checknum_time):
+                User.update_user_phone(g.db,user.id,phone,user.phone_old,)
+            else:
+                return jsonify(status="checknum_error")
         compares = {}
         compare_list = []
         page_list = []
