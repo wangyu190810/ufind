@@ -25,9 +25,6 @@ def login():
     password = data["password"]
     user = User.login_user(g.db, email=login_email,
                            phone=login_phone, password=password)
-    user_exist = User.get_user_exist(g.db,email=login_email,phone=login_phone)
-
-
 
     if user is not None:
         session["user_id"] = user.id
@@ -40,7 +37,7 @@ def login():
             student=student,
             status="success",
             cookie=set_sign_safe(str(user.id)))
-    elif user_exist:
+    elif User.get_user_exist(g.db,email=login_email,phone=login_phone):
         return jsonify(status="password_error")
     return jsonify(status="user_not_exist")
 
