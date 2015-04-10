@@ -49,6 +49,8 @@ def send_sms():
         phone = phonenum["phonenum"]
         sms_type = phonenum.get("type")
         user = User.get_user_info_by_phone(g.db,phone)
+        print user,sms_type,phone
+        # 注册发送验证码
         if (user is None and sms_type == 0) or (user is not None and sms_type is None):
             if len(phone) == 11 and phone[:2] in ["13", "15", "17", "18"]:
                 code = randint(1000, 9999)
@@ -61,6 +63,7 @@ def send_sms():
                     User.set_sms_checknum(g.db, phone, code)
                     return jsonify(status="success")
             return jsonify(status="false")
+        # 找回密码
         elif user.username is None and sms_type == 0:
             code = randint(1000, 9999)
             company = "游必有方"
