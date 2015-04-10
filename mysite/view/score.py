@@ -31,9 +31,9 @@ def set_user_score():
             num = 0
 
             while True:
-                if request.form.get("GRE[sub]["+str(num)+"][id]"):
-                    sub_id = request.form.get("GRE[sub]["+str(num)+"][id]",0,int)
-                    grade = request.form.get("GRE[sub]["+str(num)+"][grade]",0,int)
+                if request.form.get("GREmore[sub]["+str(num)+"][id]"):
+                    sub_id = request.form.get("GREmore[sub]["+str(num)+"][id]",0,int)
+                    grade = request.form.get("GREmore[sub]["+str(num)+"][grade]",0,int)
                     sub_type = 0
                     if sub_id >10:
                         sub_type = 1
