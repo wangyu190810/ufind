@@ -63,7 +63,11 @@ def send_sms():
                     User.set_sms_checknum(g.db, phone, code)
                     return jsonify(status="success")
             return jsonify(status="false")
+        if user is None and sms_type is None:
+            return jsonify(status="phone_not_exist")
+
         # 找回密码
+
         elif user.username is None and sms_type == 0:
             code = randint(1000, 9999)
             company = "游必有方"
