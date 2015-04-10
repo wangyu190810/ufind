@@ -249,6 +249,12 @@ def get_user_in_university():
         grade = request.form.get("grade")
         print grade
         page = data.get("page")
+        phone = request.form.get("phonenum")
+        check_num = request.form.get("checknum")
+        print request.form
+        if phone:
+            User.update_user_phone(g.db,user.id,phone,user.phone_old,)
+
         compares = {}
         compare_list = []
         page_list = []
