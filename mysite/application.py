@@ -35,18 +35,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = Config.db
 
 app.sa_engine = create_engine(Config.db)
 app.DBSession = scoped_session(sessionmaker(bind=app.sa_engine))
-#
-# app.add_url_rule("/",view_func=index,methods=["GET", "POST"])
-# app.add_url_rule("/edit",view_func=edit,methods=["GET", "POST"])
-# app.add_url_rule("/change/<int:blog_id>",view_func=blog_change,methods=["GET","POST"])
-# app.add_url_rule("/search",view_func=search,methods=["GET"])
-#
-# app.add_url_rule("/arch",view_func=arch,methods=["GET"])
-# app.add_url_rule("/blog/<int:blog_id>",view_func=blog,methods=["GET","POST"])
-# app.add_url_rule("/tag/<tag>",view_func=blog_tag,methods=["GET","POST"])
-# app.add_url_rule("/classify/<name>",view_func=blog_classify,methods=["GET","POST"])
-#
-#
+
+
 app.add_url_rule("/api/login", view_func=login,
                  methods=["GET", "POST"])
 app.add_url_rule("/api/login_cookie",view_func=login_from_cookie,

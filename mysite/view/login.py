@@ -31,6 +31,7 @@ def login():
         student["studentid"] = user.id
         student["studentname"] = user.username
         student["studentpic"] = user.pic
+        student["type"] = str(user.type)
         return jsonify(
             student=student,
             status="success",
@@ -49,9 +50,11 @@ def login_from_cookie():
             student["studentid"] = user.id
             student["studentname"] = user.username
             student["studentpic"] = user.pic
+            student["type"] = str(user.type)
             return jsonify(
                 student=student,
-                status="success")
+                status="success",
+            )
     return jsonify(status="false")
 
 
