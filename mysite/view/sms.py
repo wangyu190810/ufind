@@ -71,6 +71,16 @@ def send_sms():
                 User.set_sms_checknum(g.db, phone, code)
                 return jsonify(status="success")
             return jsonify(status="false")
+        elif user.username is not None and sms_type == 1:
+            code = randint(1000, 9999)
+            company = "游必有方"
+            tpl_value = "#code#="+str(code)+"&#company#="+company
+            result = tpl_send_sms(Config.apikey, 1, tpl_value, phone)
+            code_num = json.loads(result)["code"]
+            if code_num == 0:
+                User.update_user_phone(g.db,user_id=user.id,phone=phone,checknum=code)
+                return jsonify(status="success")
+            return jsonify(status="false")
         elif user.username is not None:
             return jsonify(status="registered")
 
