@@ -247,6 +247,7 @@ def get_user_in_university():
         GMAT_to = request.form.get("GMAT[to]",0.0,float)
         GMAT_form = request.form.get("GMAT[from]",1000,float)
         grade = request.form.get("grade")
+        print grade
         page = data.get("page")
         compares = {}
         compare_list = []
