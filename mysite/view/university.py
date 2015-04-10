@@ -185,7 +185,11 @@ def get_state_university():
             university_info["offernum"] = Offer.get_offer_num(g.db, row.id, user_type)
             if user_type is None:
 
-                university_info["meanGPA"] = float("%0.2f" %row.menaGPA_Total)
+                if row.menaGPA_Total is None:
+                    menaGPA_Total = 0
+                else:
+                    menaGPA_Total = row.menaGPA_Total
+                university_info["meanGPA"] = float("%0.2f" %menaGPA_Total)
             elif user_type == 0:
                 university_info["meanGPA"] = float("%0.2f" %row.menaGPA_0)
             else:
