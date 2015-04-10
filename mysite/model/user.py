@@ -53,7 +53,7 @@ class User(Base):
                 filter(User.password == password).scalar()
 
     @classmethod
-    def get_user_exist(cls, connection, email=None, phone=None):
+    def get_user_exist(cls, connection, email=None, phone=None,):
         if phone is None:
             return connection.query(User). \
                 filter(User.email == email).scalar()
