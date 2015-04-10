@@ -488,7 +488,7 @@ def update_user_info():
         username = request.form.get("engname")
         email = request.form.get("email")
         pic = request.form.get("pic")
-
+        print request.form
         if request.form.get("checknum"):
             pass
         if request.form.get("passwordold"):
