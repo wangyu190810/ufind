@@ -175,6 +175,7 @@ def get_user_detail_info():
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
+        GREmore["total"] = user.GRE
         if student_info.get("v") != 0:
             student_info["GREmore"] = GREmore
         GMATmore = dict()
@@ -182,6 +183,7 @@ def get_user_detail_info():
         GMATmore["Q"] = score.GMAT_q
         GMATmore["AW"] = score.GMAT_aw
         GMATmore["IR"] = score.GMAT_ir
+        GMATmore["total"] = user.GMAT
         if GMATmore.get("V") != 0:
             student_info["GMATmore"] = GMATmore
         IELTSmore = dict()
@@ -189,6 +191,7 @@ def get_user_detail_info():
         IELTSmore["L"] = score.IELTS_l
         IELTSmore["S"] = score.IELTS_s
         IELTSmore["W"] = score.IELTS_w
+        IELTSmore["total"] = user.IELTS
         if IELTSmore.get("R") != 0:
             student_info["IELTSmore"] = IELTSmore
         TOEFLmore = dict()
@@ -196,12 +199,14 @@ def get_user_detail_info():
         TOEFLmore["L"] = score.TOEFL_l
         TOEFLmore["S"] = score.TOEFL_s
         TOEFLmore["W"] = score.TOEFL_w
+        TOEFLmore["total"] = user.TOEFL
         if TOEFLmore.get("R") != 0:
             student_info["TOEFLmore"] = TOEFLmore
         SATmore = dict()
         SATmore["CR"] = score.SAT_cr
         SATmore["W"] = score.SAT_w
         SATmore["M"] = score.SAT_m
+        SATmore["total"] = user.SAT
         if SATmore.get("W") != 0:
             student_info["SATmore"] = SATmore
         GMATmore = dict()
@@ -209,6 +214,7 @@ def get_user_detail_info():
         GMATmore["Q"] = score.GMAT_q
         GMATmore["AW"] = score.GMAT_aw
         GMATmore["IR"] = score.GMAT_ir
+        GMATmore["total"] = user.GMAT
         if GMATmore.get("V") != 0:
             student_info["GMATmore"] = GMATmore
 
@@ -358,6 +364,7 @@ def get_user_base_info():
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
+
         if GREmore.get("V") != 0:
 
             data["GREmore"] = GREmore
@@ -428,6 +435,7 @@ def edit_user_info_page():
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
+        GREmore["total"] = user.GRE
         if GREmore.get("V") != 0:
             user_info["GREmore"] = GREmore
         TOEFLmore = dict()
@@ -435,6 +443,7 @@ def edit_user_info_page():
         TOEFLmore["L"] = score.TOEFL_l
         TOEFLmore["S"] = score.TOEFL_s
         TOEFLmore["W"] = score.TOEFL_w
+        TOEFLmore["total"] = user.TOEFL
         if TOEFLmore.get("R") != 0:
             user_info["TOEFLmore"] = TOEFLmore
         SATmore = dict()
@@ -442,6 +451,7 @@ def edit_user_info_page():
         SATmore["CR"] = score.SAT_cr
         SATmore["W"] = score.SAT_w
         SATmore["M"] = score.SAT_m
+        SATmore["total"] = user.SAT
         if SATmore.get("M") != 0:
             user_info["SATmore"] = SATmore
         IELTSmore = dict()
@@ -449,6 +459,7 @@ def edit_user_info_page():
         IELTSmore["L"] = score.IELTS_l
         IELTSmore["S"] = score.IELTS_s
         IELTSmore["W"] = score.IELTS_w
+        IELTSmore["total"] = user.IELTS
         if IELTSmore.get("R") != 0:
             user_info["IELTSmore"] = IELTSmore
 
@@ -457,6 +468,7 @@ def edit_user_info_page():
         GMATmore["Q"] = score.GMAT_q
         GMATmore["AW"] = score.GMAT_aw
         GMATmore["IR"] = score.GMAT_ir
+        GMATmore["total"] = user.GMAT
         if GMATmore.get("V") != 0:
             user_info["GMATmore"] = GMATmore
         return json.dumps(user_info)
