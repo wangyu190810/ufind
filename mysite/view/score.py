@@ -27,7 +27,7 @@ def set_user_score():
             User.update_user_bginf(g.db, user_id, bginf)
         print request.form
         Stasub.del_sub(g.db,user_id)
-        if request.form.get("GRE[sub][0][id]"):
+        if request.form.get("GREmore[sub][0][id]"):
             num = 0
 
             while True:
