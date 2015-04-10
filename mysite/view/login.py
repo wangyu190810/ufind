@@ -74,8 +74,9 @@ def register_first():
                 User.register_first(g.db, email, password, phonenum)
                 return jsonify(status="success")
             return jsonify(status="checknum_timeout")
+
         else:
-            return jsonify(status="false")
+            return jsonify(status="checknum_error")
 
 
 @allow_cross_domain
