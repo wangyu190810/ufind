@@ -65,6 +65,7 @@ def get_user_detail_info():
 
             for row_un in University.get_university_info(g.db,str(row.university_id)):
                 offer_info["universityname"] = row_un.name
+                offer_info["universityid"] = row_un.id
                 offer_info["logo"] = get_university_logo(row_un.name)
                 offer_info["twodimcode"] = row.wechat
             for row_ma in Major.get_major_info_by_id(g.db, row.major_id):
