@@ -65,13 +65,15 @@ def set_user_score():
             LELTSmoreL = request.form.get("IELTSmore[L]", 0, int)
             LELTSmoreS = request.form.get("IELTSmore[S]", 0, int)
             LELTSmoreW = request.form.get("IELTSmore[W]", 0, int)
-            sub_TELTS = get_TELTS(LELTSmoreS, LELTSmoreL, LELTSmoreR,
-                                  LELTSmoreW)
+            sub_TELTS = request.form.get("IELTSmore[total]", 0, int)
+            #sub_TELTS = get_TELTS(LELTSmoreS, LELTSmoreL, LELTSmoreR,
+            #                      LELTSmoreW)
             if request.form.get("GREmore[V]") is not None:
                 GREmoreV = request.form.get("GREmore[V]", 0, int)
                 GREmoreQ = request.form.get("GREmore[Q]", 0, int)
                 GREmoreAW = request.form.get("GREmore[AW]", 0, int)
-                sub_GRE = get_gre(GREmoreV, GREmoreQ)
+                sub_GRE = request.form.get("GREmore[total]", 0, int)
+                #sub_GRE = get_gre(GREmoreV, GREmoreQ)
                 User.update_user_score(g.db, user_id, gre=sub_GRE,
                                        lelts=sub_TELTS)
                 Score.set_user_info(connection=g.db, user_id=user_id,
@@ -87,7 +89,8 @@ def set_user_score():
                 sat_m = request.form.get("SATmore[M]", 0, int)
                 sat_cr = request.form.get("SATmore[CR]", 0, int)
                 sat_w = request.form.get("SATmore[W]", 0, int)
-                sub_sat = get_SAT(sat_cr,sat_w,sat_m)
+                sub_sat= request.form.get("SATmore[total]", 0, int)
+                #sub_sat = get_SAT(sat_cr,sat_w,sat_m)
                 User.update_user_score(g.db,user_id=user_id,
                                        lelts=sub_TELTS,
                                        sat=sub_sat)
@@ -106,7 +109,8 @@ def set_user_score():
                 GMATmoreQ = request.form.get("GMATmore[Q]", 0, int)
                 GMATmoreAW = request.form.get("GMATmore[AW]", 0, int)
                 GMATmoreIR = request.form.get("GMATmore[IR]", 0, int)
-                sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
+                sub_GMAT = request.form.get("GMATmore[total]", 0, int)
+                #sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
                 User.update_user_score(g.db, user_id=user_id,
                                        lelts=sub_TELTS, GMAT=sub_GMAT)
                 Score.set_user_info(connection=g.db,
@@ -126,13 +130,15 @@ def set_user_score():
             TOEFLmoreL = request.form.get("TOEFLmore[L]", 0, int)
             TOEFLmoreS = request.form.get("TOEFLmore[S]", 0, int)
             TOEFLmoreW = request.form.get("TOEFLmore[W]", 0, int)
-            sub_TOEFL = get_Total(TOEFLmoreL, TOEFLmoreR, TOEFLmoreS,
-                                  TOEFLmoreW)
+            sub_TOEFL = request.form.get("TOEFLmore[total]", 0, int)
+            #sub_TOEFL = get_Total(TOEFLmoreL, TOEFLmoreR, TOEFLmoreS,
+            #                      TOEFLmoreW)
             if request.form.get("GREmore[V]") is not None:
                 GREmoreV = request.form.get("GREmore[V]", 0, int)
                 GREmoreQ = request.form.get("GREmore[Q]", 0, int)
                 GREmoreAW = request.form.get("GREmore[AW]", 0, int)
-                sub_GRE = get_gre(GREmoreV, GREmoreQ)
+                sub_GRE = request.form.get("GREmore[total]", 0, int)
+                #sub_GRE = get_gre(GREmoreV, GREmoreQ)
                 User.update_user_score(g.db, user_id=user_id, gre=sub_GRE,
                                        toefl=sub_TOEFL)
                 Score.set_user_info(connection=g.db, user_id=user_id,
@@ -149,7 +155,7 @@ def set_user_score():
                 sat_m = request.form.get("SATmore[M]", 0, int)
                 sat_cr = request.form.get("SATmore[CR]", 0, int)
                 sat_w = request.form.get("SATmore[W]", 0, int)
-                sub_sat = get_SAT(sat_cr,sat_w,sat_m)
+                sub_sat= request.form.get("SATmore[total]", 0, int)
                 User.update_user_score(g.db,user_id=user_id,
                                        toefl=sub_TOEFL,
                                        sat=sub_sat)
