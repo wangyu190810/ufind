@@ -53,6 +53,18 @@ class User(Base):
                 filter(User.password == password).scalar()
 
     @classmethod
+    def get_user_exist(cls, connection, email=None, phone=None):
+        if phone is None:
+            return connection.query(User). \
+                filter(User.email == email).scalar()
+
+        elif email is None:
+            return connection.query(User).\
+                filter(User.phone == phone).scalar()
+
+
+
+    @classmethod
     def register_first(cls, connection, email, password, phone):
         connection.query(User). \
             filter(User.phone == phone). \
