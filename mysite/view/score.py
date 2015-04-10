@@ -73,7 +73,7 @@ def set_user_score():
                 GREmoreQ = request.form.get("GREmore[Q]", 0, int)
                 GREmoreAW = request.form.get("GREmore[AW]", 0, int)
                 sub_GRE = request.form.get("GREmore[total]", 0, int)
-                #sub_GRE = get_gre(GREmoreV, GREmoreQ)
+
                 User.update_user_score(g.db, user_id, gre=sub_GRE,
                                        lelts=sub_TELTS)
                 Score.set_user_info(connection=g.db, user_id=user_id,
