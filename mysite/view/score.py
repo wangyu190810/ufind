@@ -174,7 +174,7 @@ def set_user_score():
                 GMATmoreQ = request.form.get("GMATmore[Q]", 0, int)
                 GMATmoreAW = request.form.get("GMATmore[AW]", 0, int)
                 GMATmoreIR = request.form.get("GMATmore[IR]", 0, int)
-                sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
+                sub_GMAT = request.form.get("GMATmore[total]",0,int)
                 User.update_user_score(g.db, user_id=user_id,
                                        toefl=sub_TOEFL, GMAT=sub_GMAT)
                 Score.set_user_info(connection=g.db, user_id=user_id,
