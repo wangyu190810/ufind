@@ -161,7 +161,7 @@ class User(Base):
         connection.commit()
 
     @classmethod
-    def update_user_phone_old(cls,connection,user_id,phone,phone_old,checknum):
+    def update_user_phone(cls,connection,user_id,phone,phone_old,checknum):
         u"""更新个人电话第二步"""
         connection.query(User).filter(user_id).update(
                 {
