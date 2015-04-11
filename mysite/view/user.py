@@ -497,6 +497,8 @@ def update_user_info():
         user = User.get_user_info(g.db,user_id)
         if check_num or check_num == "":
             print user.checknum,check_num,checknum_timeout(user.checknum_time)
+            if check_num == "":
+                return jsonify(status="checknum_error")
             if user.checknum == int(check_num) and checknum_timeout(user.checknum_time):
                 User.update_user_phone(g.db,user.id,phone,user.phone_old,)
             else:
