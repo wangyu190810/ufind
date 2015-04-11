@@ -28,6 +28,10 @@ class Major(Base):
         if university_id is None:
            return connection.query(Major).\
                filter(Major.name.like("%"+searchname+"%"))
+        elif university_id is not None and major_type is None:
+            return connection.query(Major).\
+                filter(Major.name.like("%"+searchname+"%")).\
+                filter(Major.university_id == university_id)
         else:
            return connection.query(Major).\
                filter(Major.name.like("%"+searchname+"%")).\

@@ -15,7 +15,7 @@ def search_major():
         major = {}
         user_id = session.get("user_id")
         user = User.get_user_info(g.db,user_id)
-        major_type = -1
+        major_type = None
         if user:
             major_type = user.type
         searchname,university_id = map(request.args.get,
