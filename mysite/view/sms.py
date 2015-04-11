@@ -69,7 +69,7 @@ def send_sms():
 
         # 找回密码
 
-        elif user.username is None and sms_type == 0:
+        elif sms_type == 0 and user.username is None :
             if len(phone) == 11 and phone[:2] in ["13", "15", "17", "18"]:
                 code = randint(1000, 9999)
                 company = "游必有方"
