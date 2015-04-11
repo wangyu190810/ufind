@@ -261,7 +261,7 @@ def get_user_in_university():
             GMAT_form =0.0
         elif GMAT_to != 0.0 and GMAT_form != 10000:
             GRE_to = 0.0
-            GMAT_form = 0.0
+            GRE_form = 0.0
 
         grade = request.form.get("grade")
         print grade
