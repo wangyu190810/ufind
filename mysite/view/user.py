@@ -250,15 +250,7 @@ def get_user_in_university():
         grade = request.form.get("grade")
         print grade
         page = data.get("page")
-        phone = request.form.get("phonenum")
-        check_num = request.form.get("checknum")
-        print request.form
-        if check_num:
-            print user.checknum,check_num,checknum_timeout(user.checknum_time)
-            if user.checknum == int(check_num) and checknum_timeout(user.checknum_time):
-                User.update_user_phone(g.db,user.id,phone,user.phone_old,)
-            else:
-                return jsonify(status="checknum_error")
+
         compares = {}
         compare_list = []
         page_list = []
@@ -500,6 +492,15 @@ def update_user_info():
         email = request.form.get("email")
         pic = request.form.get("pic")
         print request.form
+        phone = request.form.get("phonenum")
+        check_num = request.form.get("checknum")
+        user = User.get_user_info(g.db,user_id)
+        if check_num:
+            print user.checknum,check_num,checknum_timeout(user.checknum_time)
+            if user.checknum == int(check_num) and checknum_timeout(user.checknum_time):
+                User.update_user_phone(g.db,user.id,phone,user.phone_old,)
+            else:
+                return jsonify(status="checknum_error")
         if request.form.get("checknum"):
             pass
         if request.form.get("passwordold"):
