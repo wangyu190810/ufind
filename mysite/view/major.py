@@ -118,7 +118,7 @@ def get_major_from_university_faculty():
                         if user is None:
                             students.append(student_info)
                         else:
-                            students.append(student_info)
+
                             student_info["studentid"] = user.id
                             student_info["name"] = user.username
                             student_info["studentimg"] = user.pic
