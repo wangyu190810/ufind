@@ -54,7 +54,7 @@ def get_university():
 def get_university_info():
     if request.method == "GET":
         user = User.get_user_info(g.db, user_id=session.get("user_id"))
-        user_type = -1
+        user_type = None
         if user:
             user_type = user.type
 

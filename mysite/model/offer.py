@@ -147,6 +147,18 @@ class Offer(Base):
         in (select major_id from offer where university_id=:university_id_3 and
         school1_id=:school_id_3) order by rand() limit 3)""")
 
+        if user_type is None:
+
+            sql = """(select count(user_id) as countmajor,major_id as id
+        from offer where university_id=%s and  school1_id=%s  group by
+        major_id order by countmajor desc) union (select 0 as countmajor,
+        id from major where university_id=%s and  faculty_id=%s
+        and id not in (select major_id from offer where university_id=%s and
+        school1_id=%s )
+        order by rand() limit 8)""" %(university_id,school_id,
+                                      university_id,school_id,
+                                      university_id,school_id)
+            return connection.execute(sql)
         sql = """(select count(user_id) as countmajor,major_id as id
         from offer where university_id=%s and  school1_id=%s and user_type =%s group by
         major_id order by countmajor desc) union (select 0 as countmajor,
