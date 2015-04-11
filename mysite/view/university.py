@@ -83,7 +83,7 @@ def get_university_info():
             faculty["name"] = row.name
             #faculty["pic"] = get_main_major(1,row.main_major)
             for row_major in Offer.get_index_from_offer_num(g.db,university_id=university_id,
-                                                            school_id=row.id):
+                                                            school_id=row.id,user_type=user_type):
                                                             #university_id=university_id,
                                                             #faculty_id=row.id):
 
