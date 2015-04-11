@@ -151,7 +151,7 @@ class User(Base):
     @classmethod
     def update_user_phone_old(cls,connection,user_id,phone,checknum):
         u"""更新个人电话第一步"""
-        connection.query(User).filter(user_id).update(
+        connection.query(User).filter(User.id ==user_id).update(
                 {
                     User.phone_old: phone,
                     User.checknum: checknum,
@@ -163,11 +163,10 @@ class User(Base):
     @classmethod
     def update_user_phone(cls,connection,user_id,phone,phone_old):
         u"""更新个人电话第二步"""
-        connection.query(User).filter(user_id).update(
+        connection.query(User).filter(User.id == user_id).update(
                 {
                     User.phone: phone,
-                    User.phone_old: phone_old,
-                    User.checknum_time: time.time()
+                    User.phone_old: phone_old
                 }
         )
         connection.commit()

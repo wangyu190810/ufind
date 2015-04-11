@@ -501,8 +501,6 @@ def update_user_info():
                 User.update_user_phone(g.db,user.id,phone,user.phone_old,)
             else:
                 return jsonify(status="checknum_error")
-        if request.form.get("checknum"):
-            pass
         if request.form.get("passwordold"):
             password = request.form.get("password")
             passwordold = request.form.get("passwordold")
