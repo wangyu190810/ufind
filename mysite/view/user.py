@@ -241,12 +241,28 @@ def get_user_in_university():
         GPA_form = data.get("GPA[from]",1000,float)
         TOEFL_to = request.form.get("TOEFL[to]",0.0,float)
         TOEFL_form = request.form.get("TOEFL[from]",10000,float)
-        GRE_to = request.form.get("GRE[to]",0.0,float)
-        GRE_form = request.form.get("GRE[from]",1000,float)
+
+
         IELTS_to= request.form.get("IELTS[to]",0.0,float)
-        IELTS_form = request.form.get("IELTS[from]",1000,float)
+        IELTS_form = request.form.get("IELTS[from]",10000,float)
+        if TOEFL_to != 0.0 and TOEFL_form != 10000:
+            IELTS_to = 0.0
+            IELTS_form = 0.0
+        elif IELTS_to != 0.0 and IELTS_form != 10000:
+            TOEFL_to = 0.0
+            TOEFL_form = 0.0
+
+        GRE_to = request.form.get("GRE[to]",0.0,float)
+        GRE_form = request.form.get("GRE[from]",10000,float)
         GMAT_to = request.form.get("GMAT[to]",0.0,float)
-        GMAT_form = request.form.get("GMAT[from]",1000,float)
+        GMAT_form = request.form.get("GMAT[from]",10000,float)
+        if GRE_to != 0.0 and GRE_form != 10000:
+            GMAT_to = 0.0
+            GMAT_form =0.0
+        elif GMAT_to != 0.0 and GMAT_form != 10000:
+            GRE_to = 0.0
+            GMAT_form = 0.0
+
         grade = request.form.get("grade")
         print grade
         page = data.get("page")
