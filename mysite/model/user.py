@@ -194,12 +194,12 @@ class User(Base):
     @classmethod
     def update_user_info(cls, connection,
                          user_id, username,
-                         phone, email,
+                         email,
                          prevuniversity, prevmajor):
         u"""用户资料更新"""
         connection.query(User).filter(User.id == user_id).update(
             {User.username: username,
-             User.phone: phone,
+
              User.email: email,
              User.prevuniversity: prevuniversity,
              User.prevmajor: prevmajor}

@@ -495,7 +495,7 @@ def update_user_info():
         phone = request.form.get("phonenum")
         check_num = request.form.get("checknum")
         user = User.get_user_info(g.db,user_id)
-        if check_num:
+        if check_num or check_num == "":
             print user.checknum,check_num,checknum_timeout(user.checknum_time)
             if user.checknum == int(check_num) and checknum_timeout(user.checknum_time):
                 User.update_user_phone(g.db,user.id,phone,user.phone_old,)
@@ -546,7 +546,7 @@ def update_user_info():
         prevmajor = request.form.get("majorid")
         prevuniversity = request.form.get("universityid")
         User.update_user_info(g.db, user_id=user_id, username=username,
-                              phone=phone, email=email,
+                              email=email,
                               prevuniversity=prevuniversity,prevmajor=prevmajor)
         if request.form.get("IELTS[R]") is not None:
             LELTSmoreR = request.form.get("IELTS[R]",0,int)
