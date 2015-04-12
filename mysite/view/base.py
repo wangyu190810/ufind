@@ -10,7 +10,6 @@ from itsdangerous import Signer
 from mysite.model.user import User
 from config import Config
 
-
 def validate_user_login(func):
     @wraps(func)
     def _validate_user_login(*args, **kwargs):
@@ -74,7 +73,7 @@ def set_university_offer_wechat(universityname,user_type,num):
         wechat_type = "_Bachelor"
     else:
         wechat_type = "_Master_PHD"
-    return u"http://www.ufindoffer.com/images/unimg/twodim/"+universityname+wechat_type+str(num)+".jpg"
+    return u"http://www.ufindoffer.com/images/unimg/twodim/"+universityname+wechat_type+str(num)+".jpg.jpg"
 
 
 def get_main_major(num,name):
