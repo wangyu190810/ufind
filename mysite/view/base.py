@@ -127,9 +127,8 @@ def get_compare_score(GPA_TO,GPA_from,GPA):
 
 
 def set_password_salt(password):
-    m = hashlib.pbkdf2_hmac("sha256",password,Config.salt,1000)
-    binascii.hexlify(m)
-    return m.digest()
+    m = hashlib.sha224(password+Config.salt).hexdigest()
+    return m
 
 
 def set_sign_safe(sign_file):
