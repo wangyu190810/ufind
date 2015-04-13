@@ -126,7 +126,7 @@ def get_compare_score(GPA_TO,GPA_from,GPA):
 
 
 def set_password_salt(password):
-    m = md5
+    m = md5()
     m.update(password+Config.salt)
     return m.digest()
 
