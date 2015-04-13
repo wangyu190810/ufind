@@ -61,17 +61,17 @@ def set_user_score():
                     break
 
         if request.form.get("IELTSmore[R]") is not None:
-            LELTSmoreR = request.form.get("IELTSmore[R]", 0, int)
-            LELTSmoreL = request.form.get("IELTSmore[L]", 0, int)
-            LELTSmoreS = request.form.get("IELTSmore[S]", 0, int)
-            LELTSmoreW = request.form.get("IELTSmore[W]", 0, int)
-            sub_TELTS = request.form.get("IELTSmore[total]", 0, int)
+            LELTSmoreR = request.form.get("IELTSmore[R]", 0, float)
+            LELTSmoreL = request.form.get("IELTSmore[L]", 0, float)
+            LELTSmoreS = request.form.get("IELTSmore[S]", 0, float)
+            LELTSmoreW = request.form.get("IELTSmore[W]", 0, float)
+            sub_TELTS = request.form.get("IELTSmore[total]", 0, float)
             #sub_TELTS = get_TELTS(LELTSmoreS, LELTSmoreL, LELTSmoreR,
             #                      LELTSmoreW)
             if request.form.get("GREmore[V]") is not None:
                 GREmoreV = request.form.get("GREmore[V]", 0, int)
                 GREmoreQ = request.form.get("GREmore[Q]", 0, int)
-                GREmoreAW = request.form.get("GREmore[AW]", 0, int)
+                GREmoreAW = request.form.get("GREmore[AW]", 0, float)
                 sub_GRE = request.form.get("GREmore[total]", 0, int)
 
                 User.update_user_score(g.db, user_id, gre=sub_GRE,
@@ -107,7 +107,7 @@ def set_user_score():
             else:
                 GMATmoreV = request.form.get("GMATmore[V]", 0, int)
                 GMATmoreQ = request.form.get("GMATmore[Q]", 0, int)
-                GMATmoreAW = request.form.get("GMATmore[AW]", 0, int)
+                GMATmoreAW = request.form.get("GMATmore[AW]", 0, float)
                 GMATmoreIR = request.form.get("GMATmore[IR]", 0, int)
                 sub_GMAT = request.form.get("GMATmore[total]", 0, int)
                 #sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
@@ -136,7 +136,7 @@ def set_user_score():
             if request.form.get("GREmore[V]") is not None:
                 GREmoreV = request.form.get("GREmore[V]", 0, int)
                 GREmoreQ = request.form.get("GREmore[Q]", 0, int)
-                GREmoreAW = request.form.get("GREmore[AW]", 0, int)
+                GREmoreAW = request.form.get("GREmore[AW]", 0, float)
                 sub_GRE = request.form.get("GREmore[total]", 0, int)
                 #sub_GRE = get_gre(GREmoreV, GREmoreQ)
                 User.update_user_score(g.db, user_id=user_id, gre=sub_GRE,
@@ -172,7 +172,7 @@ def set_user_score():
             else:
                 GMATmoreV = request.form.get("GMATmore[V]", 0, int)
                 GMATmoreQ = request.form.get("GMATmore[Q]", 0, int)
-                GMATmoreAW = request.form.get("GMATmore[AW]", 0, int)
+                GMATmoreAW = request.form.get("GMATmore[AW]", 0, float)
                 GMATmoreIR = request.form.get("GMATmore[IR]", 0, int)
                 sub_GMAT = request.form.get("GMATmore[total]",0,int)
                 User.update_user_score(g.db, user_id=user_id,
