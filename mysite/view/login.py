@@ -70,9 +70,11 @@ def register_first():
         phonenum = data["phonenum"]
         checknum = data["checknum"]
         check = User.get_checknum(g.db, phonenum)
+        print request.form
         if check is None:
             return jsonify(status="false")
         elif check.checknum == int(checknum):
+            print checknum_timeout(check.checknum_time)
             if checknum_timeout(check.checknum_time):
                 User.register_first(g.db, email, password, phonenum)
                 return jsonify(status="success")

@@ -82,7 +82,8 @@ class User(Base):
              User.prevmajor: major_id,
              User.GPA: gpa,
              User.type: user_type,
-             User.create_time: create_time}
+             User.create_time: create_time
+             }
         )
         connection.commit()
 
