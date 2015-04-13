@@ -9,3 +9,4 @@ class Config(object):
     login_sign = u"随意的签名"
     upload_folder = "."
     allowed_extensions = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+    salt = u"加盐加盐"

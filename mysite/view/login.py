@@ -3,7 +3,7 @@ __author__ = 'wangyu'
 from flask import g, session, request, jsonify
 
 from mysite.view.base import allow_cross_domain, set_sign_safe,\
-    checknum_timeout
+    checknum_timeout,set_password_salt
 from mysite.model.user import User
 from mysite.model.university_china import UniversityChina, SeniorHighSchool, \
     MajorChina
@@ -22,7 +22,7 @@ def login():
         login_email = None
         login_phone = login_auth
 
-    password = data["password"]
+    password = set_password_salt(data["password"])
     user = User.login_user(g.db, email=login_email,
                            phone=login_phone, password=password)
 
@@ -66,7 +66,7 @@ def register_first():
     if request.method == "POST":
         data = request.form
         email = data["email"]
-        password = data["password"]
+        password = set_password_salt(data["password"])
         phonenum = data["phonenum"]
         checknum = data["checknum"]
         check = User.get_checknum(g.db, phonenum)
@@ -123,7 +123,7 @@ def change_password():
     if request.method == "POST":
         data = request.form
         phone = data["phonenum"]
-        password = data["password"]
+        password = set_password_salt(data["password"])
         checknum = data["checknum"]
         check = User.get_checknum(g.db, phone)
         if check.checknum == int(checknum) and \

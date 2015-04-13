@@ -8,7 +8,7 @@ from mysite.model.user import User, UserFollow
 from mysite.view.base import allow_cross_domain, get_timestamp, \
     validate_user_login,get_university_logo,get_university_twodim,\
     get_GMAT, get_gre, get_TELTS, get_Total,get_SAT,get_compare_score,\
-    checknum_timeout
+    checknum_timeout,set_password_salt
 from mysite.model.offer import Offer
 from mysite.model.university import University
 from mysite.model.major import Major
@@ -522,7 +522,9 @@ def update_user_info():
         if request.form.get("passwordold"):
             password = request.form.get("password")
             passwordold = request.form.get("passwordold")
-            if not User.change_password_old(g.db,user_id,password,passwordold):
+            if not User.change_password_old(g.db,user_id,
+                                            set_password_salt(password),
+                                            set_password_salt(passwordold)):
 
                 return jsonify(status="false")
         if pic is not None:
