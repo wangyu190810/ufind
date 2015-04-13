@@ -6,7 +6,8 @@ from flask import make_response, jsonify, g
 import time
 from random import randint
 from itsdangerous import Signer
-from hashlib import md5
+import hashlib
+import binascii
 from mysite.model.user import User
 from config import Config
 
@@ -126,8 +127,8 @@ def get_compare_score(GPA_TO,GPA_from,GPA):
 
 
 def set_password_salt(password):
-    m = md5()
-    m.update(password+Config.salt)
+    m = hashlib.pbkdf2_hmac("sha256",password,Config.salt,1000)
+    binascii.hexlify(m)
     return m.digest()
 
 
