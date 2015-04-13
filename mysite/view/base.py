@@ -73,7 +73,7 @@ def set_university_offer_wechat(universityname,user_type,num):
         wechat_type = "_Bachelor"
     else:
         wechat_type = "_Master_PHD"
-    return u"http://www.ufindoffer.com/images/unimg/twodim/"+universityname+wechat_type+str(num)+".jpg.jpg"
+    return u"http://www.ufindoffer.com/images/unimg/twodim/"+universityname+wechat_type+str(num)+".jpg"
 
 
 def get_main_major(num,name):
