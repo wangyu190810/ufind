@@ -61,18 +61,18 @@ def set_user_score():
                     break
 
         if request.form.get("IELTSmore[R]") is not None:
-            LELTSmoreR = request.form.get("IELTSmore[R]", 0, float)
-            LELTSmoreL = request.form.get("IELTSmore[L]", 0, float)
-            LELTSmoreS = request.form.get("IELTSmore[S]", 0, float)
-            LELTSmoreW = request.form.get("IELTSmore[W]", 0, float)
-            sub_TELTS = request.form.get("IELTSmore[total]", 0, float)
+            LELTSmoreR = request.form.get("IELTSmore[R]", float)
+            LELTSmoreL = request.form.get("IELTSmore[L]", float)
+            LELTSmoreS = request.form.get("IELTSmore[S]", float)
+            LELTSmoreW = request.form.get("IELTSmore[W]", float)
+            sub_TELTS = request.form.get("IELTSmore[total]", float)
             #sub_TELTS = get_TELTS(LELTSmoreS, LELTSmoreL, LELTSmoreR,
             #                      LELTSmoreW)
             if request.form.get("GREmore[V]") is not None:
-                GREmoreV = request.form.get("GREmore[V]", 0, int)
-                GREmoreQ = request.form.get("GREmore[Q]", 0, int)
-                GREmoreAW = request.form.get("GREmore[AW]", 0, float)
-                sub_GRE = request.form.get("GREmore[total]", 0, int)
+                GREmoreV = request.form.get("GREmore[V]", int)
+                GREmoreQ = request.form.get("GREmore[Q]", int)
+                GREmoreAW = request.form.get("GREmore[AW]", float)
+                sub_GRE = request.form.get("GREmore[total]", int)
 
                 User.update_user_score(g.db, user_id, gre=sub_GRE,
                                        lelts=sub_TELTS)
@@ -86,10 +86,10 @@ def set_user_score():
                                     GRE_aw=GREmoreAW
                 )
             elif request.form.get("SATmore[M]"):
-                sat_m = request.form.get("SATmore[M]", 0, int)
-                sat_cr = request.form.get("SATmore[CR]", 0, int)
-                sat_w = request.form.get("SATmore[W]", 0, int)
-                sub_sat= request.form.get("SATmore[total]", 0, int)
+                sat_m = request.form.get("SATmore[M]",  int)
+                sat_cr = request.form.get("SATmore[CR]", int)
+                sat_w = request.form.get("SATmore[W]", int)
+                sub_sat= request.form.get("SATmore[total]", int)
                 #sub_sat = get_SAT(sat_cr,sat_w,sat_m)
                 User.update_user_score(g.db,user_id=user_id,
                                        lelts=sub_TELTS,
@@ -105,11 +105,11 @@ def set_user_score():
                                     SAT_cr=sat_cr
                 )
             else:
-                GMATmoreV = request.form.get("GMATmore[V]", 0, int)
-                GMATmoreQ = request.form.get("GMATmore[Q]", 0, int)
-                GMATmoreAW = request.form.get("GMATmore[AW]", 0, float)
-                GMATmoreIR = request.form.get("GMATmore[IR]", 0, int)
-                sub_GMAT = request.form.get("GMATmore[total]", 0, int)
+                GMATmoreV = request.form.get("GMATmore[V]", int)
+                GMATmoreQ = request.form.get("GMATmore[Q]", int)
+                GMATmoreAW = request.form.get("GMATmore[AW]", float)
+                GMATmoreIR = request.form.get("GMATmore[IR]", int)
+                sub_GMAT = request.form.get("GMATmore[total]", int)
                 #sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
                 User.update_user_score(g.db, user_id=user_id,
                                        lelts=sub_TELTS, GMAT=sub_GMAT)
@@ -126,18 +126,18 @@ def set_user_score():
 
                 )
         elif request.form.get("TOEFLmore[R]") is not None:
-            TOEFLmoreR = request.form.get("TOEFLmore[R]", 0, int)
-            TOEFLmoreL = request.form.get("TOEFLmore[L]", 0, int)
-            TOEFLmoreS = request.form.get("TOEFLmore[S]", 0, int)
-            TOEFLmoreW = request.form.get("TOEFLmore[W]", 0, int)
-            sub_TOEFL = request.form.get("TOEFLmore[total]", 0, int)
+            TOEFLmoreR = request.form.get("TOEFLmore[R]", int)
+            TOEFLmoreL = request.form.get("TOEFLmore[L]", int)
+            TOEFLmoreS = request.form.get("TOEFLmore[S]",  int)
+            TOEFLmoreW = request.form.get("TOEFLmore[W]", int)
+            sub_TOEFL = request.form.get("TOEFLmore[total]",  int)
             #sub_TOEFL = get_Total(TOEFLmoreL, TOEFLmoreR, TOEFLmoreS,
             #                      TOEFLmoreW)
             if request.form.get("GREmore[V]") is not None:
-                GREmoreV = request.form.get("GREmore[V]", 0, int)
-                GREmoreQ = request.form.get("GREmore[Q]", 0, int)
-                GREmoreAW = request.form.get("GREmore[AW]", 0, float)
-                sub_GRE = request.form.get("GREmore[total]", 0, int)
+                GREmoreV = request.form.get("GREmore[V]",  int)
+                GREmoreQ = request.form.get("GREmore[Q]",  int)
+                GREmoreAW = request.form.get("GREmore[AW]",  float)
+                sub_GRE = request.form.get("GREmore[total]",  int)
                 #sub_GRE = get_gre(GREmoreV, GREmoreQ)
                 User.update_user_score(g.db, user_id=user_id, gre=sub_GRE,
                                        toefl=sub_TOEFL)
@@ -152,10 +152,10 @@ def set_user_score():
 
                 )
             elif request.form.get("SATmore[M]"):
-                sat_m = request.form.get("SATmore[M]", 0, int)
-                sat_cr = request.form.get("SATmore[CR]", 0, int)
-                sat_w = request.form.get("SATmore[W]", 0, int)
-                sub_sat= request.form.get("SATmore[total]", 0, int)
+                sat_m = request.form.get("SATmore[M]",  int)
+                sat_cr = request.form.get("SATmore[CR]",  int)
+                sat_w = request.form.get("SATmore[W]",  int)
+                sub_sat= request.form.get("SATmore[total]",  int)
                 User.update_user_score(g.db,user_id=user_id,
                                        toefl=sub_TOEFL,
                                        sat=sub_sat)
@@ -170,11 +170,11 @@ def set_user_score():
                                     SAT_cr=sat_cr
                 )
             else:
-                GMATmoreV = request.form.get("GMATmore[V]", 0, int)
-                GMATmoreQ = request.form.get("GMATmore[Q]", 0, int)
-                GMATmoreAW = request.form.get("GMATmore[AW]", 0, float)
-                GMATmoreIR = request.form.get("GMATmore[IR]", 0, int)
-                sub_GMAT = request.form.get("GMATmore[total]",0,int)
+                GMATmoreV = request.form.get("GMATmore[V]", int)
+                GMATmoreQ = request.form.get("GMATmore[Q]", int)
+                GMATmoreAW = request.form.get("GMATmore[AW]", float)
+                GMATmoreIR = request.form.get("GMATmore[IR]",  int)
+                sub_GMAT = request.form.get("GMATmore[total]", int)
                 User.update_user_score(g.db, user_id=user_id,
                                        toefl=sub_TOEFL, GMAT=sub_GMAT)
                 Score.set_user_info(connection=g.db, user_id=user_id,
