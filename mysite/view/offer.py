@@ -11,12 +11,12 @@ from flask import request,jsonify,g,session
 from mysite.model.university import University
 from mysite.model.offer import Offer
 from mysite.view.base import allow_cross_domain,get_university_img,\
-    get_university_twodim,set_university_offer_wechat
+    get_university_twodim,set_university_offer_wechat,validate_user_login
 from mysite.model.user import User
 from mysite.model.major import Major
 from mysite.model.state import State
 
-#@allow_cross_domain
+@validate_user_login
 def set_offer():
     if request.method == "POST":
         data = request.form

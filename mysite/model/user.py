@@ -73,16 +73,19 @@ class User(Base):
         connection.commit()
 
     @classmethod
-    def register_second(cls, connection, phone, username,
+    def register_second(cls, connection, email,password,phone, username,
                         university_id, major_id, gpa, user_type,
                         create_time):
         connection.query(User).filter(User.phone == phone).update(
-            {User.username: username,
-             User.prevuniversity: university_id,
-             User.prevmajor: major_id,
-             User.GPA: gpa,
-             User.type: user_type,
-             User.create_time: create_time
+            {
+                User.email: email,
+                User.password: password,
+                User.username: username,
+                User.prevuniversity: university_id,
+                User.prevmajor: major_id,
+                User.GPA: gpa,
+                User.type: user_type,
+                User.create_time: create_time
              }
         )
         connection.commit()

@@ -9,7 +9,7 @@ from mysite.model.university_china import UniversityChina, SeniorHighSchool, \
     MajorChina
 
 from time import time
-
+from random import randint
 
 @allow_cross_domain
 def login():
@@ -76,7 +76,6 @@ def register_first():
         elif check.checknum == int(checknum):
             print checknum_timeout(check.checknum_time)
             if checknum_timeout(check.checknum_time):
-                User.register_first(g.db, email, password, phonenum)
                 return jsonify(status="success")
             return jsonify(status="checknum_timeout")
 
@@ -88,6 +87,9 @@ def register_first():
 def register_second():
     if request.method == "POST":
         data = request.form
+        email = data["email"]
+        password = set_password_salt(data["password"])
+        phonenum = data["phonenum"]
         phone = data.get("phonenum")
         username = data.get("username")
         university_id = data.get("universityid")
@@ -109,13 +111,15 @@ def register_second():
             major_name = MajorChina.get_major_china(g.db, major_id).major_name
         gpa = data["gpa"]
         create_time = time()
-        User.register_second(g.db, phone, username, university_name, major_name,
+        User.register_second(g.db, email,password,phone,
+                             username, university_name, major_name,
                              gpa, user_type, create_time)
         user = User.get_user_info_by_phone(g.db, phone)
         user_id = user.id
         session["user_id"] = user_id
         User.update_user_pic(g.db,user_id,
-                             """http://www.ufindoffer.com/images/unimg/head/%E6%97%A0%E6%80%A7%E5%88%AB/9.jpg""")
+                             """http://www.ufindoffer.com/images/unimg/head/%E6%97%A0%E6%80%A7%E5%88%AB/"""+
+                             randint(1,17)+""".jpg""")
         return jsonify(status="success",
                        cookie=set_sign_safe(str(user_id)))
     return jsonify(status="false")
