@@ -87,6 +87,7 @@ def register_first():
 def register_second():
     if request.method == "POST":
         data = request.form
+        print data
         email = data["email"]
         password = set_password_salt(data["password"])
         phonenum = data["phonenum"]
@@ -119,7 +120,7 @@ def register_second():
         session["user_id"] = user_id
         User.update_user_pic(g.db,user_id,
                              """http://www.ufindoffer.com/images/unimg/head/%E6%97%A0%E6%80%A7%E5%88%AB/"""+
-                             randint(1,17)+""".jpg""")
+                             str(randint(1,17))+""".jpg""")
         return jsonify(status="success",
                        cookie=set_sign_safe(str(user_id)))
     return jsonify(status="false")
