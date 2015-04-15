@@ -323,23 +323,23 @@ def get_user_in_university():
                                 get_compare_score(GMAT_to,GMAT_form,user.GMAT):
 
                             student_list.append(row.user_id)
-            elif faculty_id == "":
-                student_list = []
-                for row in Offer.get_user_id_from_university(g.db,
+        else:
+            student_list = []
+            for row in Offer.get_user_id_from_university(g.db,
                                                         university_id,
                                                         major_id,
                                                         user_type,
                                                         grade):
-                    user = User.get_user_info(g.db,row.user_id)
-                    if user:
+                user = User.get_user_info(g.db,row.user_id)
+                if user:
 
-                        if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                    if get_compare_score(GPA_to,GPA_form,user.GPA) and \
                                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
                                 get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
                                 get_compare_score(GRE_to,GRE_form,user.GRE) and \
                                 get_compare_score(GMAT_to,GMAT_form,user.GMAT):
 
-                            student_list.append(row.user_id)
+                        student_list.append(row.user_id)
             student = dict()
             student["studentlist"] = list(set(student_list))
             page = len(student_list) / 15
