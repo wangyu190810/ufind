@@ -61,7 +61,7 @@ class Offer(Base):
         return connection.query(Offer). \
             filter(Offer.university_id == unviersity_id). \
             filter(Offer.major_id == major_id).\
-            filter(Offer.user_type == user_type).limit(2)
+            filter(Offer.user_type == user_type).limit(6)
 
     @classmethod
     def get_offer_student_info(cls, connection, student_id):
@@ -115,9 +115,9 @@ class Offer(Base):
         if user_type is not None:
             return connection.query(Offer).\
                 filter(Offer.major_id == major_id).\
-                filter(Offer.user_type == user_type).limit(2)
+                filter(Offer.user_type == user_type).limit(6)
         return connection.query(Offer).\
-            filter(Offer.major_id == major_id).limit(2)
+            filter(Offer.major_id == major_id).limit(6)
 
     @classmethod
     def get_site_offer_num(cls,connection,user_type=None):
