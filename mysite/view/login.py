@@ -36,7 +36,7 @@ def login():
         return jsonify(
             student=student,
             status="success",
-            cookie=set_sign_safe(str(user.id)))
+            cookie=str(user.id))
     elif User.get_user_exist(g.db,email=login_email,phone=login_phone):
         return jsonify(status="password_error")
     return jsonify(status="user_not_exist")
@@ -122,7 +122,7 @@ def register_second():
                              """http://www.ufindoffer.com/images/unimg/head/%E6%97%A0%E6%80%A7%E5%88%AB/"""+
                              str(randint(1,17))+""".jpg""")
         return jsonify(status="success",
-                       cookie=set_sign_safe(str(user_id)))
+                       cookie=str(user_id))
     return jsonify(status="false")
 
 
