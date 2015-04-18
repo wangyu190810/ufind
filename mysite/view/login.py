@@ -44,7 +44,10 @@ def login():
 
 @allow_cross_domain
 def login_from_cookie():
+    print request.method
+    print request.form
     if request.method == "GET":
+
         user_id = session.get("user_id")
         print user_id
         print session
