@@ -47,6 +47,7 @@ def login_from_cookie():
     if request.method == "GET":
         user_id = session.get("user_id")
         print user_id
+        print session
         user = User.get_user_info(g.db, user_id)
         if user is not None:
             session["user_id"] = user.id
