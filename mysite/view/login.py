@@ -27,7 +27,9 @@ def login():
                            phone=login_phone, password=password)
 
     if user is not None:
+        print session
         session["user_id"] = user.id
+        print session
         student = dict()
         student["studentid"] = user.id
         student["studentname"] = user.username
