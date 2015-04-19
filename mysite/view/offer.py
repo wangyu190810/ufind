@@ -43,10 +43,14 @@ def set_offer():
                 break
             num += 1
             id_major = None
+            print offer_major_name
             if offer_major_name:
+                print offer_major_name
                 major_key = MajorKye.get_main_major(g.db,offer_major_name)
+                print major_key
                 if major_key:
                     faculty_id = Faculty.get_faultu_from_name(g.db,major_key.Main_Major)
+                    print faculty_id
                     if faculty_id:
                         id_major = Major.add_major(g.db,name=offer_major_name,
                                         main_major=faculty_id.name,
