@@ -30,5 +30,8 @@ class Faculty(Base):
         return connection.query(Faculty).limit(6)
 
 
+    @classmethod
+    def get_faultu_from_name(cls,connection,key):
+        return connection.query(Faculty).filter(Faculty.name == key).scalar()
 
 

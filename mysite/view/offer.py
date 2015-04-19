@@ -15,6 +15,8 @@ from mysite.view.base import allow_cross_domain,get_university_img,\
 from mysite.model.user import User
 from mysite.model.major import Major
 from mysite.model.state import State
+from mysite.model.user_major import MajorKye
+from mysite.model.faculty import Faculty
 
 @validate_user_login
 def set_offer():
@@ -32,16 +34,36 @@ def set_offer():
             offer_major_id = data.get("offers["+str(num)+"][majorid]")
             offer_grade = data.get("offers["+str(num)+"][grade]","Bachelor")
             offer_university_id = data.get("offers["+str(num)+"][universityid]")
+            offer_major_name = data.get("offers["+str(num)+"][major_name]")
             offer_type = data.get("offers["+str(num)+"][offertype]")
             scholarship_type = data.get("offers["+str(num)+"][scholarship][type]")
             scholarship_money = data.get("offers["+str(num)+"][scholarship][money]")
+
             if offer_major_id is None:
                 break
             num += 1
+            id_major = None
+            if offer_major_name:
+                major_key = MajorKye.get_main_major(g.db,offer_major_name)
+                if major_key:
+                    faculty_id = Faculty.get_faultu_from_name(g.db,major_key.Main_Major)
+                    if faculty_id:
+                        id_major = Major.add_major(g.db,name=offer_major_name,
+                                        main_major=faculty_id.name,
+                                        university_id=offer_university_id,
+                                        faculty_id=faculty_id.id,
+                                        )
+
+
+
             User.update_user_grade(g.db,user_id=user_id,grade=offer_grade)
             Offer.del_same_offer(g.db,university_id=offer_university_id,
                                 major_id =offer_major_id,user_id=user_id)
-            major_id = Major.get_major_info_by_id_scalar(g.db,offer_major_id)
+            if id_major:
+                major_id = Major.get_major_info_by_id_scalar(g.db,id_major)
+                offer_major_id = id_major
+            else:
+                major_id = Major.get_major_info_by_id_scalar(g.db,offer_major_id)
             school1_id = 0
             school2_id = 0
             school3_id = 0

@@ -3,7 +3,7 @@ __author__ = ''
 from sqlalchemy.schema import Table, Column
 from sqlalchemy.types import Integer, Unicode, Float
 from sqlalchemy.sql import select
-
+from sqlalchemy import func
 from datetime import datetime
 
 from base import metadata, Base
@@ -20,8 +20,18 @@ class Major(Base):
     School2_ID = Column(Integer)
     School3_ID = Column(Integer)
     major_type = Column(Integer,doc=u"专业类型，1为本科生，2为研究生，3为博士生，0为不分级别")
+    major_user_type = Column(Integer,doc=u"默认为零。用户填写的数据为1")
     introduction = Column(Unicode(225))
 
+
+    @classmethod
+    def add_major(cls,connection,name,main_major,university_id,faculty_id,
+                  major_type):
+        major = Major(name=name,main_major=main_major,university_id=university_id,
+                      faculty_id=faculty_id,major_type=major_type,major_user_type=1)
+        connection.add(major)
+        connection.commit()
+        return connection.query(func.max(Major.id))
 
     @classmethod
     def search_maior(cls, connection, searchname, university_id=None,major_type=None):
