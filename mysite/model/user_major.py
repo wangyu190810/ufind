@@ -13,7 +13,7 @@ class MajorKye(Base):
     """专业"""
     __tablename__ = "major_key"
     Main_Major = Column(Unicode(255))
-    Key_Word = Column(Unicode(255))
+    Key_Word = Column(Unicode(255),primary_key=True)
 
     @classmethod
     def get_main_major(cls,connection,key):
