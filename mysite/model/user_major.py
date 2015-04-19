@@ -11,7 +11,7 @@ from base import metadata, Base
 
 class MajorKye(Base):
     """专业"""
-    __tablename__ = "main_major_key"
+    __tablename__ = "major_key"
     Main_Major = Column(Unicode(255))
     Key_Word = Column(Unicode(255))
 
