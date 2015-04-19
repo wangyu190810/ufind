@@ -20,6 +20,7 @@ from mysite.model.state import State
 def set_offer():
     if request.method == "POST":
         data = request.form
+        print data
         user_id = session["user_id"]
         user = User.get_user_info(g.db,user_id)
         user_type = None
