@@ -39,7 +39,7 @@ def set_offer():
             scholarship_type = data.get("offers["+str(num)+"][scholarship][type]")
             scholarship_money = data.get("offers["+str(num)+"][scholarship][money]")
 
-            if offer_major_id is None:
+            if offer_university_id is None:
                 break
             num += 1
             id_major = None
@@ -57,7 +57,6 @@ def set_offer():
                                         university_id=offer_university_id,
                                         faculty_id=faculty_id.id,
                                         )
-
 
 
             User.update_user_grade(g.db,user_id=user_id,grade=offer_grade)
