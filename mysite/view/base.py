@@ -1,3 +1,4 @@
+# -*-coding:utf-8-*-
 __author__ = 'wangyu'
 from flask import session
 from functools import wraps
