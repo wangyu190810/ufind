@@ -11,6 +11,7 @@ from mysite.model.base import metadata, Base
 
 class Prize(Base):
     u"""优惠码表"""
+    __tablename__ = "paize"
     id = Column(Integer,primary_key=True,autoincrement=True)
     coupon = Column(Unicode(255),doc=u"优惠码的信息")
     account = Column(Integer,doc=u"优惠码金额")
