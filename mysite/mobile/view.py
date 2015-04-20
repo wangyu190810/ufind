@@ -29,9 +29,11 @@ def mobile_send_sms():
         phone = data.get("phone")
         sms_type = data.get("type")
         user = User.get_user_info_by_phone(g.db,phone)
+        if user:
+            return jsonify(status="user_exit")
         print user,sms_type,phone
         # 注册发送验证码
-        if (user is None and sms_type == 0) or (user is not None and sms_type is None):
+        if (user is None and sms_type == str(1)) or (user is not None and sms_type is None):
             code = sms_check(phone)
             if code:
                 User.set_sms_checknum(g.db, phone, code)

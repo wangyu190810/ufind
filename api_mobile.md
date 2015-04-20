@@ -25,6 +25,7 @@ mobile端短信验证：
     {
         "phone":"133234234234",
         "type":"1"
+        // type必须为1
     }
     output
     {
