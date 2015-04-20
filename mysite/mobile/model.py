@@ -19,7 +19,7 @@ class Prize(Base):
 
     @classmethod
     def get_random_prize(cls,connection):
-        return connection.query(func.random(Prize)).filter(Prize.user_id is None).scalar()
+        return connection.query(Prize).filter(Prize.user_id is None).order_by(func.random()).scalar()
 
     @classmethod
     def set_prize_user(cls,connection,prize_id,user_id):
