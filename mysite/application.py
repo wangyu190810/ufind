@@ -1,3 +1,4 @@
+# --coding:utf-8--
 __author__ = 'wangyu'
 from flask import Flask, g, current_app
 from sqlalchemy.orm import sessionmaker, scoped_session
