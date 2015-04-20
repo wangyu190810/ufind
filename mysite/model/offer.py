@@ -26,6 +26,7 @@ class Offer(Base):
     create_time = Column(Integer, default=lambda: time())
     user_type = Column(Integer,doc=u"用户类型")
     wechat = Column(Unicode(255),doc=u"每个offer拥有唯一的微信图片")
+    offer_status = Column(Integer,doc=u"offer是否可用来做统计,默认1可以统计,2不可统计")
 
 
     @classmethod
@@ -54,6 +55,27 @@ class Offer(Base):
                       wechat=wechat)
         connection.add(offer)
         connection.commit()
+
+    @classmethod
+    def set_offer_mobile(cls, connection, user_id,
+                            university_id, major_id,
+                            school1_id, user_type,
+                            wechat,grade,
+                            school2_id,school3_id):
+        offer = Offer(user_id=user_id,
+                      university_id=university_id,
+                      major_id=major_id,
+                      school1_id=school1_id,
+                      school2_id=school2_id,
+                      school3_id=school3_id,
+                      user_type=user_type,
+                      grade=grade,
+                      wechat=wechat,
+                      offer_status=2
+              )
+        connection.add(offer)
+        connection.commit()
+
 
     @classmethod
     def get_offer_student(cls, connection, unviersity_id, major_id, user_type):
