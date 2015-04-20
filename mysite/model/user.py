@@ -40,7 +40,7 @@ class User(Base):
     active = Column(Integer,doc=u"用户是否处于能查看自己机票信息的状态,默认可以查看为1")
     coupon = Column(Unicode(255),doc=u"用户的优惠卷")
     mobile_user = Column(Integer,doc=u"用户在手机上填写的offer,默认为0表示为web端,用户完成信息填写，自动变成1")
-
+    account = Column(Integer,doc=u"用户优惠券金额")
 
 
     @classmethod
@@ -286,6 +286,19 @@ class User(Base):
                 filter(User.phone == phone).filter(User.mobile_user==2).scalar():
             return True
         return False
+
+    @classmethod
+    def set_user_account(cls,connection,phone,coupon,account):
+        u"""用户的优惠券存储"""
+        connection.query(User).filter(User.phone == phone).\
+            update(
+                {
+                    User.coupon: coupon,
+                    User.account: account
+                }
+        )
+        connection.commit()
+
 
 
 class UserFollow(Base):

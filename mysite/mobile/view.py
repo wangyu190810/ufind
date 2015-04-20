@@ -14,7 +14,7 @@ from mysite.view.base import allow_cross_domain,sms_check,tpl_send_sms,set_unive
 from mysite.model.offer import Offer
 from mysite.model.major import Major
 from mysite.model.university import University
-
+from mysite.mobile.model import Prize
 
 
 @allow_cross_domain
@@ -107,3 +107,27 @@ def mobile_set_offer():
         return jsonify(status="success",
                        offerlist=offer_list,
                        description=User.get_user_info(g.db,user.id).description)
+
+
+@allow_cross_domain
+def get_user_prize():
+    if request.method == "POST":
+        phone = request.form.get("phone")
+        user = User.get_user_info_by_phone(g.db,phone)
+        if user:
+            if user.coupon is not None:
+                return jsonify(status="user_have_coupon")
+        prize = Prize.get_random_prize(g.db)
+        Prize.set_prize_user(g.db,prize.id,User.id)
+        User.set_user_account(g.db,phone,prize.coupon,prize.account)
+        return jsonify(status="success",
+                       count=prize.account
+                       )
+    return jsonify(status="false")
+
+
+@allow_cross_domain
+def get_user_share():
+    if request.method == "POST":
+        phone = request.form.get("phone")
+        pass

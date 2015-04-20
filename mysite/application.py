@@ -27,7 +27,7 @@ from mysite.view.user_follow import del_follow_user, set_follow_user
 from mysite.view.sub import get_sub
 from mysite.view.uploadhead import upload_file,get_random_head
 
-from mysite.mobile.view import mobile_send_sms,mobile_set_offer
+from mysite.mobile.view import mobile_send_sms,mobile_set_offer,get_user_prize
 
 from config import Config
 
@@ -152,6 +152,9 @@ app.add_url_rule("/api/mobile/send_sms",view_func=mobile_send_sms,
                  methods=["POST"])
 app.add_url_rule("/api/mobile/set_offer",view_func=mobile_set_offer,
                  methods=["POST"])
+app.add_url_rule("/api/mobile/get_prize",view_func=get_user_prize,
+                 methods=["POST"])
+
 
 @app.before_request
 def _before_request():
