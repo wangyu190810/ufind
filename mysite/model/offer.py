@@ -109,27 +109,32 @@ class Offer(Base):
         """根据学校找学生iD"""
         if major_id is None and user_type is None and grade is None:
             return connection.query(Offer). \
-                filter(Offer.university_id == university_id)
+                filter(Offer.university_id == university_id).\
+                filter(Offer.offer_status == 1)
         elif user_type is not None and major_id is None:
             return connection.query(Offer).filter(
                 Offer.university_id == university_id). \
-                filter(Offer.user_type == user_type)
+                filter(Offer.user_type == user_type).\
+                filter(Offer.offer_status == 1)
         elif user_type is not None and major_id is not None and grade is not None:
              return connection.query(Offer).filter(
             Offer.university_id == university_id). \
             filter(Offer.major_id == major_id).\
             filter(Offer.user_type == user_type).\
-                 filter(Offer.grade == grade)
+                 filter(Offer.grade == grade).filter(
+                 Offer.offer_status == 1
+             )
         elif major_id is None and grade is None and user_type is not None:
             return connection.query(Offer).filter(
                 Offer.university_id == university_id).filter(
                 Offer.user_type == user_type
-            )
+            ).filter(Offer.offer_status==1)
 
         return connection.query(Offer).filter(
             Offer.university_id == university_id). \
             filter(Offer.major_id == major_id).\
-            filter(Offer.user_type == user_type)
+            filter(Offer.user_type == user_type).\
+            filter(Offer.offer_status == 1)
 
     @classmethod
     def get_user_id_from_major(cls, connection, major_id,user_type=None):
