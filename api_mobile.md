@@ -93,7 +93,7 @@ mobile用户填写信息一次发送：
         POST
     接口地址:
         线上地址:www.ufindoffer.com/api/mobile/set_offer
-        测试地址:www.ufindoffer.com/api/mobile/set_offer
+        测试地址:test.ufindoffer.com/api/mobile/set_offer
     实例:
         POST参数:
             university_id:"12",//信息来自学校搜索接口的结果
