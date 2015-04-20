@@ -149,6 +149,16 @@ def change_password():
 
 
 @allow_cross_domain
+def check_mobile_user_phone():
+    if request.method == "POST":
+        data = request.form
+        phone = data.get("phonenum")
+        if User.get_mobile_user_phone(g.db,phone):
+            return jsonify(status="success")
+    return jsonify(status="false")
+
+
+@allow_cross_domain
 def logout():
     session.pop("user_id")
     return jsonify(status="success")

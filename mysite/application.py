@@ -17,7 +17,7 @@ from mysite.view.compare import set_compare, get_compare, get_compare_list, \
     set_compare_support
 from mysite.view.offer import set_offer, get_offer_student
 from mysite.view.login import login, logout, register_first, register_second,\
-    change_password,login_from_cookie
+    change_password,login_from_cookie,check_mobile_user_phone
 from mysite.view.message import set_message, get_message,set_message_to_gov,\
     del_message_to_user
 from mysite.view.state import get_index
@@ -122,6 +122,8 @@ app.add_url_rule("/api/register_second", view_func=register_second,
 app.add_url_rule("/api/change_password", view_func=change_password,
                  methods=["POST"])
 app.add_url_rule("/api/send_sms", view_func=send_sms,
+                 methods=["POST"])
+app.add_url_rule("/api/check_mobile_user",view_func=check_mobile_user_phone,
                  methods=["POST"])
 # app.add_url_rule("/googlefad2f2add41d5dac.html",
 

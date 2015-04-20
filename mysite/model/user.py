@@ -279,6 +279,13 @@ class User(Base):
         )
         connection.commit()
 
+    @classmethod
+    def get_mobile_user_phone(cls,connection,phone):
+        u"""查看当前手机是不是手机注册"""
+        if connection.query(User).\
+                filter(User.phone == phone).filter(User.mobile_user==2).scalar():
+            return True
+        return False
 
 
 class UserFollow(Base):

@@ -532,6 +532,20 @@
         "status":success
     }
     
-12.3 
-
+二期api
+    
+    查询手机号码是否是已经在移动端注册的。
+    方法:
+        POST
+    接口:
+        www.ufindoffer.com/api/check_mobile_user
+    input:
+        {
+            phonenum:"13812341234"
+        }
+    output:
+        {
+            status:"success"/表示是手机端注册，false表示不是手机端注册
+        }
+    
     
