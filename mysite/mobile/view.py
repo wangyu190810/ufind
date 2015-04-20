@@ -21,10 +21,13 @@ from mysite.model.university import University
 def mobile_send_sms():
     if request.method == "POST":
         data = request.form
-        cc = data.to_dict()
-        phonenum = eval(cc.keys()[0])
-        phone = phonenum["phonenum"]
-        sms_type = phonenum.get("type")
+        print data
+        # cc = data.to_dict()
+        # phonenum = eval(cc.keys()[0])
+        # phone = phonenum["phonenum"]
+        # sms_type = phonenum.get("type")
+        phone = data.get("phone")
+        sms_type = data.get("type")
         user = User.get_user_info_by_phone(g.db,phone)
         print user,sms_type,phone
         # 注册发送验证码
