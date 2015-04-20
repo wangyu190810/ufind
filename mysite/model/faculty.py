@@ -31,7 +31,7 @@ class Faculty(Base):
 
 
     @classmethod
-    def get_faultu_from_name(cls,connection,key):
+    def get_faulty_from_name(cls,connection,key):
         return connection.query(Faculty).filter(Faculty.name == key).scalar()
 
 

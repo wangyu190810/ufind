@@ -39,7 +39,7 @@ def set_offer():
             scholarship_type = data.get("offers["+str(num)+"][scholarship][type]")
             scholarship_money = data.get("offers["+str(num)+"][scholarship][money]")
 
-            if offer_university_id is None:
+            if offer_major_id is None:
                 break
             num += 1
             id_major = None
@@ -49,7 +49,7 @@ def set_offer():
                 major_key = MajorKye.get_main_major(g.db,offer_major_name)
                 print major_key
                 if major_key:
-                    faculty_id = Faculty.get_faultu_from_name(g.db,major_key.Main_Major)
+                    faculty_id = Faculty.get_faulty_from_name(g.db,major_key.Main_Major)
                     print faculty_id
                     if faculty_id:
                         id_major = Major.add_major(g.db,name=offer_major_name,
