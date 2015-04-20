@@ -4,6 +4,9 @@ from functools import wraps
 from flask import make_response, jsonify, g
 
 import time
+import urllib
+import httplib
+import json
 from random import randint
 from itsdangerous import Signer
 import hashlib
@@ -47,6 +50,35 @@ def allow_cross_domain(fun):
 
         return rst
     return wrapper_fun
+
+def tpl_send_sms(apikey, tpl_id, tpl_value, mobile):
+    """
+    模板接口发短信
+    """
+    params = urllib.urlencode({'apikey': apikey, 'tpl_id':tpl_id,
+                               'tpl_value': tpl_value, 'mobile':mobile})
+    headers = {"Content-type": "application/x-www-form-urlencoded",
+               "Accept": "text/plain"}
+    conn = httplib.HTTPConnection(Config.yunpian.get("host"),
+                                  port=Config.yunpian.get("post"), timeout=30)
+    conn.request("POST", Config. yunpian.get("sms_tpl_send_uri"), params, headers)
+    response = conn.getresponse()
+    response_str = response.read()
+    conn.close()
+    return response_str
+
+
+def sms_check(phone):
+    u"""手机验证是否符合规范"""
+    if len(phone) == 11 and phone[:2] in ["13", "15", "17", "18"]:
+        code = randint(1000, 9999)
+        company = "游必有方"
+        tpl_value = "#code#="+str(code)+"&#company#="+company
+        result = tpl_send_sms(Config.apikey, 1, tpl_value, phone)
+        code_num = json.loads(result)["code"]
+        if code_num == 0:
+            return code
+    return False
 
 
 def get_university_img(universityname, num,shape):

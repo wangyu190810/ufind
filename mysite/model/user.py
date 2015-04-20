@@ -36,6 +36,11 @@ class User(Base):
     description = Column(Unicode(255), doc=u"描述")
     bginf = Column(Unicode(255), doc=u"背景信息")
     create_time = Column(Integer,doc=u"注册时间")
+    source = Column(Integer,doc=u"用户的来源默认为来源web标示为1，来源Android标示为2")
+    active = Column(Integer,doc=u"用户是否处于能查看自己机票信息的状态,默认可以查看为1")
+    coupon = Column(Unicode(255),doc=u"用户的优惠卷")
+    mobile_user = Column(Integer,doc=u"用户在手机上填写的offer,默认为1标示为web端,用户完成信息填写，自动变成1")
+
 
 
     @classmethod
@@ -116,6 +121,18 @@ class User(Base):
                  User.checknum_time: time.time()}
             )
             connection.commit()
+
+    @classmethod
+    def set_mobile_sms(cls,connection,phone,checknum):
+        u"""手机端注册"""
+        user = User(phone=phone,
+             checknum=checknum,
+             checknum_time=time.time(),
+             source=2,
+             active=2,
+             mobile_user =2)
+        connection.add(user)
+        connection.commit()
 
     @classmethod
     def get_user_name(cls, connection, user_id):
