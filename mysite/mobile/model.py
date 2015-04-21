@@ -19,7 +19,9 @@ class Prize(Base):
 
     @classmethod
     def get_random_prize(cls,connection):
-        return connection.query(Prize).filter(Prize.user_id.is_(None)).scalar()
+        return connection.query(Prize).\
+            filter(Prize.user_id.is_(None)).\
+            filter(Prize.account < 80).scalar()
 
     @classmethod
     def set_prize_user(cls,connection,prize_id,user_id):
