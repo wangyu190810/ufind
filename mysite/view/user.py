@@ -218,6 +218,11 @@ def get_user_detail_info():
         GMATmore["total"] = user.GMAT
         if GMATmore.get("V") != 0:
             student_info["GMATmore"] = GMATmore
+        coupons = dict()
+        if user.active == 1:
+            coupons["code"] = user.coupon
+            coupons["account"] = user.account
+        student_info["coupons"] = coupons
 
         return json.dumps(student_info)
 
@@ -714,7 +719,7 @@ def update_user_info():
                                     GMAT_aw=GMATmoreAW,
                                     GMAT_ir=GMATmoreIR
                                     )
-
+        User.set_user_active(g.db,user_id)
         return jsonify(status="success")
     return jsonify(status="false")
 

@@ -298,6 +298,15 @@ class User(Base):
                 }
         )
         connection.commit()
+    @classmethod
+    def set_user_active(cls,connection,user_id):
+        u"""用户的优惠码查看变更"""
+        connection.query(User).filter(User.id == user_id).update(
+            {
+                User.active: 1
+            }
+        )
+        connection.commit()
 
 
 

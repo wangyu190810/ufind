@@ -187,5 +187,6 @@ def set_user_score():
                                     GMAT_aw=GMATmoreAW,
                                     GMAT_ir=GMATmoreIR
                 )
+        User.set_user_active(g.db,user_id)
         return jsonify(status="success")
 
