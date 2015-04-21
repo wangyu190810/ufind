@@ -120,6 +120,7 @@ def get_user_prize():
         for row in Prize.get_random_prize(g.db):
             prize = row
         print type(prize)
+        print prize.id
         if prize is None:
             return jsonify(status="success",
                        acount=None
