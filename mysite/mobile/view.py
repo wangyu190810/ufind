@@ -140,6 +140,9 @@ def get_user_share():
         if user:
             print "user"
             if Prize.get_share_prize(g.db,user.id):
+                prize_user = Prize.get_user_prize(g.db,user_id=user.id)
+                User.set_user_account(g.db,phone,prize_user.coupon,prize_user.account)
+
                 return jsonify(status="success")
     return jsonify(status="false")
 

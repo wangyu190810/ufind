@@ -25,11 +25,15 @@ class Prize(Base):
             filter(Prize.account < 80).limit(1).scalar()
 
     @classmethod
+    def get_user_prize(cls,connection,user_id):
+        return connection.query(Prize).filter(Prize.user_id == user_id).scalar()
+
+    @classmethod
     def set_prize_user(cls,connection,prize_id,user_id):
         connection.query(Prize).\
             filter(Prize.id == prize_id).update(
             {
-                Prize.user_id:user_id
+                Prize.user_id: user_id
             }
         )
         connection.commit()
