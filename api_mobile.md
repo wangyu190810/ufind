@@ -127,6 +127,45 @@ mobile用户填写信息一次发送：
                 "status": "success"
             }
 
+mobile用户抽奖：
+
+    方法:
+        POST
+    接口地址:
+        线上地址:www.ufindoffer.com/api/mobile/get_prize
+        测试地址:test.ufindoffer.com/api/mobile/get_prize
+    实例：
+        POST参数：
+        {
+            phone:"13812341234"
+        }
+    返回信息抽奖成功:
+        {
+            status="success",
+            acount=10
+        }
+    用户重复抽奖:
+        {
+            status="user_have_coupon"
+        }
+    
+
+mobile用户分享:
+    
+    方法:
+        POST
+    接口地址:
+        线上地址:www.ufindoffer.com/api/mobile/share_prize
+        测试地址:test.ufindoffer.com/api/mobile/share_prize
+    实例：
+        POST参数：
+        {
+            phone:"13812341234"
+        }
+    返回信息:
+        {
+            status="success",
+        }
 
         
         
