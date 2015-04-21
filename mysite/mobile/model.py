@@ -16,6 +16,7 @@ class Prize(Base):
     coupon = Column(Unicode(255),doc=u"优惠码的信息")
     account = Column(Integer,doc=u"优惠码金额")
     user_id = Column(Integer,doc=u"分配给某些用户")
+    share = Column(Integer,doc=u"是否分享，默认为0，没有分享")
 
     @classmethod
     def get_random_prize(cls,connection):
@@ -35,7 +36,8 @@ class Prize(Base):
 
     @classmethod
     def get_share_prize(cls,connection,user_id):
-        prize = connection.query(Prize).filter(Prize.user_id == user_id).scalar()
+        prize = connection.query(Prize).filter(Prize.user_id == user_id).\
+            filter(Prize.share == 0).scalar()
         if prize:
             account = prize.account
             connection.query(Prize).filter(Prize.id == prize.id).update(
@@ -49,7 +51,8 @@ class Prize(Base):
                 filter(Prize.user_id.is_(None)).limit(1).scalar()
             connection.query(Prize).filter(Prize.id == new_prize.id).update(
                 {
-                    Prize.user_id:user_id
+                    Prize.user_id:user_id,
+                    Prize.share:1
                 }
             )
             connection.commit()
