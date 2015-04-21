@@ -29,3 +29,27 @@ class Prize(Base):
                 Prize.user_id:user_id
             }
         )
+        connection.commit()
+
+    @classmethod
+    def get_share_prize(cls,connection,user_id):
+        prize = connection.query(Prize).filter(Prize.user_id == user_id).scalar()
+        if prize:
+            account = prize.account
+            connection.query(Prize).filter(Prize.id == prize.id).update(
+                {
+                    Prize.user_id: None
+                }
+            )
+            connection.commit()
+            new_prize = connection.query(Prize).\
+                filter(Prize.account == account + 10).\
+                filter(Prize.user_id.is_(None)).limit(1).scalar()
+            connection.query(Prize).filter(Prize.id == new_prize.id).update(
+                {
+                    Prize.user_id:user_id
+                }
+            )
+            connection.commit()
+            return True
+        return False
