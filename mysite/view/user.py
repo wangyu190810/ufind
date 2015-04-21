@@ -219,9 +219,15 @@ def get_user_detail_info():
         if GMATmore.get("V") != 0:
             student_info["GMATmore"] = GMATmore
         coupons = dict()
-        if user.active == 1:
+        if user.active == 1 and user.account is not None:
             coupons["code"] = user.coupon
             coupons["account"] = user.account
+        elif user.active != 1:
+            coupons["code"] = None
+            coupons["account"] = user.account
+        else:
+            coupons["code"] = None
+            coupons["account"] = None
         student_info["coupons"] = coupons
 
         return json.dumps(student_info)
