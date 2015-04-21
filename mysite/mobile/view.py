@@ -122,7 +122,6 @@ def get_user_prize():
             return jsonify(status="success",
                        acount=None
                        )
-
         Prize.set_prize_user(g.db,prize.id,user.id)
         User.set_user_account(g.db,phone,prize.coupon,prize.account)
 
