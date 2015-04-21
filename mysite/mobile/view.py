@@ -135,4 +135,11 @@ def get_user_prize():
 def get_user_share():
     if request.method == "POST":
         phone = request.form.get("phone")
-        pass
+        share_type = request.form.get("share")
+        user = User.get_user_info_by_phone(g.db,phone)
+        if user:
+            if Prize.get_share_prize(g.db,user.id):
+                return jsonify(status="success")
+    return jsonify(status="false")
+
+
