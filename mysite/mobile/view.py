@@ -117,10 +117,7 @@ def get_user_prize():
         if user:
             if user.coupon is not None:
                 return jsonify(status="user_have_coupon")
-        for row in Prize.get_random_prize(g.db):
-            prize = row
-        print type(prize)
-        print prize.id
+        prize = Prize.get_random_prize(g.db)
         if prize is None:
             return jsonify(status="success",
                        acount=None
