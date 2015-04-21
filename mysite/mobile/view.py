@@ -108,6 +108,21 @@ def mobile_set_offer():
                        offerlist=offer_list,
                        description=User.get_user_info(g.db,user.id).description)
 
+@allow_cross_domain
+def get_mobile_user_info():
+    u"""获取用户的信息"""
+    if request.method == "GET":
+        phone = request.form.get("phone")
+        user = User.get_user_info_by_phone(g.db,phone)
+        user_info = dict()
+        if user:
+            user_info["user_type"] = user.type
+            user_info["grade"] = user.grade
+            user_info["phone"] = user.phone
+        return jsonify(status="success",
+                       user_info=user_info)
+    return jsonify(status="false")
+
 
 @allow_cross_domain
 def get_user_prize():

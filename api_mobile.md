@@ -164,8 +164,25 @@ mobile用户分享:
         }
     返回信息:
         {
-            status="success",
+            status:"success",
         }
 
-        
+mobile用户信息回填
+    
+    方式:
+        POST
+    接口地址:
+        线上地址:www.ufindoffer.com/api/mobile/user_info
+        测试地址:test.ufindoffer.com/api/mobile/user_info
+    返回数据:
+    {
+        "status":"success",
+        "user_info":{
+             user_type:"1",
+             phone:"13812341234",
+             grade:"Master"
+            }
+    
+    }
+    
         
