@@ -177,8 +177,9 @@ def get_mobile_search_university():
                 university["logo"] = get_university_logo(row.name)
                 universitylist.append(university)
                 university = {}
-            return jsonify(namelist=universitylist,
-                           stattus="success")
+            university_jsonp = {"namelist":universitylist}
+            university["status"] = "success"
+            return json.dumps(university_jsonp)
         else:
             for row in University.search_university(g.db,searchname,stateid):
                 university["name"] = row.name
@@ -187,8 +188,9 @@ def get_mobile_search_university():
                 university["logo"] = get_university_logo(row.name)
                 universitylist.append(university)
                 university = {}
-            return jsonify(namelist=universitylist,
-                           stattus="success")
+            university_jsonp = {"namelist":universitylist}
+            university["status"] = "success"
+            return json.dumps(university_jsonp)
 
 
 @jsonp
