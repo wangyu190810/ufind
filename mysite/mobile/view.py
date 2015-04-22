@@ -163,7 +163,7 @@ def get_user_share():
     return jsonify(status="false")
 
 @jsonp
-def get_search_university():
+def get_mobile_search_university():
     if request.method == "GET":
         searchname, stateid = map(request.args.get,("searchname","stateid"))
         universitylist = []
@@ -192,7 +192,7 @@ def get_search_university():
 
 
 @jsonp
-def search_major():
+def get_mobile_search_major():
     """专业搜索"""
     if request.method == "GET":
         major_list = []

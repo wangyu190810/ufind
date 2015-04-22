@@ -43,11 +43,11 @@ mobile学校搜索接口调用:
     方法：
         GET
     接口地址
-        线上地址:www.ufindoffer.com/api/search_university
-        测试地址:test.ufindoffer.com/api/search_university
+        线上地址:www.ufindoffer.com/api/mobile/search_university
+        测试地址:test.ufindoffer.com/api/mobile/search_university
         
     实例：
-        www.ufindoffer.com/api/search_university?searchname=MIT
+        www.ufindoffer.com/api/mobile/search_university?searchname=MIT
         返回数据：
         {
          "namelist": [
@@ -70,10 +70,10 @@ moblie专业接口调用:
     方法:
         GET
     接口地址
-        线上地址:www.ufindoffer.com/api/search_major
-        测试地址:test.ufindoffer.com/api/search_major
+        线上地址:www.ufindoffer.com/api/mobile/search_major
+        测试地址:test.ufindoffer.com/api/mobile/search_major
     实例:
-        www.ufindoffer.com/api/search_major?searchname=EE&universityid=1
+        www.ufindoffer.com/api/mobile/search_major?searchname=EE&universityid=1
         
     返回数据：
         {"namelist": [

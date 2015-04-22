@@ -28,7 +28,8 @@ from mysite.view.sub import get_sub
 from mysite.view.uploadhead import upload_file,get_random_head
 
 from mysite.mobile.view import mobile_send_sms,mobile_set_offer,get_user_prize,\
-    get_user_share,get_mobile_user_info
+    get_user_share,get_mobile_user_info,get_mobile_search_major,\
+    get_mobile_search_university
 
 from config import Config
 
@@ -159,6 +160,11 @@ app.add_url_rule("/api/mobile/share_prize",view_func=get_user_share,
                  methods=["POST"])
 app.add_url_rule("/api/mobile/user_info",view_func=get_mobile_user_info,
                  methods=["GET"])
+app.add_url_rule("/api/mobile/search_major",view_func=get_mobile_search_major,
+                 methods=["GET"])
+app.add_url_rule("/api/mobile/search_university",view_func=get_mobile_search_university,
+                 methods=["GET"])
+
 
 @app.before_request
 def _before_request():
