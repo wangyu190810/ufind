@@ -209,7 +209,7 @@ def get_mobile_search_major():
         searchname,university_id,callback = map(request.args.get,
                                        ("searchname", "universityid","jsoncallback"))
 
-        print request.form
+        print request.args
         if university_id is None:
             for row in Major.search_maior(g.db, searchname):
                 major["name"] = row.name
