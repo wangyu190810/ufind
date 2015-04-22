@@ -40,8 +40,8 @@ def jsonp(func):
     return decorated_function
 
 
-def jsoncallback(jsonp_content):
-    return "123("+str(jsonp_content)+");"
+def jsoncallback(jsonp_content,callback):
+    return callback+"("+str(jsonp_content)+");"
 
 
 def login_user_info(func):
