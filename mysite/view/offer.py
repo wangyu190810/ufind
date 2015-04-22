@@ -39,7 +39,7 @@ def set_offer():
             scholarship_type = data.get("offers["+str(num)+"][scholarship][type]")
             scholarship_money = data.get("offers["+str(num)+"][scholarship][money]")
 
-            if offer_major_id is None:
+            if offer_university_id is None:
                 break
             num += 1
             id_major = None
