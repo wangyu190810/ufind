@@ -167,7 +167,7 @@ def get_user_share():
 def get_mobile_search_university():
     if request.method == "GET":
         print request.data
-        searchname, stateid = map(request.args.get,("searchname","stateid"))
+        searchname, stateid,callback = map(request.args.get,("searchname","stateid","jsoncallback"))
         universitylist = []
         university = {}
         if stateid is None:
@@ -181,7 +181,7 @@ def get_mobile_search_university():
                 university = {}
             university_jsonp = {"namelist":universitylist}
             university["status"] = "success"
-            return jsoncallback(json.dumps(university_jsonp))
+            return jsoncallback(json.dumps(university_jsonp),callback)
         else:
             for row in University.search_university(g.db,searchname,stateid):
                 university["name"] = row.name
@@ -192,7 +192,7 @@ def get_mobile_search_university():
                 university = {}
             university_jsonp = {"namelist":universitylist}
             university["status"] = "success"
-            return jsoncallback(json.dumps(university_jsonp))
+            return jsoncallback(json.dumps(university_jsonp),callback)
 
 
 @jsonp
@@ -206,8 +206,8 @@ def get_mobile_search_major():
         major_type = None
         if user:
             major_type = user.type
-        searchname,university_id = map(request.args.get,
-                                       ("searchname", "universityid"))
+        searchname,university_id,callback = map(request.args.get,
+                                       ("searchname", "universityid","jsoncallback"))
 
         if university_id is None:
             for row in Major.search_maior(g.db, searchname):
@@ -217,7 +217,7 @@ def get_mobile_search_major():
                 major_list.append(major)
                 major = {}
             return jsoncallback(jsonify(namelist=major_list,
-                           status="success"))
+                           status="success"),callback)
         else:
             for row in Major.search_maior(g.db, searchname, university_id,major_type):
                 major["name"] = row.name
@@ -226,4 +226,4 @@ def get_mobile_search_major():
                 major_list.append(major)
                 major = {}
             return jsoncallback(jsonify(namelist=major_list,
-                           status="success"))
+                           status="success"),callback)
