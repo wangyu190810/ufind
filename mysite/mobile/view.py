@@ -219,7 +219,7 @@ def get_mobile_search_major():
             return jsoncallback(jsonify(namelist=major_list,
                            status="success"),callback)
         else:
-            for row in Major.search_maior(g.db, searchname, university_id,major_type):
+            for row in Major.search_maior(g.db, searchname, university_id):
                 major["name"] = row.name
                 major["chiname"] = row.chiname
                 major["id"] = row.id
