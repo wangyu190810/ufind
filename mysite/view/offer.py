@@ -58,6 +58,7 @@ def set_offer():
             id_major = Major.add_major(g.db,name=offer_major_name,
                                         main_major=name,
                                         university_id=offer_university_id,
+                                        major_type=user.type,
                                         faculty_id=faculty_id,
                                 )
 
