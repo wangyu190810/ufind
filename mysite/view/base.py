@@ -41,7 +41,7 @@ def jsonp(func):
 
 
 def jsoncallback(jsonp_content):
-    return "jsoncallback("+str(jsonp_content)+");"
+    return "123("+str(jsonp_content)+");"
 
 
 def login_user_info(func):

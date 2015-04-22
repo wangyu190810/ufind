@@ -32,15 +32,15 @@ def mobile_send_sms():
         sms_type = data.get("type")
         user = User.get_user_info_by_phone(g.db,phone)
         if user:
-            return jsonify(status="user_exit")
+            return jsoncallback(jsonify(status="user_exit"))
         print user,sms_type,phone
         # 注册发送验证码
         if (user is None and sms_type == str(1)) or (user is not None and sms_type is None):
             code = sms_check(phone)
             if code:
                 User.set_sms_checknum(g.db, phone, code)
-                return jsonify(status="success")
-        return jsonify(status="false")
+                return jsoncallback(jsonify(status="success"))
+        return jsoncallback(jsonify(status="false"))
 
 
 @jsonp
@@ -61,9 +61,9 @@ def mobile_set_offer():
                 User.set_mobile_user_grade(g.db,phone,grade)
                 user = User.get_user_info_by_phone(g.db,phone)
             else:
-                return jsonify(status="check_num_error")
+                return jsoncallback(jsonify(status="check_num_error"))
         else:
-            return jsonify(status="please_send_sms")
+            return jsoncallback(jsonify(status="please_send_sms"))
 
         major_id = Major.get_major_info_by_id_scalar(g.db,major_id)
         school1_id = 0
@@ -106,9 +106,9 @@ def mobile_set_offer():
                 if row_user.university_id not in checkList:
                     offer_list.append(offer_dict)
                     checkList.append(row_user.university_id)
-        return jsonify(status="success",
+        return jsoncallback(jsonify(status="success",
                        offerlist=offer_list,
-                       description=User.get_user_info(g.db,user.id).description)
+                       description=User.get_user_info(g.db,user.id).description))
 
 @jsonp
 def get_mobile_user_info():
@@ -121,9 +121,9 @@ def get_mobile_user_info():
             user_info["user_type"] = user.type
             user_info["grade"] = user.grade
             user_info["phone"] = user.phone
-        return jsonify(status="success",
-                       user_info=user_info)
-    return jsonify(status="false")
+        return jsoncallback(jsonify(status="success",
+                       user_info=user_info))
+    return jsoncallback(jsonify(status="false"))
 
 
 @jsonp
@@ -133,19 +133,19 @@ def get_user_prize():
         user = User.get_user_info_by_phone(g.db,phone)
         if user:
             if user.coupon is not None:
-                return jsonify(status="user_have_coupon")
+                return jsoncallback(jsonify(status="user_have_coupon"))
         prize = Prize.get_random_prize(g.db)
         if prize is None:
-            return jsonify(status="success",
+            return jsoncallback(jsonify(status="success",
                        acount=None
-                       )
+                       ))
         Prize.set_prize_user(g.db,prize.id,user.id)
         User.set_user_account(g.db,phone,prize.coupon,prize.account)
 
-        return jsonify(status="success",
+        return jsoncallback(jsonify(status="success",
                        acount=prize.account
-                       )
-    return jsonify(status="false")
+                       ))
+    return jsoncallback(jsonify(status="false"))
 
 
 @jsonp
@@ -160,12 +160,13 @@ def get_user_share():
                 prize_user = Prize.get_user_prize(g.db,user_id=user.id)
                 User.set_user_account(g.db,phone,prize_user.coupon,prize_user.account)
 
-                return jsonify(status="success")
-    return jsonify(status="false")
+                return jsoncallback(jsonify(status="success"))
+    return jsoncallback(jsonify(status="false"))
 
 @jsonp
 def get_mobile_search_university():
     if request.method == "GET":
+        print request.data
         searchname, stateid = map(request.args.get,("searchname","stateid"))
         universitylist = []
         university = {}
@@ -215,8 +216,8 @@ def get_mobile_search_major():
                 major["id"] = row.id
                 major_list.append(major)
                 major = {}
-            return jsonify(namelist=major_list,
-                           status="success")
+            return jsoncallback(jsonify(namelist=major_list,
+                           status="success"))
         else:
             for row in Major.search_maior(g.db, searchname, university_id,major_type):
                 major["name"] = row.name
@@ -224,5 +225,5 @@ def get_mobile_search_major():
                 major["id"] = row.id
                 major_list.append(major)
                 major = {}
-            return jsonify(namelist=major_list,
-                           status="success")
+            return jsoncallback(jsonify(namelist=major_list,
+                           status="success"))
