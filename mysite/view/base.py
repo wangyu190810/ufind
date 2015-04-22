@@ -40,6 +40,10 @@ def jsonp(func):
     return decorated_function
 
 
+def jsoncallback(jsonp_content):
+    return "jsoncallback("+str(jsonp_content)+");"
+
+
 def login_user_info(func):
     @wraps(func)
     def _login_user_info(*args, **kwargs):

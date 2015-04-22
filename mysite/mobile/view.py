@@ -11,7 +11,8 @@ from config import Config
 
 from mysite.model.user import User
 from mysite.view.base import allow_cross_domain,sms_check,\
-    tpl_send_sms,set_university_offer_wechat,get_university_logo,jsonp
+    tpl_send_sms,set_university_offer_wechat,get_university_logo,jsonp,\
+    jsoncallback
 from mysite.model.offer import Offer
 from mysite.model.major import Major
 from mysite.model.university import University
@@ -179,7 +180,7 @@ def get_mobile_search_university():
                 university = {}
             university_jsonp = {"namelist":universitylist}
             university["status"] = "success"
-            return json.dumps(university_jsonp)
+            return jsoncallback(json.dumps(university_jsonp))
         else:
             for row in University.search_university(g.db,searchname,stateid):
                 university["name"] = row.name
@@ -190,7 +191,7 @@ def get_mobile_search_university():
                 university = {}
             university_jsonp = {"namelist":universitylist}
             university["status"] = "success"
-            return json.dumps(university_jsonp)
+            return jsoncallback(json.dumps(university_jsonp))
 
 
 @jsonp
