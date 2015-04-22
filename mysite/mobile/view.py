@@ -10,14 +10,15 @@ from flask import request, jsonify,g,session
 from config import Config
 
 from mysite.model.user import User
-from mysite.view.base import allow_cross_domain,sms_check,tpl_send_sms,set_university_offer_wechat
+from mysite.view.base import allow_cross_domain,sms_check,\
+    tpl_send_sms,set_university_offer_wechat,get_university_logo,jsonp
 from mysite.model.offer import Offer
 from mysite.model.major import Major
 from mysite.model.university import University
 from mysite.mobile.model import Prize
 
 
-@allow_cross_domain
+@jsonp
 def mobile_send_sms():
     if request.method == "POST":
         data = request.form
@@ -41,7 +42,7 @@ def mobile_send_sms():
         return jsonify(status="false")
 
 
-@allow_cross_domain
+@jsonp
 def mobile_set_offer():
     if request.method == "POST":
         data = request.form
@@ -108,7 +109,7 @@ def mobile_set_offer():
                        offerlist=offer_list,
                        description=User.get_user_info(g.db,user.id).description)
 
-@allow_cross_domain
+@jsonp
 def get_mobile_user_info():
     u"""获取用户的信息"""
     if request.method == "GET":
@@ -124,7 +125,7 @@ def get_mobile_user_info():
     return jsonify(status="false")
 
 
-@allow_cross_domain
+@jsonp
 def get_user_prize():
     if request.method == "POST":
         phone = request.form.get("phone")
@@ -146,7 +147,7 @@ def get_user_prize():
     return jsonify(status="false")
 
 
-@allow_cross_domain
+@jsonp
 def get_user_share():
     if request.method == "POST":
         phone = request.form.get("phone")
@@ -161,4 +162,64 @@ def get_user_share():
                 return jsonify(status="success")
     return jsonify(status="false")
 
+@jsonp
+def get_search_university():
+    if request.method == "GET":
+        searchname, stateid = map(request.args.get,("searchname","stateid"))
+        universitylist = []
+        university = {}
+        if stateid is None:
 
+            for row in University.search_university(g.db,searchname):
+                university["name"] = row.name
+                university["chiname"] = row.chiname
+                university["id"] = row.id
+                university["logo"] = get_university_logo(row.name)
+                universitylist.append(university)
+                university = {}
+            return jsonify(namelist=universitylist,
+                           stattus="success")
+        else:
+            for row in University.search_university(g.db,searchname,stateid):
+                university["name"] = row.name
+                university["chiname"] = row.chiname
+                university["id"] = row.id
+                university["logo"] = get_university_logo(row.name)
+                universitylist.append(university)
+                university = {}
+            return jsonify(namelist=universitylist,
+                           stattus="success")
+
+
+@jsonp
+def search_major():
+    """专业搜索"""
+    if request.method == "GET":
+        major_list = []
+        major = {}
+        user_id = session.get("user_id")
+        user = User.get_user_info(g.db,user_id)
+        major_type = None
+        if user:
+            major_type = user.type
+        searchname,university_id = map(request.args.get,
+                                       ("searchname", "universityid"))
+
+        if university_id is None:
+            for row in Major.search_maior(g.db, searchname):
+                major["name"] = row.name
+                major["chiname"] = row.chiname
+                major["id"] = row.id
+                major_list.append(major)
+                major = {}
+            return jsonify(namelist=major_list,
+                           status="success")
+        else:
+            for row in Major.search_maior(g.db, searchname, university_id,major_type):
+                major["name"] = row.name
+                major["chiname"] = row.chiname
+                major["id"] = row.id
+                major_list.append(major)
+                major = {}
+            return jsonify(namelist=major_list,
+                           status="success")

@@ -2,7 +2,8 @@
 __author__ = 'wangyu'
 from flask import session
 from functools import wraps
-from flask import make_response, jsonify, g
+from flask import make_response, jsonify, g,request, current_app
+
 
 import time
 import urllib
@@ -22,6 +23,21 @@ def validate_user_login(func):
             return func(*args, **kwargs)
         return jsonify(status="no_login")
     return _validate_user_login
+
+
+def jsonp(func):
+    """Wraps JSONified output for JSONP requests."""
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        callback = request.args.get('callback', False)
+        if callback:
+            data = str(func(*args, **kwargs).data)
+            content = str(callback) + '(' + data + ')'
+            mimetype = 'application/javascript'
+            return current_app.response_class(content, mimetype=mimetype)
+        else:
+            return func(*args, **kwargs)
+    return decorated_function
 
 
 def login_user_info(func):
