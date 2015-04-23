@@ -62,7 +62,7 @@ def mobile_set_offer():
 
         user_check = User.get_checknum(g.db,phone)
         print data,user_check.checknum
-        if user_check:
+        if user_check != "":
             if str(user_check.checknum) == check_num:
                 User.set_mobile_user_grade(g.db,phone,grade)
                 user = User.get_user_info_by_phone(g.db,phone)
