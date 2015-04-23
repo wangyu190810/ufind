@@ -61,7 +61,7 @@ def mobile_set_offer():
         check_num = data.get("check_num")
 
         user_check = User.get_checknum(g.db,phone)
-        if user_check:
+        if user_check is None:
             return json.dumps({"status": "user_not_exit"})
         print user_check
         print data,check_num
