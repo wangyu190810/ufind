@@ -14,7 +14,7 @@ from mysite.view.base import allow_cross_domain,login_user_info
 from mysite.model.state import State
 from mysite.model.offer import Offer
 from mysite.model.user import User
-
+from mysite.application import cache
 
 @allow_cross_domain
 def get_state_info():
@@ -31,6 +31,7 @@ def get_state_info():
 
 
 @allow_cross_domain
+@cache.cached(timeout=50)
 def get_index():
     if request.method == "GET":
         statelist = {}

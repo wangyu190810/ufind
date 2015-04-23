@@ -5,7 +5,12 @@
 import httplib
 import urllib
 from random import randint
+
+
+
 import json
+import time
+from datetime import timedelta
 from flask import request, jsonify,g,session
 from config import Config
 
@@ -247,3 +252,4 @@ def get_mobile_search_major():
 
 def get_mobile_prize_deadline():
     u"""活动截止时间"""
+    timedelta()

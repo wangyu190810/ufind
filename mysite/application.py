@@ -5,6 +5,9 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
 from datetime import timedelta
 
+from flask import Flask
+from flask.ext.cache import Cache
+
 from mysite.view.university import get_university, get_search_university, \
     get_university_info, get_university_list, get_state_university
 from mysite.view.major import search_major, get_major_compare,\
@@ -39,6 +42,7 @@ app.secret_key = Config.SUCCESS_KEY
 app.permanent_session_lifetime = timedelta(minutes=60*24)
 app.config["SQLALCHEMY_DATABASE_URI"] = Config.db
 
+cache = Cache(app,config={'CACHE_TYPE': 'simple'})
 
 app.sa_engine = create_engine(Config.db)
 app.DBSession = scoped_session(sessionmaker(bind=app.sa_engine))
