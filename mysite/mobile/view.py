@@ -62,6 +62,10 @@ def mobile_set_offer():
 
         user_check = User.get_checknum(g.db,phone)
         print data,user_check.checknum,check_num
+        if check_num == "":
+            print("adfasdf")
+        else:
+            type(check_num),
 
         if user_check != "":
             if str(user_check.checknum) == check_num:
