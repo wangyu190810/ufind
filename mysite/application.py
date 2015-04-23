@@ -42,8 +42,9 @@ app.secret_key = Config.SUCCESS_KEY
 app.permanent_session_lifetime = timedelta(minutes=60*24)
 app.config["SQLALCHEMY_DATABASE_URI"] = Config.db
 
-cache = Cache(app, config={'CACHE_TYPE': 'simple'})
-cache.init_app(app)
+app.cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+
+cached_view_index = app.cache.cached(timeout=10)(get_index)
 
 app.sa_engine = create_engine(Config.db)
 app.DBSession = scoped_session(sessionmaker(bind=app.sa_engine))
@@ -120,7 +121,7 @@ app.add_url_rule("/api/del_message_to_user",view_func=del_message_to_user,
 
 app.add_url_rule("/api/get_state_university", view_func=get_state_university,
                  methods=["GET"])
-app.add_url_rule("/api/index", view_func=get_index,
+app.add_url_rule("/api/index", view_func=cached_view_index,
                  methods=["GET"])
 app.add_url_rule("/api/register_first", view_func=register_first,
                  methods=["POST"])
