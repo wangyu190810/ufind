@@ -61,6 +61,8 @@ def mobile_set_offer():
         check_num = data.get("check_num")
 
         user_check = User.get_checknum(g.db,phone)
+        if user_check:
+            return json.dumps({"status": "user_not_exit"})
         print user_check
         print data,check_num
         if check_num == "":
@@ -106,7 +108,7 @@ def mobile_set_offer():
                                )
         offer_list = list()
         checkList = list()
-        for row_user in Offer.get_offer_student_info(g.db,user.id):
+        for row_user in Offer.get_offer_student_info(g.db,user_check.id):
             offer_dict = dict()
             offer_dict["universityid"] = row_user.university_id
             university_name = University.get_university_from_id(g.db,row_user.university_id)
@@ -119,7 +121,7 @@ def mobile_set_offer():
                     checkList.append(row_user.university_id)
         return json.dumps({"status":"success",
                        "offerlist":offer_list,
-                       "description":User.get_user_info(g.db,user.id).description})
+                       "description":User.get_user_info(g.db,user_check.id).description})
 
 @allow_cross_domain
 def get_mobile_user_info():
