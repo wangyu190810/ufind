@@ -313,7 +313,7 @@ class User(Base):
         u"""用户手机是否已经注册"""
         return connection.query(User).\
             filter(User.phone == phone).\
-            filter(User.name is not None).scalar()
+            filter(User.username is not None).scalar()
 
 
 
