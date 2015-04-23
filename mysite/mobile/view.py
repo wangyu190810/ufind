@@ -68,8 +68,6 @@ def mobile_set_offer():
                 user = User.get_user_info_by_phone(g.db,phone)
             else:
                 return json.dumps({"status":"check_num_error"})
-        else:
-            return json.dumps({"status":"please_send_sms"})
 
         major_id = Major.get_major_info_by_id_scalar(g.db,major_id)
         school1_id = 0
