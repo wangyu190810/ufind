@@ -12,12 +12,12 @@ class User(Base):
     u"""用户信息表"""
 
     __tablename__ = "user"
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     username = Column(String(80), doc=u"用户名")
     password = Column(String(80), doc=u"密码")
     email = Column(String(80), doc=u"邮箱")
-    phone = Column(Unicode(13), doc=u"电话")
-    phone_old = Column(Unicode(13),doc=u"曾经使用过的电话")
+    phone = Column(Unicode(13), doc=u"电话", index=True)
+    phone_old = Column(Unicode(13), doc=u"曾经使用过的电话")
     checknum = Column(Integer, doc=u"验证码")
     checknum_time = Column(Integer,doc=u"验证码时间")
     pic = Column(Unicode(255), doc=u"头像")

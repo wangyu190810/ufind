@@ -13,9 +13,9 @@ class University(Base):
     """学校"""
     __tablename__ = "university"
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(Unicode(255))
+    name = Column(Unicode(255),index=True)
     chiname = Column(Unicode(255))
-    short_name = Column(Unicode(255), doc=u"大学缩写")
+    short_name = Column(Unicode(255), index=True, doc=u"大学缩写")
     rank = Column(Integer,doc=u"排名")
     schoollogo = Column(Unicode(255), doc=u"学校图标")
     official = Column(Unicode(1000), doc=u"学校的官网地址")

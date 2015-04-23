@@ -11,9 +11,9 @@ from base import Base
 
 class Offer(Base):
     __tablename__ = "offer"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, doc=u"用户id")
-    university_id = Column(Integer, doc=u"学校的id")
+    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    user_id = Column(Integer, doc=u"用户id", index=True)
+    university_id = Column(Integer, index=True,doc=u"学校的id")
     major_id = Column(Integer, doc=u"专业id")
     result = Column(Integer, doc=u"状态位")
     grade = Column(Unicode(80),doc=u"master硕士，pa博士")
