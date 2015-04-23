@@ -19,7 +19,7 @@ from mysite.model.university import University
 from mysite.mobile.model import Prize
 
 
-@jsonp
+@allow_cross_domain
 def mobile_send_sms():
     if request.method == "POST":
         data = request.form
@@ -39,11 +39,11 @@ def mobile_send_sms():
             code = sms_check(phone)
             if code:
                 User.set_sms_checknum(g.db, phone, code)
-                return jsoncallback(jsonify(status="success"))
-        return jsoncallback(jsonify(status="false"))
+                return json.dumps({"status": "success"})
+        return json.dumps({"status": "false"})
 
 
-@jsonp
+@allow_cross_domain
 def mobile_set_offer():
     if request.method == "POST":
         data = request.form
@@ -61,9 +61,9 @@ def mobile_set_offer():
                 User.set_mobile_user_grade(g.db,phone,grade)
                 user = User.get_user_info_by_phone(g.db,phone)
             else:
-                return jsoncallback(jsonify(status="check_num_error"))
+                return json.dumps({"status":"check_num_error"})
         else:
-            return jsoncallback(jsonify(status="please_send_sms"))
+            return json.dumps({"status":"please_send_sms"})
 
         major_id = Major.get_major_info_by_id_scalar(g.db,major_id)
         school1_id = 0
@@ -106,11 +106,11 @@ def mobile_set_offer():
                 if row_user.university_id not in checkList:
                     offer_list.append(offer_dict)
                     checkList.append(row_user.university_id)
-        return jsoncallback(jsonify(status="success",
-                       offerlist=offer_list,
-                       description=User.get_user_info(g.db,user.id).description))
+        return json.dumps({"status":"success",
+                       "offerlist":offer_list,
+                       "description":User.get_user_info(g.db,user.id).description})
 
-@jsonp
+@allow_cross_domain
 def get_mobile_user_info():
     u"""获取用户的信息"""
     if request.method == "GET":
@@ -121,34 +121,34 @@ def get_mobile_user_info():
             user_info["user_type"] = user.type
             user_info["grade"] = user.grade
             user_info["phone"] = user.phone
-        return jsoncallback(jsonify(status="success",
-                       user_info=user_info))
-    return jsoncallback(jsonify(status="false"))
+        return json.dumps({"status":"success",
+                       "user_info":user_info})
+    return json.dumps({"status":"false"})
 
 
-@jsonp
+@allow_cross_domain
 def get_user_prize():
     if request.method == "POST":
         phone = request.form.get("phone")
         user = User.get_user_info_by_phone(g.db,phone)
         if user:
             if user.coupon is not None:
-                return jsoncallback(jsonify(status="user_have_coupon"))
+                return json.dumps({"status":"user_have_coupon"})
         prize = Prize.get_random_prize(g.db)
         if prize is None:
-            return jsoncallback(jsonify(status="success",
-                       acount=None
-                       ))
+            return json.dumps({"status":"success",
+                       "acount":None
+                       })
         Prize.set_prize_user(g.db,prize.id,user.id)
         User.set_user_account(g.db,phone,prize.coupon,prize.account)
 
-        return jsoncallback(jsonify(status="success",
-                       acount=prize.account
-                       ))
-    return jsoncallback(jsonify(status="false"))
+        return json.dumps({"status":"success",
+                       "acount":prize.account
+                       })
+    return json.dumps({"status":"false"})
 
 
-@jsonp
+@allow_cross_domain
 def get_user_share():
     if request.method == "POST":
         phone = request.form.get("phone")
@@ -160,10 +160,10 @@ def get_user_share():
                 prize_user = Prize.get_user_prize(g.db,user_id=user.id)
                 User.set_user_account(g.db,phone,prize_user.coupon,prize_user.account)
 
-                return jsoncallback(jsonify(status="success"))
-    return jsoncallback(jsonify(status="false"))
+                return json.dumps({"status":"success"})
+    return json.dumps({"status":"false"})
 
-@jsonp
+@allow_cross_domain
 def get_mobile_search_university():
     if request.method == "GET":
         print request.data
@@ -181,7 +181,7 @@ def get_mobile_search_university():
                 university = {}
             university_jsonp = {"namelist":universitylist}
             university["status"] = "success"
-            return jsoncallback(json.dumps(university_jsonp),callback)
+            return json.dumps(university_jsonp)
         else:
             for row in University.search_university(g.db,searchname,stateid):
                 university["name"] = row.name
@@ -192,10 +192,10 @@ def get_mobile_search_university():
                 university = {}
             university_jsonp = {"namelist":universitylist}
             university["status"] = "success"
-            return jsoncallback(json.dumps(university_jsonp),callback)
+            return json.dumps(university_jsonp)
 
 
-@jsonp
+@allow_cross_domain
 def get_mobile_search_major():
     """专业搜索"""
     if request.method == "GET":
@@ -219,7 +219,7 @@ def get_mobile_search_major():
                 major = {}
             major_json = {"namelist":major_list}
             major_json["status"] = "success"
-            return jsoncallback(json.dumps(major_json),callback)
+            return json.dumps(major_json)
         else:
             for row in Major.search_maior(g.db, searchname, university_id):
                 major["name"] = row.name
@@ -229,4 +229,4 @@ def get_mobile_search_major():
                 major = {}
             major_json = {"namelist":major_list}
             major_json["status"] = "success"
-            return jsoncallback(json.dumps(major_json),callback)
+            return json.dumps(major_json)
