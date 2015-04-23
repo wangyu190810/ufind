@@ -13,10 +13,10 @@ from mysite.model.base import Base
 
 class Message(Base):
     __tablename__ = "message"
-    id = Column(Integer,primary_key=True,autoincrement=True)
-    user_id = Column(Integer,doc=u"发留言的用户id")
-    message_user_id = Column(Integer,doc=u"接受留言的用户id")
-    message = Column(TEXT)
+    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    user_id = Column(Integer, doc=u"发留言的用户id")
+    message_user_id = Column(Integer, doc=u"接受留言的用户id")
+    message = Column(TEXT, index=True)
     message_type = Column(Integer,default=0,doc=u"0默认为用户留言，1表示系统留言")
     create_time = Column(Integer,default=lambda: time(), doc=u"留言时间")
 
