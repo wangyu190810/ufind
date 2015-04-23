@@ -42,7 +42,8 @@ app.secret_key = Config.SUCCESS_KEY
 app.permanent_session_lifetime = timedelta(minutes=60*24)
 app.config["SQLALCHEMY_DATABASE_URI"] = Config.db
 
-cache = Cache(app,config={'CACHE_TYPE': 'simple'})
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+cache.init_app(app)
 
 app.sa_engine = create_engine(Config.db)
 app.DBSession = scoped_session(sessionmaker(bind=app.sa_engine))
