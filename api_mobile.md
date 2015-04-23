@@ -73,7 +73,7 @@ moblie专业接口调用:
         线上地址:www.ufindoffer.com/api/mobile/search_major
         测试地址:test.ufindoffer.com/api/mobile/search_major
     实例:
-        www.ufindoffer.com/api/mobile/search_major?searchname=EE&universityid=1
+        www.ufindoffer.com/api/mobile/search_major?searchname=EE&universityid=1&grade=1
         
     返回数据：
         {"namelist": [

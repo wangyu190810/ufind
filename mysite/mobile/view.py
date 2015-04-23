@@ -33,7 +33,7 @@ def mobile_send_sms():
 
         user = User.get_user_info_by_phone(g.db,phone)
         print user,sms_type,phone
-        if user:
+        if User.get_mobile_user_exit_by_phone(g.db,phone):
             return json.dumps({"status":"user_exit"})
 
         # 注册发送验证码
@@ -208,8 +208,8 @@ def get_mobile_search_major():
         major_type = None
         if user:
             major_type = user.type
-        searchname,university_id,callback = map(request.args.get,
-                                       ("searchname", "universityid","jsoncallback"))
+        searchname,university_id,grade = map(request.args.get,
+                                       ("searchname", "universityid","grade"))
 
         print request.args
         if university_id is None:
@@ -223,7 +223,7 @@ def get_mobile_search_major():
             major_json["status"] = "success"
             return json.dumps(major_json)
         else:
-            for row in Major.search_maior(g.db, searchname, university_id):
+            for row in Major.search_maior(g.db, searchname, university_id,grade):
                 major["name"] = row.name
                 major["chiname"] = row.chiname
                 major["id"] = row.id

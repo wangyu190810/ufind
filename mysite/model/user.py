@@ -308,6 +308,14 @@ class User(Base):
         )
         connection.commit()
 
+    @classmethod
+    def get_mobile_user_exit_by_phone(cls,connection,phone):
+        u"""用户手机是否已经注册"""
+        return connection.query(User).\
+            filter(User.phone == phone).\
+            filter(User.grade.is_(not None)).scalar()
+
+
 
 
 class UserFollow(Base):
