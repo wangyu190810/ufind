@@ -37,11 +37,15 @@ def mobile_send_sms():
             return json.dumps({"status":"user_exit"})
 
         # 注册发送验证码
-        if (user is None and sms_type == str(1)) or (user is not None and sms_type is None):
+        code = None
+        if user is None and sms_type == str(1):
             code = sms_check(phone)
-            if code:
-                User.set_sms_checknum(g.db, phone, code)
-                return json.dumps({"status": "success"})
+        elif user.grade is None and sms_type == str(1):
+            code = sms_check(phone)
+
+        if code:
+            User.set_sms_checknum(g.db, phone, code)
+            return json.dumps({"status": "success"})
         return json.dumps({"status": "false"})
 
 
