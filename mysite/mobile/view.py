@@ -240,3 +240,7 @@ def get_mobile_search_major():
             major_json = {"namelist":major_list}
             major_json["status"] = "success"
             return json.dumps(major_json)
+
+
+def get_mobile_prize_deadline():
+    u"""活动截止时间"""
