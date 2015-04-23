@@ -60,7 +60,7 @@ def set_offer():
                                         major_type=user.type,
                                         faculty_id=faculty_id,
                                 )
-
+            print id_major
             print type(id_major),dir(id_major),id_major.id
             User.update_user_grade(g.db,user_id=user_id,grade=offer_grade)
             Offer.del_same_offer(g.db,university_id=offer_university_id,
