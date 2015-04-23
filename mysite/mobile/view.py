@@ -108,6 +108,7 @@ def mobile_set_offer():
             university_name = University.get_university_from_id(g.db,row_user.university_id)
             if university_name:
                 offer_dict["universityname"] = university_name.chiname
+                offer_dict["logo"] = get_university_logo(university_name.name)
                 offer_dict["twodim"] = row_user.wechat
                 if row_user.university_id not in checkList:
                     offer_list.append(offer_dict)
