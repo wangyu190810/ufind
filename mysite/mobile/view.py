@@ -94,7 +94,7 @@ def mobile_set_offer():
                 num_wechat = 3
 
         wechat=set_university_offer_wechat(University.get_university_from_id(g.db,university_id).short_name,user_type,num_wechat)
-        Offer.set_offer_mobile(g.db,user_id=user.id,
+        Offer.set_offer_mobile(g.db,user_id=user_check.id,
                                university_id=university_id,
                                major_id=major_id,
                                school1_id=school1_id,
