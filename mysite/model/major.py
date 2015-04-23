@@ -31,7 +31,7 @@ class Major(Base):
                       faculty_id=faculty_id,major_type=major_type,major_user_type=1)
         connection.add(major)
         connection.commit()
-        return connection.query(func.max(Major.id))
+        return connection.query(Major).filter(func.max(Major.id)).scalar()
 
     @classmethod
     def search_maior(cls, connection, searchname, university_id=None,major_type=None):
