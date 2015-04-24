@@ -93,5 +93,5 @@ class Major(Base):
 
 
         return connection.execute(text("select count(name) from (select distinct name "
-                                "from major) as a where name like :major_name"),
-                           major_name="%"+major_name+"%")
+                                "from major) as a where name like :major"),
+                                major="%"+major_name+"%")
