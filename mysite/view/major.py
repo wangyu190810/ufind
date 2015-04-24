@@ -77,6 +77,7 @@ def get_major_from_university_faculty():
             for row in Major.get_major_info_university(g.db, university_id):
                 students = list()
                 major_info = dict()
+                print row.name
                 major_info["majorid"] = row.id
                 major_info["name"] = row.name
                 major_info["offernum"] = Offer.get_offer_num_from_major(g.db,university_id,row.id)
