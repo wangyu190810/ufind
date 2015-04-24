@@ -78,7 +78,7 @@ class Offer(Base):
 
     @classmethod
     def get_mobile_user_last_offer(cls,connection,user_id):
-        return connection.query(func.max(Offer.create_time)).filter(Offer.user_id == user_id).scalar()
+        return connection.query(func.max(Offer.create_time)).filter(Offer.user_id == user_id)
 
 
     @classmethod
