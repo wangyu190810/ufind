@@ -85,7 +85,7 @@ def set_user_score():
                                     GRE_q=GREmoreQ,
                                     GRE_aw=GREmoreAW
                 )
-            elif request.form.get("SATmore[M]"):
+            elif request.form.get("SATmore[M]") is not None:
                 sat_m = request.form.get("SATmore[M]",  int)
                 sat_cr = request.form.get("SATmore[CR]", int)
                 sat_w = request.form.get("SATmore[W]", int)
@@ -104,7 +104,7 @@ def set_user_score():
                                     SAT_w=sat_w,
                                     SAT_cr=sat_cr
                 )
-            elif request.form.get("GMATmore[V]", int):
+            elif request.form.get("GMATmore[V]") is not None:
                 GMATmoreV = request.form.get("GMATmore[V]", int)
                 GMATmoreQ = request.form.get("GMATmore[Q]", int)
                 GMATmoreAW = request.form.get("GMATmore[AW]", float)
@@ -150,7 +150,7 @@ def set_user_score():
                                     GRE_aw=GREmoreAW
 
                 )
-            elif request.form.get("SATmore[M]"):
+            elif request.form.get("SATmore[M]") is not None:
                 sat_m = request.form.get("SATmore[M]",  int)
                 sat_cr = request.form.get("SATmore[CR]",  int)
                 sat_w = request.form.get("SATmore[W]",  int)
@@ -168,7 +168,7 @@ def set_user_score():
                                     SAT_w=sat_w,
                                     SAT_cr=sat_cr
                 )
-            elif request.form.get("GMATmore[V]", int):
+            elif request.form.get("GMATmore[V]") is not None:
                 GMATmoreV = request.form.get("GMATmore[V]", int)
                 GMATmoreQ = request.form.get("GMATmore[Q]", int)
                 GMATmoreAW = request.form.get("GMATmore[AW]", float)
