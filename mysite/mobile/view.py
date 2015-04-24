@@ -113,17 +113,16 @@ def mobile_set_offer():
                                )
         offer_list = list()
         checkList = list()
-        for row_user in Offer.get_offer_student_info(g.db,user_check.id):
-            offer_dict = dict()
-            offer_dict["universityid"] = row_user.university_id
-            university_name = University.get_university_from_id(g.db,row_user.university_id)
-            if university_name:
-                offer_dict["universityname"] = university_name.chiname
-                offer_dict["logo"] = get_university_logo(university_name.name)
-                offer_dict["twodim"] = row_user.wechat
-                if row_user.university_id not in checkList:
-                    offer_list.append(offer_dict)
-                    checkList.append(row_user.university_id)
+        last_offer = Offer.get_mobile_user_last_offer(g.db,user_check.id)
+        university_name = University.get_university_from_id(g.db,last_offer.university_id)
+        offer_dict = dict()
+        if university_name:
+            offer_dict["universityname"] = university_name.chiname
+            offer_dict["logo"] = get_university_logo(university_name.name)
+            offer_dict["twodim"] = last_offer.wechat
+
+            offer_list.append(offer_dict)
+
         return json.dumps({"status":"success",
                        "offerlist":offer_list,
                        "description":User.get_user_info(g.db,user_check.id).description})
