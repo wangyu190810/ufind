@@ -26,9 +26,13 @@ class Major(Base):
 
     @classmethod
     def add_major(cls,connection,name,main_major,university_id,faculty_id,
-                  major_type):
+                  major_type,major_user_type=None):
+        if major_user_type is None:
+            major_user_type = 1
+        else:
+            major_user_type = 0
         major = Major(name=name,main_major=main_major,university_id=university_id,
-                      faculty_id=faculty_id,major_type=major_type,major_user_type=1)
+                      faculty_id=faculty_id,major_type=major_type,major_user_type=major_user_type)
         connection.add(major)
         connection.commit()
         return connection.query(func.max(Major.id)).scalar()

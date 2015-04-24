@@ -43,6 +43,7 @@ def set_offer():
                 break
             num += 1
             print offer_major_name
+            id_major = None
             if offer_major_name and offer_major_id is None:
                 print offer_major_name
                 print Major.get_major_exit(g.db,offer_major_name)
@@ -56,11 +57,12 @@ def set_offer():
                     if faculty:
                         faculty_id = faculty.id
                         name = faculty.name
-            id_major = Major.add_major(g.db,name=offer_major_name,
+                id_major = Major.add_major(g.db,name=offer_major_name,
                                         main_major=name,
                                         university_id=offer_university_id,
                                         major_type=user.type,
                                         faculty_id=faculty_id,
+                                        major_user_type=major_key
                                 )
             print id_major
             User.update_user_grade(g.db,user_id=user_id,grade=offer_grade)

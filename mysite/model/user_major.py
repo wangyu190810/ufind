@@ -17,5 +17,5 @@ class MajorKye(Base):
 
     @classmethod
     def get_main_major(cls,connection,key):
-        return connection.query(MajorKye).filter(MajorKye.Key_Word.like("%"+key+"%")).scalar()
+        return connection.query(MajorKye).filter(MajorKye.Key_Word.like(key+"%")).scalar()
 
