@@ -80,7 +80,7 @@ class Offer(Base):
     def get_mobile_user_last_offer(cls,connection,user_id):
         return connection.query(func.max(Offer.create_time),
                                 Offer.university_id,
-                                Offer.wechat).filter(Offer.user_id == user_id).scalar()
+                                Offer.wechat).filter(Offer.user_id == user_id)
 
 
     @classmethod
