@@ -108,11 +108,13 @@ class Offer(Base):
         """查看当前学校的off数量"""
         if user_type is None:
             return connection.query(func.count(Offer)). \
-                filter(Offer.university_id == university_id).scalar()
+                filter(Offer.university_id == university_id).\
+                filter(Offer.offer_status == 1).scalar()
 
         return connection.query(func.count(Offer)). \
             filter(Offer.university_id == university_id).\
-            filter(Offer.user_type == user_type).scalar()
+            filter(Offer.user_type == user_type).\
+            filter(Offer.offer_status == 1).scalar()
 
 
     @classmethod
@@ -172,13 +174,15 @@ class Offer(Base):
         if user_type is None:
             return connection.query(func.count(Offer.id)).scalar()
         return connection.query(func.count(Offer.id)).\
-            filter(Offer.user_type == user_type).scalar()
+            filter(Offer.user_type == user_type).\
+            filter(Offer.offer_status == 1).scalar()
 
     @classmethod
     def get_offer_num_from_major(cls,connection,university_id,major_id):
         return connection.query(func.count(Offer.id)).\
             filter(Offer.university_id == university_id).\
-            filter(Offer.major_id == major_id).scalar()
+            filter(Offer.major_id == major_id).\
+            filter(Offer.offer_status == 1).scalar()
 
     @classmethod
     def del_same_offer(cls,connection,university_id,major_id,user_id):
