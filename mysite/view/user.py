@@ -330,6 +330,14 @@ def get_user_in_university():
                                 get_compare_score(GMAT_to,GMAT_form,user.GMAT):
 
                             student_list.append(row.user_id)
+                        student = dict()
+                        student["studentlist"] = list(set(student_list))
+                        page = len(student_list) / 15
+                        student["more"] = ""
+                        if int(page) > 1:
+                            student["more"] = "true"
+                        student["status"] = "success"
+                        return json.dumps(student)
         else:
             student_list = []
             for row in Offer.get_user_id_from_university(g.db,
