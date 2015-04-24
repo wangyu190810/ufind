@@ -3,7 +3,7 @@ __author__ = ''
 from sqlalchemy.schema import Table, Column
 from sqlalchemy.types import Integer, Unicode, Float
 from sqlalchemy.sql import select
-from sqlalchemy import func
+from sqlalchemy import func,text
 from datetime import datetime
 
 from base import metadata, Base
@@ -90,7 +90,7 @@ class Major(Base):
 
     @classmethod
     def get_major_exit(cls,connection,major_name):
-        sql = "select count(name) from (select distinct name from major) as " \
-              "a where name like `%`"+major_name+"`%`"
-        print sql 
+        sql =text("select count(name) from (select distinct name from major) as " \
+              "a where name like %:major_name",major_name=major_name+"%")
+        print sql
         connection.execute(sql)
