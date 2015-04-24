@@ -45,7 +45,7 @@ def mobile_send_sms():
             code = sms_check(phone)
 
         if code:
-            User.set_sms_checknum(g.db, phone, code)
+            User.set_mobile_sms(g.db, phone, code)
             return json.dumps({"status": "success"})
         return json.dumps({"status": "false"})
 

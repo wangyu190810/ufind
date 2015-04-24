@@ -260,14 +260,20 @@ class User(Base):
     @classmethod
     def set_mobile_sms(cls,connection,phone,checknum):
         u"""手机端注册"""
-        user = User(phone=phone,
-             checknum=checknum,
-             checknum_time=time.time(),
-             source=2,
-             active=2,
-             mobile_user =2)
-        connection.add(user)
-        connection.commit()
+        if User.get_user_info_by_phone(g.db,phone):
+            connection.query(User).filter(User.phone == phone).filter(
+                {
+                    User.checknum:checknum,
+                    User.checknum_time: time.time()
+                }
+            )
+            connection.commit()
+        else:
+            user = User(phone=phone, checknum=checknum, checknum_time=time.time(),
+                    source=2, active=2, mobile_user =2)
+            connection.add(user)
+            connection.commit()
+        return True
 
     @classmethod
     def set_mobile_user_grade(cls,connection,phone,grade):
