@@ -58,7 +58,7 @@ def get_user_detail_info():
         student_info = dict()
         offers = list()
         login_user_id = session.get("user_id")
-
+        user_info = User.get_user_info(g.db,student_id)
         if login_user_id is None:
             login_user_id = -1
         for row in Offer.get_offer_student_info(g.db, student_id):
@@ -176,7 +176,7 @@ def get_user_detail_info():
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
-        GREmore["total"] = user.GRE
+        GREmore["total"] = user_info.GRE
         if student_info.get("v") != 0:
             student_info["GREmore"] = GREmore
         GMATmore = dict()
@@ -184,7 +184,7 @@ def get_user_detail_info():
         GMATmore["Q"] = score.GMAT_q
         GMATmore["AW"] = score.GMAT_aw
         GMATmore["IR"] = score.GMAT_ir
-        GMATmore["total"] = user.GMAT
+        GMATmore["total"] = user_info.GMAT
         if GMATmore.get("V") != 0:
             student_info["GMATmore"] = GMATmore
         IELTSmore = dict()
@@ -192,7 +192,7 @@ def get_user_detail_info():
         IELTSmore["L"] = score.IELTS_l
         IELTSmore["S"] = score.IELTS_s
         IELTSmore["W"] = score.IELTS_w
-        IELTSmore["total"] = user.IELTS
+        IELTSmore["total"] = user_info.IELTS
         if IELTSmore.get("R") != 0:
             student_info["IELTSmore"] = IELTSmore
         TOEFLmore = dict()
@@ -200,14 +200,14 @@ def get_user_detail_info():
         TOEFLmore["L"] = score.TOEFL_l
         TOEFLmore["S"] = score.TOEFL_s
         TOEFLmore["W"] = score.TOEFL_w
-        TOEFLmore["total"] = user.TOEFL
+        TOEFLmore["total"] = user_info.TOEFL
         if TOEFLmore.get("R") != 0:
             student_info["TOEFLmore"] = TOEFLmore
         SATmore = dict()
         SATmore["CR"] = score.SAT_cr
         SATmore["W"] = score.SAT_w
         SATmore["M"] = score.SAT_m
-        SATmore["total"] = user.SAT
+        SATmore["total"] = user_info.SAT
         if SATmore.get("W") != 0:
             student_info["SATmore"] = SATmore
         GMATmore = dict()
@@ -215,16 +215,16 @@ def get_user_detail_info():
         GMATmore["Q"] = score.GMAT_q
         GMATmore["AW"] = score.GMAT_aw
         GMATmore["IR"] = score.GMAT_ir
-        GMATmore["total"] = user.GMAT
+        GMATmore["total"] = user_info.GMAT
         if GMATmore.get("V") != 0:
             student_info["GMATmore"] = GMATmore
         coupons = dict()
-        if user.active == 1 and user.account is not None:
-            coupons["code"] = user.coupon
-            coupons["account"] = user.account
-        elif user.active == 2 and user.account is not None:
+        if user_info.active == 1 and user_info.account is not None:
+            coupons["code"] = user_info.coupon
+            coupons["account"] = user_info.account
+        elif user_info.active == 2 and user_info.account is not None:
             coupons["code"] = None
-            coupons["account"] = user.account
+            coupons["account"] = user_info.account
         else:
             coupons["code"] = None
             coupons["account"] = None
