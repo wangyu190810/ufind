@@ -113,9 +113,11 @@ def mobile_set_offer():
                                )
         offer_list = list()
         checkList = list()
-        last_offer = Offer.get_mobile_user_last_offer(g.db,user_check.id)
-        print last_offer
-        university_name = University.get_university_from_id(g.db,last_offer.university_id)
+        university_name = None
+        for last_offer in Offer.get_mobile_user_last_offer(g.db,user_check.id):
+
+            print last_offer
+            university_name = University.get_university_from_id(g.db,last_offer.university_id)
         offer_dict = dict()
         if university_name:
             offer_dict["universityname"] = university_name.chiname
