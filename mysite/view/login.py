@@ -133,7 +133,7 @@ def register_second():
                              str(randint(1,17))+""".jpg""")
         return jsonify(status="success",
                        cookie=str(user_id),
-                       incomplete=True)
+                       incomplete=str(True))
     return jsonify(status="false")
 
 
