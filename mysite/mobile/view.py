@@ -106,7 +106,8 @@ def mobile_set_offer():
                                school3_id=school3_id,
                                user_type=user_type,
                                grade=grade,
-                               wechat=wechat
+                               wechat=wechat,
+                               offer_type=grade
                                )
         offer_list = list()
         checkList = list()
