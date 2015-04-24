@@ -355,7 +355,7 @@ def get_user_in_university():
             student["status"] = "success"
             return json.dumps(student)
 
-        return jsonify(status="false")
+        return jsonify(status="success")
 
 
 @validate_user_login
