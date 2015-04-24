@@ -190,23 +190,15 @@ def get_user_detail_info():
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
         GREmore["total"] = user_info.GRE
-        if student_info.get("v") != 0:
+        if GREmore.get("total") not in(0, None):
             student_info["GREmore"] = GREmore
-        GMATmore = dict()
-        GMATmore["V"] = score.GMAT_v
-        GMATmore["Q"] = score.GMAT_q
-        GMATmore["AW"] = score.GMAT_aw
-        GMATmore["IR"] = score.GMAT_ir
-        GMATmore["total"] = user_info.GMAT
-        if GMATmore.get("V") != 0:
-            student_info["GMATmore"] = GMATmore
         IELTSmore = dict()
         IELTSmore["R"] = score.IELTS_r
         IELTSmore["L"] = score.IELTS_l
         IELTSmore["S"] = score.IELTS_s
         IELTSmore["W"] = score.IELTS_w
         IELTSmore["total"] = user_info.IELTS
-        if IELTSmore.get("R") != 0:
+        if IELTSmore.get("total") not in (0, None):
             student_info["IELTSmore"] = IELTSmore
         TOEFLmore = dict()
         TOEFLmore["R"] = score.TOEFL_r
@@ -214,14 +206,14 @@ def get_user_detail_info():
         TOEFLmore["S"] = score.TOEFL_s
         TOEFLmore["W"] = score.TOEFL_w
         TOEFLmore["total"] = user_info.TOEFL
-        if TOEFLmore.get("R") != 0:
+        if TOEFLmore.get("total") not in (0, None):
             student_info["TOEFLmore"] = TOEFLmore
         SATmore = dict()
         SATmore["CR"] = score.SAT_cr
         SATmore["W"] = score.SAT_w
         SATmore["M"] = score.SAT_m
         SATmore["total"] = user_info.SAT
-        if SATmore.get("W") != 0:
+        if SATmore.get("total") not in (0, None):
             student_info["SATmore"] = SATmore
         GMATmore = dict()
         GMATmore["V"] = score.GMAT_v
@@ -229,7 +221,7 @@ def get_user_detail_info():
         GMATmore["AW"] = score.GMAT_aw
         GMATmore["IR"] = score.GMAT_ir
         GMATmore["total"] = user_info.GMAT
-        if GMATmore.get("V") != 0:
+        if GMATmore.get("V") not in (0, None):
             student_info["GMATmore"] = GMATmore
 
 
