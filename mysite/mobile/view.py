@@ -54,9 +54,9 @@ def mobile_send_sms():
 def mobile_set_offer():
     if request.method == "POST":
         data = request.form
-        university_id = data.get("university_id")
-        major_id = data.get("major_id")
-        user_type = data.get("user_type")
+        university_id = data.get("university_id",int)
+        major_id = data.get("major_id",int)
+        user_type = data.get("user_type",int)
         grade = data.get("grade")
         phone = data.get("phone")
         check_num = data.get("check_num")
