@@ -25,7 +25,7 @@ class Prize(Base):
             filter(Prize.account.in_((20, 35, 50, 90))).limit(1).scalar()
 
     @classmethod
-    def get_random_prize_not_coupon(cls,connection):
+    def get_random_prize_not_coupon(cls, connection):
         return connection.query(Prize).\
             filter(Prize.account.in_((20, 35, 50, 90))).limit(1).scalar()
 
