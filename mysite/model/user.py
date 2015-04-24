@@ -260,7 +260,7 @@ class User(Base):
     @classmethod
     def set_mobile_sms(cls,connection,phone,checknum):
         u"""手机端注册"""
-        if User.get_user_info_by_phone(g.db,phone):
+        if User.get_user_info_by_phone(connection,phone):
             connection.query(User).filter(User.phone == phone).filter(
                 {
                     User.checknum:checknum,
