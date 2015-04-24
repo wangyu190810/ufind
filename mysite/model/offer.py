@@ -154,6 +154,16 @@ class Offer(Base):
             filter(Offer.major_id == major_id).limit(6)
 
     @classmethod
+    def update_offer_status(cls,connection,user_id):
+        u"""用户在移动端注册，完成他的offer可见性"""
+        connection.query(Offer).filter(Offer.user_id == user_id).update(
+            {
+                Offer.offer_status:1
+            }
+        )
+        connection.commit()
+
+    @classmethod
     def get_site_offer_num(cls,connection,user_type=None):
         """全站offer数量"""
         if user_type is None:

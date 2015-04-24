@@ -7,7 +7,7 @@ from mysite.view.base import allow_cross_domain, set_sign_safe,\
 from mysite.model.user import User
 from mysite.model.university_china import UniversityChina, SeniorHighSchool, \
     MajorChina
-
+from mysite.model.offer import Offer
 from time import time
 from random import randint
 
@@ -131,6 +131,7 @@ def register_second():
         User.update_user_pic(g.db,user_id,
                              """http://www.ufindoffer.com/images/unimg/head/%E6%97%A0%E6%80%A7%E5%88%AB/"""+
                              str(randint(1,17))+""".jpg""")
+        Offer.update_offer_status(g.db,user_id)
         return jsonify(status="success",
                        cookie=str(user_id),
                        incomplete=str(True))

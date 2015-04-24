@@ -48,7 +48,7 @@ def set_offer():
                 print offer_major_name
                 major_key = Major.get_major_exit(g.db,offer_major_name)
 
-                
+
                 print major_key
                 faculty_id = 7
                 name = "NotMatched"
