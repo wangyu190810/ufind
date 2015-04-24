@@ -161,6 +161,19 @@ def get_user_detail_info():
         student_info["follows"] = follows_list
         student_info["status"] = "success"
         score = Score.get_user_score(g.db, student_id)
+        coupons = dict()
+
+        print user_info.account,user.active,
+        if user_info.active == 1 and user_info.account is not None:
+            coupons["code"] = user_info.coupon
+            coupons["account"] = user_info.account
+        elif user_info.active == 2 and user_info.account is not None:
+            coupons["code"] = None
+            coupons["account"] = user_info.account
+        else:
+            coupons["code"] = None
+            coupons["account"] = None
+        student_info["coupons"] = coupons
         if score is None:
             return jsonify(student_info)
 
@@ -218,19 +231,7 @@ def get_user_detail_info():
         GMATmore["total"] = user_info.GMAT
         if GMATmore.get("V") != 0:
             student_info["GMATmore"] = GMATmore
-        coupons = dict()
 
-        print user_info.account,user.active,
-        if user_info.active == 1 and user_info.account is not None:
-            coupons["code"] = user_info.coupon
-            coupons["account"] = user_info.account
-        elif user_info.active == 2 and user_info.account is not None:
-            coupons["code"] = None
-            coupons["account"] = user_info.account
-        else:
-            coupons["code"] = None
-            coupons["account"] = None
-        student_info["coupons"] = coupons
 
         return json.dumps(student_info)
 
