@@ -20,17 +20,13 @@ class Major(Base):
     School2_ID = Column(Integer)
     School3_ID = Column(Integer)
     major_type = Column(Integer,doc=u"专业类型，1为本科生，2为研究生，3为博士生，0为不分级别")
-    major_user_type = Column(Integer,doc=u"默认为零。用户填写的数据为1")
+    major_user_type = Column(Integer,doc=u"默认为零。用户填写的数据为1,可疑数据为2")
     introduction = Column(Unicode(225))
 
 
     @classmethod
     def add_major(cls,connection,name,main_major,university_id,faculty_id,
-                  major_type,major_user_type=None):
-        if major_user_type is None:
-            major_user_type = 1
-        else:
-            major_user_type = 0
+                  major_type,major_user_type):
         major = Major(name=name,main_major=main_major,university_id=university_id,
                       faculty_id=faculty_id,major_type=major_type,major_user_type=major_user_type)
         connection.add(major)
@@ -96,5 +92,10 @@ class Major(Base):
     @classmethod
     def get_major_exit(cls,connection,major_name):
         return connection.query(func.count(Major.id)).\
-            filter(Major.name.like("%"+major_name+"%")).scalar()
+            filter(Major.name == major_name).scalar()
+
+
+    @classmethod
+    def get_major_info_by_mame(cls,connection,major_name):
+        return connection.query(Major).filter(Major.name == major_name).limit(1).scalar()
 

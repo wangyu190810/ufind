@@ -50,21 +50,22 @@ def set_offer():
 
 
                 print major_key
-                faculty_id = 7
-                name = "NotMatched"
+                school1_id = 7
+                main_major = "NotMatched"
+                major_user_type =2
                 if major_key:
-                    faculty = Faculty.get_faulty_from_name(g.db,major_key.Main_Major)
-                    if faculty:
-                        faculty_id = faculty.id
-                        name = faculty.name
+                    major_info = Major.get_major_info_by_mame(g.db,offer_major_name)
+                    if major_info:
+                        school1_id = major_info.faculty_id
+                        major_user_type = 1
+                        main_major = major_info.main_major
                 id_major = Major.add_major(g.db,name=offer_major_name,
-                                        main_major=name,
+                                        main_major=main_major,
                                         university_id=offer_university_id,
                                         major_type=user.type,
-                                        faculty_id=faculty_id,
-                                        major_user_type=major_key
+                                        faculty_id=school1_id,
+                                        major_user_type=major_user_type
                                 )
-            print id_major
             User.update_user_grade(g.db,user_id=user_id,grade=offer_grade)
             Offer.del_same_offer(g.db,university_id=offer_university_id,
                                 major_id =offer_major_id,user_id=user_id)

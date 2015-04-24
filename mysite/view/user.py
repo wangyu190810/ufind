@@ -222,7 +222,7 @@ def get_user_detail_info():
         if user.active == 1 and user.account is not None:
             coupons["code"] = user.coupon
             coupons["account"] = user.account
-        elif user.active != 1 and user.account is not None:
+        elif user.active == 2 and user.account is not None:
             coupons["code"] = None
             coupons["account"] = user.account
         else:
