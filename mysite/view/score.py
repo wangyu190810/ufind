@@ -110,7 +110,6 @@ def set_user_score():
                 GMATmoreAW = request.form.get("GMATmore[AW]", float)
                 GMATmoreIR = request.form.get("GMATmore[IR]", int)
                 sub_GMAT = request.form.get("GMATmore[total]", int)
-                #sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
                 User.update_user_score(g.db, user_id=user_id,
                                        lelts=sub_TELTS, GMAT=sub_GMAT)
                 Score.set_user_info(connection=g.db,
