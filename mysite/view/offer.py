@@ -46,6 +46,7 @@ def set_offer():
             if offer_major_name and offer_major_id is None:
                 print offer_major_name
                 print Major.get_major_exit(g.db,offer_major_name)
+
                 major_key = MajorKye.get_main_major(g.db,offer_major_name)
                 print major_key
                 faculty_id = 7

@@ -127,9 +127,7 @@ class Offer(Base):
             Offer.university_id == university_id). \
             filter(Offer.major_id == major_id).\
             filter(Offer.user_type == user_type).\
-                 filter(Offer.grade == grade).filter(
-                 Offer.offer_status == 1
-             )
+                 filter(Offer.grade == grade)
         elif major_id is None and grade is None and user_type is not None:
             return connection.query(Offer).filter(
                 Offer.university_id == university_id).filter(
