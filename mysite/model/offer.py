@@ -52,7 +52,8 @@ class Offer(Base):
                       offer_type=offer_type,
                       scholarship=scholarship,
                       scholarship_type=scholarship_type,
-                      wechat=wechat)
+                      wechat=wechat,
+                      offer_status=1)
         connection.add(offer)
         connection.commit()
 
