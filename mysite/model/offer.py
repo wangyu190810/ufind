@@ -39,8 +39,10 @@ class Offer(Base):
                   offer_type,
                   user_type,
                   wechat,
+                  offer_status,
                   scholarship=None,
                   scholarship_type=None,
+
                   ):
         offer = Offer(user_id=user_id, university_id=university_id,
                       major_id=major_id, result=result,
@@ -53,7 +55,7 @@ class Offer(Base):
                       scholarship=scholarship,
                       scholarship_type=scholarship_type,
                       wechat=wechat,
-                      offer_status=1)
+                      offer_status=offer_status)
         connection.add(offer)
         connection.commit()
 

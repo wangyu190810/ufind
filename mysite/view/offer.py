@@ -44,6 +44,7 @@ def set_offer():
             num += 1
             print offer_major_name
             id_major = None
+            offer_status = 1
             if offer_major_name and offer_major_id is None:
                 print offer_major_name
                 major_key = Major.get_major_exit(g.db,offer_major_name)
@@ -53,12 +54,14 @@ def set_offer():
                 school1_id = 7
                 main_major = "NotMatched"
                 major_user_type =2
+                offer_status = 2
                 if major_key:
                     major_info = Major.get_major_info_by_mame(g.db,offer_major_name)
                     if major_info:
                         school1_id = major_info.faculty_id
                         major_user_type = 1
                         main_major = major_info.main_major
+                        offer_status = 1
                 id_major = Major.add_major(g.db,name=offer_major_name,
                                         main_major=main_major,
                                         university_id=offer_university_id,
@@ -105,7 +108,8 @@ def set_offer():
                             offer_type=offer_type,
                             grade=offer_grade,
                             scholarship=scholarship_money,
-                            scholarship_type=scholarship_type)
+                            scholarship_type=scholarship_type,
+                            offer_status=offer_status)
             un = University.get_university_from_id(g.db, offer_university_id)
             if un:
                 state_id = un.state_id
