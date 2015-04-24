@@ -78,14 +78,14 @@ def mobile_set_offer():
             else:
                 return json.dumps({"status":"check_num_error"})
 
-        major_id = Major.get_major_info_by_id_scalar(g.db,major_id)
+        major_info = Major.get_major_info_by_id_scalar(g.db,major_id)
         school1_id = 0
         school2_id = 0
         school3_id = 0
-        if major_id:
-            school1_id = major_id.faculty_id
-            school2_id = major_id.School2_ID
-            school3_id = major_id.School3_ID
+        if major_info:
+            school1_id = major_info.faculty_id
+            school2_id = major_info.School2_ID
+            school3_id = major_info.School3_ID
         offer_num = Offer.get_offer_num(g.db,university_id,user_type)
         num_wechat = 1
         if offer_num:
