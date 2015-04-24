@@ -276,6 +276,7 @@ def get_user_in_university():
         compares = {}
         compare_list = []
         page_list = []
+        print faculty_id,major_id,university_id
 
         if faculty_id is not None:
             if major_id is None:
