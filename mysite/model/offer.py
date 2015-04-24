@@ -62,6 +62,7 @@ class Offer(Base):
                             school1_id, user_type,
                             wechat,grade,
                             school2_id,school3_id):
+        print major_id
         offer = Offer(user_id=user_id,
                       university_id=university_id,
                       major_id=major_id,
