@@ -91,5 +91,6 @@ class Major(Base):
     @classmethod
     def get_major_exit(cls,connection,major_name):
         sql = "select count(name) from (select distinct name from major) as " \
-              "a where name like %"+major_name+"%"
+              "a where name like `%`"+major_name+"`%`"
+        print sql 
         connection.execute(sql)
