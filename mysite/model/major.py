@@ -88,10 +88,9 @@ class Major(Base):
     def get_major_info_by_id_scalar(cls,connection,major_id):
         return connection.query(Major).filter(Major.id == major_id).scalar()
 
+    
     @classmethod
     def get_major_exit(cls,connection,major_name):
+        return connection.query(func.count(Major.id)).\
+            filter(Major.name.like("%"+major_name+"%")).scalar()
 
-
-        return connection.execute(text("select count(name) from (select distinct name "
-                                "from major) as a where name like : major"),
-                                major="%"+major_name+"%")
