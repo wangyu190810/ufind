@@ -104,7 +104,7 @@ def set_user_score():
                                     SAT_w=sat_w,
                                     SAT_cr=sat_cr
                 )
-            else:
+            elif request.form.get("GMATmore[V]", int):
                 GMATmoreV = request.form.get("GMATmore[V]", int)
                 GMATmoreQ = request.form.get("GMATmore[Q]", int)
                 GMATmoreAW = request.form.get("GMATmore[AW]", float)
@@ -168,7 +168,7 @@ def set_user_score():
                                     SAT_w=sat_w,
                                     SAT_cr=sat_cr
                 )
-            else:
+            elif request.form.get("GMATmore[V]", int):
                 GMATmoreV = request.form.get("GMATmore[V]", int)
                 GMATmoreQ = request.form.get("GMATmore[Q]", int)
                 GMATmoreAW = request.form.get("GMATmore[AW]", float)
