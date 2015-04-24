@@ -22,7 +22,7 @@ class Prize(Base):
     def get_random_prize(cls,connection):
         return connection.query(Prize).\
             filter(Prize.user_id.is_(None)).\
-            filter(Prize.account < 80).limit(1).scalar()
+            filter(Prize.account.in_((20,35,50,90))).limit(1).scalar()
 
     @classmethod
     def get_user_prize(cls,connection,user_id):
