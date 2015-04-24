@@ -10,7 +10,8 @@ from random import randint
 
 import json
 import time
-from datetime import timedelta
+from datetime import timedelta,datetime
+
 from flask import request, jsonify,g,session
 from config import Config
 
@@ -28,11 +29,6 @@ from mysite.mobile.model import Prize
 def mobile_send_sms():
     if request.method == "POST":
         data = request.form
-        print data
-        # cc = data.to_dict()
-        # phonenum = eval(cc.keys()[0])
-        # phone = phonenum["phonenum"]
-        # sms_type = phonenum.get("type")
         phone = data.get("phone")
         sms_type = data.get("type")
 
@@ -157,16 +153,16 @@ def get_user_prize():
         phone = request.form.get("phone")
         user = User.get_user_info_by_phone(g.db,phone)
         if user:
-            if user.coupon is not None:
+            if user.account is not None:
                 return json.dumps({"status":"user_have_coupon"})
         prize = Prize.get_random_prize(g.db)
         if prize is None:
-            return json.dumps({"status":"success",
-                       "acount":None
-                       })
+            not_coupon = Prize.get_random_prize_not_coupon(g.db)
+            User.set_user_account(g.db, phone, None, not_coupon.account)
+            return json.dumps({"status": "success",
+                                "acount": not_coupon.account})
         Prize.set_prize_user(g.db,prize.id,user.id)
         User.set_user_account(g.db,phone,prize.coupon,prize.account)
-
         return json.dumps({"status":"success",
                        "acount":prize.account
                        })
@@ -180,7 +176,6 @@ def get_user_share():
         share_type = request.form.get("share")
         user = User.get_user_info_by_phone(g.db,phone)
         if user:
-            print "user"
             if Prize.get_share_prize(g.db,user.id):
                 prize_user = Prize.get_user_prize(g.db,user_id=user.id)
                 User.set_user_account(g.db,phone,prize_user.coupon,prize_user.account)
@@ -259,4 +254,5 @@ def get_mobile_search_major():
 
 def get_mobile_prize_deadline():
     u"""活动截止时间"""
-    timedelta()
+    now = datetime.now() - datetime.now()+ timedelta(7)
+    return json.dumps({"deadline": time.mktime(time.strptime(now,'%Y-%m-%d %H:%M:%S'))})
