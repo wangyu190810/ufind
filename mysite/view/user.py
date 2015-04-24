@@ -219,6 +219,8 @@ def get_user_detail_info():
         if GMATmore.get("V") != 0:
             student_info["GMATmore"] = GMATmore
         coupons = dict()
+
+        print user_info.account,user.active,
         if user_info.active == 1 and user_info.account is not None:
             coupons["code"] = user_info.coupon
             coupons["account"] = user_info.account
