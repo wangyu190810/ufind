@@ -17,12 +17,22 @@ class Prize(Base):
     account = Column(Integer,doc=u"优惠码金额")
     user_id = Column(Integer,doc=u"分配给某些用户")
     share = Column(Integer,doc=u"是否分享，默认为0，没有分享")
+    probability = Column(Integer,doc=u"用户概率控制")
+
 
     @classmethod
     def get_random_prize(cls,connection):
-        return connection.query(Prize).\
+        stmt = connection.query(Prize).\
             filter(Prize.user_id.is_(None)).\
-            filter(Prize.account.in_((20, 35, 50, 90))).limit(1).scalar()
+            filter(Prize.account.in_((20, 35, 50, 90))).\
+            filter(Prize.probability == 1).limit(1).scalar()
+        if stmt is None:
+            stmt = connection.query(Prize).\
+                filter(Prize.user_id.is_(None)).\
+                filter(Prize.account.in_((20, 35, 50, 90))).\
+                filter(Prize.probability == 0).limit(1).scalar()
+        return stmt
+
 
     @classmethod
     def get_random_prize_not_coupon(cls, connection):
@@ -51,7 +61,8 @@ class Prize(Base):
             account = prize.account
             connection.query(Prize).filter(Prize.id == prize.id).update(
                 {
-                    Prize.user_id: None
+                    Prize.user_id: None,
+                    Prize.probability: 0
                 }
             )
             connection.commit()
