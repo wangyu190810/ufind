@@ -739,6 +739,7 @@ def update_user_info():
         return jsonify(status="success")
     return jsonify(status="false")
 
+
 @validate_user_login
 def update_user_description():
     if request.method == "POST":
