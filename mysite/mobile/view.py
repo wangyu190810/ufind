@@ -259,8 +259,8 @@ def get_mobile_search_major():
 
 def get_mobile_prize_deadline():
     u"""活动截止时间"""
-    last_now = datetime.now()+ timedelta(7)
-    last_ts = calendar.timegm(last_now.utctimetuple())
+    #last_now = datetime.now()+ timedelta(7)
+    #last_ts = calendar.timegm(last_now.utctimetuple())
     now = datetime.utcnow()
-    last = last_ts - calendar.timegm(now.utctimetuple())
+    last = 1431273600 - calendar.timegm(now.utctimetuple())
     return json.dumps({"deadline": last})
