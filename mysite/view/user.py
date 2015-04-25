@@ -173,13 +173,12 @@ def get_user_detail_info():
         if user_info.active == 1 and user_info.account is not None:
             coupons["code"] = user_info.coupon
             coupons["account"] = user_info.account
+            student_info["coupons"] = coupons
         elif user_info.active == 2 and user_info.account is not None:
             coupons["code"] = None
             coupons["account"] = user_info.account
-        else:
-            coupons["code"] = None
-            coupons["account"] = None
-        student_info["coupons"] = coupons
+            student_info["coupons"] = coupons
+            
         if score is None:
             return jsonify(student_info)
 
