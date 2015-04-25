@@ -191,13 +191,25 @@ def get_state_university():
                     menaGPA_Total = row.menaGPA_Total
                 university_info["meanGPA"] = float("%0.2f" %menaGPA_Total)
             elif user_type == 0:
-                university_info["meanGPA"] = float("%0.2f" %row.menaGPA_0)
+                try:
+                    university_info["meanGPA"] = float("%0.2f" %row.menaGPA_0)
+                except TypeError:
+                    university_info["meanGPA"] = 0.00
             else:
-                university_info["meanGPA"] = float("%0.2f" %row.menaGPA_1)
+                try:
+                    university_info["meanGPA"] = float("%0.2f" %row.menaGPA_1)
+                except TypeError:
+                    university_info["meanGPA"] = 0.00
             if row.country == "USA":
-                university_info["meanTOEFL"] = float("%0.2f" %row.menaTOEFL)
+                try:
+                    university_info["meanTOEFL"] = float("%0.2f" %row.menaTOEFL)
+                except TypeError:
+                    university_info["meanTOEFL"] = 0.00
             else:
-                university_info["meanIELTS"] = float("%0.2f" %row.menaIELTS)
+                try:
+                    university_info["meanIELTS"] = float("%0.2f" %row.menaIELTS)
+                except TypeError:
+                    university_info["meanIELTS"] = 0.00
             universitylist.append(university_info)
             university_info = {}
         university["universitylist"] = universitylist

@@ -11,6 +11,7 @@ from random import randint
 import json
 import time
 from datetime import timedelta,datetime
+import calendar
 
 from flask import request, jsonify,g,session
 from config import Config
@@ -256,5 +257,8 @@ def get_mobile_search_major():
 
 def get_mobile_prize_deadline():
     u"""活动截止时间"""
-    now = datetime.now() - datetime.now()+ timedelta(7)
-    return json.dumps({"deadline": time.mktime(time.strptime(now,'%Y-%m-%d %H:%M:%S'))})
+    last_now = datetime.now()+ timedelta(7)
+    last_ts = calendar.timegm(last_now.utctimetuple())
+    now = datetime.utcnow()
+    last = last_ts - calendar.timegm(now.utctimetuple())
+    return json.dumps({"deadline": last})
