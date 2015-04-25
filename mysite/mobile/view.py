@@ -244,6 +244,8 @@ def get_mobile_search_major():
             major_json["status"] = "success"
             return json.dumps(major_json)
         else:
+            if searchname is None:
+                searchname = ""
             for row in Major.search_maior(g.db, searchname, university_id,grade):
                 major["name"] = row.name
                 major["chiname"] = row.chiname
