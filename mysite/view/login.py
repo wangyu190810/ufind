@@ -134,7 +134,7 @@ def register_second():
         Offer.update_offer_status(g.db,user_id)
         return jsonify(status="success",
                        cookie=str(user_id),
-                       incomplete=incomplete)
+                       incomplete="true")
     return jsonify(status="false")
 
 
