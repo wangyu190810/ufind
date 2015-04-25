@@ -30,12 +30,18 @@ def get_user_info():
         student_info["prevuniversity"] = row.prevuniversity
         student_info["name"] = row.username
         student_info["prevmajor"] = row.prevmajor
-        student_info["GPA"] = row.GPA
-        student_info["TOEFL"] = row.TOEFL
-        student_info["IELTS"] = row.IELTS
-        student_info["GMAT"] = row.GMAT
-        student_info["SAT"] = row.SAT
-        student_info["GRE"] = row.GRE
+        if row.GPA != 0:
+            student_info["GPA"] = row.GPA
+        if row.TOEFL != 0:
+            student_info["TOEFL"] = row.TOEFL
+        if row.IELTS != 0:
+            student_info["IELTS"] = row.IELTS
+        if row.GMAT != 0:
+            student_info["GMAT"] = row.GMAT
+        if row.SAT != 0:
+            student_info["SAT"] = row.SAT
+        if row.GRE != 0:
+            student_info["GRE"] = row.GRE
 
         student_info["pic"] = row.pic
         student_info["grade"] = row.grade

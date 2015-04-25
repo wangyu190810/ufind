@@ -1,11 +1,5 @@
 
 # -*- coding:utf-8 -*-
-# Time: 14-2-22 下午11:48
-# Desc: 短信http接口的python代码调用示例
-import httplib
-import urllib
-from random import randint
-
 
 
 import json
