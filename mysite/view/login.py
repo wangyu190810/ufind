@@ -125,16 +125,16 @@ def register_second():
         user = User.get_user_info_by_phone(g.db, phone)
         user_id = user.id
         session["user_id"] = user_id
-        incomplete = False
-        if user.coupon:
-            incomplete = True
+        incomplete = "true"
+        if user.mobile_user == 2:
+            incomplete = "true"
         User.update_user_pic(g.db,user_id,
                              """http://www.ufindoffer.com/images/unimg/head/%E6%97%A0%E6%80%A7%E5%88%AB/"""+
                              str(randint(1,17))+""".jpg""")
         Offer.update_offer_status(g.db,user_id)
         return jsonify(status="success",
                        cookie=str(user_id),
-                       incomplete="true")
+                       incomplete=incomplete)
     return jsonify(status="false")
 
 
