@@ -83,7 +83,7 @@ def mobile_set_offer():
             print offer_major_id,"123123"
         if offer_major_id == "":
             print "fasdfasd"
-        if offer_major_name and offer_major_id is None:
+        if offer_major_name and offer_major_id == "":
 
             major_key = Major.get_major_exit(g.db,offer_major_name)
             print major_key
