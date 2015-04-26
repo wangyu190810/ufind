@@ -133,6 +133,10 @@ def mobile_set_offer():
 
         wechat=set_university_offer_wechat(University.get_university_from_id(g.db,university_id).short_name,user_type,num_wechat)
         print offer_major_id
+        Offer.del_same_offer(g.db,university_id=university_id,
+                                major_id =offer_major_id,user_id=user_check.id)
+
+
         Offer.set_offer_mobile(g.db,user_id=user_check.id,
                                university_id=university_id,
                                major_id=offer_major_id,
@@ -299,3 +303,8 @@ def get_mobile_prize_deadline():
     now = datetime.utcnow()
     last = 1431273600 - calendar.timegm(now.utctimetuple())
     return json.dumps({"deadline": last})
+
+
+def get_random_prize_test():
+    return json.dumps(Prize.get_random_prize(g.db).account)
+
