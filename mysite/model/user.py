@@ -82,7 +82,7 @@ class User(Base):
     @classmethod
     def register_second(cls, connection, email,password,phone, username,
                         university_id, major_id, gpa, user_type,
-                        create_time):
+                        create_time,active):
         connection.query(User).filter(User.phone == phone).update(
             {
                 User.email: email,
@@ -94,7 +94,7 @@ class User(Base):
                 User.type: user_type,
                 User.create_time: create_time,
                 User.source:1,
-                User.active:1
+                User.active:active
              }
         )
         connection.commit()

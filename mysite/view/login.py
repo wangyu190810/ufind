@@ -119,9 +119,12 @@ def register_second():
             major_name = MajorChina.get_major_china(g.db, major_id).major_name
         gpa = data["gpa"]
         create_time = time()
+        active = 1
+        if User.get_mobile_user_phone(g.db,phone):
+            active = 2
         User.register_second(g.db, email,password,phone,
                              username, university_name, major_name,
-                             gpa, user_type, create_time)
+                             gpa, user_type, create_time,active)
         user = User.get_user_info_by_phone(g.db, phone)
         user_id = user.id
         session["user_id"] = user_id
