@@ -65,7 +65,7 @@ class Offer(Base):
                             school1_id, user_type,
                             wechat,grade,
                             school2_id,school3_id,
-                            offer_type,offfer_status):
+                            offer_type,offer_status):
         print major_id
         offer = Offer(user_id=user_id,
                       university_id=university_id,
@@ -77,7 +77,7 @@ class Offer(Base):
                       offer_type=offer_type,
                       grade=grade,
                       wechat=wechat,
-                      offer_status=offfer_status
+                      offer_status=offer_status
               )
         connection.add(offer)
         connection.commit()
