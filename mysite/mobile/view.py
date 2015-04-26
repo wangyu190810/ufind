@@ -79,7 +79,11 @@ def mobile_set_offer():
 
         id_major = None
         offer_status = 1
-        if offer_major_name and offer_major_id == "":
+        if offer_major_id is None:
+            print offer_major_id,"123123"
+        if offer_major_id == "":
+            print "fasdfasd"
+        if offer_major_name and offer_major_id is None:
 
             major_key = Major.get_major_exit(g.db,offer_major_name)
             print major_key
@@ -138,7 +142,8 @@ def mobile_set_offer():
                                user_type=user_type,
                                grade=grade,
                                wechat=wechat,
-                               offer_type="AD"
+                               offer_type="AD",
+                               offer_status=offer_status
                                )
         offer_list = list()
         checkList = list()

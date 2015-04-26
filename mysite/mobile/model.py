@@ -12,12 +12,12 @@ from mysite.model.base import metadata, Base
 class Prize(Base):
     u"""优惠码表"""
     __tablename__ = "prize"
-    id = Column(Integer,primary_key=True,autoincrement=True)
-    coupon = Column(Unicode(255),doc=u"优惠码的信息")
-    account = Column(Integer,doc=u"优惠码金额")
-    user_id = Column(Integer,doc=u"分配给某些用户")
-    share = Column(Integer,doc=u"是否分享，默认为0，没有分享")
-    probability = Column(Integer,doc=u"用户概率控制，3表示废弃优惠码")
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    coupon = Column(Unicode(255), doc=u"优惠码的信息")
+    account = Column(Integer, doc=u"优惠码金额")
+    user_id = Column(Integer, doc=u"分配给某些用户")
+    share = Column(Integer, doc=u"是否分享，默认为0，没有分享")
+    probability = Column(Integer, doc=u"用户概率控制，3表示废弃优惠码")
 
 
     @classmethod
