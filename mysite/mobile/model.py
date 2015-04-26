@@ -24,15 +24,15 @@ class Prize(Base):
     def get_random_prize(cls,connection):
         stmt = connection.query(Prize).\
             filter(Prize.user_id.is_(None)).\
-            filter(Prize.account.in_((35, 50, 90))).\
-            filter(Prize.probability == 1).\
+            filter(Prize.account.in_((20,35, 50, 90))).\
+            filter(Prize.probability == 0).\
             order_by(func.rand()).limit(1).scalar()
         print stmt,type(stmt)
         if stmt is None:
             stmt = connection.query(Prize).\
                 filter(Prize.user_id.is_(None)).\
                 filter(Prize.account.in_((20, 35, 50, 90))).\
-                filter(Prize.probability == 0).limit(1).scalar()
+                filter(Prize.probability == 1).limit(1).scalar()
         return stmt
 
 
