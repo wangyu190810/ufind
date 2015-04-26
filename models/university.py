@@ -2,7 +2,7 @@
 # email: khahux@163.com
 
 from sqlalchemy.schema import Column
-from sqlalchemy.types import Integer, Unicode
+from sqlalchemy.types import Integer, Unicode,Float
 from sqlalchemy import or_
 
 from models.base import Base
@@ -12,17 +12,21 @@ class University(Base):
     u"""学校"""
     __tablename__ = "university"
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(Unicode(255))
+    name = Column(Unicode(255),index=True)
     chiname = Column(Unicode(255))
-    short_name = Column(Unicode(255), doc=u"大学缩写")
-    rank = Column(Integer, doc=u"排名")
+    short_name = Column(Unicode(255), index=True, doc=u"大学缩写")
+    rank = Column(Integer,doc=u"排名")
+
     schoollogo = Column(Unicode(255), doc=u"学校图标")
     official = Column(Unicode(1000), doc=u"学校的官网地址")
     baidu = Column(Unicode(1000), doc=u"百度介绍")
     wiki = Column(Unicode(1000), doc=u"wiki介绍")
-    menaGPA = Column(Unicode(255), doc=u"GPA评价分数")
-    menaTOEFL = Column(Unicode(255), doc=u"托福评价分数")
-    menaILETS = Column(Integer, doc=u"雅思分数")
+    menaGPA_Total = Column(Float, doc=u"")
+    menaGPA_0 = Column(Float, doc=u"")
+    menaGPA_1 = Column(Float, doc=u"")
+    menaTOEFL = Column(Float, doc=u"")
+    menaIELTS = Column(Float, doc=u"")
+
     latitude = Column(Unicode(40), doc=u"经度")
     longitude = Column(Unicode(40), doc=u"纬度")
     country = Column(Unicode(255))
@@ -39,7 +43,7 @@ class University(Base):
 
     @classmethod
     def search_university(cls, connection, searchname=None, stateid=None):
-        if stateid == None:
+        if stateid is None:
             return connection.query(University).\
                 filter(or_(University.name.like("%"+searchname+"%"),
                            University.short_name == searchname)).limit(10)
@@ -65,13 +69,15 @@ class University(Base):
             filter(University.id == university_id).scalar()
 
     @classmethod
-    def update_university_GPA_TOEFL(cls, connection, university_id, TOEFL, GPA):
-        u"""学校的GPA分数和TOEFL分数"""
-        connection.query(University).filter(University.id == university_id).\
-            update(
+    def set_GPA_TOEFL_IELTS(cls,connection,university_id,GPA,GPA_0,GPA_1,TOEFL,IELTS):
+        connection.query(University).filter(University.id == university_id).update(
             {
+                University.menaGPA_Total: GPA,
+                University.menaGPA_0: GPA_0,
+                University.menaGPA_1: GPA_1,
                 University.menaTOEFL: TOEFL,
-                University.menaGPA: GPA
+                University.menaIELTS: IELTS
             }
         )
         connection.commit()
+

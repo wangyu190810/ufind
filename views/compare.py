@@ -88,24 +88,23 @@ def set_compare_support():
 @allow_cross_domain
 def get_compare_list():
     if request.method == "POST":
-        print request.form
-        # data = request.form
-        # data = json.loads(request.data)
-        # university_id = data["universityid"]
-        # faculty_id = data["facultyid"]
-        # major_id = data["majorid"]
-        # grade = data["grade"]
-        # GPA = data["GPA"]
-        # TOEFL = data["TOEFL"]
-        # GRE = data["GRE"]
-        # IELTS = data["IELTS"]
-        # GMAT = data["GMAT"]
-        # SAT = data["SAT"]
-        # page = data["page"]
-        # compares = {}
-        # compare_list = []
-        # for row in CompareInfo.get_compare_university_major(g.db, university_id,
-        #                                                     major_id):
+        data = request.form
+       # #data = json.loads(request.data)
+       # university_id = data["universityid"]
+       # faculty_id = data["facultyid"]
+       # major_id = data["majorid"]
+       # grade = data["grade"]
+       # GPA = data["GPA"]
+       # TOEFL = data["TOEFL"]
+       # GRE = data["GRE"]
+       # IELTS = data["IELTS"]
+       # GMAT = data["GMAT"]
+       # SAT = data["SAT"]
+       # page = data["page"]
+       # compares = {}
+       # compare_list = []
+       # for row in CompareInfo.get_compare_university_major(g.db, university_id,
+       #                                                     major_id):
 #            compare_list.append(str(row.compare_id))
 #
 #        return jsonify(compares=compare_list,

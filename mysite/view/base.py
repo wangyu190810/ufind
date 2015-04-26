@@ -13,7 +13,7 @@ from random import randint
 from itsdangerous import Signer
 import hashlib
 import binascii
-from models.user import User
+from mysite.model.user import User
 from config import Config
 
 def validate_user_login(func):

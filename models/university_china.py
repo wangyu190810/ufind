@@ -11,8 +11,8 @@ from models.base import Base
 class UniversityChina(Base):
     u"""国内大学"""
     __tablename__ = "university_china"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(Unicode(255))
+    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    name = Column(Unicode(255), index=True)
     location = Column(Unicode(255))
 
     @classmethod
@@ -31,8 +31,9 @@ class UniversityChina(Base):
 class SeniorHighSchool(Base):
     u"""国内高中"""
     __tablename__ = "senior_high"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(Unicode(255))
+    id = Column(Integer,primary_key=True,autoincrement=True,index=True)
+    name = Column(Unicode(255),index=True)
+
     location = Column(Unicode(255))
     province = Column(Unicode(255))
     city = Column(Unicode(255))
@@ -56,11 +57,11 @@ class SeniorHighSchool(Base):
 class MajorChina(Base):
     u"""国内大学专业"""
     __tablename__ = "major_china"
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer,primary_key=True,autoincrement=True,index=True)
     faculty_id = Column(Integer)
     faculty_name = Column(Unicode(255))
     major_id = Column(Integer)
-    major_name = Column(Unicode(255))
+    major_name = Column(Unicode(255),index=True)
 
     @classmethod
     def get_major_china(cls, connection, major_id):

@@ -1,7 +1,7 @@
 # coding: utf-8
 # email: khahux@163.com
 
-from sqlalchemy import Column, Integer
+from sqlalchemy import Column, Integer,Float
 
 from models.base import Base
 
@@ -16,16 +16,16 @@ class Score(Base):
     TOEFL_l = Column(Integer, default=0, doc=u"")
     TOEFL_s = Column(Integer, default=0, doc=u"")
     TOEFL_w = Column(Integer, default=0, doc=u"")
-    IELTS_r = Column(Integer, default=0, doc=u"")
-    IELTS_l = Column(Integer, default=0, doc=u"")
-    IELTS_s = Column(Integer, default=0, doc=u"")
-    IELTS_w = Column(Integer, default=0, doc=u"")
+    IELTS_r = Column(Float, default=0, doc=u"")
+    IELTS_l = Column(Float, default=0, doc=u"")
+    IELTS_s = Column(Float, default=0, doc=u"")
+    IELTS_w = Column(Float, default=0, doc=u"")
     GRE_v = Column(Integer, default=0, doc=u"")
     GRE_q = Column(Integer, default=0, doc=u"")
-    GRE_aw = Column(Integer, default=0, doc=u"")
+    GRE_aw = Column(Float, default=0, doc=u"")
     GMAT_v = Column(Integer, default=0, doc=u"")
     GMAT_q = Column(Integer, default=0, doc=u"")
-    GMAT_aw = Column(Integer, default=0, doc=u"")
+    GMAT_aw = Column(Float, default=0, doc=u"")
     GMAT_ir = Column(Integer, default=0, doc=u"")
     SAT_cr = Column(Integer, default=0, doc=u"")
     SAT_m = Column(Integer, default=0, doc=u"")

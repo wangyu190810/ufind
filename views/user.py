@@ -14,9 +14,10 @@ from models.university import University
 from models.user import User, UserFollow
 from models.compare import CompareInfo, Compare
 
-from lib.decorators import allow_cross_domain, validate_user_login
-from lib.get_static import get_university_logo, get_university_twodim
-from lib.utils import get_timestamp, get_GMAT, get_gre, get_TELTS, get_Total, get_SAT, get_compare_score
+from lib.decorators import allow_cross_domain, validate_user_login,\
+    checknum_timeout,set_password_salt
+from lib.get_static import get_university_logo
+from lib.utils import get_timestamp, get_compare_score
 
 
 @validate_user_login
@@ -28,15 +29,22 @@ def get_user_info():
         row = User.get_user_info(g.db, student_id)
         if row is None:
             return jsonify(status="false")
+
         student_info["prevuniversity"] = row.prevuniversity
         student_info["name"] = row.username
         student_info["prevmajor"] = row.prevmajor
-        student_info["GPA"] = row.GPA
-        student_info["TOEFL"] = row.TOEFL
-        student_info["IELTS"] = row.IELTS
-        student_info["GMAT"] = row.GMAT
-        student_info["SAT"] = row.SAT
-        student_info["GRE"] = row.GRE
+        if row.GPA != 0:
+            student_info["GPA"] = row.GPA
+        if row.TOEFL != 0:
+            student_info["TOEFL"] = row.TOEFL
+        if row.IELTS != 0:
+            student_info["IELTS"] = row.IELTS
+        if row.GMAT != 0:
+            student_info["GMAT"] = row.GMAT
+        if row.SAT != 0:
+            student_info["SAT"] = row.SAT
+        if row.GRE != 0:
+            student_info["GRE"] = row.GRE
 
         student_info["pic"] = row.pic
         student_info["grade"] = row.grade
@@ -59,16 +67,17 @@ def get_user_detail_info():
         student_info = dict()
         offers = list()
         login_user_id = session.get("user_id")
-
+        user_info = User.get_user_info(g.db,student_id)
         if login_user_id is None:
             login_user_id = -1
         for row in Offer.get_offer_student_info(g.db, student_id):
             offer_info = dict()
-            for row_un in University.get_university_info(g.db,
-                                                         row.university_id):
+
+            for row_un in University.get_university_info(g.db,str(row.university_id)):
                 offer_info["universityname"] = row_un.name
+                offer_info["universityid"] = row_un.id
                 offer_info["logo"] = get_university_logo(row_un.name)
-                offer_info["twodimcode"] = get_university_twodim(row_un.name)
+                offer_info["twodimcode"] = row.wechat
             for row_ma in Major.get_major_info_by_id(g.db, row.major_id):
                 offer_info["majorname"] = row_ma.name
             offer_info["grade"] = row.grade
@@ -161,6 +170,18 @@ def get_user_detail_info():
         student_info["follows"] = follows_list
         student_info["status"] = "success"
         score = Score.get_user_score(g.db, student_id)
+        coupons = dict()
+
+        print user_info.account,user.active,
+        if user_info.active == 1 and user_info.account is not None:
+            coupons["code"] = user_info.coupon
+            coupons["account"] = user_info.account
+            student_info["coupons"] = coupons
+        elif user_info.active == 2 and user_info.account is not None:
+            coupons["code"] = None
+            coupons["account"] = user_info.account
+            student_info["coupons"] = coupons
+
         if score is None:
             return jsonify(student_info)
 
@@ -176,42 +197,41 @@ def get_user_detail_info():
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
-        if student_info.get("v") != 0:
+        GREmore["total"] = user_info.GRE
+        if GREmore.get("total") not in(0, None):
             student_info["GREmore"] = GREmore
-        GMATmore = dict()
-        GMATmore["V"] = score.GMAT_v
-        GMATmore["Q"] = score.GMAT_q
-        GMATmore["AW"] = score.GMAT_aw
-        GMATmore["IR"] = score.GMAT_ir
-        if GMATmore.get("V") != 0:
-            student_info["GMATmore"] = GMATmore
         IELTSmore = dict()
         IELTSmore["R"] = score.IELTS_r
         IELTSmore["L"] = score.IELTS_l
         IELTSmore["S"] = score.IELTS_s
         IELTSmore["W"] = score.IELTS_w
-        if IELTSmore.get("R") != 0:
+        IELTSmore["total"] = user_info.IELTS
+        if IELTSmore.get("total") not in (0, None):
             student_info["IELTSmore"] = IELTSmore
         TOEFLmore = dict()
         TOEFLmore["R"] = score.TOEFL_r
         TOEFLmore["L"] = score.TOEFL_l
         TOEFLmore["S"] = score.TOEFL_s
         TOEFLmore["W"] = score.TOEFL_w
-        if TOEFLmore.get("R") != 0:
+        TOEFLmore["total"] = user_info.TOEFL
+        if TOEFLmore.get("total") not in (0, None):
             student_info["TOEFLmore"] = TOEFLmore
         SATmore = dict()
         SATmore["CR"] = score.SAT_cr
         SATmore["W"] = score.SAT_w
         SATmore["M"] = score.SAT_m
-        if SATmore.get("W") != 0:
+        SATmore["total"] = user_info.SAT
+        if SATmore.get("total") not in (0, None):
             student_info["SATmore"] = SATmore
         GMATmore = dict()
         GMATmore["V"] = score.GMAT_v
         GMATmore["Q"] = score.GMAT_q
         GMATmore["AW"] = score.GMAT_aw
         GMATmore["IR"] = score.GMAT_ir
-        if GMATmore.get("V") != 0:
+        GMATmore["total"] = user_info.GMAT
+        if GMATmore.get("V") not in (0, None):
             student_info["GMATmore"] = GMATmore
+
 
         return json.dumps(student_info)
 
@@ -219,26 +239,53 @@ def get_user_detail_info():
 @allow_cross_domain
 def get_user_in_university():
     if request.method == "POST":
-        print request.form
         data = request.form
-        # return jsonify(status="success")
-        # data = json.loads(request.data)
+        #return jsonify(status="success")
+        #data = json.loads(request.data)
+        user_id = session.get("user_id")
+        user = User.get_user_info(g.db,user_id)
+        user_type = -1
+        if user:
+            user_type = user.type
+
 
         university_id = data.get("universityid")
         faculty_id = data.get("facultyid")
         major_id = data.get("majorid")
         GPA_to = data.get("GPA[to]",0.0,float)
-        GPA_form = data.get("GPA[from]",0.0,float)
+        GPA_form = data.get("GPA[from]",1000,float)
         TOEFL_to = request.form.get("TOEFL[to]",0.0,float)
-        TOEFL_form = request.form.get("TOEFL[from]",0.0,float)
-        GER_to = request.form.get("GRE[to]",0.0,float)
-        GER_form = request.form.get("GRE[from]",0.0,float)
-        # TOEFL_form = request.form.get("TOEFL[from]")
-        # TOEFL_form = request.form.get("TOEFL[from]")#   SAT = data["SAT"]
+        TOEFL_form = request.form.get("TOEFL[from]",10000,float)
+
+
+        IELTS_to= request.form.get("IELTS[to]",0.0,float)
+        IELTS_form = request.form.get("IELTS[from]",10000,float)
+        if TOEFL_to != 0.0 and TOEFL_form != 10000:
+            IELTS_to = 0.0
+            IELTS_form = 0.0
+        elif IELTS_to != 0.0 and IELTS_form != 10000:
+            TOEFL_to = 0.0
+            TOEFL_form = 0.0
+
+        GRE_to = request.form.get("GRE[to]",0.0,float)
+        GRE_form = request.form.get("GRE[from]",10000,float)
+        GMAT_to = request.form.get("GMAT[to]",0.0,float)
+        GMAT_form = request.form.get("GMAT[from]",10000,float)
+        if GRE_to != 0.0 and GRE_form != 10000:
+            GMAT_to = 0.0
+            GMAT_form =0.0
+        elif GMAT_to != 0.0 and GMAT_form != 10000:
+            GRE_to = 0.0
+            GRE_form = 0.0
+
+        grade = request.form.get("grade")
+        print grade
         page = data.get("page")
+
         compares = {}
         compare_list = []
         page_list = []
+        print faculty_id,major_id,university_id
 
         if faculty_id is not None:
             student_list = []
@@ -250,27 +297,18 @@ def get_user_in_university():
                     student = dict()
                     for row in Offer.get_user_id_from_university(g.db,
                                                          university_id,
-                                                         row_major.id):
+                                                         row_major.id,
+                                                         user_type,
+                                                         grade):
                         user = User.get_user_info(g.db,row.user_id)
                         if user:
-                            print GPA_to
-                            print GPA_form
-                            print get_compare_score(GPA_to,GPA_form,user.GPA)
-                            if GPA_to != 0.0:
-                                if TOEFL_to != 0.0:
-                                    if GER_to != 0.0:
-                                        if get_compare_score(GPA_to,GPA_form,user.GPA) and \
-                                            get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and\
-                                            get_compare_score(GER_to,GER_form,user.GRE):
 
-                                                student_list.append(row.user_id)
-                                    elif get_compare_score(GPA_to,GPA_form,user.GPA) and \
-                                            get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL):
+                            if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                                get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
+                                get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
+                                get_compare_score(GRE_to,GRE_form,user.GRE) and \
+                                get_compare_score(GMAT_to,GMAT_form,user.GMAT):
 
-                                        student_list.append(row.user_id)
-                                elif get_compare_score(GPA_to,GPA_form,user.GPA):
-                                    student_list.append(row.user_id)
-                            else:
                                 student_list.append(row.user_id)
                     student["studentlist"] = student_list
                     student["majorid"] = row_major.id
@@ -288,40 +326,53 @@ def get_user_in_university():
             elif major_id is not None:
                 for row in Offer.get_user_id_from_university(g.db,
                                                         university_id,
-                                                        major_id):
+                                                        major_id,
+                                                        user_type,
+                                                        grade):
                     user = User.get_user_info(g.db,row.user_id)
-                    print user
                     if user:
-                        print GPA_to
-                        print GPA_form
-                        print get_compare_score(GPA_to,GPA_form,user.GPA)
-                        if GPA_to != 0.0:
-                            if TOEFL_to != 0.0:
-                                if GER_to != 0.0:
-                                    if get_compare_score(GPA_to,GPA_form,user.GPA) and \
-                                        get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and\
-                                        get_compare_score(GER_to,GER_form,user.GRE):
+                        if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                                get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
+                                get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
+                                get_compare_score(GRE_to,GRE_form,user.GRE) and \
+                                get_compare_score(GMAT_to,GMAT_form,user.GMAT):
 
-                                                student_list.append(row.user_id)
-                                elif get_compare_score(GPA_to, GPA_form, user.GPA) and \
-                                        get_compare_score(TOEFL_to, TOEFL_form, user.TOEFL):
-
-                                    student_list.append(row.user_id)
-                            elif get_compare_score(GPA_to,GPA_form, user.GPA):
-                                student_list.append(row.user_id)
-                        else:
                             student_list.append(row.user_id)
-                    student_list.append(row.user_id)
+                        student = dict()
+                        student["studentlist"] = list(set(student_list))
+                        page = len(student_list) / 15
+                        student["more"] = ""
+                        if int(page) > 1:
+                            student["more"] = "true"
+                        student["status"] = "success"
+                        return json.dumps(student)
+        else:
+            student_list = []
+            for row in Offer.get_user_id_from_university(g.db,
+                                                        university_id,
+                                                        major_id,
+                                                        user_type,
+                                                        grade):
+                user = User.get_user_info(g.db,row.user_id)
+                if user:
 
+                    if get_compare_score(GPA_to,GPA_form,user.GPA) and \
+                                get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
+                                get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
+                                get_compare_score(GRE_to,GRE_form,user.GRE) and \
+                                get_compare_score(GMAT_to,GMAT_form,user.GMAT):
+
+                        student_list.append(row.user_id)
             student = dict()
-            student["studentlist"] = student_list
+            student["studentlist"] = list(set(student_list))
             page = len(student_list) / 15
             student["more"] = ""
             if int(page) > 1:
                 student["more"] = "true"
             student["status"] = "success"
             return json.dumps(student)
-        return jsonify(status="false")
+
+        return jsonify(status="success")
 
 
 @validate_user_login
@@ -367,11 +418,13 @@ def get_user_base_info():
             sub_dict["id"] = sub.sub_id
             sub_dict["grade"] = sub.grade
             sub_list.append(sub_dict)
-        print sub_list
+
         GREmore["sub"] = sub_list
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
+        GREmore["total"] = user.GRE
+
         if GREmore.get("V") != 0:
 
             data["GREmore"] = GREmore
@@ -380,6 +433,7 @@ def get_user_base_info():
         TOEFLmore["L"] = score.TOEFL_l
         TOEFLmore["S"] = score.TOEFL_s
         TOEFLmore["W"] = score.TOEFL_w
+        TOEFLmore["total"] = user.TOEFL
         if TOEFLmore.get("W") != 0:
             data["TOEFLmore"] = TOEFLmore
         SATmore = dict()
@@ -387,7 +441,7 @@ def get_user_base_info():
         SATmore["CR"] = score.SAT_cr
         SATmore["W"] = score.SAT_w
         SATmore["M"] = score.SAT_m
-
+        SATmore["total"] = user.SAT
         if SATmore.get("CR") != 0:
             data["SATmore"] = SATmore
         IELTSmore = dict()
@@ -395,6 +449,7 @@ def get_user_base_info():
         IELTSmore["L"] = score.IELTS_l
         IELTSmore["S"] = score.IELTS_s
         IELTSmore["W"] = score.IELTS_w
+        IELTSmore["total"] = user.IELTS
         if IELTSmore.get("R") != 0:
             data["IELTSmore"] = IELTSmore
         GMATmore = dict()
@@ -402,6 +457,7 @@ def get_user_base_info():
         GMATmore["Q"] = score.GMAT_q
         GMATmore["AW"] = score.GMAT_aw
         GMATmore["IR"] = score.GMAT_ir
+        GMATmore["total"] = user.GMAT
         if GMATmore.get("V") != 0:
             data["GMATmore"] = GMATmore
 
@@ -414,7 +470,7 @@ def edit_user_info_page():
     if request.method == "GET":
         user_id = session.get("user_id")
         user = User.get_user_info(g.db,user_id)
-        print user
+
         if user is None:
             return jsonify(status="false")
         user_info = dict()
@@ -438,11 +494,12 @@ def edit_user_info_page():
             sub_dict["id"] = sub.sub_id
             sub_dict["grade"] = sub.grade
             sub_list.append(sub_dict)
-        print sub_list
+
         GREmore["sub"] = sub_list
         GREmore["V"] = score.GRE_v
         GREmore["Q"] = score.GRE_q
         GREmore["AW"] = score.GRE_aw
+        GREmore["total"] = user.GRE
         if GREmore.get("V") != 0:
             user_info["GREmore"] = GREmore
         TOEFLmore = dict()
@@ -450,6 +507,7 @@ def edit_user_info_page():
         TOEFLmore["L"] = score.TOEFL_l
         TOEFLmore["S"] = score.TOEFL_s
         TOEFLmore["W"] = score.TOEFL_w
+        TOEFLmore["total"] = user.TOEFL
         if TOEFLmore.get("R") != 0:
             user_info["TOEFLmore"] = TOEFLmore
         SATmore = dict()
@@ -457,6 +515,7 @@ def edit_user_info_page():
         SATmore["CR"] = score.SAT_cr
         SATmore["W"] = score.SAT_w
         SATmore["M"] = score.SAT_m
+        SATmore["total"] = user.SAT
         if SATmore.get("M") != 0:
             user_info["SATmore"] = SATmore
         IELTSmore = dict()
@@ -464,14 +523,16 @@ def edit_user_info_page():
         IELTSmore["L"] = score.IELTS_l
         IELTSmore["S"] = score.IELTS_s
         IELTSmore["W"] = score.IELTS_w
+        IELTSmore["total"] = user.IELTS
         if IELTSmore.get("R") != 0:
             user_info["IELTSmore"] = IELTSmore
-        print user_info
+
         GMATmore = dict()
         GMATmore["V"] = score.GMAT_v
         GMATmore["Q"] = score.GMAT_q
         GMATmore["AW"] = score.GMAT_aw
         GMATmore["IR"] = score.GMAT_ir
+        GMATmore["total"] = user.GMAT
         if GMATmore.get("V") != 0:
             user_info["GMATmore"] = GMATmore
         return json.dumps(user_info)
@@ -488,13 +549,24 @@ def update_user_info():
         email = request.form.get("email")
         pic = request.form.get("pic")
         print request.form
-        if request.form.get("checknum"):
-            pass
+        phone = request.form.get("phonenum")
+        check_num = request.form.get("checknum")
+        user = User.get_user_info(g.db,user_id)
+        if check_num or check_num == "":
+            print user.checknum,check_num,checknum_timeout(user.checknum_time)
+            if check_num == "":
+                return jsonify(status="checknum_error")
+            if user.checknum == int(check_num) and checknum_timeout(user.checknum_time):
+                User.update_user_phone(g.db,user.id,phone,user.phone_old,)
+            else:
+                return jsonify(status="checknum_error")
         if request.form.get("passwordold"):
             password = request.form.get("password")
             passwordold = request.form.get("passwordold")
-            if not User.change_password_old(g.db,user_id,password,passwordold):
-                print "123124"
+            if not User.change_password_old(g.db,user_id,
+                                            set_password_salt(password),
+                                            set_password_salt(passwordold)):
+
                 return jsonify(status="false")
         if pic is not None:
             User.update_user_pic(g.db,user_id,pic)
@@ -535,20 +607,20 @@ def update_user_info():
         prevmajor = request.form.get("majorid")
         prevuniversity = request.form.get("universityid")
         User.update_user_info(g.db, user_id=user_id, username=username,
-                              phone=phone, email=email,
+                              email=email,
                               prevuniversity=prevuniversity,prevmajor=prevmajor)
         if request.form.get("IELTS[R]") is not None:
-            LELTSmoreR = request.form.get("IELTS[R]",0,int)
-            LELTSmoreL = request.form.get("IELTS[L]",0,int)
-            LELTSmoreS = request.form.get("IELTS[S]",0,int)
-            LELTSmoreW = request.form.get("IELTS[W]",0,int)
-            sub_TELTS = get_TELTS(LELTSmoreS, LELTSmoreL, LELTSmoreR,
-                                  LELTSmoreW)
+            LELTSmoreR = request.form.get("IELTS[R]",float)
+            LELTSmoreL = request.form.get("IELTS[L]",float)
+            LELTSmoreS = request.form.get("IELTS[S]",float)
+            LELTSmoreW = request.form.get("IELTS[W]",float)
+            sub_TELTS = request.form.get("IELTS[total]", float)
+
             if request.form.get("GRE[V]") is not None:
-                GREmoreV = request.form.get("GRE[V]",0,int)
-                GREmoreQ = request.form.get("GRE[Q]",0,int)
-                GREmoreAW = request.form.get("GRE[AW]",0,int)
-                sub_GRE = get_gre(GREmoreV, GREmoreQ)
+                GREmoreV = request.form.get("GRE[V]",int)
+                GREmoreQ = request.form.get("GRE[Q]",int)
+                GREmoreAW = request.form.get("GRE[AW]",float)
+                sub_GRE = request.form.get("GRE[total]", int)
                 User.update_user_score(g.db,user_id, gre=sub_GRE,
                                        lelts=sub_TELTS)
                 Score.set_user_info(connection=g.db, user_id=user_id,
@@ -563,11 +635,11 @@ def update_user_info():
 
                                     )
             elif request.form.get("SAT[M]"):
-                sat_m = request.form.get("SAT[M]", 0, int)
-                sat_cr = request.form.get("SAT[CR]", 0, int)
-                sat_w = request.form.get("SAT[W]", 0, int)
-                sub_sat = get_SAT(sat_cr, sat_w, sat_m)
-                User.update_user_score(g.db, user_id=user_id,
+                sat_m = request.form.get("SAT[M]", int)
+                sat_cr = request.form.get("SAT[CR]", int)
+                sat_w = request.form.get("SAT[W]", int)
+                sub_sat= request.form.get("SAT[total]", int)
+                User.update_user_score(g.db,user_id=user_id,
                                        lelts=sub_TELTS,
                                        sat=sub_sat)
                 Score.set_user_info(connection=g.db,
@@ -582,11 +654,11 @@ def update_user_info():
                                     )
 
             else:
-                GMATmoreV = request.form.get("GMAT[V]",0,int)
-                GMATmoreQ = request.form.get("GMAT[Q]",0,int)
-                GMATmoreAW = request.form.get("GMAT[AW]",0,int)
-                GMATmoreIR = request.form.get("GMAT[IR]",0,int)
-                sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
+                GMATmoreV = request.form.get("GMAT[V]", int)
+                GMATmoreQ = request.form.get("GMAT[Q]", int)
+                GMATmoreAW = request.form.get("GMAT[AW]", float)
+                GMATmoreIR = request.form.get("GMAT[IR]", int)
+                sub_GMAT = request.form.get("GMAT[total]",  int)
                 User.update_user_score(g.db, user_id=user_id,
                                        lelts=sub_TELTS, GMAT=sub_GMAT)
                 Score.set_user_info(connection=g.db,
@@ -604,18 +676,17 @@ def update_user_info():
 
 
         elif request.form.get("TOEFL[R]") is not None:
-            print request.form
-            TOEFLmoreR = request.form.get("TOEFL[R]",0,int)
-            TOEFLmoreL = request.form.get("TOEFL[L]",0,int)
-            TOEFLmoreS = request.form.get("TOEFL[S]",0,int)
-            TOEFLmoreW = request.form.get("TOEFL[W]",0,int)
-            sub_TOEFL = get_Total(TOEFLmoreL, TOEFLmoreR, TOEFLmoreS,
-                                  TOEFLmoreW)
+
+            TOEFLmoreR = request.form.get("TOEFL[R]",int)
+            TOEFLmoreL = request.form.get("TOEFL[L]",int)
+            TOEFLmoreS = request.form.get("TOEFL[S]",int)
+            TOEFLmoreW = request.form.get("TOEFL[W]",int)
+            sub_TOEFL = request.form.get("TOEFL[total]", int)
             if request.form.get("GRE[V]") is not None:
-                GREmoreV = request.form.get("GRE[V]",0,int)
-                GREmoreQ = request.form.get("GRE[Q]",0,int)
-                GREmoreAW = request.form.get("GRE[AW]",0,int)
-                sub_GRE = get_gre(GREmoreV, GREmoreQ)
+                GREmoreV = request.form.get("GRE[V]", int)
+                GREmoreQ = request.form.get("GRE[Q]", int)
+                GREmoreAW = request.form.get("GRE[AW]", float)
+                sub_GRE = request.form.get("GRE[total]", int)
                 User.update_user_score(g.db, user_id=user_id, gre=sub_GRE,
                                        toefl=sub_TOEFL)
                 Score.set_user_info(connection=g.db,user_id=user_id,
@@ -632,8 +703,9 @@ def update_user_info():
                 sat_m = request.form.get("SAT[M]", 0, int)
                 sat_cr = request.form.get("SAT[CR]", 0, int)
                 sat_w = request.form.get("SAT[W]", 0, int)
-                sub_sat = get_SAT(sat_cr, sat_w, sat_m)
-                User.update_user_score(g.db, user_id=user_id,
+                sub_sat= request.form.get("SAT[total]", 0, int)
+
+                User.update_user_score(g.db,user_id=user_id,
                                        toefl=sub_TOEFL,
                                        sat=sub_sat)
                 Score.set_user_info(connection=g.db,
@@ -647,11 +719,12 @@ def update_user_info():
                                     SAT_cr=sat_cr
                                     )
             else:
-                GMATmoreV = request.form.get("GMAT[V]", 0, int)
-                GMATmoreQ = request.form.get("GMAT[Q]", 0, int)
-                GMATmoreAW = request.form.get("GMAT[AW]", 0, int)
-                GMATmoreIR = request.form.get("GMAT[IR]", 0, int)
-                sub_GMAT = get_GMAT(GMATmoreV, GMATmoreQ)
+                GMATmoreV = request.form.get("GMAT[V]",int)
+                GMATmoreQ = request.form.get("GMAT[Q]",int)
+                GMATmoreAW = request.form.get("GMAT[AW]",float)
+                GMATmoreIR = request.form.get("GMAT[IR]",int)
+                sub_GMAT = request.form.get("GMAT[total]",int)
+
                 User.update_user_score(g.db, user_id=user_id,
                                        toefl=sub_TOEFL, GMAT=sub_GMAT)
                 Score.set_user_info(connection=g.db, user_id=user_id,
@@ -665,7 +738,7 @@ def update_user_info():
                                     GMAT_aw=GMATmoreAW,
                                     GMAT_ir=GMATmoreIR
                                     )
-
+        User.set_user_active(g.db,user_id)
         return jsonify(status="success")
     return jsonify(status="false")
 
