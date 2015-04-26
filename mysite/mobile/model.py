@@ -26,7 +26,7 @@ class Prize(Base):
             filter(Prize.user_id.is_(None)).\
             filter(Prize.account.in_((35, 50, 90))).\
             filter(Prize.probability == 1).\
-            order_by(func.random()).limit(1).scalar()
+            order_by(func.rand()).limit(1).scalar()
         print stmt,type(stmt)
         if stmt is None:
             stmt = connection.query(Prize).\
