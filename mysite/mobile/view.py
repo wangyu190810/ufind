@@ -52,7 +52,7 @@ def mobile_set_offer():
         data = request.form
         university_id = data.get("university_id",int)
         offer_major_id = data.get("major_id",int)
-        offer_major_name = data.get("major_name")
+        offer_major_name = data.get("majorname")
         user_type = data.get("user_type",int)
 
         grade = data.get("grade")
@@ -83,8 +83,9 @@ def mobile_set_offer():
             print offer_major_id,"123123"
         if offer_major_id == "":
             print "fasdfasd"
+        print offer_major_name
         if offer_major_name and offer_major_id == "":
-
+            print
             major_key = Major.get_major_exit(g.db,offer_major_name)
             print major_key
             school1_id = 7
