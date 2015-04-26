@@ -17,7 +17,7 @@ class Prize(Base):
     account = Column(Integer,doc=u"优惠码金额")
     user_id = Column(Integer,doc=u"分配给某些用户")
     share = Column(Integer,doc=u"是否分享，默认为0，没有分享")
-    probability = Column(Integer,doc=u"用户概率控制")
+    probability = Column(Integer,doc=u"用户概率控制，3表示废弃优惠码")
 
 
     @classmethod
