@@ -325,6 +325,13 @@ class User(Base):
             filter(User.phone == phone).\
             filter(User.username is not None).scalar()
 
+    @classmethod
+    def get_mobile_user_prize_exit(cls,connection,phone):
+        u"""用户手机注册是否抽奖"""
+        return connection.query(User).\
+            filter(User.phone == phone).\
+            filter(User.account.is_(None)).\
+            filter(User.username.is_(None)).scalar()
 
 
 

@@ -31,7 +31,8 @@ def mobile_send_sms():
         print user,sms_type,phone
         if User.get_mobile_user_exit_by_phone(g.db,phone):
             return json.dumps({"status":"user_exit"})
-
+        if User.get_mobile_user_prize_exit(g.db,phone):
+            return json.dumps({"status": "get_prize"})
         # 注册发送验证码
         code = None
         if user is None and sms_type == str(1):
@@ -50,8 +51,10 @@ def mobile_set_offer():
     if request.method == "POST":
         data = request.form
         university_id = data.get("university_id",int)
-        major_id = data.get("major_id",int)
+        offer_major_id = data.get("major_id",int)
+        offer_major_name = data.get("major_name")
         user_type = data.get("user_type",int)
+
         grade = data.get("grade")
         phone = data.get("phone")
         check_num = data.get("check_num")
@@ -73,14 +76,47 @@ def mobile_set_offer():
             else:
                 return json.dumps({"status":"check_num_error"})
 
-        major_info = Major.get_major_info_by_id_scalar(g.db,major_id)
+        offer_major_name
+        id_major = None
+        offer_status = 1
+        if offer_major_name and offer_major_id is None:
+
+            major_key = Major.get_major_exit(g.db,offer_major_name)
+            print major_key
+            school1_id = 7
+            main_major = "NotMatched"
+            major_user_type =2
+            offer_status = 2
+            if major_key:
+                major_info = Major.get_major_info_by_mame(g.db,offer_major_name)
+                if major_info:
+                    school1_id = major_info.faculty_id
+                    major_user_type = 1
+                    main_major = major_info.main_major
+                    offer_status = 1
+            id_major = Major.add_major(g.db,name=offer_major_name,
+                                        main_major=main_major,
+                                        university_id=university_id,
+                                        major_type=user.type,
+                                        faculty_id=school1_id,
+                                        major_user_type=major_user_type
+                                )
+
+        if id_major:
+            major_id_info = Major.get_major_info_by_id_scalar(g.db,id_major)
+            offer_major_id = id_major
+        else:
+            major_id_info = Major.get_major_info_by_id_scalar(g.db,offer_major_id)
+
+
+
         school1_id = 0
         school2_id = 0
         school3_id = 0
-        if major_info:
-            school1_id = major_info.faculty_id
-            school2_id = major_info.School2_ID
-            school3_id = major_info.School3_ID
+        if major_id_info:
+            school1_id = major_id_info.faculty_id
+            school2_id = major_id_info.School2_ID
+            school3_id = major_id_info.School3_ID
         offer_num = Offer.get_offer_num(g.db,university_id,user_type)
         num_wechat = 1
         if offer_num:
@@ -92,10 +128,10 @@ def mobile_set_offer():
                 num_wechat = 3
 
         wechat=set_university_offer_wechat(University.get_university_from_id(g.db,university_id).short_name,user_type,num_wechat)
-        print major_id
+        print offer_major_id
         Offer.set_offer_mobile(g.db,user_id=user_check.id,
                                university_id=university_id,
-                               major_id=major_id,
+                               major_id=offer_major_id,
                                school1_id=school1_id,
                                school2_id=school2_id,
                                school3_id=school3_id,

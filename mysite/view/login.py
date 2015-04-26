@@ -128,7 +128,7 @@ def register_second():
         user = User.get_user_info_by_phone(g.db, phone)
         user_id = user.id
         session["user_id"] = user_id
-        incomplete = "true"
+        incomplete = "false"
         if user.mobile_user == 2:
             incomplete = "true"
         User.update_user_pic(g.db,user_id,
