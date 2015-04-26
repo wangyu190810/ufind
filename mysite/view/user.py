@@ -178,7 +178,7 @@ def get_user_detail_info():
             coupons["code"] = None
             coupons["account"] = user_info.account
             student_info["coupons"] = coupons
-            
+
         if score is None:
             return jsonify(student_info)
 

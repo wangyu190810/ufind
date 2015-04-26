@@ -97,6 +97,7 @@ def sms_check(phone):
         tpl_value = "#code#="+str(code)+"&#company#="+company
         result = tpl_send_sms(Config.apikey, 1, tpl_value, phone)
         code_num = json.loads(result)["code"]
+        print result
         if code_num == 0:
             return code
     return False
