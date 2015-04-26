@@ -64,7 +64,7 @@ class Prize(Base):
             connection.query(Prize).filter(Prize.id == prize.id).update(
                 {
                     Prize.user_id: None,
-                    Prize.probability: 0
+                    Prize.probability: 3
                 }
             )
             connection.commit()
