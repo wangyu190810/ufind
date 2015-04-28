@@ -16,6 +16,7 @@ from mysite.model.score import Score
 from mysite.view.base import allow_cross_domain, validate_user_login, get_gre, \
     get_TELTS, get_Total, get_GMAT,get_SAT
 from mysite.model.stasub import Stasub
+from mysite.model.offer import Offer
 
 @validate_user_login
 @allow_cross_domain
@@ -187,5 +188,6 @@ def set_user_score():
                                     GMAT_ir=GMATmoreIR
                 )
         User.set_user_active(g.db,user_id)
+        Offer.set_user_offer_result(g.db,user_id)
         return jsonify(status="success")
 
