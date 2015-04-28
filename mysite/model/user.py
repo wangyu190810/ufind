@@ -48,6 +48,12 @@ class User(Base):
         return connection.query(User).filter(User.id == user_id).scalar()
 
     @classmethod
+    def get_not_mobile_user(cls,connection,user_id):
+        return connection.query(User).\
+            filter(User.id == user_id).\
+            filter(User.active == 1)
+
+    @classmethod
     def login_user(cls, connection, email=None, phone=None, password=None,):
         if phone is None:
             return connection.query(User). \
