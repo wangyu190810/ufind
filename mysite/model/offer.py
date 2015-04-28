@@ -197,6 +197,18 @@ class Offer(Base):
         connection.commit()
 
     @classmethod
+    def set_user_offer_result(cls,connection,user_id):
+        u"""用户offer可以被统计"""
+        connection.query(Offer).\
+            filter(Offer.user_id == user_id).\
+            filter(Offer.result == 1).update(
+            {
+                Offer.result: 1
+            }
+        )
+        connection.commit()
+
+    @classmethod
     def get_index_from_offer_num(cls, connection,university_id,school_id,user_type):
 
         sql = text("""(select count(user_id) as countmajor,major_id as id from offer
