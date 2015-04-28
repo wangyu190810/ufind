@@ -295,9 +295,8 @@ def get_user_in_university():
                                                          row_major.id,
                                                          user_type,
                                                          grade):
-                        user = User.get_user_info(g.db,row.user_id)
+                        user = User.get_not_mobile_user(g.db,row.user_id)
                         if user:
-
                             if get_compare_score(GPA_to,GPA_form,user.GPA) and \
                                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
                                 get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
