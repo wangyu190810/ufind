@@ -324,7 +324,7 @@ def get_user_in_university():
                                                         major_id,
                                                         user_type,
                                                         grade):
-                    user = User.get_user_info(g.db,row.user_id)
+                    user = User.get_not_mobile_user(g.db,row.user_id)
                     if user:
 
                         if get_compare_score(GPA_to,GPA_form,user.GPA) and \
@@ -349,7 +349,7 @@ def get_user_in_university():
                                                         major_id,
                                                         user_type,
                                                         grade):
-                user = User.get_user_info(g.db,row.user_id)
+                user = User.get_not_mobile_user(g.db,row.user_id)
                 if user:
 
                     if get_compare_score(GPA_to,GPA_form,user.GPA) and \
