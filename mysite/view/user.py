@@ -178,6 +178,10 @@ def get_user_detail_info():
             coupons["code"] = None
             coupons["account"] = user_info.account
             student_info["coupons"] = coupons
+        elif user_info.active == 1 and (user_info.account != 0 and user_info.account is not None) and user_info.coupon is None:
+            coupons["code"] = "not_coupons"
+            coupons["account"] = user_info.account
+            student_info["coupons"] = coupons
 
         if score is None:
             return jsonify(student_info)
@@ -396,7 +400,7 @@ def get_user_base_info():
         data["bginf"] = user.bginf
         user_info["data"] = data
         score = Score.get_user_score(g.db, user_id)
-        print score 
+        print score
         if score is None:
             return jsonify(user_info)
         GREmore = dict()
