@@ -135,7 +135,7 @@ def set_offer():
             GPA_1_num = 0
             offer_user_list = list()
             for offer_user in Offer.get_user_id_from_university(g.db,offer_university_id):
-                of_user = User.get_user_info(g.db,offer_user.user_id)
+                of_user = User.get_not_mobile_user(g.db,offer_user.user_id)
 
                 if of_user is not None and of_user.id not in offer_user_list:
 
