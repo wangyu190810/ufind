@@ -96,7 +96,7 @@ def get_major_from_university_faculty():
                         student_info["prevuniversity"] = user.prevuniversity
 
                         students.append(student_info)
-                    major_info["students"] = students
+                        major_info["students"] = students
                 if major_info.get("students") is not None:
                     major_list.append(major_info)
             return jsonify(status="success",
@@ -126,7 +126,7 @@ def get_major_from_university_faculty():
                             student_info["GPA"] = user.GPA
                             student_info["prevuniversity"] = user.prevuniversity
                             students.append(student_info)
-                        major_info["students"] = students
+                            major_info["students"] = students
                     if major_info.get("students") is not None:
                         major_list.append(major_info)
             return jsonify(status="success",
