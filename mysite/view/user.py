@@ -396,8 +396,9 @@ def get_user_base_info():
         data["bginf"] = user.bginf
         user_info["data"] = data
         score = Score.get_user_score(g.db, user_id)
-        #if score is None:
-        #    return jsonify(user_info)
+        print score 
+        if score is None:
+            return jsonify(user_info)
         GREmore = dict()
         #GREmore["sub"] = list()
         sub_list = list()
