@@ -170,11 +170,11 @@ def get_user_detail_info():
         coupons = dict()
 
         print user_info.account,user.active,
-        if user_info.active == 1 and (user_info.account !=0 and user_info.active is not None):
+        if user_info.active == 1 and (user_info.account !=0 and user_info.account is not None):
             coupons["code"] = user_info.coupon
             coupons["account"] = user_info.account
             student_info["coupons"] = coupons
-        elif user_info.active == 2 and (user_info.account != 0 and user_info.active is not None):
+        elif user_info.active == 2 and (user_info.account != 0 and user_info.account is not None):
             coupons["code"] = None
             coupons["account"] = user_info.account
             student_info["coupons"] = coupons

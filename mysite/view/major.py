@@ -116,10 +116,7 @@ def get_major_from_university_faculty():
                     for row_major in Offer.get_user_id_from_major(g.db,row.id,user_type):
                         student_info = dict()
                         user = User.get_not_mobile_user(g.db,row_major.user_id)
-                        if user is None:
-                            students.append(student_info)
-                        else:
-
+                        if user:
                             student_info["studentid"] = user.id
                             student_info["name"] = user.username
                             student_info["studentimg"] = user.pic
