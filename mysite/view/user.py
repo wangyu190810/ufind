@@ -739,6 +739,7 @@ def update_user_info():
                                     GMAT_ir=GMATmoreIR
                                     )
         User.set_user_active(g.db,user_id)
+        Offer.set_user_offer_result(g.db,user_id)
         return jsonify(status="success")
     return jsonify(status="false")
 
