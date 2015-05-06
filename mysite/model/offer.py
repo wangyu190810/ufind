@@ -201,9 +201,10 @@ class Offer(Base):
         u"""用户offer可以被统计"""
         connection.query(Offer).\
             filter(Offer.user_id == user_id).\
-            filter(Offer.result == 1).update(
+            filter(Offer.result != 1).update(
             {
-                Offer.result: 1
+                Offer.result: 1,
+                Offer.offer_status: 1
             }
         )
         connection.commit()
