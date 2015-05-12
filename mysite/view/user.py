@@ -367,11 +367,16 @@ def get_user_in_university():
 
                         student_list.append(row.user_id)
             student = dict()
-            student["studentlist"] = list(set(student_list))
-            page = len(student_list) / 15
+
+            user_page = len(student_list) / 15
             student["more"] = ""
-            if int(page) > 1:
+            if user_page > page:
                 student["more"] = "true"
+                for row in range(user_page):
+                    if row == page:
+                        student["studentlist"] = student_list[page*16:]
+            else:
+                 student["studentlist"] = list(set(student_list))
             student["status"] = "success"
             return json.dumps(student)
 
