@@ -370,6 +370,7 @@ def get_user_in_university():
             student = dict()
 
             user_page = len(student_list) / 15
+            user_page_last = len(student_list) % 15
             student["more"] = ""
             if user_page > page:
                 student["more"] = "true"
@@ -381,7 +382,7 @@ def get_user_in_university():
                         break
 
             else:
-                 student["studentlist"] = list(set(student_list))
+                 student["studentlist"] = student_list[user_page_last:]
             student["status"] = "success"
             return json.dumps(student)
 
