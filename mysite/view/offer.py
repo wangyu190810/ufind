@@ -89,7 +89,7 @@ def set_offer():
                     num_wechat = 2
                 elif 200 <= offer_num < 300:
                     num_wechat = 3
-            print University.get_university_from_id(g.db,2)
+            print University.get_university_from_id(g.db,2).short_name
 
             wechat=set_university_offer_wechat(University.get_university_from_id(g.db,int(offer_university_id)).short_name,user_type,num_wechat)
             Offer.set_offer(g.db,
