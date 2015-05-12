@@ -375,6 +375,10 @@ def get_user_in_university():
                 for row in range(user_page):
                     if row == page:
                         student["studentlist"] = student_list[page*16:]
+                        print student_list
+                        print student
+                        break
+
             else:
                  student["studentlist"] = list(set(student_list))
             student["status"] = "success"
