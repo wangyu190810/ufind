@@ -382,7 +382,7 @@ def get_user_in_university():
                         break
 
             else:
-                 student["studentlist"] = student_list[user_page_last:]
+                 student["studentlist"] = student_list[-user_page_last:]
             student["status"] = "success"
             return json.dumps(student)
 
