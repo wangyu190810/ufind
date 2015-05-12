@@ -280,7 +280,7 @@ def get_user_in_university():
 
         grade = request.form.get("grade")
         print grade
-        page = data.get("page",int,0)
+        page = data.get("page",0,int)
 
         compares = {}
         compare_list = []
