@@ -3,7 +3,6 @@ __author__ = ''
 from sqlalchemy.schema import Table, Column
 from sqlalchemy.types import Integer, Unicode, Float
 from sqlalchemy.sql import select
-from sqlalchemy.orm import aliased
 from datetime import datetime
 from sqlalchemy import or_
 from base import Base
