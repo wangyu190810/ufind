@@ -94,6 +94,6 @@ def get_index():
         statelist["UK"] = local["UK"]
         statelist["AUS"] = local["AUS"]
         data["statelist"] = statelist
-        data["offernum"] = Offer.get_site_offer_num(g.db, user_type)
+        data["offernum"] = Offer.get_site_offer_num(g.db, user_type) + 500
         data["status"] = "success"
         return json.dumps(data)
