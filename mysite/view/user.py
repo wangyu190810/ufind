@@ -306,8 +306,8 @@ def get_user_in_university():
                                 get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
                                 get_compare_score(GRE_to,GRE_form,user.GRE) and \
                                 get_compare_score(GMAT_to,GMAT_form,user.GMAT):
-
-                                student_list.append(row.user_id)
+                                if row.user_id not in student_list:
+                                    student_list.append(row.user_id)
                     student["studentlist"] = student_list
                     student["majorid"] = row_major.id
                     student["majorname"] = row_major.name
@@ -340,7 +340,8 @@ def get_user_in_university():
                                 get_compare_score(GRE_to,GRE_form,user.GRE) and \
                                 get_compare_score(GMAT_to,GMAT_form,user.GMAT):
 
-                            student_list.append(row.user_id)
+                            if row.user_id not in student_list:
+                                student_list.append(row.user_id)
                         student = dict()
                         student["studentlist"] = list(set(student_list))
                         page = len(student_list) / 15
@@ -364,8 +365,8 @@ def get_user_in_university():
                                 get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
                                 get_compare_score(GRE_to,GRE_form,user.GRE) and \
                                 get_compare_score(GMAT_to,GMAT_form,user.GMAT):
-
-                        student_list.append(row.user_id)
+                        if row.user_id not in student_list:
+                            student_list.append(row.user_id)
             student = dict()
 
             user_page = len(student_list) / 15
@@ -374,7 +375,7 @@ def get_user_in_university():
                 student["more"] = "true"
                 for row in range(user_page):
                     if row == page:
-                        student["studentlist"] = student_list[page*16:]
+                        student["studentlist"] = student_list[page*16:(page+1)*16]
                         print student_list
                         print student
                         break
