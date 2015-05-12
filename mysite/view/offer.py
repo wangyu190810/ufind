@@ -41,6 +41,8 @@ def set_offer():
             if offer_university_id is None:
                 break
             num += 1
+            if num == 6:
+                break
             id_major = None
             offer_status = 1
             if offer_major_name and offer_major_id is None:
