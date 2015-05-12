@@ -280,7 +280,7 @@ def get_user_in_university():
 
         grade = request.form.get("grade")
         print grade
-        page = data.get("page")
+        page = data.get("page",int,0)
 
         compares = {}
         compare_list = []
@@ -311,10 +311,13 @@ def get_user_in_university():
                     student["studentlist"] = student_list
                     student["majorid"] = row_major.id
                     student["majorname"] = row_major.name
-                    page = len(student_list) / 15
+                    user_page = len(student_list) / 15
                     student["more"] = ""
-                    if int(page) > 1:
+                    if user_page > page:
                         student["more"] = "true"
+                        for row in range(user_page):
+                            if row == page:
+                               student["studentlist"] = student_list[page*16:]
                     if len(student.get("studentlist")) > 0:
                         info.append(student)
 

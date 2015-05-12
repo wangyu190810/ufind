@@ -22,7 +22,6 @@ from mysite.model.faculty import Faculty
 def set_offer():
     if request.method == "POST":
         data = request.form
-        print data
         user_id = session["user_id"]
         user = User.get_user_info(g.db,user_id)
         user_type = None
@@ -39,18 +38,15 @@ def set_offer():
             scholarship_type = data.get("offers["+str(num)+"][scholarship][type]")
             scholarship_money = data.get("offers["+str(num)+"][scholarship][money]")
 
-            if offer_university_id is None:
+            if offer_university_id is None and num == 6:
                 break
             num += 1
-            print offer_major_name
             id_major = None
             offer_status = 1
             if offer_major_name and offer_major_id is None:
-                print offer_major_name
+
                 major_key = Major.get_major_exit(g.db,offer_major_name)
 
-
-                print major_key
                 school1_id = 7
                 main_major = "NotMatched"
                 major_user_type =2
