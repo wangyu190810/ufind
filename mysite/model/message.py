@@ -9,7 +9,7 @@
 from sqlalchemy import Column,Integer,String,TEXT,Date,DateTime
 
 from time import time
-from mysite.model.base import Base
+from models.base import Base
 
 class Message(Base):
     __tablename__ = "message"

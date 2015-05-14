@@ -111,11 +111,14 @@ class Offer(Base):
         if user_type is None:
             return connection.query(func.count(Offer)). \
                 filter(Offer.university_id == university_id).\
-                filter(Offer.offer_status == 1).scalar()
+                filter(Offer.offer_status == 1).\
+                filter(Offer.result == 1).scalar()
+
         return connection.query(func.count(Offer)). \
             filter(Offer.university_id == university_id).\
             filter(Offer.user_type == user_type).\
-            filter(Offer.offer_status == 1).scalar()
+            filter(Offer.offer_status == 1).\
+            filter(Offer.result == 1).scalar()
 
     @classmethod
     def get_user_id_from_university(cls, connection, university_id,
@@ -186,7 +189,8 @@ class Offer(Base):
         return connection.query(func.count(Offer.id)).\
             filter(Offer.university_id == university_id).\
             filter(Offer.major_id == major_id).\
-            filter(Offer.offer_status == 1).scalar()
+            filter(Offer.offer_status == 1).\
+            filter(Offer.result == 1).scalar()
 
     @classmethod
     def del_same_offer(cls, connection, university_id, major_id, user_id):
@@ -195,6 +199,19 @@ class Offer(Base):
             filter(Offer.university_id == university_id).\
             filter(Offer.user_id == user_id).\
             filter(Offer.major_id == major_id).delete()
+        connection.commit()
+
+    @classmethod
+    def set_user_offer_result(cls,connection,user_id):
+        u"""用户offer可以被统计"""
+        connection.query(Offer).\
+            filter(Offer.user_id == user_id).\
+            filter(Offer.result != 1).update(
+            {
+                Offer.result: 1,
+                Offer.offer_status: 1
+            }
+        )
         connection.commit()
 
     @classmethod

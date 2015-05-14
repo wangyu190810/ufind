@@ -87,12 +87,9 @@ def get_major_from_university_faculty():
                 major_info["offervote"]= None
                 #offervote = dict()
                 for row_major in Offer.get_user_id_from_major(g.db,row.id,user_type):
-
                     student_info = dict()
-                    user = User.get_user_info(g.db, row_major.user_id)
-                    if user is None:
-                        students.append(student_info)
-                    else:
+                    user = User.get_not_mobile_user(g.db,row_major.user_id)
+                    if user:
                         student_info["studentid"] = user.id
                         student_info["studentimg"] = user.pic
                         student_info["name"] = user.username
@@ -100,7 +97,7 @@ def get_major_from_university_faculty():
                         student_info["prevuniversity"] = user.prevuniversity
 
                         students.append(student_info)
-                    major_info["students"] = students
+                        major_info["students"] = students
                 if major_info.get("students") is not None:
                     major_list.append(major_info)
             return jsonify(status="success",
@@ -118,19 +115,15 @@ def get_major_from_university_faculty():
                     major_info["offervote"]=None
                     for row_major in Offer.get_user_id_from_major(g.db,row.id,user_type):
                         student_info = dict()
-                        user = User.get_user_info(g.db,row_major.user_id)
-                        if user is None:
-                            students.append(student_info)
-                        else:
-
+                        user = User.get_not_mobile_user(g.db,row_major.user_id)
+                        if user:
                             student_info["studentid"] = user.id
                             student_info["name"] = user.username
                             student_info["studentimg"] = user.pic
                             student_info["GPA"] = user.GPA
                             student_info["prevuniversity"] = user.prevuniversity
                             students.append(student_info)
-
-                        major_info["students"] = students
+                            major_info["students"] = students
                     if major_info.get("students") is not None:
                         major_list.append(major_info)
             return jsonify(status="success",
@@ -146,7 +139,7 @@ def get_major_from_university_faculty():
                 major_info["offervote"]=None
                 for row_major in Offer.get_user_id_from_major(g.db,row.id,user_type):
                     student_info = dict()
-                    user = User.get_user_info(g.db,row_major.user_id)
+                    user = User.get_not_mobile_user(g.db,row_major.user_id)
                     if user:
                         student_info["studentid"] = user.id
                         student_info["name"] = user.username

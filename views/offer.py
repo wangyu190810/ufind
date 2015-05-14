@@ -20,7 +20,6 @@ from lib.decorators import allow_cross_domain, set_university_offer_wechat,\
 def set_offer():
     if request.method == "POST":
         data = request.form
-        print data
         user_id = session["user_id"]
         user = User.get_user_info(g.db,user_id)
         user_type = None
@@ -37,16 +36,16 @@ def set_offer():
             offer_type = data.get("offers["+str(num)+"][offertype]")
             scholarship_type = data.get("offers["+str(num)+"][scholarship][type]")
             scholarship_money = data.get("offers["+str(num)+"][scholarship][money]")
-
             if offer_university_id is None:
                 break
             num += 1
-            print offer_major_name
+            if num == 6:
+                break
             id_major = None
             offer_status = 1
             if offer_major_name and offer_major_id is None:
-                major_key = Major.get_major_exit(g.db,offer_major_name)
 
+                major_key = Major.get_major_exit(g.db,offer_major_name)
                 school1_id = 7
                 main_major = "NotMatched"
                 major_user_type =2
@@ -90,7 +89,8 @@ def set_offer():
                 elif 200 <= offer_num < 300:
                     num_wechat = 3
 
-            wechat=set_university_offer_wechat(University.get_university_from_id(g.db,offer_university_id).short_name,user_type,num_wechat)
+
+            wechat=set_university_offer_wechat(University.get_university_from_id(g.db,int(offer_university_id)).short_name,user_type,num_wechat)
             Offer.set_offer(g.db,
                             user_id=user_id,
                             university_id=offer_university_id,
@@ -131,7 +131,7 @@ def set_offer():
             GPA_1_num = 0
             offer_user_list = list()
             for offer_user in Offer.get_user_id_from_university(g.db,offer_university_id):
-                of_user = User.get_user_info(g.db,offer_user.user_id)
+                of_user = User.get_not_mobile_user(g.db,offer_user.user_id)
 
                 if of_user is not None and of_user.id not in offer_user_list:
 

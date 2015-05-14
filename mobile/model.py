@@ -6,7 +6,7 @@ from sqlalchemy.sql import select
 from sqlalchemy import func
 from datetime import datetime
 
-from mysite.model.base import metadata, Base
+from models.base import Base
 
 
 class Prize(Base):
@@ -24,15 +24,12 @@ class Prize(Base):
     def get_random_prize(cls,connection):
         stmt = connection.query(Prize).\
             filter(Prize.user_id.is_(None)).\
-            filter(Prize.account.in_((20,35, 50, 90))).\
-            filter(Prize.probability == 0).\
+            filter(Prize.probability == 1).\
             order_by(func.rand()).limit(1).scalar()
-        print stmt,type(stmt)
         if stmt is None:
             stmt = connection.query(Prize).\
                 filter(Prize.user_id.is_(None)).\
-                filter(Prize.account.in_((20, 35, 50, 90))).\
-                filter(Prize.probability == 1).limit(1).scalar()
+                order_by(func.rand()).limit(1).scalar()
         return stmt
 
 

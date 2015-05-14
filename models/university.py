@@ -3,6 +3,7 @@
 
 from sqlalchemy.schema import Column
 from sqlalchemy.types import Integer, Unicode,Float
+
 from sqlalchemy import or_
 
 from models.base import Base

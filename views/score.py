@@ -3,9 +3,10 @@
 
 from flask import request, jsonify, g, session
 
-from models.user import User
 from models.score import Score
+from models.user import User
 from models.stasub import Stasub
+from models.offer import Offer
 
 from lib.decorators import allow_cross_domain, validate_user_login
 from lib.utils import get_gre, get_TELTS, get_Total, get_GMAT, get_SAT
@@ -19,7 +20,6 @@ def set_user_score():
         if request.form.get("bginf") is not None:
             bginf = request.form.get("bginf")
             User.update_user_bginf(g.db, user_id, bginf)
-        print request.form
         Stasub.del_sub(g.db,user_id)
         if request.form.get("GREmore[sub][0][id]"):
             num = 0
@@ -182,4 +182,6 @@ def set_user_score():
                 )
         User.set_user_active(g.db,user_id)
 
+        Offer.set_user_offer_result(g.db,user_id)
         return jsonify(status="success")
+

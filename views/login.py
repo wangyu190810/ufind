@@ -31,9 +31,8 @@ def login():
                            phone=login_phone, password=password)
 
     if user is not None:
-        print session
         session["user_id"] = user.id
-        print session
+
         student = dict()
         student["studentid"] = user.id
         student["studentname"] = user.username
@@ -55,8 +54,6 @@ def login_from_cookie():
     if request.method == "GET":
 
         user_id = session.get("user_id")
-        print user_id
-        print session
         user = User.get_user_info(g.db, user_id)
         if user is not None:
             session["user_id"] = user.id
@@ -76,9 +73,6 @@ def login_from_cookie():
 def register_first():
     if request.method == "POST":
         data = request.form
-
-        email = data["email"]
-        password = set_password_salt(data["password"])
         phonenum = data["phonenum"]
         checknum = data["checknum"]
 
@@ -101,19 +95,13 @@ def register_second():
     if request.method == "POST":
         data = request.form
 
-        print data
         email = data["email"]
         password = set_password_salt(data["password"])
-        phonenum = data["phonenum"]
-
         phone = data.get("phonenum")
         username = data.get("username")
         university_id = data.get("universityid")
         gpa = data["gpa"]
         user_type = data.get("type")
-
-        print request.form
-
         if int(user_type) == 0:
             senior_dict = {
                 '1': u"文科",

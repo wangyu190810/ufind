@@ -173,12 +173,16 @@ def get_user_detail_info():
         coupons = dict()
 
         print user_info.account,user.active,
-        if user_info.active == 1 and user_info.account is not None:
+        if user_info.active == 1 and (user_info.account !=0 and user_info.account is not None):
             coupons["code"] = user_info.coupon
             coupons["account"] = user_info.account
             student_info["coupons"] = coupons
-        elif user_info.active == 2 and user_info.account is not None:
+        elif user_info.active == 2 and (user_info.account != 0 and user_info.account is not None):
             coupons["code"] = None
+            coupons["account"] = user_info.account
+            student_info["coupons"] = coupons
+        elif user_info.active == 1 and (user_info.account != 0 and user_info.account is not None) and user_info.coupon is None:
+            coupons["code"] = "not_coupons"
             coupons["account"] = user_info.account
             student_info["coupons"] = coupons
 
@@ -280,7 +284,7 @@ def get_user_in_university():
 
         grade = request.form.get("grade")
         print grade
-        page = data.get("page")
+        page = data.get("page",0,int)
 
         compares = {}
         compare_list = []
@@ -300,23 +304,25 @@ def get_user_in_university():
                                                          row_major.id,
                                                          user_type,
                                                          grade):
-                        user = User.get_user_info(g.db,row.user_id)
+                        user = User.get_not_mobile_user(g.db,row.user_id)
                         if user:
-
                             if get_compare_score(GPA_to,GPA_form,user.GPA) and \
                                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
                                 get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
                                 get_compare_score(GRE_to,GRE_form,user.GRE) and \
                                 get_compare_score(GMAT_to,GMAT_form,user.GMAT):
-
-                                student_list.append(row.user_id)
+                                if row.user_id not in student_list:
+                                    student_list.append(row.user_id)
                     student["studentlist"] = student_list
                     student["majorid"] = row_major.id
                     student["majorname"] = row_major.name
-                    page = len(student_list) / 15
+                    user_page = len(student_list) / 15
                     student["more"] = ""
-                    if int(page) > 1:
+                    if user_page > page:
                         student["more"] = "true"
+                        for row in range(user_page):
+                            if row == page:
+                               student["studentlist"] = student_list[page*16:]
                     if len(student.get("studentlist")) > 0:
                         info.append(student)
 
@@ -329,7 +335,7 @@ def get_user_in_university():
                                                         major_id,
                                                         user_type,
                                                         grade):
-                    user = User.get_user_info(g.db,row.user_id)
+                    user = User.get_not_mobile_user(g.db,row.user_id)
                     if user:
                         if get_compare_score(GPA_to,GPA_form,user.GPA) and \
                                 get_compare_score(TOEFL_to,TOEFL_form,user.TOEFL) and \
@@ -337,7 +343,8 @@ def get_user_in_university():
                                 get_compare_score(GRE_to,GRE_form,user.GRE) and \
                                 get_compare_score(GMAT_to,GMAT_form,user.GMAT):
 
-                            student_list.append(row.user_id)
+                            if row.user_id not in student_list:
+                                student_list.append(row.user_id)
                         student = dict()
                         student["studentlist"] = list(set(student_list))
                         page = len(student_list) / 15
@@ -353,7 +360,7 @@ def get_user_in_university():
                                                         major_id,
                                                         user_type,
                                                         grade):
-                user = User.get_user_info(g.db,row.user_id)
+                user = User.get_not_mobile_user(g.db,row.user_id)
                 if user:
 
                     if get_compare_score(GPA_to,GPA_form,user.GPA) and \
@@ -361,14 +368,24 @@ def get_user_in_university():
                                 get_compare_score(IELTS_to,IELTS_form,user.IELTS) and \
                                 get_compare_score(GRE_to,GRE_form,user.GRE) and \
                                 get_compare_score(GMAT_to,GMAT_form,user.GMAT):
-
-                        student_list.append(row.user_id)
+                        if row.user_id not in student_list:
+                            student_list.append(row.user_id)
             student = dict()
-            student["studentlist"] = list(set(student_list))
-            page = len(student_list) / 15
+
+            user_page = len(student_list) / 15
+            user_page_last = len(student_list) % 15
             student["more"] = ""
-            if int(page) > 1:
+            if user_page > page:
                 student["more"] = "true"
+                for row in range(user_page):
+                    if row == page:
+                        student["studentlist"] = student_list[page*16:(page+1)*16]
+                        print student_list
+                        print student
+                        break
+
+            else:
+                 student["studentlist"] = student_list[-user_page_last:]
             student["status"] = "success"
             return json.dumps(student)
 
@@ -739,6 +756,7 @@ def update_user_info():
                                     GMAT_ir=GMATmoreIR
                                     )
         User.set_user_active(g.db,user_id)
+        Offer.set_user_offer_result(g.db,user_id)
         return jsonify(status="success")
     return jsonify(status="false")
 
