@@ -43,7 +43,7 @@ def send_sms():
         if user is None and sms_type is None:
             return jsonify(status="phone_not_exist")
 
-        elif user.mobile_user == 2 and sms_type is None and user.user_name is None:
+        elif user.mobile_user == 2 and sms_type is None and user.username is None:
             return jsonify(status="phone_not_exist")
 
         elif sms_type == 0 and user.username is None :
