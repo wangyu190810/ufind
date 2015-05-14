@@ -376,12 +376,10 @@ def get_user_in_university():
             user_page_last = len(student_list) % 15
             student["more"] = ""
             if user_page > page:
-                student["more"] = "true"
                 for row in range(user_page):
                     if row == page:
                         student["studentlist"] = student_list[page*16:(page+1)*16]
-                        print student_list
-                        print student
+                        student["more"] = "true"
                         break
 
             else:
