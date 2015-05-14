@@ -25,7 +25,14 @@ def send_sms():
         user = User.get_user_info_by_phone(g.db,phone)
         print user,sms_type,phone
         # 注册发送验证码
-        if (user is None and sms_type == 0) or (user is not None and sms_type is None):
+        if user is None and sms_type == 0:
+            code = sms_check(phone)
+            if code:
+                User.set_sms_checknum(g.db, phone, code)
+                return jsonify(status="success")
+            return jsonify(status="false")
+
+        elif user.checknum is not None and sms_type is None and user.mobile_user != 2:
             code = sms_check(phone)
             if code:
                 User.set_sms_checknum(g.db, phone, code)
