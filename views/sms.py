@@ -16,7 +16,10 @@ def send_sms():
         cc = data.to_dict()
         user_change = User.get_user_info(g.db,session.get("user_id"))
         phonenum = eval(cc.keys()[0])
-        phone = phonenum["phonenum"]
+        print data
+        print data.get("phonenum")
+        print data.get("type")
+        phone = phonenum.get("phonenum")
         sms_type = phonenum.get("type")
         user = User.get_user_info_by_phone(g.db,phone)
         print user,sms_type,phone
