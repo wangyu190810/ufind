@@ -58,6 +58,12 @@ def send_sms():
                     User.update_user_phone_old(g.db,user_id=user.id,phone=phone,checknum=code)
                     return jsonify(status="success")
             return jsonify(status="false")
+        elif user.username is not None and sms_type is None:
+            code = sms_check(phone)
+            if code:
+                User.set_sms_checknum(g.db, phone, code)
+                return jsonify(status="success")
+            return jsonify(status="false")
         elif user.username is not None:
             return jsonify(status="registered")
 
