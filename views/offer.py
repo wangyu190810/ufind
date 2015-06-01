@@ -146,14 +146,11 @@ def set_offer():
                             if of_user.type == 0:
                                 offer_GPA_0 += of_user.GPA
                                 GPA_0_num += 1
-                        except TypeError:
-                            offer_GPA_0 += 0
-                        else:
-                            try:
+                            else:
                                 offer_GPA_1 += of_user.GPA
                                 GPA_1_num += 1
-                            except TypeError:
-                                offer_GPA_1 += 0
+                        except TypeError:
+                            print "123"
                     offer_num += 1
                     offer_user_list.append(of_user.id)
             if offer_num == 0 or GPA_0_num == 0 or GPA_1_num == 0:
