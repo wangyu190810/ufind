@@ -143,11 +143,17 @@ def set_offer():
                         offer_IELTS += of_user.IELTS
                     if of_user:
                         if of_user.type == 0:
-                            offer_GPA_0 += of_user.GPA
-                            GPA_0_num += 1
+                            if of_user.GPA is None:
+                                offer_GPA_0 += 0
+                            else:
+                                offer_GPA_0 += of_user.GPA
+                                GPA_0_num += 1
                         else:
-                            offer_GPA_1 += of_user.GPA
-                            GPA_1_num += 1
+                            if of_user.GPA is None:
+                                offer_GPA_1 += 0
+                            else:
+                                offer_GPA_1 += of_user.GPA
+                                GPA_1_num += 1
                     offer_num += 1
                     offer_user_list.append(of_user.id)
             if offer_num == 0 or GPA_0_num == 0 or GPA_1_num == 0:

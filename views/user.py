@@ -372,8 +372,8 @@ def get_user_in_university():
                             student_list.append(row.user_id)
             student = dict()
 
-            user_page = len(student_list) / 15
-            user_page_last = len(student_list) % 15
+            user_page = len(student_list) / 16
+            user_page_last = len(student_list) % 16
             student["more"] = ""
             if user_page > page:
                 for row in range(user_page):
@@ -382,7 +382,7 @@ def get_user_in_university():
                         student["more"] = "true"
                         break
 
-            else:
+            elif user_page < page:
                  student["studentlist"] = student_list[-user_page_last:]
             student["status"] = "success"
             return json.dumps(student)
