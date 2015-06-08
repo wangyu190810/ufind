@@ -111,14 +111,12 @@ class Offer(Base):
         if user_type is None:
             return connection.query(func.count(Offer)). \
                 filter(Offer.university_id == university_id).\
-                filter(Offer.offer_status == 1).\
-                filter(Offer.result == 1).scalar()
+                filter(Offer.offer_status == 1).scalar()
 
         return connection.query(func.count(Offer)). \
             filter(Offer.university_id == university_id).\
             filter(Offer.user_type == user_type).\
-            filter(Offer.offer_status == 1).\
-            filter(Offer.result == 1).scalar()
+            filter(Offer.offer_status == 1).scalar()
 
     @classmethod
     def get_user_id_from_university(cls, connection, university_id,
