@@ -378,7 +378,7 @@ def get_user_in_university():
             if len(student_list) < 16:
                 student["status"] = "success"
                 student["studentlist"] = student_list
-                return student
+                return json.dumps(student)
             if user_page > page:
                 for row in range(user_page):
                     if row == page:
