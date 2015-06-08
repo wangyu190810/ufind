@@ -84,7 +84,6 @@ class Offer(Base):
         connection.commit()
 
     @classmethod
-
     def get_mobile_user_last_offer(cls,connection,user_id):
         return connection.query(func.max(Offer.create_time),
                                 Offer.university_id,
